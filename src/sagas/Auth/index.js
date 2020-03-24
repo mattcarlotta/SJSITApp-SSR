@@ -44,8 +44,8 @@ export function* signoutUserSession() {
 export function* authenticateUser({ req }) {
 	try {
 		const headers = yield call(parseCookie, req);
-		const response = yield call(app.get, "signedin", headers);
-		const data = yield call(parseData, response);
+		const res = yield call(app.get, "signedin", headers);
+		const data = yield call(parseData, res);
 
 		yield put(signin(data));
 	} catch (e) {

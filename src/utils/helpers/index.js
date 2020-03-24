@@ -143,7 +143,6 @@ const tokenGenerator = (str, tlen) => {
 const clearSession = (req, res, status, err) => {
 	req.session = null;
 
-	res.setHeader("set-cookie", "SJSITAPP=; max-age=0");
 	res.status(status).json({ role: "guest", err });
 };
 
@@ -644,7 +643,7 @@ const findMemberEvents = async (existingMember, selectedDate) => {
  * @function parseSession
  * @returns {string}
  */
-const parseSession = req => get(req, ["session", "id"]);
+const parseSession = req => get(req, ["session", "user", "id"]);
 
 /**
  * Helper function to redirect a user client-side or server-side.

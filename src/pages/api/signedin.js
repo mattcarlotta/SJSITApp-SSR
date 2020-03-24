@@ -8,7 +8,7 @@ import { requireRelogin } from "~services/strategies";
  * @returns {object}
  */
 const signedin = (req, res) => {
-	res.status(200).send(req.session.user);
+	res.status(200).send(req.user);
 };
 
 export default withMiddleware(requireRelogin(signedin));
