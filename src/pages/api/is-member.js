@@ -8,7 +8,7 @@ import { requireAuth } from "~services/strategies";
  * @returns {object}
  */
 const isValidMember = (_, res) => {
-	res.status(200);
+	res.status(200).end();
 };
 
 export default withMiddleware(requireAuth(isValidMember));

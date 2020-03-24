@@ -8,7 +8,7 @@ import { requireStaffRole } from "~services/strategies";
  * @returns {object}
  */
 const isValidStaffMember = (_, res) => {
-	res.status(200);
+	res.status(200).end();
 };
 
 export default withMiddleware(requireStaffRole(isValidStaffMember));

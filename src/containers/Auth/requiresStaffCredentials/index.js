@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { requiresStaffCreds } from "~actions/Users";
+import { requiresStaffCreds } from "~actions/Auth";
 import Spinner from "~components/Body/Spinner";
 
 const requiresStaffCredentials = WrappedComponent => {

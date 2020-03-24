@@ -9,10 +9,10 @@ import Router from "next/router";
  */
 function redirect(res) {
 	if (res) {
-		res.writeHead(302, { Location: "/signin" });
+		res.writeHead(302, { Location: "/employee/login" });
 		res.end();
 	} else {
-		Router.push("/signin");
+		Router.push("/employee/login");
 	}
 }
 

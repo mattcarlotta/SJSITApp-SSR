@@ -3,7 +3,6 @@ import isEmpty from "lodash/isEmpty";
 import moment from "moment-timezone";
 import random from "lodash/random";
 import sortBy from "lodash/sortBy";
-import Router from "next/router";
 import { Types } from "mongoose";
 import { Event, User } from "~models";
 import {
@@ -646,22 +645,6 @@ const findMemberEvents = async (existingMember, selectedDate) => {
 const parseSession = req => get(req, ["session", "user", "id"]);
 
 /**
- * Helper function to redirect a user client-side or server-side.
- *
- * @function redirect
- * @param {object} res - an API response.
- * @returns {string} - a parsed message string from res.data.message.
- */
-function redirect(res) {
-	if (res) {
-		res.writeHead(302, { Location: "/signin" });
-		res.end();
-	} else {
-		Router.push("/signin");
-	}
-}
-
-/**
  * Helper function to send an error to the LOCALHOST.
  *
  * @function
@@ -739,7 +722,6 @@ export {
 	getStartOfDay,
 	getUsers,
 	parseSession,
-	redirect,
 	sendError,
 	sortScheduledUsersByLastName,
 	uniqueArray,

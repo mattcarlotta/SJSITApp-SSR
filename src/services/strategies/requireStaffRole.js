@@ -1,6 +1,6 @@
 import get from "lodash/get";
 import { accessDenied, badCredentials } from "~messages/errors";
-import { parseSession, sendError } from "~utils/helpers";
+import { sendError } from "~utils/helpers";
 import { User } from "~models";
 
 /**
@@ -10,7 +10,7 @@ import { User } from "~models";
  * @returns {function}
  */
 export default next => async (req, res) => {
-	const user = parseSession(req);
+	const user = get(req, "session", "user");
 	const role = get(user, ["role"]);
 
 	if (!user || (role !== "admin" && role !== "staff"))
@@ -20,5 +20,5 @@ export default next => async (req, res) => {
 	if (!existingUser || existingUser.status === "suspended")
 		return sendError(badCredentials, 404, res);
 
-	return next(req, res);
+	next(req, res);
 };

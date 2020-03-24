@@ -68,9 +68,9 @@ export const resetToken = next => async (req, res) => {
 
 		req.user = existingUser;
 
-		return next(req, res);
+		next(req, res);
 	} catch (err) {
-		return sendError(err, 404, res);
+		sendError(err, 404, res);
 	}
 };
 

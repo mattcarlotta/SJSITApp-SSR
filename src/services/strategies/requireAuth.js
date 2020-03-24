@@ -9,12 +9,12 @@ import { User } from "~models";
  * @returns {function}
  */
 export default next => async (req, res) => {
-	const user = parseSession(req);
-	if (!user) return clearSession(req, res, 404, badCredentials);
+	const _id = parseSession(req);
+	if (!_id) return clearSession(req, res, 404, badCredentials);
 
-	const existingUser = await User.findOne({ _id: user.id, email: user.email });
+	const existingUser = await User.findOne({ _id });
 	if (!existingUser || existingUser.status === "suspended")
 		return sendError(badCredentials, 404, res);
 
-	return next(req, res);
+	next(req, res);
 };
