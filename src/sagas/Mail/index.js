@@ -1,0 +1,310 @@
+import Router from "next/router";
+import { all, put, call, select, takeLatest } from "redux-saga/effects";
+import { app } from "~utils";
+import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import * as actions from "~actions/Mail";
+import { parseData, parseMessage } from "~utils/parseResponse";
+import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
+import * as types from "~types";
+
+/**
+ * Attempts to send a new email to admin or staff.
+ *
+ * @generator
+ * @function contactUs
+ * @param {object} props -contains mail data ([sendTo, message, subject]).
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to push to a URL.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* contactUs({ props }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.post, "mail/contact", { ...props });
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "success",
+				message,
+			}),
+		);
+
+		yield call(Router.push, "/employee/dashboard");
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to create a new email.
+ *
+ * @generator
+ * @function createMail
+ * @param {object} props -contains mail data ([id, sendTo, sendFrom, sendDate, message, subject]).
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to push to a URL.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* createMail({ props }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.post, "mail/create", { ...props });
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "success",
+				message,
+			}),
+		);
+
+		yield call(Router.push, "/employee/mail/viewall?page=1");
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to delete an email.
+ *
+ * @generator
+ * @function deleteMail
+ * @param {obect} mailId
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to refetch mail.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* deleteMail({ mailId }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.delete, `mail/delete/${mailId}`);
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "success",
+				message,
+			}),
+		);
+
+		yield put(actions.fetchMails());
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to delete many emails.
+ *
+ * @generator
+ * @function deleteManyMails
+ * @param {obect} ids
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to refetch mail.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* deleteManyMails({ ids }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.delete, `mails/delete-many`, { data: { ids } });
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "success",
+				message,
+			}),
+		);
+
+		yield put(actions.fetchMails());
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to get a single mail for editing.
+ *
+ * @generator
+ * @function fetchMail
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} - A redux action to set mail data to redux state.
+ * @throws {actions} - A redux action to go back to a previous URL and to display a server message by type.
+ */
+
+export function* fetchMail({ mailId }) {
+	try {
+		yield put(hideServerMessage());
+
+		let res = yield call(app.get, "members/names");
+		const membersNamesData = yield call(parseData, res);
+
+		res = yield call(app.get, `mail/edit/${mailId}`);
+		const emailData = yield call(parseData, res);
+
+		yield put(
+			actions.setMailToEdit({
+				...emailData.email,
+				dataSource: membersNamesData.members,
+			}),
+		);
+	} catch (e) {
+		yield call(Router.back);
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to get all mails.
+ *
+ * @generator
+ * @function fetchMails
+ * @yields {string} - A stringified location.search query.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} - A redux action to set mail data to redux state.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* fetchMails() {
+	try {
+		const query = yield select(selectQuery);
+
+		const res = yield call(app.get, `mail/all${query}`);
+		const data = yield call(parseData, res);
+
+		yield put(actions.setMails(data));
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to resend form emails.
+ *
+ * @generator
+ * @function resendMail
+ * @param {object} mailId
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to refetch mail.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* resendMail({ mailId }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.put, `mail/resend/${mailId}`);
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "info",
+				message,
+			}),
+		);
+
+		yield put(actions.fetchMails());
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Attempts to update an existing mail.
+ *
+ * @generator
+ * @function updateMail
+ * @param {object} props - props contain mailID and mail fields.
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to go back to a previous URL.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
+export function* updateMail({ props }) {
+	try {
+		yield put(hideServerMessage());
+
+		const res = yield call(app.put, "mail/update", { ...props });
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				type: "success",
+				message,
+			}),
+		);
+
+		yield call(Router.back);
+	} catch (e) {
+		const error = { type: "error", message: e.toString() };
+		yield put(setServerMessage(error));
+		yield call(toast, error);
+	}
+}
+
+/**
+ * Creates watchers for all generators.
+ *
+ * @generator
+ * @function mailsSagas
+ * @yields {watchers}
+ */
+export default function* mailsSagas() {
+	yield all([
+		takeLatest(types.MAIL_CONTACT_US, contactUs),
+		takeLatest(types.MAIL_CREATE, createMail),
+		takeLatest(types.MAIL_DELETE, deleteMail),
+		takeLatest(types.MAIL_DELETE_MANY, deleteManyMails),
+		takeLatest(types.MAIL_EDIT, fetchMail),
+		takeLatest(types.MAIL_FETCH, fetchMails),
+		takeLatest(types.MAIL_RESEND, resendMail),
+		takeLatest(types.MAIL_UPDATE_EDIT, updateMail),
+	]);
+}
