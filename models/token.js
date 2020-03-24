@@ -1,5 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // token templates
 const tokenSchema = new Schema({
@@ -15,4 +15,4 @@ const tokenSchema = new Schema({
 
 tokenSchema.plugin(mongoosePaginate);
 
-export default model("Token", tokenSchema);
+module.exports = model("Token", tokenSchema);

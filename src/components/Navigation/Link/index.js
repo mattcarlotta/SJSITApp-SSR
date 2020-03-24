@@ -3,9 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 
-const LinkComponent = ({ className, children, href, style, ...rest }) => (
-	<Link href={href} prefetch={false} passHref {...rest}>
-		<a style={style} className={className}>
+const LinkComponent = ({ className, children, href, style, target }) => (
+	<Link href={href} prefetch={false} passHref>
+		<a style={style} className={className} target={target}>
 			{children}
 		</a>
 	</Link>
@@ -18,6 +18,7 @@ LinkComponent.propTypes = {
 	style: PropTypes.objectOf(
 		PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	),
+	target: PropTypes.string,
 };
 
 export default styled(LinkComponent)`

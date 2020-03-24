@@ -1,6 +1,6 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
-import bcrypt from "bcryptjs";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 // admin, staff, employee
 const userSchema = new Schema({
@@ -43,4 +43,4 @@ userSchema.methods.comparePassword = async function compareNewPassword(
 	return isMatch;
 };
 
-export default model("User", userSchema);
+module.exports = model("User", userSchema);

@@ -228,7 +228,7 @@ export function* updateSeason({ props }) {
 			}),
 		);
 
-		yield call(back);
+		yield call(Router.back);
 	} catch (e) {
 		const error = { type: "error", message: e.toString() };
 		yield put(setServerMessage(error));

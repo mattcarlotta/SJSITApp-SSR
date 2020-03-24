@@ -60,7 +60,7 @@ export const localLogin = next => async (req, res) => {
 			role: existingUser.role,
 		};
 
-		next(req, res);
+		return next(req, res);
 	} catch (err) {
 		sendError(err, 404, res);
 	}

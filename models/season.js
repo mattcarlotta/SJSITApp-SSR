@@ -1,5 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // current season year
 const seasonSchema = new Schema({
@@ -10,4 +10,4 @@ const seasonSchema = new Schema({
 
 seasonSchema.plugin(mongoosePaginate);
 
-export default model("Season", seasonSchema);
+module.exports = model("Season", seasonSchema);

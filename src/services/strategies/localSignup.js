@@ -7,7 +7,7 @@ import {
 	missingSignupCreds,
 	tokenAlreadyUsed,
 	usernameAlreadyTaken,
-} from "shared/authErrors";
+} from "~messages/errors";
 import { createDate, createRandomToken, sendError } from "~utils/helpers";
 import { newUserTemplate } from "~services/templates";
 import { User, Mail, Token } from "~models";
@@ -104,9 +104,9 @@ export const localSignup = next => async (req, res) => {
 			lastName: newUser.lastName,
 		};
 
-		next(req, res);
+		return next(req, res);
 	} catch (err) {
-		sendError(err, 400, res);
+		return sendError(err, 400, res);
 	}
 };
 

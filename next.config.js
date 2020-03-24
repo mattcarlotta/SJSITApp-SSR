@@ -1,5 +1,6 @@
 require("./env");
 require("./database");
+require("./models/all");
 const openBrowser = require("react-dev-utils/openBrowser");
 const connectRedis = require("connect-redis");
 const redis = require("redis");

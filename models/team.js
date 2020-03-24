@@ -1,5 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // NHL/AHL teams
 const teamSchema = new Schema({
@@ -10,4 +10,4 @@ const teamSchema = new Schema({
 
 teamSchema.plugin(mongoosePaginate);
 
-export default model("Team", teamSchema);
+module.exports = model("Team", teamSchema);

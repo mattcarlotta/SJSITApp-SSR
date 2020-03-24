@@ -1,5 +1,5 @@
 import isEmpty from "lodash/isEmpty";
-import * as types from "types";
+import * as types from "~types";
 
 /**
  * Creates a new member.

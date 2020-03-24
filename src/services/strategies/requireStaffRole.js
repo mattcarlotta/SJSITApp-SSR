@@ -1,6 +1,6 @@
 import get from "lodash/get";
-import { accessDenied, badCredentials } from "messages/errors";
-import { sendError } from "~utils/helpers";
+import { accessDenied, badCredentials } from "~messages/errors";
+import { parseSession, sendError } from "~utils/helpers";
 import { User } from "~models";
 
 /**
@@ -20,5 +20,5 @@ export default next => async (req, res) => {
 	if (!existingUser || existingUser.status === "suspended")
 		return sendError(badCredentials, 404, res);
 
-	next(req, res);
+	return next(req, res);
 };

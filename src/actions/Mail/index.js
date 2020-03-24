@@ -1,5 +1,5 @@
 import isEmpty from "lodash/isEmpty";
-import * as types from "types";
+import * as types from "~types";
 
 /**
  * Sends a single mail to staff or admin.

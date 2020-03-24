@@ -65,7 +65,7 @@ export const updatePassword = next => async (req, res) => {
 
 		req.user = existingUser;
 
-		next(req, res);
+		return next(req, res);
 	} catch (err) {
 		return sendError(err, 400, res);
 	}

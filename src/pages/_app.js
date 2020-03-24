@@ -7,22 +7,18 @@ import withReduxSaga from "next-redux-saga";
 import { ToastContainer } from "react-toastify";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
-import toast from "~components/Body/Toast";
+import { authenticateUser } from "~actions/Auth";
 import "react-toastify/dist/ReactToastify.css";
 
 export class MyApp extends App {
-	componentDidMount() {
-		toast({ type: "info", message: "Welcome to the NextJS SSR Kit!" });
-	}
-
 	static async getInitialProps({ Component, ctx }) {
 		const {
 			store: { dispatch, getState },
 		} = ctx;
 		const { role } = getState().auth;
 
-		if (!role === "guest") {
-			dispatch(authenticateUser(ctx));
+		if (role !== "guest") {
+			await dispatch(authenticateUser(ctx));
 		}
 
 		return {

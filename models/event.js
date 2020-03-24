@@ -1,6 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
-import { createSchedule } from "~utils/helpers";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // event
 const eventSchema = new Schema({
@@ -37,9 +36,12 @@ const eventSchema = new Schema({
 
 eventSchema.plugin(mongoosePaginate);
 
-eventSchema.pre("save", function (next) {
-	this.schedule = createSchedule(this.callTimes);
+eventSchema.pre("save", function saveSchedule(next) {
+	this.schedule = this.callTimes.map(time => ({
+		_id: time,
+		employeeIds: [],
+	}));
 	next();
 });
 
-export default model("Event", eventSchema);
+module.exports = model("Event", eventSchema);

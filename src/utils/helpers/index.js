@@ -140,11 +140,12 @@ const tokenGenerator = (str, tlen) => {
  * @param {string} err
  * @returns {response}
  */
-const clearSession = (res, status, err) =>
-	res
-		.status(status)
-		.clearCookie("SJSITApp", { path: "/" })
-		.json({ role: "guest", err });
+const clearSession = (req, res, status, err) => {
+	req.session = null;
+
+	res.setHeader("set-cookie", "SJSITAPP=; max-age=0");
+	res.status(status).json({ role: "guest", err });
+};
 
 /**
  * Helper function to generate a schedule based upon calltimes.
@@ -307,14 +308,6 @@ const createSignupToken = () =>
  * @returns {month}
  */
 const expirationDate = () => moment().add(90, "days").endOf("day");
-
-/**
- * Helper function to parse req.session.
- *
- * @function parseSession
- * @returns {string}
- */
-const parseSession = req => get(req, ["session", "id"]);
 
 /**
  *Helper function to generate table filters.

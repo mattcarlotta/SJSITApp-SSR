@@ -1,5 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // monthly form
 const formSchema = new Schema({
@@ -17,4 +17,4 @@ const formSchema = new Schema({
 
 formSchema.plugin(mongoosePaginate);
 
-export default model("Form", formSchema);
+module.exports = model("Form", formSchema);

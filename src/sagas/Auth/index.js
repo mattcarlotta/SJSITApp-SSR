@@ -152,6 +152,7 @@ export function* signinUser({ props }) {
 		const data = yield call(parseData, res);
 
 		yield put(signin(data));
+		yield call(Router.push, "/");
 	} catch (e) {
 		const error = { type: "error", message: e.toString() };
 		yield put(setServerMessage(error));

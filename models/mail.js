@@ -1,5 +1,5 @@
-import mongoosePaginate from "mongoose-paginate-v2";
-import { Schema, model } from "mongoose";
+const mongoosePaginate = require("mongoose-paginate-v2");
+const { Schema, model } = require("mongoose");
 
 // email
 const mailSchema = new Schema({
@@ -16,4 +16,4 @@ const mailSchema = new Schema({
 
 mailSchema.plugin(mongoosePaginate);
 
-export default model("Mail", mailSchema);
+module.exports = model("Mail", mailSchema);

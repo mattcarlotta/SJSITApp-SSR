@@ -1,4 +1,5 @@
 import withMiddleware from "~middlewares";
+import { clearSession } from "~utils/helpers";
 
 /**
  * Allows a user to log out of the application (removes cookie).
@@ -7,9 +8,7 @@ import withMiddleware from "~middlewares";
  * @returns {string}
  */
 const signout = (req, res) => {
-	req.session.destroy();
-
-	res.clearCookie("SJSITApp", { path: "/" }).status(200).send("Session ended.");
+	clearSession(req, res, 200);
 };
 
 export default withMiddleware(signout);

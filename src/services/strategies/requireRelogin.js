@@ -9,11 +9,11 @@ import { User } from "~models";
  */
 export default next => async (req, res) => {
 	const user = parseSession(req);
-	if (!user) return clearSession(res, 200);
+	if (!user) return clearSession(req, res, 200);
 
 	const existingUser = await User.findOne({ _id: user.id });
 	if (!existingUser || existingUser.status === "suspended")
-		return clearSession(res, 200);
+		return clearSession(req, res, 200);
 
-	next(req, res);
+	return next(req, res);
 };

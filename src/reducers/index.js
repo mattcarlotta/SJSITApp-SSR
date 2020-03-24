@@ -22,7 +22,7 @@ const reducers = {
 	teams: teamsReducer,
 };
 
-const rootReducer = combineReducers({ reducers });
+const rootReducer = combineReducers(reducers);
 
 export default (state, action) =>
 	rootReducer(action.type === types.USER_SIGNOUT ? undefined : state, action);
