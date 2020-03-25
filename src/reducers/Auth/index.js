@@ -6,6 +6,7 @@ export const initialState = {
 	firstName: "",
 	lastName: "",
 	role: "",
+	isCollapsed: false,
 };
 
 /**
@@ -16,6 +17,9 @@ export const initialState = {
  */
 const authReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		case types.USER_SET_SIDEBAR_STATE: {
+			return { ...state, isCollapsed: !state.isCollapsed };
+		}
 		case types.USER_SIGNIN: {
 			return { ...state, ...payload };
 		}

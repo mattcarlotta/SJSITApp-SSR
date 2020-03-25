@@ -9,6 +9,7 @@ const Dashboard = ({ firstName, lastName }) => (
 		<div>
 			Welcome to the SJS Ice Team App, {firstName} {lastName}
 		</div>
+		<div css="height: 100vh" />
 	</AppLayout>
 );
 

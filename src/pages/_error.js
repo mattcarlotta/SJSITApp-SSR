@@ -1,37 +1,35 @@
 import React from "react";
-import { FaBug } from "react-icons/fa";
 import Router from "next/router";
 import Head from "~components/Navigation/Head";
 import FlexCenter from "~components/Body/FlexCenter";
-import BackButton from "~components/Body/BackButton";
 import Center from "~components/Body/Center";
+import Button from "~components/Body/Button";
+import Logo from "~images/ITLogo_192x192.png";
 
 const NotFound = () => (
-	<FlexCenter style={{ height: "100%" }} id="notfound">
+	<FlexCenter style={{ minHeight: "90vh" }} id="notfound">
 		<Head title="Page Not Found" />
 		<div css="margin-bottom: 80px;margin-top: 20px;">
 			<Center>
-				<div css="font-size: 150px;margin-bottom: 0px;color: #025f6d; padding: 0;">
-					<FaBug
-						style={{
-							position: "relative",
-							fontSize: 120,
-							top: 10,
-						}}
-					/>{" "}
-					<span>404</span>
+				<img src={Logo} width="100px" alt="logo.png" />
+				<div css="font-size: 280px;margin-bottom: 0px;color: #025f6d; padding: 0;">
+					404
 				</div>
-				<div css="font-size: 32px;font-weight: bold;margin-top: -30px;margin-bottom: 20px;letter-spacing: 2px; color: #025f6d;">
+				<div css="font-size: 32px;font-weight: bold;margin-top: -20px;margin-bottom: 20px;letter-spacing: 2px; color: #025f6d;">
 					Page not found
 				</div>
 				<div css="font-size: 18px;margin-bottom: 60px;letter-spacing: 2px;">
 					We&#39;re sorry, the page you requested could not be found.
 				</div>
-				<BackButton
-					style={{ margin: "0 auto", width: 120 }}
-					push={Router.back}
-					title="Go Back"
-				/>
+				<Button
+					primary
+					marginRight="0px"
+					width="150px"
+					style={{ margin: "0 auto" }}
+					onClick={() => Router.replace("/")}
+				>
+					Go Home
+				</Button>
 			</Center>
 		</div>
 	</FlexCenter>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Header = ({ title }) => (
 	<Head>
-		<title>San Jose Sharks Ice Team - {title}</title>
+		<title>{title} - San Jose Sharks Ice Team</title>
 	</Head>
 );
 

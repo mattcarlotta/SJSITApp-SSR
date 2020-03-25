@@ -8,6 +8,7 @@ import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
 import SideMenu from "~components/Navigation/SideMenu";
 import DrawerMenu from "~components/Navigation/DrawerMenu";
+import { setSidebarState } from "~actions/Auth";
 import { TABS, ROOTTABS } from "./Tabs";
 
 const Header = Layout.Header;
@@ -28,7 +29,6 @@ class AppLayout extends Component {
 		const { pathname } = props.router;
 
 		this.state = {
-			isCollapsed: false,
 			hideSideBar: false,
 			showDrawer: false,
 			openKeys: openedKey(pathname),
@@ -36,12 +36,13 @@ class AppLayout extends Component {
 		};
 	}
 
-	componentDidUpdate = (_, prevState) => {
+	componentDidUpdate = (prevProps, prevState) => {
 		const { pathname } = this.props.router;
-		const { isCollapsed, hideSideBar, showDrawer } = this.state;
+		const { hideSideBar, showDrawer } = this.state;
+		const { isCollapsed } = this.props;
 
 		if (
-			(prevState.isCollapsed !== isCollapsed && !isCollapsed && !hideSideBar) ||
+			(prevProps.isCollapsed !== isCollapsed && !isCollapsed && !hideSideBar) ||
 			(prevState.showDrawer !== showDrawer && showDrawer && hideSideBar)
 		) {
 			this.setState({
@@ -53,7 +54,6 @@ class AppLayout extends Component {
 	handleBreakpoint = isBroken => {
 		this.setState(prevState => ({
 			...prevState,
-			isCollapsed: isBroken,
 			hideSideBar: isBroken,
 			openKeys: isBroken ? [] : openedKey(this.props.router.pathname),
 			showDrawer: false,
@@ -93,17 +93,22 @@ class AppLayout extends Component {
 		}));
 
 	toggleSideMenu = () =>
-		this.setState(prevState => ({
-			openKeys: [],
-			isCollapsed: !prevState.isCollapsed,
-			showDrawer: !prevState.showDrawer,
-		}));
+		this.setState(
+			prevState => ({
+				openKeys: [],
+				showDrawer: !prevState.showDrawer,
+			}),
+			() => {
+				if (!this.state.hideSideBar) this.props.setSidebarState();
+			},
+		);
 
 	render = () => (
 		<div id="app">
 			<Layout>
 				<SideMenu
 					{...this.state}
+					isCollapsed={this.props.isCollapsed}
 					role={this.props.role}
 					onHandleBreakpoint={this.handleBreakpoint}
 					onHandleTabClick={this.handleTabClick}
@@ -124,6 +129,7 @@ class AppLayout extends Component {
 				<DrawerMenu
 					{...this.state}
 					role={this.props.role}
+					isCollapsed={this.props.isCollapsed}
 					onHandleTabClick={this.handleTabClick}
 					onHandleToggleDrawer={this.toggleDrawerMenu}
 					onHandleOpenMenuChange={this.handleOpenMenuChange}
@@ -135,18 +141,27 @@ class AppLayout extends Component {
 
 AppLayout.propTypes = {
 	children: PropTypes.node.isRequired,
+	isCollapsed: PropTypes.bool.isRequired,
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
 	router: PropTypes.shape({
 		pathname: PropTypes.string,
 	}),
 	role: PropTypes.string.isRequired,
+	setSidebarState: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ auth }) => ({
+	isCollapsed: auth.isCollapsed,
 	firstName: auth.firstName,
 	lastName: auth.lastName,
 	role: auth.role,
 });
 
-export default withRouter(connect(mapStateToProps)(AppLayout));
+const mapDispatchToProps = {
+	setSidebarState,
+};
+
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(AppLayout),
+);

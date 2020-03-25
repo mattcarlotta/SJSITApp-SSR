@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Menu } from "antd";
 import Center from "~components/Body/Center";
-import FadeIn from "~components/Body/FadeIn";
 import Legal from "~components/Body/Legal";
 import Tab from "~components/Body/Tab";
 import Title from "~components/Body/Title";
@@ -35,20 +34,18 @@ const NavMenu = ({
 				<Link href="/" style={{ padding: 0, margin: 0 }}>
 					<div css="text-align:center;padding: 12px 18px 0 18px;">
 						{isCollapsed ? (
-							<FadeIn timing="0.4s">
-								<div css="border: 1px solid #fff;">
-									<Title
-										style={{
-											color: "#fff",
-											margin: 0,
-											padding: "4px 0",
-											fontSize: 26,
-										}}
-									>
-										IT
-									</Title>
-								</div>
-							</FadeIn>
+							<div css="border: 1px solid #fff;">
+								<Title
+									style={{
+										color: "#fff",
+										margin: 0,
+										padding: "4px 0",
+										fontSize: 26,
+									}}
+								>
+									IT
+								</Title>
+							</div>
 						) : (
 							<Title
 								style={{

@@ -1,23 +1,18 @@
 import App from "../index";
 
-const push = jest.fn();
-
 const initProps = {
-	match: {
-		url: "/employee",
-	},
-	location: {
+	router: {
 		pathname: "/employee/dashboard",
 	},
 	firstName: "Beta",
 	lastName: "Tester",
 	role: "staff",
-	push,
+	isCollapsed: false,
 };
 
 const nextProps = {
 	...initProps,
-	location: {
+	router: {
 		pathname: "/employee/forms/create",
 	},
 };
@@ -59,20 +54,14 @@ describe("Employee App", () => {
 	});
 
 	it("opens a submenu", () => {
-		wrapper
-			.find("App")
-			.instance()
-			.handleOpenMenuChange(["events"]);
+		wrapper.find("App").instance().handleOpenMenuChange(["events"]);
 
 		jest.advanceTimersByTime(3000);
 		wrapper.update();
 
 		expect(wrapper.find("App").state("openKeys")).toEqual(["events"]);
 
-		wrapper
-			.find("App")
-			.instance()
-			.handleOpenMenuChange(["events", "forms"]);
+		wrapper.find("App").instance().handleOpenMenuChange(["events", "forms"]);
 
 		jest.advanceTimersByTime(3000);
 		wrapper.update();
@@ -81,10 +70,7 @@ describe("Employee App", () => {
 	});
 
 	it("handles submenu clicks", () => {
-		wrapper
-			.find("App")
-			.instance()
-			.handleOpenMenuChange(["", "forms"]);
+		wrapper.find("App").instance().handleOpenMenuChange(["", "forms"]);
 
 		jest.advanceTimersByTime(3000);
 		wrapper.update();
@@ -92,10 +78,7 @@ describe("Employee App", () => {
 		expect(wrapper.find("App").state("openKeys")).toEqual(["", "forms"]);
 		expect(wrapper.find("li.ant-menu-submenu-open").text()).toContain("forms");
 
-		wrapper
-			.find("App")
-			.instance()
-			.handleOpenMenuChange([]);
+		wrapper.find("App").instance().handleOpenMenuChange([]);
 
 		jest.advanceTimersByTime(3000);
 		wrapper.update();
@@ -134,19 +117,13 @@ describe("Employee App", () => {
 	it("collapses the SideMenu when the breakpoint is triggered", () => {
 		wrapper.setProps({ location: { pathname: "/employee/forms/create" } });
 
-		wrapper
-			.find("App")
-			.instance()
-			.handleBreakpoint(false);
+		wrapper.find("App").instance().handleBreakpoint(false);
 
 		expect(wrapper.find("App").state("isCollapsed")).toBeFalsy();
 		expect(wrapper.find("App").state("hideSideBar")).toBeFalsy();
 		expect(wrapper.find("App").state("openKeys")).toEqual(["forms"]);
 
-		wrapper
-			.find("App")
-			.instance()
-			.handleBreakpoint(true);
+		wrapper.find("App").instance().handleBreakpoint(true);
 
 		expect(wrapper.find("App").state("isCollapsed")).toBeTruthy();
 		expect(wrapper.find("App").state("hideSideBar")).toBeTruthy();
@@ -158,10 +135,7 @@ describe("Employee App", () => {
 			wrapper.find("aside.ant-layout-sider-collapsed").exists(),
 		).toBeFalsy();
 
-		wrapper
-			.find("App")
-			.instance()
-			.toggleSideMenu();
+		wrapper.find("App").instance().toggleSideMenu();
 
 		jest.advanceTimersByTime(3000);
 
@@ -174,30 +148,21 @@ describe("Employee App", () => {
 	});
 
 	it("stores the openTab when sidebar is collapsed and opened", () => {
-		wrapper
-			.find("App")
-			.instance()
-			.handleOpenMenuChange(["", "forms"]);
+		wrapper.find("App").instance().handleOpenMenuChange(["", "forms"]);
 
 		jest.advanceTimersByTime(3000);
 
 		wrapper.update();
 		expect(wrapper.find("App").state("openKeys")).toEqual(["", "forms"]);
 
-		wrapper
-			.find("App")
-			.instance()
-			.toggleSideMenu();
+		wrapper.find("App").instance().toggleSideMenu();
 
 		jest.advanceTimersByTime(3000);
 
 		wrapper.update();
 		expect(wrapper.find("App").state("openKeys")).toEqual([]);
 
-		wrapper
-			.find("App")
-			.instance()
-			.toggleSideMenu();
+		wrapper.find("App").instance().toggleSideMenu();
 
 		jest.advanceTimersByTime(3000);
 
@@ -226,10 +191,7 @@ describe("Employee App", () => {
 			"View Forms",
 		);
 
-		wrapper
-			.find("App")
-			.instance()
-			.toggleSideMenu();
+		wrapper.find("App").instance().toggleSideMenu();
 
 		wrapper.setProps({
 			location: {
@@ -248,10 +210,7 @@ describe("Employee App", () => {
 	});
 
 	it("handles Drawer Menu open and closing", () => {
-		wrapper
-			.find("App")
-			.instance()
-			.toggleDrawerMenu();
+		wrapper.find("App").instance().toggleDrawerMenu();
 
 		expect(wrapper.find("App").state("openKeys")).toEqual([]);
 		expect(wrapper.find("App").state("showDrawer")).toBeTruthy();

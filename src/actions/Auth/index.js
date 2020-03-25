@@ -49,6 +49,17 @@ export const resetPassword = props => ({
 });
 
 /**
+ * Persists sidebar state.
+ *
+ * @function setSidebarState
+ * @param {object} props - props just contain an email field.
+ * @returns {object}
+ */
+export const setSidebarState = () => ({
+	type: types.USER_SET_SIDEBAR_STATE,
+});
+
+/**
  * Sets current signed in user (can be guest) to redux state
  *
  * @function signin

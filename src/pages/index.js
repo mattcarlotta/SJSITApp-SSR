@@ -7,7 +7,7 @@ import Link from "~components/Navigation/Link";
 
 const Home = ({ email, signoutUser }) => (
 	<>
-		<Head title="Dashboard" />
+		<Head title="Home" />
 		<div>Welcome!</div>
 		<Link blue href="/employee/login">
 			Login

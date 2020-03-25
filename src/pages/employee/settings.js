@@ -5,6 +5,7 @@ import AppLayout from "~components/App";
 const Settings = () => (
 	<AppLayout>
 		<div>Settings</div>
+		<div css="height: 100vh" />
 	</AppLayout>
 );
 

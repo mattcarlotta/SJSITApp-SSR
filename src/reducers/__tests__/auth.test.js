@@ -9,6 +9,13 @@ describe("Auth Reducer", () => {
 		);
 	});
 
+	it("toggles sidebar state", () => {
+		const state = authReducer(undefined, {
+			type: types.types.USER_SET_SIDEBAR_STATE,
+		});
+		expect(state).toEqual({ ...mocks.userSession, isCollapsed: true });
+	});
+
 	it("stores a signed in user", () => {
 		const state = authReducer(undefined, {
 			type: types.USER_SIGNIN,

@@ -69,6 +69,7 @@ describe("Auth Sagas", () => {
 					firstName: "",
 					lastName: "",
 					role: "guest",
+					isCollapsed: false,
 				})
 				.run();
 		});
@@ -212,6 +213,7 @@ describe("Auth Sagas", () => {
 					firstName: "",
 					lastName: "",
 					role: "",
+					isCollapsed: false,
 				})
 				.run();
 		});

@@ -4,6 +4,7 @@ export const userSession = {
 	firstName: "Beta",
 	lastName: "Tester",
 	role: "staff",
+	isCollapsed: false,
 };
 
 export const teams = ["sharks", "barracuda"];
