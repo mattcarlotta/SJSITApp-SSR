@@ -95,7 +95,6 @@ export const MEMBERS_FETCH_TOKENS = "MEMBERS/FETCH_TOKENS";
 export const MEMBERS_SET_TOKENS = "MEMBERS/SET_TOKENS";
 
 // server messages
-export const MESSAGE_HIDE = "MESSAGE/HIDE";
 export const MESSAGE_RESET = "MESSAGE/RESET";
 export const MESSAGE_SET = "MESSAGE/SET";
 

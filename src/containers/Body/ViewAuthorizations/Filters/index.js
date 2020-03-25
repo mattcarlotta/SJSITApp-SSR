@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Router from "next/router";
 import { Button as AntButton, Select } from "antd";
 import { FaUserPlus } from "react-icons/fa";
 import Button from "~components/Body/Button";
@@ -79,7 +80,7 @@ const AuthorizationFilters = ({ clearFilters, queries, push, updateQuery }) => (
 				width="180px"
 				marginRight="0px"
 				padding="5px 10px"
-				onClick={() => push("/employee/members/create")}
+				onClick={() => Router.push("/employee/members/create")}
 			>
 				<FaUserPlus style={{ position: "relative", top: 2 }} />
 				&nbsp; Add Member

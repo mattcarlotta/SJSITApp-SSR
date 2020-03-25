@@ -11,7 +11,7 @@ import {
 	FaClock,
 	FaUserEdit,
 } from "react-icons/fa";
-import { hideServerMessage } from "~actions/Messages";
+import { resetServerMessage } from "~actions/Messages";
 import {
 	fetchMember,
 	fetchMemberAvailability,
@@ -78,12 +78,17 @@ const scheduling = (
 
 export class ViewMemberProfile extends PureComponent {
 	componentDidMount = () => {
-		const { hideServerMessage, fetchMember, match, serverMessage } = this.props;
+		const {
+			resetServerMessage,
+			fetchMember,
+			match,
+			serverMessage,
+		} = this.props;
 
 		const { id } = match.params;
 		fetchMember(id);
 
-		if (serverMessage) hideServerMessage();
+		if (serverMessage) resetServerMessage();
 	};
 
 	componentWillUnmount = () => {
@@ -189,7 +194,7 @@ ViewMemberProfile.propTypes = {
 	fetchMemberAvailability: PropTypes.func.isRequired,
 	fetchMemberEvents: PropTypes.func.isRequired,
 	fetchScheduleEvents: PropTypes.func.isRequired,
-	hideServerMessage: PropTypes.func.isRequired,
+	resetServerMessage: PropTypes.func.isRequired,
 	match: PropTypes.shape({
 		params: PropTypes.shape({
 			id: PropTypes.string,
@@ -273,7 +278,7 @@ const mapDispatchToProps = {
 	fetchMemberAvailability,
 	fetchMemberEvents,
 	fetchScheduleEvents,
-	hideServerMessage,
+	resetServerMessage,
 	goBack,
 	resetMembers,
 	updateMemberStatus,

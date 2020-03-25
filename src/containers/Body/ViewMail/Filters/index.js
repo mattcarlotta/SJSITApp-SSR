@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
+import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";
 import { FaPaperPlane } from "react-icons/fa";
 import Button from "~components/Body/Button";
@@ -73,7 +74,7 @@ const MailFilters = ({ clearFilters, queries, push, updateQuery }) => {
 					width="180px"
 					marginRight="0px"
 					padding="5px 10px"
-					onClick={() => push("/employee/mail/create")}
+					onClick={() => Router.push("/employee/mail/create")}
 				>
 					<FaPaperPlane style={{ position: "relative", top: 2 }} />
 					&nbsp; Send Mail

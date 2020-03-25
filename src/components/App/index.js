@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Router, { withRouter } from "next/router";
 import { Layout } from "antd";
-import AppRoutes from "routes/AppRoutes";
 // import BuildVersion from "components/Body/BuildVersion";
 import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
@@ -20,13 +21,11 @@ const openedKey = path => {
 	return opened ? [opened] : [];
 };
 
-class App extends Component {
+class AppLayout extends Component {
 	constructor(props) {
 		super(props);
 
-		const {
-			location: { pathname },
-		} = props;
+		const { pathname } = props.router;
 
 		this.state = {
 			isCollapsed: false,
@@ -37,17 +36,9 @@ class App extends Component {
 		};
 	}
 
-	componentDidUpdate = (prevProps, prevState) => {
-		const { pathname } = this.props.location;
+	componentDidUpdate = (_, prevState) => {
+		const { pathname } = this.props.router;
 		const { isCollapsed, hideSideBar, showDrawer } = this.state;
-
-		if (prevProps.location.pathname !== pathname) {
-			this.setState(prevState => ({
-				openKeys: !prevState.isCollapsed ? openedKey(pathname) : [],
-				selectedKey: selectedTab(pathname),
-				showDrawer: false,
-			}));
-		}
 
 		if (
 			(prevState.isCollapsed !== isCollapsed && !isCollapsed && !hideSideBar) ||
@@ -60,12 +51,11 @@ class App extends Component {
 	};
 
 	handleBreakpoint = isBroken => {
-		const { pathname } = this.props.location;
 		this.setState(prevState => ({
 			...prevState,
 			isCollapsed: isBroken,
 			hideSideBar: isBroken,
-			openKeys: isBroken ? [] : openedKey(pathname),
+			openKeys: isBroken ? [] : openedKey(this.props.router.pathname),
 			showDrawer: false,
 		}));
 	};
@@ -87,7 +77,7 @@ class App extends Component {
 		},
 	}) => {
 		this.setState(() => {
-			this.props.push(`/employee/${value}`);
+			Router.push(`/employee/${value}`);
 			const openKeys = ROOTTABS.find(tab => key.includes(tab));
 
 			return {
@@ -125,7 +115,7 @@ class App extends Component {
 						<RightMenu {...this.props} />
 					</Header>
 					<Content>
-						<AppRoutes {...this.props} />
+						{this.props.children}
 						{/* <BuildVersion /> */}
 					</Content>
 				</Layout>
@@ -143,17 +133,20 @@ class App extends Component {
 	);
 }
 
-App.propTypes = {
+AppLayout.propTypes = {
+	children: PropTypes.node.isRequired,
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
-	location: PropTypes.shape({
+	router: PropTypes.shape({
 		pathname: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		url: PropTypes.string,
-	}).isRequired,
 	role: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapStateToProps = ({ auth }) => ({
+	firstName: auth.firstName,
+	lastName: auth.lastName,
+	role: auth.role,
+});
+
+export default withRouter(connect(mapStateToProps)(AppLayout));

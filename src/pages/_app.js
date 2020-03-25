@@ -4,10 +4,11 @@ import App from "next/app";
 import Head from "next/head";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
-import { ToastContainer } from "react-toastify";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import { authenticateUser } from "~actions/Auth";
+import ServerMessages from "~containers/App/ServerMessages";
+import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 export class MyApp extends App {
@@ -17,7 +18,7 @@ export class MyApp extends App {
 		} = ctx;
 		const { role } = getState().auth;
 
-		if (role !== "guest") {
+		if (!role) {
 			await dispatch(authenticateUser(ctx));
 		}
 
@@ -40,16 +41,7 @@ export class MyApp extends App {
 				<GlobalStylesheet />
 				<Provider store={store}>
 					<Component {...pageProps} />
-					<ToastContainer
-						position="top-right"
-						autoClose={2500}
-						hideProgressBar={false}
-						newestOnTop={false}
-						draggable={false}
-						pauseOnVisibilityChange
-						closeOnClick
-						pauseOnHover
-					/>
+					<ServerMessages />
 				</Provider>
 			</>
 		);

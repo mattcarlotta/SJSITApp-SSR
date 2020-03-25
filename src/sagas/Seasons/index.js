@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Seasons";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
@@ -24,23 +24,21 @@ import * as types from "~types";
 
 export function* createSeason({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "season/create", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.push, "/employee/seasons/viewall?page=1");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -60,23 +58,21 @@ export function* createSeason({ props }) {
 
 export function* deleteSeason({ seasonId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `season/delete/${seasonId}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -96,7 +92,7 @@ export function* deleteSeason({ seasonId }) {
 
 export function* deleteManySeasons({ ids }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `seasons/delete-many`, {
 			data: { ids },
@@ -105,16 +101,14 @@ export function* deleteManySeasons({ ids }) {
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -133,16 +127,15 @@ export function* deleteManySeasons({ ids }) {
 
 export function* fetchSeason({ seasonId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.get, `season/edit/${seasonId}`);
 		const data = yield call(parseData, res);
 
 		yield put(actions.setSeasonToEdit(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -167,9 +160,8 @@ export function* fetchSeasons() {
 
 		yield put(actions.setSeasons(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -187,16 +179,15 @@ export function* fetchSeasons() {
 
 export function* fetchSeasonsIds() {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.get, "seasons/all/ids");
 		const data = yield call(parseData, res);
 
 		yield put(actions.setSeasonsIds(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -216,23 +207,21 @@ export function* fetchSeasonsIds() {
 
 export function* updateSeason({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "season/update", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.back);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

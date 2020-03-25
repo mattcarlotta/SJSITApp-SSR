@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
+import AppLayout from "~components/App";
 
 const Dashboard = ({ firstName, lastName }) => (
-	<div>
-		Welcome to the SJS Ice Team App, {firstName} {lastName}
-	</div>
+	<AppLayout>
+		<div>
+			Welcome to the SJS Ice Team App, {firstName} {lastName}
+		</div>
+	</AppLayout>
 );
 
 Dashboard.propTypes = {

@@ -2,10 +2,10 @@ import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
 import AppLayout from "~components/App";
 
-const CreateEvent = () => (
+const ScheduleEvent = () => (
 	<AppLayout>
-		<div>Create Event</div>
+		<div>Schedule Event</div>
 	</AppLayout>
 );
 
-export default requiresStaffCredentials(CreateEvent);
+export default requiresStaffCredentials(ScheduleEvent);

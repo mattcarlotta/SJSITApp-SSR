@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Forms";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Forms";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import messageReducer from "~reducers/Messages";
@@ -36,13 +36,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.createForm, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "form/create", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/forms/viewall?page=1")
 				.next()
@@ -57,8 +57,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -72,8 +70,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -86,13 +82,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.deleteForm, { formId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `form/delete/${formId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchForms())
 				.next()
@@ -108,8 +104,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -123,8 +117,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -137,13 +129,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.deleteManyForms, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `forms/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchForms())
 				.next()
@@ -159,8 +151,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -174,8 +164,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -195,7 +183,7 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.fetchForm, { formId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `form/edit/${formId}`)
 				.next(res)
@@ -248,8 +236,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -269,7 +255,7 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.fetchFormAp, { formId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `form/view/${formId}`)
 				.next(res)
@@ -310,8 +296,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -369,8 +353,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -383,13 +365,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.resendFormEmails, { formId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, `form/resend-email/${formId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchForms())
 				.next()
@@ -405,8 +387,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -420,8 +400,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -440,13 +418,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.updateForm, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "form/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -461,8 +439,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -476,8 +452,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -496,13 +470,13 @@ describe("Form Sagas", () => {
 
 			testSaga(sagas.updateFormAp, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "form/update/ap", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/dashboard")
 				.next()
@@ -517,8 +491,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -532,8 +504,6 @@ describe("Form Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

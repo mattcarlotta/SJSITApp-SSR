@@ -12,10 +12,12 @@ const Home = ({ email, signoutUser }) => (
 		<Link blue href="/employee/login">
 			Login
 		</Link>
-
 		{email && (
 			<>
 				<div>Signed in: {email}</div>
+				<Link blue href="/employee/dashboard">
+					Dashboard
+				</Link>
 				<button type="button" onClick={signoutUser}>
 					Sign Out
 				</button>

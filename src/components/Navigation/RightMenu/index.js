@@ -1,5 +1,5 @@
 import React from "react";
-import Float from "components/Body/Float";
+import Float from "~components/Body/Float";
 import AccountButton from "~containers/Auth/AccountButton";
 
 const RightMenu = props => (

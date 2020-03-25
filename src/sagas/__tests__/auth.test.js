@@ -2,7 +2,7 @@ import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
 import { app } from "~utils";
 import * as actions from "~actions/Auth";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Auth";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import authReducer from "~reducers/Auth";
@@ -82,8 +82,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -101,13 +99,13 @@ describe("Auth Sagas", () => {
 
 			testSaga(sagas.resetPassword, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "reset-password", { ...mocks.resetPassword })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next(res.data.message)
 				.call(sagas.signoutUserSession)
 				.next()
@@ -125,8 +123,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -140,8 +136,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -158,7 +152,7 @@ describe("Auth Sagas", () => {
 
 			testSaga(sagas.signinUser, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "signin", { ...props })
 				.next(res)
@@ -188,8 +182,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -233,8 +225,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -252,15 +242,15 @@ describe("Auth Sagas", () => {
 
 			testSaga(sagas.signupUser, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "signup", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
-				.put(push("/employee/login"))
+				.put(Router.push, "/employee/login")
 				.next()
 				.isDone();
 		});
@@ -274,8 +264,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -289,8 +277,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -308,13 +294,13 @@ describe("Auth Sagas", () => {
 
 			testSaga(sagas.updateUserPassword, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "new-password", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(sagas.signoutUserSession)
 				.next()
@@ -331,8 +317,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -346,8 +330,6 @@ describe("Auth Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

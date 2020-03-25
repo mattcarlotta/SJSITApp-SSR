@@ -16,8 +16,9 @@ export class NewPasswordForm extends Component {
 	constructor(props) {
 		super(props);
 
+		// TODO - Fix convert to withRouter
 		const token = parseToken(props.history.location.search);
-		if (!token) props.push("/employee/login");
+		if (!token) Router.push("/employee/login");
 
 		this.state = {
 			fields,

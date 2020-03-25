@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Events";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Events";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import messageReducer from "~reducers/Messages";
@@ -36,13 +36,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.createEvent, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "event/create", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/events/viewall?page=1")
 				.next()
@@ -57,8 +57,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -72,8 +70,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -86,13 +82,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.deleteEvent, { eventId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `event/delete/${eventId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchEvents())
 				.next()
@@ -108,8 +104,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -123,8 +117,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -137,13 +129,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.deleteManyEvents, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `events/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchEvents())
 				.next()
@@ -159,8 +151,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -174,8 +164,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -198,7 +186,7 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.fetchEvent, { eventId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `event/edit/${eventId}`)
 				.next(res)
@@ -263,8 +251,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -286,7 +272,7 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.fetchEventForScheduling, { eventId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `event/review/${eventId}`)
 				.next(res)
@@ -335,8 +321,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -396,8 +380,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -456,8 +438,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -477,7 +457,7 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.initializeNewEvent)
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, "seasons/all/ids")
 				.next(res)
@@ -534,8 +514,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -548,13 +526,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.resendEventEmails, { eventId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, `event/resend-email/${eventId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchEvents())
 				.next()
@@ -570,8 +548,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -585,8 +561,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -605,13 +579,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.updateEvent, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "event/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -626,8 +600,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -641,8 +613,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -661,13 +631,13 @@ describe("Event Sagas", () => {
 
 			testSaga(sagas.updateEventSchedule, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "event/update/schedule", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -682,8 +652,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -697,8 +665,6 @@ describe("Event Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

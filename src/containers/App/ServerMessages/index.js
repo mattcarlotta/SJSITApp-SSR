@@ -1,43 +1,16 @@
-/* eslint-disable react/jsx-handler-names */
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-	FaExclamationTriangle,
-	FaCheckCircle,
-	FaTimesCircle,
-	FaInfoCircle,
-} from "react-icons/fa";
-import { Transition } from "react-transition-group";
-import { hideServerMessage, resetServerMessage } from "~actions/Messages";
-import MessageContainer from "./MessageContainer";
-import WindowContainer from "./WindowContainer";
-import AlertContainer from "./AlertContainer";
-import TextContainer from "./TextContainer";
-import ButtonContainer from "./ButtonContainer";
-import CloseButton from "./CloseButton";
-
-const alertType = type => {
-	switch (type) {
-		case "success":
-			return <FaCheckCircle />;
-		case "warning":
-			return <FaExclamationTriangle />;
-		case "info":
-			return <FaInfoCircle />;
-		default:
-			return <FaTimesCircle />;
-	}
-};
+import { ToastContainer } from "react-toastify";
+import { resetServerMessage } from "~actions/Messages";
 
 export class ServerMessages extends Component {
 	shouldComponentUpdate = nextProps =>
-		nextProps.message !== this.props.message ||
-		nextProps.show !== this.props.show;
+		nextProps.serverMessage !== this.props.serverMessage;
 
 	componentDidUpdate = prevProps => {
-		const { message } = this.props;
-		if (prevProps.message !== message && message !== "") {
+		const { serverMessage } = this.props;
+		if (prevProps.serverMessage !== serverMessage && serverMessage !== "") {
 			clearTimeout(this.timeout);
 			this.setTimer();
 		}
@@ -47,52 +20,36 @@ export class ServerMessages extends Component {
 
 	clearTimer = () => {
 		clearTimeout(this.timeout);
-		this.props.hideServerMessage();
+		this.props.resetServerMessage();
 	};
 
-	setTimer = () => (this.timeout = setTimeout(this.clearTimer, 10000));
+	setTimer = () => (this.timeout = setTimeout(this.clearTimer, 2000));
 
 	render = () => (
-		<Transition
-			mountOnEnter
-			unmountOnExit
-			in={this.props.show}
-			timeout={350}
-			onExited={this.props.resetServerMessage}
-		>
-			{state => (
-				<WindowContainer state={state}>
-					<MessageContainer type={this.props.type}>
-						<AlertContainer>{alertType(this.props.type)}</AlertContainer>
-						<TextContainer>{this.props.message}</TextContainer>
-						<ButtonContainer>
-							<CloseButton handleClick={this.clearTimer} />
-						</ButtonContainer>
-					</MessageContainer>
-				</WindowContainer>
-			)}
-		</Transition>
+		<ToastContainer
+			position="top-right"
+			autoClose={2500}
+			hideProgressBar={false}
+			newestOnTop={false}
+			draggable={false}
+			pauseOnVisibilityChange
+			closeOnClick
+			pauseOnHover
+		/>
 	);
 }
 
 ServerMessages.propTypes = {
-	hideServerMessage: PropTypes.func.isRequired,
-	message: PropTypes.string,
 	resetServerMessage: PropTypes.func.isRequired,
-	show: PropTypes.bool,
-	type: PropTypes.string,
+	serverMessage: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
-	message: state.server.message,
-	show: state.server.show,
-	type: state.server.type,
+	serverMessage: state.server.message,
 });
 
 const mapDispatchToProps = {
-	hideServerMessage,
 	resetServerMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServerMessages);
-/* eslint-enable react/jsx-handler-names */

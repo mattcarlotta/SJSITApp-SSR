@@ -24,9 +24,8 @@ export function* fetchTeamNames() {
 
 		yield put(setTeamNames(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

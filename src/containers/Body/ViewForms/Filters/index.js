@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import moment from "moment-timezone";
+import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";
 import { MdNoteAdd } from "react-icons/md";
 import Button from "~components/Body/Button";
@@ -116,7 +117,7 @@ const FormFilters = ({ clearFilters, queries, push, updateQuery }) => {
 					width="200px"
 					marginRight="0px"
 					padding="5px 10px"
-					onClick={() => push("/employee/forms/create")}
+					onClick={() => Router.push("/employee/forms/create")}
 				>
 					<MdNoteAdd style={{ position: "relative", top: 3, fontSize: 20 }} />
 					&nbsp; Create AP Form

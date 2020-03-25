@@ -30,9 +30,8 @@ export function* fetchAPForm() {
 
 		yield put(setAPForm(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -54,9 +53,8 @@ export function* fetchAvailability() {
 
 		yield put(setAvailability(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -81,9 +79,8 @@ export function* fetchEventDistribution({ params }) {
 
 		yield put(setEventDistribution(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -106,9 +103,8 @@ export function* fetchEvents({ selectedEvent }) {
 
 		yield put(setEvents(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -130,9 +126,8 @@ export function* fetchMembersAvailability() {
 
 		yield put(setMembersAvailability(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

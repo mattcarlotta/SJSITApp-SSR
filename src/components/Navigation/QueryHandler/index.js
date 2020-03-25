@@ -1,5 +1,6 @@
 import { PureComponent } from "react";
 import PropTypes from "prop-types";
+import Router from "next/router";
 import { setQuery, stringifyQuery } from "~utils/queryHelpers";
 
 class QueryHandler extends PureComponent {
@@ -8,7 +9,7 @@ class QueryHandler extends PureComponent {
 	static getDerivedStateFromProps = ({ location }) => setQuery(location.search);
 
 	pushToLocation = query =>
-		this.props.push(`${this.props.location.pathname}?${query}`);
+		Router.push(`${this.props.location.pathname}?${query}`);
 
 	updateQuery = nextQuery =>
 		this.pushToLocation(
@@ -33,7 +34,6 @@ QueryHandler.propTypes = {
 		pathname: PropTypes.string,
 		search: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	children: PropTypes.func.isRequired,
 };
 

@@ -2,8 +2,6 @@ import * as types from "~types";
 
 export const initialState = {
 	message: "",
-	show: false,
-	type: "",
 };
 
 /**
@@ -14,14 +12,11 @@ export const initialState = {
  */
 const serverMessageReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
-		case types.MESSAGE_HIDE: {
-			return { ...state, show: false };
-		}
 		case types.MESSAGE_RESET: {
-			return { ...state, message: "", type: "" };
+			return initialState;
 		}
 		case types.MESSAGE_SET: {
-			return { message: payload.message, show: true, type: payload.type };
+			return payload.message;
 		}
 		default: {
 			return state;

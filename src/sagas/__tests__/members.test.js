@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Members";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { signoutUser } from "~actions/Auth";
 import * as sagas from "~sagas/Members";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
@@ -38,13 +38,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.createMember, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "token/create", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/members/authorizations/viewall?page=1")
 				.next()
@@ -59,8 +59,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -74,8 +72,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -88,13 +84,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.deleteMember, { memberId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `member/delete/${memberId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchMembers())
 				.next()
@@ -110,8 +106,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -125,8 +119,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -139,13 +131,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.deleteManyMembers, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `members/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchMembers())
 				.next()
@@ -161,8 +153,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -176,8 +166,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -190,13 +178,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.deleteToken, { tokenId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `token/delete/${tokenId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchTokens())
 				.next()
@@ -212,8 +200,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -227,8 +213,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -241,13 +225,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.deleteManyTokens, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `tokens/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchTokens())
 				.next()
@@ -263,8 +247,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -278,8 +260,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -338,8 +318,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -356,7 +334,7 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.fetchMemberNames)
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, "members/names")
 				.next(res)
@@ -396,8 +374,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -466,8 +442,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -527,8 +501,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -589,8 +561,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -659,8 +629,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -716,8 +684,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -777,8 +743,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -798,7 +762,7 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.fetchToken, { tokenId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `token/edit/${tokenId}`)
 				.next(res)
@@ -850,8 +814,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -912,8 +874,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -926,13 +886,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.resendToken, { tokenId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, `token/resend/${tokenId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchTokens())
 				.next()
@@ -948,8 +908,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -963,8 +921,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -983,13 +939,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.updateMember, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "member/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next(props)
 				.put(actions.fetchMember(props._id))
 				.next()
@@ -1004,8 +960,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -1019,8 +973,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -1039,13 +991,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.updateMemberStatus, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "member/updatestatus", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next(props)
 				.put(actions.fetchMember(props._id))
 				.next()
@@ -1060,8 +1012,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -1075,8 +1025,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -1095,13 +1043,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.updateMemberToken, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "token/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -1116,8 +1064,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -1131,8 +1077,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -1151,13 +1095,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.updateSettings, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "member/settings/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(signoutUser())
 				.next()
@@ -1170,13 +1114,13 @@ describe("Member Sagas", () => {
 
 			testSaga(sagas.updateSettings, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "member/settings/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next(res.data.message)
 				.put(actions.fetchMemberSettings())
 				.next()
@@ -1192,8 +1136,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -1207,8 +1149,6 @@ describe("Member Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

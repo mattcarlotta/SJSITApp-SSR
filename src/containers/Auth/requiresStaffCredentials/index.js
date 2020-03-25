@@ -8,14 +8,15 @@ const requiresStaffCredentials = WrappedComponent => {
 	class RequiresStaffAuthentication extends PureComponent {
 		static async getInitialProps(ctx) {
 			const {
-				store: { dispatch },
+				store: { dispatch, getState },
 			} = ctx;
 
-			await dispatch(requiresStaffCreds(ctx));
+			const { role, email } = getState().auth;
 
-			if (WrappedComponent.getInitialProps) {
+			if (role !== "staff" || !email) await dispatch(requiresStaffCreds(ctx));
+
+			if (WrappedComponent.getInitialProps)
 				await WrappedComponent.getInitialProps(ctx);
-			}
 		}
 
 		render = () =>

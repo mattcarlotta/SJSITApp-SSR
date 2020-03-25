@@ -2,7 +2,7 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
 import { signin, signout } from "~actions/Auth";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { parseCookie, parseData, parseMessage } from "~utils/parseResponse";
 import Redirect from "~utils/redirect";
 import toast from "~components/Body/Toast";
@@ -25,9 +25,8 @@ export function* signoutUserSession() {
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -49,9 +48,8 @@ export function* authenticateUser({ req }) {
 
 		yield put(signin(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -70,10 +68,9 @@ export function* requiresBasicCreds({ req, res }) {
 		const headers = yield call(parseCookie, req);
 		yield call(app.get, "is-member", headers);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
 		yield call(Redirect, res);
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -92,10 +89,9 @@ export function* requiresStaffCreds({ req, res }) {
 		const headers = yield call(parseCookie, req);
 		yield call(app.get, "is-staff-member", headers);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
 		yield call(Redirect, res);
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -113,23 +109,21 @@ export function* requiresStaffCreds({ req, res }) {
  */
 export function* resetPassword({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "reset-password", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "info",
 				message,
 			}),
 		);
 
 		yield call(signoutUserSession);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -146,7 +140,7 @@ export function* resetPassword({ props }) {
  */
 export function* signinUser({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "signin", { ...props });
 		const data = yield call(parseData, res);
@@ -154,9 +148,8 @@ export function* signinUser({ props }) {
 		yield put(signin(data));
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -174,23 +167,21 @@ export function* signinUser({ props }) {
  */
 export function* signupUser({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "signup", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -208,23 +199,21 @@ export function* signupUser({ props }) {
  */
 export function* updateUserPassword({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "new-password", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(signoutUserSession);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

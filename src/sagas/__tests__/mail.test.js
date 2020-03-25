@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Mail";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Mail";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import messageReducer from "~reducers/Messages";
@@ -36,13 +36,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.contactUs, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "mail/contact", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/dashboard")
 				.next()
@@ -57,8 +57,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -72,8 +70,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -92,13 +88,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.createMail, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "mail/create", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(Router.push, "/employee/mail/viewall?page=1")
 				.next()
@@ -113,8 +109,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -128,8 +122,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -142,13 +134,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.deleteMail, { mailId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `mail/delete/${mailId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchMails())
 				.next()
@@ -164,8 +156,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -179,8 +169,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -193,13 +181,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.deleteManyMails, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `mails/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchMails())
 				.next()
@@ -215,8 +203,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -230,8 +216,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -251,7 +235,7 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.fetchMail, { mailId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `members/names`)
 				.next(res)
@@ -300,8 +284,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -357,8 +339,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -371,13 +351,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.resendMail, { mailId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, `mail/resend/${mailId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "info", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchMails())
 				.next()
@@ -393,8 +373,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "info",
 				})
 				.run();
 		});
@@ -408,8 +386,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -428,13 +404,13 @@ describe("Mail Sagas", () => {
 
 			testSaga(sagas.updateMail, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "mail/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -449,8 +425,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -464,8 +438,6 @@ describe("Mail Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

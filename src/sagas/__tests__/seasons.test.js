@@ -3,7 +3,7 @@ import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Seasons";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Seasons";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import messageReducer from "~reducers/Messages";
@@ -36,13 +36,13 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.createSeason, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.post, "season/create", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.push, "/employee/seasons/viewall?page=1")
 				.next()
@@ -57,8 +57,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -72,8 +70,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -86,13 +82,13 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.deleteSeason, { seasonId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `season/delete/${seasonId}`)
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchSeasons())
 				.next()
@@ -108,8 +104,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -123,8 +117,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -137,13 +129,13 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.deleteManySeasons, { ids })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.delete, `seasons/delete-many`, { data: { ids } })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.put(actions.fetchSeasons())
 				.next()
@@ -159,8 +151,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -174,8 +164,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -192,7 +180,7 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.fetchSeason, { seasonId })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, `season/edit/${seasonId}`)
 				.next(res)
@@ -228,8 +216,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -286,8 +272,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -304,7 +288,7 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.fetchSeasonsIds)
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.get, "seasons/all/ids")
 				.next(res)
@@ -340,8 +324,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});
@@ -360,13 +342,13 @@ describe("Season Sagas", () => {
 
 			testSaga(sagas.updateSeason, { props })
 				.next()
-				.put(hideServerMessage())
+				.put(resetServerMessage())
 				.next()
 				.call(app.put, "season/update", { ...props })
 				.next(res)
 				.call(parseMessage, res)
 				.next(res.data.message)
-				.put(setServerMessage({ type: "success", message: res.data.message }))
+				.put(setServerMessage({ message: res.data.message }))
 				.next()
 				.call(Router.back)
 				.next()
@@ -381,8 +363,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message,
-					show: true,
-					type: "success",
 				})
 				.run();
 		});
@@ -396,8 +376,6 @@ describe("Season Sagas", () => {
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
-					show: true,
-					type: "error",
 				})
 				.run();
 		});

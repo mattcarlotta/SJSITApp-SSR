@@ -2,6 +2,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
+import Router from "next/router";
 import { Popconfirm } from "antd";
 import {
 	FaCheckSquare,
@@ -40,7 +41,7 @@ const TableActions = ({
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() =>
-						push(`/employee/${assignLocation}/assign/${record._id}`)
+						Router.push(`/employee/${assignLocation}/assign/${record._id}`)
 					}
 				>
 					<FaClipboardCheck style={{ ...iconStyle, fontSize: 17 }} />
@@ -56,7 +57,9 @@ const TableActions = ({
 					primary
 					padding="3px 0 0 0"
 					marginRight="0px"
-					onClick={() => push(`/employee/${viewLocation}/view/${record._id}`)}
+					onClick={() =>
+						Router.push(`/employee/${viewLocation}/view/${record._id}`)
+					}
 				>
 					<FaSearchPlus style={{ ...iconStyle, fontSize: 16 }} />
 					&nbsp;
@@ -71,7 +74,9 @@ const TableActions = ({
 					primary
 					padding="3px 0px 0 3px"
 					marginRight="0px"
-					onClick={() => push(`/employee/${editLocation}/edit/${record._id}`)}
+					onClick={() =>
+						Router.push(`/employee/${editLocation}/edit/${record._id}`)
+					}
 				>
 					<FaEdit style={iconStyle} />
 					&nbsp;
@@ -145,7 +150,6 @@ TableActions.propTypes = {
 	editLocation: PropTypes.string,
 	handleClickAction: PropTypes.func.isRequired,
 	handleDeleteRecords: PropTypes.func.isRequired,
-	push: PropTypes.func.isRequired,
 	record: PropTypes.any.isRequired,
 	selectedRowKeys: PropTypes.arrayOf(PropTypes.string),
 	sendMail: PropTypes.func,

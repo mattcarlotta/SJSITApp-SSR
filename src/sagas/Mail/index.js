@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Mail";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
@@ -24,23 +24,21 @@ import * as types from "~types";
 
 export function* contactUs({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "mail/contact", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -60,23 +58,21 @@ export function* contactUs({ props }) {
 
 export function* createMail({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "mail/create", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.push, "/employee/mail/viewall?page=1");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -96,23 +92,21 @@ export function* createMail({ props }) {
 
 export function* deleteMail({ mailId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `mail/delete/${mailId}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -132,23 +126,21 @@ export function* deleteMail({ mailId }) {
 
 export function* deleteManyMails({ ids }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `mails/delete-many`, { data: { ids } });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -168,7 +160,7 @@ export function* deleteManyMails({ ids }) {
 
 export function* fetchMail({ mailId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		let res = yield call(app.get, "members/names");
 		const membersNamesData = yield call(parseData, res);
@@ -184,9 +176,8 @@ export function* fetchMail({ mailId }) {
 		);
 	} catch (e) {
 		yield call(Router.back);
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -211,9 +202,8 @@ export function* fetchMails() {
 
 		yield put(actions.setMails(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -233,23 +223,21 @@ export function* fetchMails() {
 
 export function* resendMail({ mailId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, `mail/resend/${mailId}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "info",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -269,23 +257,21 @@ export function* resendMail({ mailId }) {
 
 export function* updateMail({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "mail/update", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.back);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

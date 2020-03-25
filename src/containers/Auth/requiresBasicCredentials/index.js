@@ -8,14 +8,15 @@ const requiresBasicCredentials = WrappedComponent => {
 	class RequiresAuthentication extends PureComponent {
 		static async getInitialProps(ctx) {
 			const {
-				store: { dispatch },
+				store: { dispatch, getState },
 			} = ctx;
 
-			await dispatch(requiresBasicUserCreds(ctx));
+			const { role, email } = getState().auth;
 
-			if (WrappedComponent.getInitialProps) {
+			if (!role || !email) await dispatch(requiresBasicUserCreds(ctx));
+
+			if (WrappedComponent.getInitialProps)
 				await WrappedComponent.getInitialProps(ctx);
-			}
 		}
 
 		render = () =>

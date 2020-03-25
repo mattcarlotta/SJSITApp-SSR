@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
-import { hideServerMessage, setServerMessage } from "~actions/Messages";
+import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Events";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
@@ -23,23 +23,21 @@ import * as types from "~types";
 
 export function* createEvent({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.post, "event/create", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.push, "/employee/events/viewall?page=1");
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -58,23 +56,21 @@ export function* createEvent({ props }) {
 
 export function* deleteEvent({ eventId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `event/delete/${eventId}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -93,23 +89,21 @@ export function* deleteEvent({ eventId }) {
 
 export function* deleteManyEvents({ ids }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.delete, `events/delete-many`, { data: { ids } });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -132,7 +126,7 @@ export function* deleteManyEvents({ ids }) {
 
 export function* fetchEvent({ eventId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		let res = yield call(app.get, `event/edit/${eventId}`);
 		const events = yield call(parseData, res);
@@ -151,9 +145,8 @@ export function* fetchEvent({ eventId }) {
 			}),
 		);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -174,7 +167,7 @@ export function* fetchEvent({ eventId }) {
 
 export function* fetchEventForScheduling({ eventId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		let res = yield call(app.get, `event/review/${eventId}`);
 		const scheduleData = yield call(parseData, res);
@@ -186,9 +179,8 @@ export function* fetchEventForScheduling({ eventId }) {
 			actions.setEventForScheduling({ ...scheduleData, ...memberCountData }),
 		);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -213,9 +205,8 @@ export function* fetchEvents() {
 
 		yield put(actions.setEvents(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -238,9 +229,8 @@ export function* fetchScheduleEvents({ params }) {
 
 		yield put(actions.setScheduleEvents(data));
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -260,7 +250,7 @@ export function* fetchScheduleEvents({ params }) {
 
 export function* initializeNewEvent() {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		let res = yield call(app.get, "seasons/all/ids");
 		const seasons = yield call(parseData, res);
@@ -275,9 +265,8 @@ export function* initializeNewEvent() {
 			}),
 		);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -296,23 +285,21 @@ export function* initializeNewEvent() {
 
 export function* resendEventEmails({ eventId }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, `event/resend-email/${eventId}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "info",
 				message,
 			}),
 		);
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -331,23 +318,21 @@ export function* resendEventEmails({ eventId }) {
 
 export function* updateEvent({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "event/update", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.back);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -367,23 +352,21 @@ export function* updateEvent({ props }) {
 
 export function* updateEventSchedule({ props }) {
 	try {
-		yield put(hideServerMessage());
+		yield put(resetServerMessage());
 
 		const res = yield call(app.put, "event/update/schedule", { ...props });
 		const message = yield call(parseMessage, res);
 
 		yield put(
 			setServerMessage({
-				type: "success",
 				message,
 			}),
 		);
 
 		yield call(Router.back);
 	} catch (e) {
-		const error = { type: "error", message: e.toString() };
-		yield put(setServerMessage(error));
-		yield call(toast, error);
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

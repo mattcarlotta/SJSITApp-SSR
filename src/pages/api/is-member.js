@@ -7,7 +7,7 @@ import { requireAuth } from "~services/strategies";
  * @function isValidMember
  * @returns {object}
  */
-const isValidMember = (_, res) => {
+const isValidMember = async (_, res) => {
 	res.status(200).end();
 };
 

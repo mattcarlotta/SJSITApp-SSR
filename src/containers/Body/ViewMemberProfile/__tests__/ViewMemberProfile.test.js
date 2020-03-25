@@ -2,7 +2,7 @@ import { ViewMemberProfile } from "../index";
 
 const fetchMember = jest.fn();
 const fetchMemberEvents = jest.fn();
-const hideServerMessage = jest.fn();
+const resetServerMessage = jest.fn();
 const fetchScheduleEvents = jest.fn();
 const fetchMemberAvailability = jest.fn();
 const goBack = jest.fn();
@@ -15,7 +15,7 @@ const initProps = {
 	fetchMemberAvailability,
 	fetchMemberEvents,
 	fetchScheduleEvents,
-	hideServerMessage,
+	resetServerMessage,
 	match: {
 		params: {
 			id: "0123456789",
@@ -47,7 +47,7 @@ describe("View Member Profile", () => {
 	});
 
 	afterEach(() => {
-		hideServerMessage.mockClear();
+		resetServerMessage.mockClear();
 		goBack.mockClear();
 		resetMembers.mockClear();
 		fetchMember.mockClear();
@@ -66,17 +66,17 @@ describe("View Member Profile", () => {
 		expect(fetchMember).toHaveBeenCalledTimes(1);
 	});
 
-	it("initially calls hideServerMessage on mount if 'serverMessage' is present", () => {
-		expect(hideServerMessage).toHaveBeenCalledTimes(1);
+	it("initially calls resetServerMessage on mount if 'serverMessage' is present", () => {
+		expect(resetServerMessage).toHaveBeenCalledTimes(1);
 	});
 
-	it("doesn't call hideServerMessage on mount if 'serverMessage' is absent", () => {
-		hideServerMessage.mockClear();
+	it("doesn't call resetServerMessage on mount if 'serverMessage' is absent", () => {
+		resetServerMessage.mockClear();
 		wrapper.setProps({ serverMessage: "" });
 
 		wrapper.instance().componentDidMount();
 
-		expect(hideServerMessage).toHaveBeenCalledTimes(0);
+		expect(resetServerMessage).toHaveBeenCalledTimes(0);
 	});
 
 	it("renders 4 tabs when a member has been loaded", () => {

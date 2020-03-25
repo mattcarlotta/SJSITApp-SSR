@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import moment from "moment-timezone";
+import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";
 import { FaCalendarPlus } from "react-icons/fa";
 import Button from "~components/Body/Button";
@@ -140,7 +141,7 @@ const EventFilters = ({ clearFilters, queries, push, teams, updateQuery }) => {
 					width="180px"
 					marginRight="0px"
 					padding="5px 10px"
-					onClick={() => push("/employee/events/create")}
+					onClick={() => Router.push("/employee/events/create")}
 				>
 					<FaCalendarPlus
 						style={{ position: "relative", top: 1, fontSize: 16 }}

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FaBars } from "react-icons/fa";
-import MenuButton from "components/Body/MenuButton";
+import MenuButton from "~components/Body/MenuButton";
 
 const LeftMenu = ({ toggleSideMenu }) => (
 	<MenuButton

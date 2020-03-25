@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Router from "next/router";
 import { connect } from "react-redux";
 import { Menu, Dropdown } from "antd";
 import { FaUserCircle, FaSignOutAlt, FaCogs } from "react-icons/fa";
@@ -10,13 +11,13 @@ import MenuItemTitle from "~components/Body/MenuItemTitle";
 
 const MenuItem = Menu.Item;
 
-export const AccountButton = ({ firstName, lastName, push, signoutUser }) => {
+export const AccountButton = ({ firstName, lastName, signoutUser }) => {
 	const options = (
 		<Menu style={{ padding: 0 }}>
 			<MenuItem>
 				<MenuButton
 					style={{ width: "100%" }}
-					onClick={() => push("/employee/settings")}
+					onClick={() => Router.push("/employee/settings")}
 				>
 					<MenuItemContainer>
 						<FaCogs />
@@ -57,7 +58,6 @@ export const AccountButton = ({ firstName, lastName, push, signoutUser }) => {
 AccountButton.propTypes = {
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
-	push: PropTypes.func,
 	signoutUser: PropTypes.func.isRequired,
 };
 
