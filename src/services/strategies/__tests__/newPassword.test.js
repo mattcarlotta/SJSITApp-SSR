@@ -35,7 +35,7 @@ describe("Update Password Request Middleware", () => {
 
 		await updatePassword(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: invalidToken });
 		done();
 	});
@@ -50,7 +50,7 @@ describe("Update Password Request Middleware", () => {
 
 		await updatePassword(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: emptyPassword });
 		done();
 	});
@@ -65,7 +65,7 @@ describe("Update Password Request Middleware", () => {
 
 		await updatePassword(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: invalidToken });
 		done();
 	});
@@ -80,7 +80,7 @@ describe("Update Password Request Middleware", () => {
 
 		await updatePassword(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: notUniquePassword });
 		done();
 	});

@@ -1,6 +1,6 @@
 import withMiddleware from "~middlewares";
 import { newPassword } from "~services/strategies";
-import { passwordResetSuccess } from "messages/success";
+import { passwordResetSuccess } from "~messages/success";
 
 /**
  * Allows a user to update their password with an authorization key.

@@ -19,12 +19,12 @@ describe("Server Messages", () => {
 		resetServerMessage.mockClear();
 	});
 
-	it("automatically resets server messages after 10 seconds", done => {
+	it("automatically resets server messages after 7.5 seconds", done => {
 		jest.useFakeTimers();
 		wrapper.setProps({
-			message: "This message auto closes in 10 seconds.",
+			message: "This message auto resets in 7.5 seconds.",
 		});
-		jest.advanceTimersByTime(2500);
+		jest.advanceTimersByTime(7500);
 
 		expect(resetServerMessage).toHaveBeenCalledTimes(1);
 		jest.runAllTimers();

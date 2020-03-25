@@ -1,6 +1,6 @@
 import withMiddleware from "~middlewares";
 import { resetToken } from "~services/strategies";
-import { passwordResetToken } from "messages/success";
+import { passwordResetToken } from "~messages/success";
 
 /**
  * Emails a user a new authorization key to reset their password.

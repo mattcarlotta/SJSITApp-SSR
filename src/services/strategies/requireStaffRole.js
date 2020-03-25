@@ -14,11 +14,11 @@ export default next => async (req, res) => {
 	const role = get(user, ["role"]);
 
 	if (!user || (role !== "admin" && role !== "staff"))
-		return sendError(accessDenied, 404, res);
+		return sendError(accessDenied, 403, res);
 
 	const existingUser = await User.findOne({ _id: user.id });
 	if (!existingUser || existingUser.status === "suspended")
-		return sendError(badCredentials, 404, res);
+		return sendError(badCredentials, 403, res);
 
 	next(req, res);
 };

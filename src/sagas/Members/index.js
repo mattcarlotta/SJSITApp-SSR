@@ -35,6 +35,7 @@ export function* createMember({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/members/authorizations/viewall?page=1");
 	} catch (e) {
@@ -69,6 +70,7 @@ export function* deleteMember({ memberId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchMembers());
 	} catch (e) {
@@ -105,6 +107,7 @@ export function* deleteManyMembers({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchMembers());
 	} catch (e) {
@@ -139,6 +142,7 @@ export function* deleteToken({ tokenId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
@@ -173,6 +177,7 @@ export function* deleteManyTokens({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
@@ -488,6 +493,7 @@ export function* resendToken({ tokenId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
@@ -522,6 +528,7 @@ export function* updateMember({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchMember(props._id));
 	} catch (e) {
@@ -556,6 +563,7 @@ export function* updateMemberStatus({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchMember(props._id));
 	} catch (e) {
@@ -590,6 +598,7 @@ export function* updateMemberToken({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield call(Router.back);
 	} catch (e) {
@@ -624,6 +633,7 @@ export function* updateSettings({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		if (message !== "Successfully updated your settings.") {
 			yield put(signoutUser());

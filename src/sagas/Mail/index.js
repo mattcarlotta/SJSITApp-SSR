@@ -34,6 +34,7 @@ export function* contactUs({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
@@ -68,6 +69,7 @@ export function* createMail({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/mail/viewall?page=1");
 	} catch (e) {
@@ -102,6 +104,7 @@ export function* deleteMail({ mailId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchMails());
 	} catch (e) {
@@ -136,6 +139,7 @@ export function* deleteManyMails({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchMails());
 	} catch (e) {
@@ -233,6 +237,7 @@ export function* resendMail({ mailId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchMails());
 	} catch (e) {
@@ -267,6 +272,7 @@ export function* updateMail({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.back);
 	} catch (e) {

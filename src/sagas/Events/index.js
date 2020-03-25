@@ -33,6 +33,7 @@ export function* createEvent({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/events/viewall?page=1");
 	} catch (e) {
@@ -66,6 +67,7 @@ export function* deleteEvent({ eventId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
@@ -99,6 +101,7 @@ export function* deleteManyEvents({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
@@ -295,6 +298,7 @@ export function* resendEventEmails({ eventId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchEvents());
 	} catch (e) {
@@ -328,6 +332,7 @@ export function* updateEvent({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.back);
 	} catch (e) {
@@ -362,6 +367,7 @@ export function* updateEventSchedule({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.back);
 	} catch (e) {

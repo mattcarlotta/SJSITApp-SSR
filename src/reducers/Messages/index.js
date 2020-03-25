@@ -16,7 +16,7 @@ const serverMessageReducer = (state = initialState, { payload, type }) => {
 			return initialState;
 		}
 		case types.MESSAGE_SET: {
-			return payload.message;
+			return { ...state, message: payload.message };
 		}
 		default: {
 			return state;

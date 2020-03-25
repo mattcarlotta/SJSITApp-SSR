@@ -34,6 +34,7 @@ export function* createForm({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/forms/viewall?page=1");
 	} catch (e) {
@@ -68,6 +69,7 @@ export function* deleteForm({ formId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchForms());
 	} catch (e) {
@@ -102,6 +104,7 @@ export function* deleteManyForms({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchForms());
 	} catch (e) {
@@ -229,6 +232,7 @@ export function* resendFormEmails({ formId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield put(actions.fetchForms());
 	} catch (e) {
@@ -263,6 +267,7 @@ export function* updateForm({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.back);
 	} catch (e) {
@@ -297,6 +302,7 @@ export function* updateFormAp({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {

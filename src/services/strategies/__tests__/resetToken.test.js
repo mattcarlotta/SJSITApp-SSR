@@ -28,7 +28,7 @@ describe("Reset Password Token Request Middleware", () => {
 
 		await resetToken(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: missingEmailCreds });
 		done();
 	});
@@ -42,7 +42,7 @@ describe("Reset Password Token Request Middleware", () => {
 
 		await resetToken(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(404);
 		expect(res.json).toHaveBeenCalledWith({ err: missingEmailCreds });
 		done();
 	});

@@ -34,6 +34,7 @@ export function* createSeason({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/seasons/viewall?page=1");
 	} catch (e) {
@@ -68,6 +69,7 @@ export function* deleteSeason({ seasonId }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
@@ -104,6 +106,7 @@ export function* deleteManySeasons({ ids }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
@@ -217,6 +220,7 @@ export function* updateSeason({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.back);
 	} catch (e) {

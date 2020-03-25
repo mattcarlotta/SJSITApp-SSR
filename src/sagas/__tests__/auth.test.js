@@ -108,6 +108,8 @@ describe("Auth Sagas", () => {
 				.next(res.data.message)
 				.put(setServerMessage({ message: res.data.message }))
 				.next(res.data.message)
+				.call(toast, { type: "info", message: res.data.message })
+				.next()
 				.call(sagas.signoutUserSession)
 				.next()
 				.isDone();
@@ -251,6 +253,8 @@ describe("Auth Sagas", () => {
 				.call(parseMessage, res)
 				.next(res.data.message)
 				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data.message)
+				.call(toast, { type: "success", message: res.data.message })
 				.next()
 				.put(Router.push, "/employee/login")
 				.next()
@@ -284,7 +288,7 @@ describe("Auth Sagas", () => {
 		});
 	});
 
-	describe("Update Current User", () => {
+	describe("Update Current User Password", () => {
 		let props;
 		beforeAll(() => {
 			props = mocks.updateCurrentPassword;
@@ -303,6 +307,8 @@ describe("Auth Sagas", () => {
 				.call(parseMessage, res)
 				.next(res.data.message)
 				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data.message)
+				.call(toast, { type: "success", message: res.data.message })
 				.next()
 				.call(sagas.signoutUserSession)
 				.next()

@@ -119,6 +119,7 @@ export function* resetPassword({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "info", message });
 
 		yield call(signoutUserSession);
 	} catch (e) {
@@ -177,6 +178,7 @@ export function* signupUser({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
@@ -209,6 +211,7 @@ export function* updateUserPassword({ props }) {
 				message,
 			}),
 		);
+		yield call(toast, { type: "success", message });
 
 		yield call(signoutUserSession);
 	} catch (e) {

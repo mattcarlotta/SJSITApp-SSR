@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import get from "lodash/get";
+import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import { FaUnlockAlt } from "react-icons/fa";
 import Center from "~components/Body/Center";
@@ -11,14 +13,13 @@ import Link from "~components/Navigation/Link";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import parseToken from "~utils/parseToken";
 import { signupUser } from "~actions/Auth";
 
 export class SignupForm extends Component {
 	constructor(props) {
 		super(props);
 
-		const token = parseToken(props.history.location.search);
+		const token = get(props, ["router", "query", "token"]);
 
 		this.state = {
 			fields: [
@@ -110,7 +111,7 @@ export class SignupForm extends Component {
 				<Link
 					blue
 					style={{ padding: 0, margin: 0, fontSize: 16 }}
-					href="/employee/resetpassword"
+					href="/employee/reset-password"
 				>
 					<FaUnlockAlt />
 					&nbsp; Forgot your password?
@@ -128,23 +129,8 @@ export class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-	history: PropTypes.shape({
-		action: PropTypes.string,
-		block: PropTypes.func,
-		createHref: PropTypes.func,
-		go: PropTypes.func,
-		goBack: PropTypes.func,
-		goForward: PropTypes.func,
-		length: PropTypes.number,
-		listen: PropTypes.func,
-		location: PropTypes.shape({
-			pathname: PropTypes.string,
-			search: PropTypes.string,
-			hash: PropTypes.string,
-			state: PropTypes.oneOf(["object", "undefined"]),
-		}),
-		push: PropTypes.func,
-		replace: PropTypes.func,
+	router: PropTypes.shape({
+		pathname: PropTypes.string,
 	}),
 	serverMessage: PropTypes.string,
 	signupUser: PropTypes.func,
@@ -160,4 +146,6 @@ const mapDispatchToProps = {
 	signupUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(SignupForm),
+);

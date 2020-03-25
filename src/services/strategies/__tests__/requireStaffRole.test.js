@@ -24,7 +24,7 @@ describe("Require Staff Role Authentication Middleware", () => {
 
 		await requireStaffRole(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: accessDenied });
 		done();
 	});
@@ -44,7 +44,7 @@ describe("Require Staff Role Authentication Middleware", () => {
 		const req = mockRequest(null, session);
 
 		await requireStaffRole(req, res, next);
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
 		done();
 	});
@@ -60,7 +60,7 @@ describe("Require Staff Role Authentication Middleware", () => {
 		const req = mockRequest(null, session);
 
 		await requireStaffRole(req, res, next);
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
 		done();
 	});

@@ -67,7 +67,7 @@ export const updatePassword = next => async (req, res) => {
 
 		next(req, res);
 	} catch (err) {
-		sendError(err, 400, res);
+		sendError(err, 404, res);
 	}
 };
 

@@ -65,7 +65,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: missingSignupCreds });
 		done();
 	});
@@ -83,7 +83,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: invalidToken });
 		done();
 	});
@@ -101,7 +101,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: invalidSignupEmail });
 		done();
 	});
@@ -123,7 +123,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: tokenAlreadyUsed });
 		done();
 	});
@@ -153,7 +153,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: expiredToken });
 		done();
 	});
@@ -171,7 +171,7 @@ describe("Local Signup Middleware", () => {
 
 		await localSignup(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({
 			err: usernameAlreadyTaken,
 		});

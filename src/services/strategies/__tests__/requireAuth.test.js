@@ -23,7 +23,7 @@ describe("Require Authentication Middleware", () => {
 		const req = mockRequest();
 
 		await requireAuth(req, res, next);
-		expect(res.status).toHaveBeenCalledWith(404);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({
 			role: "guest",
 			err: badCredentials,
@@ -45,7 +45,7 @@ describe("Require Authentication Middleware", () => {
 		const req = mockRequest(null, session);
 
 		await requireAuth(req, res, next);
-		expect(res.status).toHaveBeenCalledWith(404);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({
 			role: "guest",
 			err: invalidSession,
@@ -63,7 +63,7 @@ describe("Require Authentication Middleware", () => {
 		const req = mockRequest(null, session);
 
 		await requireAuth(req, res, next);
-		expect(res.status).toHaveBeenCalledWith(404);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({
 			role: "guest",
 			err: invalidSession,

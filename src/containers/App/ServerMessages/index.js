@@ -28,7 +28,7 @@ export class ServerMessages extends Component {
 	render = () => (
 		<ToastContainer
 			position="top-right"
-			autoClose={2500}
+			autoClose={7500}
 			hideProgressBar={false}
 			newestOnTop={false}
 			draggable={false}

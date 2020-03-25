@@ -62,7 +62,7 @@ export const localLogin = next => async (req, res) => {
 
 		next(req, res);
 	} catch (err) {
-		sendError(err, 404, res);
+		sendError(err, 403, res);
 	}
 };
 

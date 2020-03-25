@@ -82,34 +82,14 @@ export class ResetPasswordForm extends Component {
 }
 
 ResetPasswordForm.propTypes = {
-	history: PropTypes.shape({
-		action: PropTypes.string,
-		block: PropTypes.func,
-		createHref: PropTypes.func,
-		go: PropTypes.func,
-		goBack: PropTypes.func,
-		goForward: PropTypes.func,
-		length: PropTypes.number,
-		listen: PropTypes.func,
-		location: PropTypes.shape({
-			pathname: PropTypes.string,
-			search: PropTypes.string,
-			hash: PropTypes.string,
-			state: PropTypes.oneOf(["object", "undefined"]),
-		}),
-		push: PropTypes.func,
-		replace: PropTypes.func,
-	}),
 	resetPassword: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 };
 
-/* istanbul ignore next */
 const mapStateToProps = state => ({
 	serverMessage: state.server.message,
 });
 
-/* istanbul ignore next */
 const mapDispatchToProps = {
 	resetPassword,
 };

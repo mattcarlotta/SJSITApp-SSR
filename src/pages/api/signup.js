@@ -1,6 +1,6 @@
 import withMiddleware from "~middlewares";
 import { localSignup } from "~services/strategies";
-import { thanksForReg } from "messages/success";
+import { thanksForReg } from "~messages/success";
 
 /**
  * Creates a new user.

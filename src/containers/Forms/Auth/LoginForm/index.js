@@ -35,7 +35,10 @@ export class LoginForm extends Component {
 		const { validatedFields, errors } = fieldValidator(this.state.fields);
 
 		this.setState(
-			{ fields: !errors ? fields : validatedFields, isSubmitting: !errors },
+			prevState => ({
+				fields: !errors ? prevState.fields : validatedFields,
+				isSubmitting: !errors,
+			}),
 			() => {
 				if (!errors) this.props.signinUser(parseFields(validatedFields));
 			},
@@ -57,7 +60,7 @@ export class LoginForm extends Component {
 				<Link
 					blue
 					style={{ padding: 0, margin: 0, fontSize: 16 }}
-					href="/employee/resetpassword"
+					href="/employee/reset-password"
 				>
 					<FaUnlockAlt />
 					&nbsp; Forgot your password?

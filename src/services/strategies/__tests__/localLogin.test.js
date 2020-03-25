@@ -32,7 +32,7 @@ describe("Local Login Middleware", () => {
 
 		await localLogin(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
 		done();
 	});
@@ -47,7 +47,7 @@ describe("Local Login Middleware", () => {
 
 		await localLogin(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
 		done();
 	});
@@ -62,7 +62,7 @@ describe("Local Login Middleware", () => {
 
 		await localLogin(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: badCredentials });
 		done();
 	});
@@ -77,7 +77,7 @@ describe("Local Login Middleware", () => {
 
 		await localLogin(req, res, next);
 
-		expect(res.status).toHaveBeenCalledWith(400);
+		expect(res.status).toHaveBeenCalledWith(403);
 		expect(res.json).toHaveBeenCalledWith({ err: invalidStatus });
 		done();
 	});
