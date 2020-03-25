@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import get from "lodash/get";
+import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import Modal from "~components/Body/Modal";
 import SubmitButton from "~components/Body/SubmitButton";
@@ -8,7 +10,6 @@ import FormTitle from "~components/Forms/FormTitle";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import parseToken from "~utils/parseToken";
 import { updateUserPassword } from "~actions/Auth";
 import fields from "./Fields";
 
@@ -16,9 +17,7 @@ export class NewPasswordForm extends Component {
 	constructor(props) {
 		super(props);
 
-		// TODO - Fix convert to withRouter
-		const token = parseToken(props.history.location.search);
-		if (!token) Router.push("/employee/login");
+		const token = get(props, ["router", "query", "token"]);
 
 		this.state = {
 			fields,
@@ -76,15 +75,11 @@ export class NewPasswordForm extends Component {
 }
 
 NewPasswordForm.propTypes = {
-	history: PropTypes.shape({
-		location: PropTypes.shape({
-			pathname: PropTypes.string,
-			search: PropTypes.string,
-			hash: PropTypes.string,
-			state: PropTypes.oneOf(["object", "undefined"]),
+	router: PropTypes.shape({
+		query: PropTypes.shape({
+			token: PropTypes.string,
 		}),
 	}),
-	push: PropTypes.func,
 	serverMessage: PropTypes.string,
 	updateUserPassword: PropTypes.func.isRequired,
 };
@@ -97,4 +92,6 @@ const mapDispatchToProps = {
 	updateUserPassword,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewPasswordForm);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(NewPasswordForm),
+);

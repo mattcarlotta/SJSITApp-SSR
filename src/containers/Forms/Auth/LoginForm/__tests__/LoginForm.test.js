@@ -3,6 +3,7 @@ import { LoginForm } from "../index";
 const signinUser = jest.fn();
 
 const initProps = {
+	email: "test@test.com",
 	serverMessage: "",
 	signinUser,
 };
@@ -13,6 +14,10 @@ describe("Login Form", () => {
 	beforeEach(() => {
 		wrapper = HOCWrap(LoginForm, initProps);
 		submitForm = () => wrapper.find("form").simulate("submit");
+	});
+
+	it("doesn't render if a user is already signed in", () => {
+		expect(wrapper.find("form").exists()).toBeFalsy();
 	});
 
 	it("renders without errors", () => {

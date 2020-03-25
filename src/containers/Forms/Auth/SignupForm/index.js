@@ -130,7 +130,9 @@ export class SignupForm extends Component {
 
 SignupForm.propTypes = {
 	router: PropTypes.shape({
-		pathname: PropTypes.string,
+		query: PropTypes.shape({
+			token: PropTypes.string,
+		}),
 	}),
 	serverMessage: PropTypes.string,
 	signupUser: PropTypes.func,
