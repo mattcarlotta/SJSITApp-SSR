@@ -9,9 +9,7 @@ import { thanksForReg } from "~messages/success";
  * @returns {string} - message
  */
 const createUser = (req, res) => {
-	res
-		.status(201)
-		.json(thanksForReg(req.user.email, req.user.firstName, req.user.lastName));
+	res.status(201).json(thanksForReg(req.user.firstName, req.user.lastName));
 };
 
 export default withMiddleware(localSignup(createUser));

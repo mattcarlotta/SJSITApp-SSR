@@ -84,10 +84,12 @@ NewPasswordForm.propTypes = {
 	updateUserPassword: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	serverMessage: state.server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateUserPassword,
 };

@@ -8,7 +8,7 @@ import withReduxSaga from "next-redux-saga";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import { authenticateUser } from "~actions/Auth";
-import ServerMessages from "~containers/App/ServerMessages";
+import ServerMessages from "~containers/Auth/ServerMessages";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
