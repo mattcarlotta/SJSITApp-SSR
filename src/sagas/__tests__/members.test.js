@@ -4,7 +4,7 @@ import * as matchers from "redux-saga-test-plan/matchers";
 import { app } from "~utils";
 import * as actions from "~actions/Members";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
-import { signoutUser } from "~actions/Auth";
+import { signoutUser, updateUser } from "~actions/Auth";
 import * as sagas from "~sagas/Members";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import messageReducer from "~reducers/Messages";
@@ -412,6 +412,13 @@ describe("Member Sagas", () => {
 				.next(res2)
 				.call(parseData, res2)
 				.next(res2.memberAvailability)
+				.put(
+					updateUser({
+						firstName: res.basicMemberInfo.member.firstName,
+						lastName: res.basicMemberInfo.member.lastName,
+					}),
+				)
+				.next()
 				.put(
 					actions.setMemberToReview({
 						...res.basicMemberInfo,

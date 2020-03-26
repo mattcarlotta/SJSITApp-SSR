@@ -20,14 +20,12 @@ const authReducer = (state = initialState, { payload, type }) => {
 		case types.USER_SET_SIDEBAR_STATE: {
 			return { ...state, isCollapsed: !state.isCollapsed };
 		}
+		case types.USER_UPDATE:
 		case types.USER_SIGNIN: {
 			return { ...state, ...payload };
 		}
 		case types.USER_SIGNOUT: {
 			return { ...initialState, role: "guest" };
-		}
-		case types.USER_UPDATE: {
-			return { ...state, ...payload };
 		}
 		default: {
 			return state;

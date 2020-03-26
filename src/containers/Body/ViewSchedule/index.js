@@ -62,10 +62,10 @@ ViewSchedule.propTypes = {
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => ({
-	loggedinUserId: state.auth.id,
-	scheduleEvents: state.events.scheduleEvents,
-	role: state.auth.role,
+const mapStateToProps = ({ auth, events }) => ({
+	loggedinUserId: auth.id,
+	scheduleEvents: events.scheduleEvents,
+	role: auth.role,
 });
 
 /* istanbul ignore next */

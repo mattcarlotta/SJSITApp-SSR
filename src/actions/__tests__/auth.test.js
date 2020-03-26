@@ -93,6 +93,20 @@ describe("Authentication Actions", () => {
 		});
 	});
 
+	it("returns USER_UPDATE with props", () => {
+		const data = {
+			firstName: "Alan",
+			password: "Go",
+		};
+
+		const value = actions.updateUser(data);
+
+		expect(value).toEqual({
+			type: types.USER_UPDATE,
+			payload: data,
+		});
+	});
+
 	it("returns USER_PASSWORD_UPDATE with props", () => {
 		const props = {
 			token: "88",

@@ -13,6 +13,7 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import { signinUser } from "~actions/Auth";
+import Spinner from "~components/Body/Spinner";
 import fields from "./Fields";
 
 export class LoginForm extends Component {
@@ -80,7 +81,9 @@ export class LoginForm extends Component {
 					</Link>
 				</Center>
 			</Modal>
-		) : null;
+		) : (
+			<Spinner />
+		);
 }
 
 LoginForm.propTypes = {

@@ -17,6 +17,7 @@ class CustomCalendar extends Component {
 	constructor(props) {
 		super(props);
 
+		// TODO - Fix URL matching & elevate cmpDidMnt
 		const id = get(props, ["match", "params", "id"]);
 
 		this.state = {

@@ -192,11 +192,11 @@ Settings.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-	eventResponses: state.members.eventResponses,
-	memberAvailability: state.members.memberAvailability,
-	viewMember: state.members.viewMember,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ members, server }) => ({
+	eventResponses: members.eventResponses,
+	memberAvailability: members.memberAvailability,
+	viewMember: members.viewMember,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
