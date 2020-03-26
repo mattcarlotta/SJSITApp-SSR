@@ -1,5 +1,5 @@
 import React from "react";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import PropTypes from "prop-types";
 import { Tooltip } from "antd";
 

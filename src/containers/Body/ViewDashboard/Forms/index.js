@@ -1,6 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
 import { connect } from "react-redux";
 import Router from "next/router";

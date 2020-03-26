@@ -1,11 +1,12 @@
 import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import AppLayout from "~components/App";
+import ViewHelp from "~containers/Body/ViewHelp";
 
-const Help = () => (
+const HelpPage = () => (
 	<AppLayout>
-		<div>Help</div>
+		<ViewHelp />
 	</AppLayout>
 );
 
-export default requiresBasicCredentials(Help);
+export default requiresBasicCredentials(HelpPage);

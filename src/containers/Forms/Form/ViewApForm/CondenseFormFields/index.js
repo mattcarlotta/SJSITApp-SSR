@@ -1,4 +1,4 @@
-import groupBy from "lodash/groupBy";
+import groupBy from "lodash.groupby";
 
 /**
  * Helper function to merge event notes (textarea) into an event field's (radiogroup) object.

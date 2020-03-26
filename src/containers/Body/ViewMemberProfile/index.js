@@ -1,6 +1,6 @@
 import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { goBack } from "next/router";
 import { connect } from "react-redux";
 import { Card, Tabs } from "antd";

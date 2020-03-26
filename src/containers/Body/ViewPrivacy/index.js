@@ -7,7 +7,7 @@ import InfoText from "~components/Body/InfoText";
 import Title from "~components/Body/Title";
 import Link from "~components/Navigation/Link";
 
-const title = "Privacy Policy";
+const title = "Privacy & Warranty Policy";
 
 const style = { fontSize: 18 };
 const iconStyle = {
@@ -32,7 +32,7 @@ const ViewPrivacyPage = () => (
 			}
 		>
 			<div css="padding: 0 30px 30px 30px;">
-				<Title>PRIVACY POLICY</Title>
+				<Title>PRIVACY & WARRANTY POLICY</Title>
 				<Line style={{ marginBottom: 10 }} />
 				<InfoText>
 					This Privacy Policy explains how the San Jose Sharks Ice
@@ -47,7 +47,12 @@ const ViewPrivacyPage = () => (
 					our Services, you consent to the practices described in this Privacy
 					Policy. If you have any questions about this Privacy Policy, please
 					contact us using our{" "}
-					<Link blue style={linkStyle} href="/employee/contact-us">
+					<Link
+						blue
+						style={linkStyle}
+						href="/employee/contact-us"
+						target="_blank"
+					>
 						Contact Us
 					</Link>{" "}
 					form.
@@ -109,21 +114,12 @@ const ViewPrivacyPage = () => (
 					files that are placed in your device&#39;s browser, and that can be
 					used to help recognize your browser across different web pages,
 					websites, and browsing sessions. Cookies are stored on your device or
-					in &#34;local storage.&#34; We also use other types of local storage
-					technologies, such as Local Shared Objects (sometimes called
-					&#34;Flash cookies&#34;), in connection with our Services. These
-					technologies are similar to cookies in that they are stored on your
-					device and can be used to maintain information about your activities
-					and preferences. However, these other local storage technologies may
-					use parts of your device other than your browser, which means you may
-					not be able to control their use using the browser tools and settings
-					you use to control browser cookies. Your browser&#39;s privacy
-					controls may enable you to manage other types of local storage. Our
-					Services may use cookies or other local storage technologies in
-					combination with other information about you to enhance and
-					personalize your experience on our Services (or elsewhere online),
-					including: to help authenticate you when you use our Services and to
-					remember your preferences.
+					in &#34;local storage.&#34;. Your browser&#39;s privacy controls may
+					enable you to manage other types of local storage. Our Services may
+					use cookies or other local storage technologies in combination with
+					other information about you to enhance and personalize your experience
+					on our Services (or elsewhere online), including: to help authenticate
+					you when you use our Services and to remember your preferences.
 				</InfoText>
 				<Title style={style}>Security.</Title>
 				<InfoText>
@@ -141,6 +137,13 @@ const ViewPrivacyPage = () => (
 					you do not disclose your password to anyone. We will never ask you for
 					your password in any unsolicited communication (such as letters, phone
 					calls, or email messages).
+				</InfoText>
+				<Title style={style}>Changes To This Privacy Policy.</Title>
+				<InfoText>
+					We may update this Privacy Policy from time to time to reflect changes
+					in our privacy practices, so we encourage you to review this Privacy
+					Policy periodically. If we make significant changes to this Privacy
+					Policy, we will provide appropriate notice to you.
 				</InfoText>
 				<Title style={style}>Disclaimer of Warranties.</Title>
 				<InfoText>
@@ -175,18 +178,16 @@ const ViewPrivacyPage = () => (
 					WARRANTIES TO APPLY TO YOU, THE ABOVE EXCLUSIONS WILL APPLY TO YOU TO
 					THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
 				</InfoText>
-				<Title style={style}>Changes To This Privacy Policy.</Title>
-				<InfoText>
-					We may update this Privacy Policy from time to time to reflect changes
-					in our privacy practices, so we encourage you to review this Privacy
-					Policy periodically. If we make significant changes to this Privacy
-					Policy, we will provide appropriate notice to you.
-				</InfoText>
 				<Title style={style}>Contact Us.</Title>
 				<InfoText>
-					If you have any questions about this Privacy Policy or our privacy
-					practices, please contact us by using the{" "}
-					<Link blue style={linkStyle} href="/employee/contact-us">
+					If you have any questions about this Privacy and/or Warranty Policy or
+					any of our practices, please contact us by using the{" "}
+					<Link
+						blue
+						style={linkStyle}
+						href="/employee/contact-us"
+						target="_blank"
+					>
 						Contact Us
 					</Link>{" "}
 					form.

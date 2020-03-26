@@ -1,5 +1,4 @@
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import { Event, Form, Season } from "~models";

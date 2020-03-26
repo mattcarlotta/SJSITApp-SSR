@@ -1,8 +1,8 @@
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
+import get from "lodash.get";
+import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
-import random from "lodash/random";
-import sortBy from "lodash/sortBy";
+import random from "lodash.random";
+import sortBy from "lodash.sortby";
 import { Types } from "mongoose";
 import { Event, User } from "~models";
 import {

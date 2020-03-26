@@ -1,4 +1,4 @@
-import get from "lodash/get";
+import get from "lodash.get";
 import { accessDenied, badCredentials } from "~messages/errors";
 import { sendError } from "~utils/helpers";
 import { User } from "~models";
@@ -10,7 +10,7 @@ import { User } from "~models";
  * @returns {function}
  */
 export default next => async (req, res) => {
-	const user = get(req, "session", "user");
+	const user = get(req, ["session", "user"]);
 	const role = get(user, ["role"]);
 
 	if (!user || (role !== "admin" && role !== "staff"))

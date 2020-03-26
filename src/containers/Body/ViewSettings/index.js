@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
-import debounce from "lodash/debounce";
+import isEmpty from "lodash.isempty";
+import debounce from "lodash.debounce";
 import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
 import { FaCogs, FaUserCircle, FaChartBar, FaReply } from "react-icons/fa";

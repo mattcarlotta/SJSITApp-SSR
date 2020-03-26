@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { Tooltip } from "antd";
 import { FaFileAlt } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";

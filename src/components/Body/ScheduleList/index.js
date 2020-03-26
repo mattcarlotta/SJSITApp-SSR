@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { FaCalendarCheck } from "react-icons/fa";
 import Button from "~components/Body/Button";
 import DisplayTeam from "~components/Body/DisplayTeam";

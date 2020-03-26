@@ -1,4 +1,4 @@
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import * as types from "~types";
 
 /**

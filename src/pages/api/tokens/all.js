@@ -1,4 +1,4 @@
-import get from "lodash/get";
+import get from "lodash.get";
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import { Token } from "~models";

@@ -1,4 +1,4 @@
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Mail } from "~models";

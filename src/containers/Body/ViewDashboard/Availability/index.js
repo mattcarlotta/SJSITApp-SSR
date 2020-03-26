@@ -1,7 +1,7 @@
 import React, { Fragment, PureComponent } from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
 import { Card, Col } from "antd";
 import { FaUserClock } from "react-icons/fa";

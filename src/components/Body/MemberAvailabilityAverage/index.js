@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-boolean-value */
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
+import isEmpty from "lodash.isempty";
+import get from "lodash.get";
 import { ResponsivePie } from "@nivo/pie";
 import NoAvailability from "~components/Body/NoAvailability";
 

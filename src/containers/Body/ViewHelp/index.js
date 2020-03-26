@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
-import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Card, Collapse } from "antd";
 import { FaQuestionCircle } from "react-icons/fa";
+import Head from "~components/Navigation/Head";
 import { ViewingContact } from "./Other";
 import {
 	ChangingEmail,
@@ -68,7 +68,7 @@ const iconStyle = {
 
 const Help = ({ role }) => (
 	<Fragment>
-		<Helmet title={title} />
+		<Head title={title} />
 		<Card
 			title={
 				<Fragment>

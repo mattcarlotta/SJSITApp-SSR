@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
 import SubmitButton from "~components/Body/SubmitButton";
 import FieldGenerator from "~components/Forms/FieldGenerator";

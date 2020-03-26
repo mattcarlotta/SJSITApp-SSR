@@ -1,5 +1,5 @@
-import isEmpty from "lodash/isEmpty";
-import isEqual from "lodash/isEqual";
+import isEmpty from "lodash.isempty";
+import isEqual from "lodash.isequal";
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import {

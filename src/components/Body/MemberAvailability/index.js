@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-boolean-value */
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
-import debounce from "lodash/debounce";
+import isEmpty from "lodash.isempty";
+import debounce from "lodash.debounce";
 import moment from "moment-timezone";
 import { Empty } from "antd";
 import { ResponsivePie } from "@nivo/pie";

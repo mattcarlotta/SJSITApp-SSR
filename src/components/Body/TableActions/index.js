@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import Router from "next/router";
 import { Popconfirm } from "antd";
 import {

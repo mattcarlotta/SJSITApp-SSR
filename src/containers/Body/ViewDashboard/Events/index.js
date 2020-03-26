@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
+import isEmpty from "lodash.isempty";
+import get from "lodash.get";
 import moment from "moment-timezone";
 import { Card, Col, Select } from "antd";
 import { MdEvent } from "react-icons/md";

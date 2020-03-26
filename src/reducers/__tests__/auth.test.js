@@ -33,6 +33,6 @@ describe("Auth Reducer", () => {
 
 		state = authReducer(state, { type: types.USER_SIGNOUT });
 
-		expect(state).toEqual(initialState);
+		expect(state).toEqual({ ...initialState, role: "guest" });
 	});
 });

@@ -1,11 +1,12 @@
 import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import AppLayout from "~components/App";
+import ViewPrivacy from "~containers/Body/ViewPrivacy";
 
-const Privacy = () => (
+const PrivacyPage = () => (
 	<AppLayout>
-		<div>Privacy</div>
+		<ViewPrivacy />
 	</AppLayout>
 );
 
-export default requiresBasicCredentials(Privacy);
+export default requiresBasicCredentials(PrivacyPage);

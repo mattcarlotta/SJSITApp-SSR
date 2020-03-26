@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 
 /**
  * Helper function to update form fields.

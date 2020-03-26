@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event } from "~models";

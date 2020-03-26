@@ -41,7 +41,6 @@ module.exports = api => {
 					preprocess: false,
 				},
 			],
-			"lodash",
 		],
 	};
 };

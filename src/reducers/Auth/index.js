@@ -24,7 +24,7 @@ const authReducer = (state = initialState, { payload, type }) => {
 			return { ...state, ...payload };
 		}
 		case types.USER_SIGNOUT: {
-			return initialState;
+			return { ...initialState, role: "guest" };
 		}
 		default: {
 			return state;

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
 import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";

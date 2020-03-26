@@ -18,7 +18,12 @@ const ChangingPassword = () => (
 	<TextContainer>
 		<InfoText>To change your password, go to the</InfoText>
 		&nbsp;
-		<Link blue style={linkStyle} href="/employee/resetpassword" target="_blank">
+		<Link
+			blue
+			style={linkStyle}
+			href="/employee/reset-password"
+			target="_blank"
+		>
 			Reset Password
 		</Link>
 		&nbsp;

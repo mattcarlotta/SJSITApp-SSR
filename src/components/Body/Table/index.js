@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types, react/jsx-boolean-value */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { Popover, Table } from "antd";
 import { FaTools } from "react-icons/fa";
 import Button from "~components/Body/Button";

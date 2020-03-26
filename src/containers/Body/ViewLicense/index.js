@@ -30,7 +30,7 @@ const License = () => (
 				<InfoText>MIT License</InfoText>
 				<br />
 				<br />
-				<InfoText>Copyright (c) 2019 Matt Carlotta</InfoText>
+				<InfoText>Copyright (c) 2019-2020 Matt Carlotta</InfoText>
 				<br />
 				<br />
 				<InfoText>

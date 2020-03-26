@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import { FaCaretSquareDown } from "react-icons/fa";
 import { Dropdown, Tooltip } from "antd";
 import RenderEmailDetails from "../RenderEmailDetails";

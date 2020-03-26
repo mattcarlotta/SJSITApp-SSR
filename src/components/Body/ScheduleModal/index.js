@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import isEmpty from "lodash.isempty";
 import moment from "moment";
 import { FaCalendarCheck, FaClock } from "react-icons/fa";
 import Badge from "components/Body/Badge";
