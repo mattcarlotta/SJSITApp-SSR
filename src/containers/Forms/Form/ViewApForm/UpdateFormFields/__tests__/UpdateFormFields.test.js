@@ -1,4 +1,4 @@
-import EventLabel from "components/Body/EventLabel";
+import EventLabel from "~components/Body/EventLabel";
 import updateFormFields from "../index";
 
 const eventsGame = [

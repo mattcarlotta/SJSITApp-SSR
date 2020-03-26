@@ -1,6 +1,6 @@
 import React from "react";
 import { MdAssignment } from "react-icons/md";
-import FlexCenter from "components/Body/FlexCenter";
+import FlexCenter from "~components/Body/FlexCenter";
 
 const NoForms = () => (
 	<FlexCenter style={{ color: "#909090", flexDirection: "column" }}>

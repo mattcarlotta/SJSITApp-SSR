@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { DragDropContext } from "react-beautiful-dnd";
-import Bold from "components/Body/Bold";
-import DropContainer from "components/Body/DropContainer";
-import FormatDate from "components/Body/FormatDate";
-import Legend from "components/Body/Legend";
-import List from "components/Body/List";
-import ListItem from "components/Body/ListItem";
-import Row from "components/Body/Row";
-import ScheduleContainer from "components/Body/ScheduleContainer";
+import Bold from "~components/Body/Bold";
+import DropContainer from "~components/Body/DropContainer";
+import FormatDate from "~components/Body/FormatDate";
+import Legend from "~components/Body/Legend";
+import List from "~components/Body/List";
+import ListItem from "~components/Body/ListItem";
+import Row from "~components/Body/Row";
+import ScheduleContainer from "~components/Body/ScheduleContainer";
 import Container from "./Container";
 import GameDetailsContainer from "./GameDetailsContainer";
 

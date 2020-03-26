@@ -116,6 +116,18 @@ export const signupUser = props => ({
 });
 
 /**
+ * Updates current signed in user first and last name.
+ *
+ * @function updateUser
+ * @param {object} data - contains user session data first/last name
+ * @returns {object}
+ */
+export const updateUser = data => ({
+	type: types.USER_UPDATE,
+	payload: data,
+});
+
+/**
  * Updates user password via newpassword form.
  *
  * @function updateUserPassword

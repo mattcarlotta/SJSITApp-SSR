@@ -20,6 +20,7 @@ const {
 	baseURL,
 	cookieSecret,
 	DATABASE,
+	IMAGEAPI,
 	inDevelopment,
 	inTesting,
 	LOCALHOST,
@@ -45,12 +46,13 @@ module.exports = isServer => {
 			/* envs for client */
 			new DefinePlugin({
 				"process.env": {
+					baseURL: JSON.stringify(baseURL),
 					DATABASE: JSON.stringify(DATABASE),
 					cookieSecret: JSON.stringify(cookieSecret),
+					IMAGEAPI: JSON.stringify(IMAGEAPI),
 					inDevelopment: inDev,
 					inTesting: JSON.stringify(inTesting),
 					LOCALHOST: JSON.stringify(LOCALHOST),
-					baseURL: JSON.stringify(baseURL),
 				},
 			}),
 		);

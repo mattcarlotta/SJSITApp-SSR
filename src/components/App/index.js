@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router, { withRouter } from "next/router";
 import { Layout } from "antd";
-// import BuildVersion from "components/Body/BuildVersion";
+// import BuildVersion from "~components/Body/BuildVersion";
 import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
 import SideMenu from "~components/Navigation/SideMenu";

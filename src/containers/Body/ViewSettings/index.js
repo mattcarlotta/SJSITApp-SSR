@@ -5,12 +5,6 @@ import debounce from "lodash.debounce";
 import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
 import { FaCogs, FaUserCircle, FaChartBar, FaReply } from "react-icons/fa";
-import {
-	fetchMemberSettings,
-	fetchMemberSettingsAvailability,
-	fetchMemberSettingsEvents,
-	updateMemberStatus,
-} from "~actions/Members";
 import Head from "~components/Navigation/Head";
 import Calendar from "~components/Body/Calendar";
 import Line from "~components/Body/Line";
@@ -18,6 +12,11 @@ import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
 import PaneBody from "~components/Body/PaneBody";
 import Title from "~components/Body/Title";
+import {
+	fetchMemberSettingsAvailability,
+	fetchMemberSettingsEvents,
+	updateMemberStatus,
+} from "~actions/Members";
 import Profile from "./Profile";
 
 const Pane = Tabs.TabPane;
@@ -57,17 +56,15 @@ const responses = (
 );
 
 export class Settings extends Component {
-	/* istanbul ignore next */
 	state = {
-		windowWidth: window.innerWidth || 0,
+		windowWidth: 0,
 	};
 
 	componentDidMount = () => {
+		this.setState({ windowWidth: window.innerWidth });
 		window.addEventListener("resize", this.handleResize);
-		this.props.fetchMemberSettings();
 	};
 
-	/* istanbul ignore next */
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.handleResize);
 	}
@@ -159,7 +156,6 @@ Settings.propTypes = {
 	),
 	fetchMemberSettingsAvailability: PropTypes.func.isRequired,
 	fetchMemberSettingsEvents: PropTypes.func.isRequired,
-	fetchMemberSettings: PropTypes.func.isRequired,
 	match: PropTypes.shape({
 		params: PropTypes.shape({
 			id: PropTypes.string,
@@ -206,7 +202,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
-	fetchMemberSettings,
 	updateMemberStatus,
 };
 

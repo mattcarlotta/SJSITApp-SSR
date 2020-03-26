@@ -2,10 +2,11 @@ import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
-import { signoutUser } from "~actions/Auth";
+import { signoutUser, updateUser } from "~actions/Auth";
 import * as actions from "~actions/Members";
-import { parseData, parseMessage } from "~utils/parseResponse";
+import { parseCookie, parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import { redirectTo } from "~utils/redirect";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -338,13 +339,24 @@ export function* fetchMembers() {
  * @throws {actions} - A redux action to push to a URL and to display a server message by type.
  */
 
-export function* fetchSettings() {
+export function* fetchSettings({ req, res }) {
 	try {
-		let res = yield call(app.get, `member/settings`);
+		const headers = yield call(parseCookie, req);
+
+		let res = yield call(app.get, `member/settings`, headers);
 		const basicMemberInfo = yield call(parseData, res);
 
-		res = yield call(app.get, "member/settings/availability");
+		res = yield call(app.get, "member/settings/availability", headers);
 		const memberAvailability = yield call(parseData, res);
+
+		const { member } = basicMemberInfo;
+
+		yield put(
+			updateUser({
+				firstName: member.firstName,
+				lastName: member.lastName,
+			}),
+		);
 
 		yield put(
 			actions.setMemberToReview({
@@ -353,7 +365,7 @@ export function* fetchSettings() {
 			}),
 		);
 	} catch (e) {
-		yield call(Router.push, "/employee/dashboard");
+		yield call(redirectTo(res, "/employee/dashboard"));
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
@@ -638,7 +650,7 @@ export function* updateSettings({ props }) {
 		if (message !== "Successfully updated your settings.") {
 			yield put(signoutUser());
 		} else {
-			yield put(actions.fetchMemberSettings());
+			yield put(actions.fetchMemberSettings({ req: "", res: "" }));
 		}
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));

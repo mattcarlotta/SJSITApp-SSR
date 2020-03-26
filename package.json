@@ -21,8 +21,7 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
-			"npm run lint",
-			"npm run test"
+			"npm run lint"
 		],
 		"*.scss": [
 			"npm run lint:styles"
@@ -67,9 +66,9 @@
 		"passport-local": "^1.0.0",
 		"pify": "^5.0.0",
 		"qs": "^6.9.2",
-		"react": "^16.13.1",
+		"react": "16.8.6",
 		"react-beautiful-dnd": "^13.0.0",
-		"react-dom": "^16.13.1",
+		"react-dom": "16.8.6",
 		"react-icons": "^3.9.0",
 		"react-quill": "^1.3.3",
 		"react-redux": "^7.2.0",
