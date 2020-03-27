@@ -3,6 +3,6 @@ import styled from "styled-components";
 
 export default styled.div`
 	position: absolute;
-	top: 8px;
+	top: 8.7px;
 	right: 36px;
 `;

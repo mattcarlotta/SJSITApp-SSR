@@ -9,6 +9,11 @@ const { IMAGEAPI } = process.env;
 class DisplayTeam extends Component {
 	state = { isLoaded: false };
 
+	componentDidMount = () => {
+		if (this.imageRef && this.imageRef.complete)
+			this.setState({ isLoaded: true });
+	};
+
 	componentWillUnmount = () => {
 		this.cancelLoad = true;
 	};
@@ -29,6 +34,7 @@ class DisplayTeam extends Component {
 					bgColor={isLoaded ? "transparent" : undefined}
 				>
 					<img
+						ref={node => (this.imageRef = node)}
 						src={`${IMAGEAPI}/${this.props.folder}/${this.props.team}.png`}
 						alt={`${this.props.team}.png`}
 						onLoad={this.handleLoaded}

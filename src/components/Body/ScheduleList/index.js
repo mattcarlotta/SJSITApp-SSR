@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { FaCalendarCheck } from "react-icons/fa";
@@ -35,7 +35,7 @@ const ScheduleList = ({
 	spacing,
 	width,
 }) => (
-	<Fragment>
+	<>
 		<CalendarWeek>{date}</CalendarWeek>
 		{!isEmpty(content) &&
 			content.map(item => (
@@ -67,7 +67,7 @@ const ScheduleList = ({
 								team={item.team}
 							/>
 							{item.opponent && (
-								<Fragment>
+								<>
 									<span
 										css={`
 											margin: 0 ${spacing || 5}px;
@@ -82,13 +82,13 @@ const ScheduleList = ({
 										width={width}
 										team={item.opponent}
 									/>
-								</Fragment>
+								</>
 							)}
 						</FlexSpaceAround>
 					</Button>
 				</FadeIn>
 			))}
-	</Fragment>
+	</>
 );
 
 ScheduleList.propTypes = {

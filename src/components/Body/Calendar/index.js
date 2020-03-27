@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import get from "lodash.get";
 import moment from "moment-timezone";
 import { Calendar } from "antd";
 import ScheduleList from "~components/Body/ScheduleList";
@@ -17,11 +16,7 @@ class CustomCalendar extends Component {
 	constructor(props) {
 		super(props);
 
-		// TODO - Fix URL matching & elevate cmpDidMnt
-		const id = get(props, ["match", "params", "id"]);
-
 		this.state = {
-			id: props.id || id,
 			isVisible: false,
 			modalChildren: null,
 			months: moment.monthsShort(),
@@ -35,16 +30,11 @@ class CustomCalendar extends Component {
 			],
 			validRange: setValidRange(Date.now()),
 			value: moment(Date.now()),
-			selectedGames: id ? "My Games" : "All Games",
+			selectedGames: props.id ? "My Games" : "All Games",
 			selectedMonth: moment().format("MMM"),
 			selectedYear: parseInt(moment().format("YYYY"), 10),
 		};
 	}
-
-	componentDidMount = () => {
-		const { id, selectedGames } = this.state;
-		this.props.fetchAction({ id, selectedGames });
-	};
 
 	handleShowModal = modalChildren => {
 		this.setState({
@@ -80,12 +70,13 @@ class CustomCalendar extends Component {
 			{ [name]: value, validRange: setValidRange(newCalendarDate) },
 			() => {
 				this.props.fetchAction({
-					id: this.state.id,
+					id: this.props.id,
 					selectedDate: moment(
 						`${this.state.selectedMonth} ${this.state.selectedYear}`,
 						"MMM YYYY",
 					).format(),
 					selectedGames: this.state.selectedGames,
+					req: "",
 				});
 			},
 		);
@@ -95,6 +86,7 @@ class CustomCalendar extends Component {
 		<ScheduleHeader
 			{...this.state}
 			{...props}
+			id={this.props.id}
 			role={this.props.role}
 			handleSelection={this.handleSelection}
 		/>
@@ -150,12 +142,8 @@ CustomCalendar.propTypes = {
 	id: PropTypes.string,
 	fetchAction: PropTypes.func.isRequired,
 	loggedinUserId: PropTypes.string,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}),
 	role: PropTypes.string,
+	selectedGames: PropTypes.string,
 	scheduleEvents: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string,

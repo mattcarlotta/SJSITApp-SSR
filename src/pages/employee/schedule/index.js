@@ -1,11 +1,24 @@
 import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import AppLayout from "~components/App";
+import ViewSchedule from "~containers/Body/ViewSchedule";
+import { fetchScheduleEvents } from "~actions/Events";
 
-const Schedule = () => (
+const SchedulePage = () => (
 	<AppLayout>
-		<div>Schedule</div>
+		<ViewSchedule />
 	</AppLayout>
 );
 
-export default requiresBasicCredentials(Schedule);
+SchedulePage.getInitialProps = async ctx => {
+	const {
+		store: { dispatch },
+		req,
+	} = ctx;
+
+	await dispatch(fetchScheduleEvents({ req }));
+
+	return {};
+};
+
+export default requiresBasicCredentials(SchedulePage);

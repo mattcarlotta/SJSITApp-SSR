@@ -3,7 +3,7 @@ import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Events";
-import { parseData, parseMessage } from "~utils/parseResponse";
+import { parseCookie, parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
@@ -225,9 +225,12 @@ export function* fetchEvents() {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* fetchScheduleEvents({ params }) {
+export function* fetchScheduleEvents({ req, params }) {
 	try {
-		const res = yield call(app.get, "events/schedule", { params });
+		const headers = yield call(parseCookie, req);
+		const config = headers ? { ...headers, params } : { params };
+
+		const res = yield call(app.get, "events/schedule", config);
 		const data = yield call(parseData, res);
 
 		yield put(actions.setScheduleEvents(data));

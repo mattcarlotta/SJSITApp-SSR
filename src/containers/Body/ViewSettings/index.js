@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
 import { FaCogs, FaUserCircle, FaChartBar, FaReply } from "react-icons/fa";
 import Head from "~components/Navigation/Head";
-import Calendar from "~components/Body/Calendar";
+import ResponseCalendar from "~components/Body/ResponseCalendar";
 import Line from "~components/Body/Line";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
@@ -83,7 +83,6 @@ export class Settings extends Component {
 		const {
 			eventResponses,
 			fetchMemberSettingsAvailability,
-			fetchMemberSettingsEvents,
 			viewMember,
 		} = this.props;
 
@@ -124,11 +123,10 @@ export class Settings extends Component {
 								<PaneBody>
 									<Title centered>My Event Responses</Title>
 									<Line centered width="400px" />
-									<Calendar
+									<ResponseCalendar
 										{...this.props}
 										id={_id}
 										scheduleEvents={eventResponses}
-										fetchAction={fetchMemberSettingsEvents}
 									/>
 								</PaneBody>
 							</Pane>

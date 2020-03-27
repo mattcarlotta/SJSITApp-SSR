@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { FaCalendar } from "react-icons/fa";
@@ -15,19 +15,19 @@ const iconStyle = {
 };
 
 export const ViewSchedule = ({ fetchScheduleEvents, ...rest }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaCalendar style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<Calendar {...rest} fetchAction={fetchScheduleEvents} />
 		</Card>
-	</Fragment>
+	</>
 );
 
 ViewSchedule.propTypes = {
