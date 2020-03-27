@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setServerMessage } from "~actions/Messages";
@@ -8,32 +8,30 @@ import toast from "~components/Body/Toast";
 import Spinner from "~components/Body/Spinner";
 
 const requiresBasicCredentials = WrappedComponent => {
-	class RequiresAuthentication extends PureComponent {
-		static async getInitialProps(ctx) {
-			const {
-				store: { dispatch, getState },
-				res,
-			} = ctx;
+	const RequiresAuthentication = ({ email, role, ...rest }) =>
+		email && role && role !== "guest" ? (
+			<WrappedComponent {...rest} />
+		) : (
+			<Spinner />
+		);
 
-			const { role, email } = getState().auth;
+	RequiresAuthentication.getInitialProps = async ctx => {
+		const {
+			store: { dispatch, getState },
+			res,
+		} = ctx;
 
-			if (role === "guest" || !email) {
-				dispatch(setServerMessage({ message: accessDenied }));
-				toast({ type: "error", message: accessDenied });
-				Redirect(res);
-			}
+		const { role, email } = getState().auth;
 
-			if (WrappedComponent.getInitialProps)
-				await WrappedComponent.getInitialProps(ctx);
+		if (role === "guest" || !email) {
+			dispatch(setServerMessage({ message: accessDenied }));
+			toast({ type: "error", message: accessDenied });
+			Redirect(res);
 		}
 
-		render = () =>
-			this.props.email && this.props.role && this.props.role !== "guest" ? (
-				<WrappedComponent {...this.props} />
-			) : (
-				<Spinner />
-			);
-	}
+		if (WrappedComponent.getInitialProps)
+			await WrappedComponent.getInitialProps(ctx);
+	};
 
 	RequiresAuthentication.propTypes = {
 		email: PropTypes.string,
