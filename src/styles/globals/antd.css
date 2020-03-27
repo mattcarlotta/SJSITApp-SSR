@@ -7786,7 +7786,7 @@ span.ant-radio + * {
 .ant-tabs-nav .ant-tabs-tab-active {
   color: #1890ff;
   background-color: #e6f7ff;
-  font-weight: 500;
+  font-weight: normal;
 }
 .ant-tabs .ant-tabs-large-bar .ant-tabs-nav-container {
   font-size: 16px;

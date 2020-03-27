@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { setServerMessage } from "~actions/Messages";
-import { accessDenied } from "~messages/errors";
-import Redirect from "~utils/redirect";
-import toast from "~components/Body/Toast";
+import { checkAuthentication } from "~utils/helpers";
 import Spinner from "~components/Body/Spinner";
 
 const requiresBasicCredentials = WrappedComponent => {
@@ -17,20 +14,16 @@ const requiresBasicCredentials = WrappedComponent => {
 
 	RequiresAuthentication.getInitialProps = async ctx => {
 		const {
-			store: { dispatch, getState },
-			res,
+			store: { getState },
 		} = ctx;
-
 		const { role, email } = getState().auth;
+		const { getInitialProps } = WrappedComponent;
 
-		if (role === "guest" || !email) {
-			dispatch(setServerMessage({ message: accessDenied }));
-			toast({ type: "error", message: accessDenied });
-			Redirect(res);
-		}
-
-		if (WrappedComponent.getInitialProps)
-			await WrappedComponent.getInitialProps(ctx);
+		await checkAuthentication({
+			condition: role === "guest" || !email,
+			ctx,
+			getInitialProps,
+		});
 	};
 
 	RequiresAuthentication.propTypes = {
