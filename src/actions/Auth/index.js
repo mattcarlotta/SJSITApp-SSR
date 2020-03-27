@@ -2,41 +2,6 @@ import isEmpty from "lodash.isempty";
 import * as types from "~types";
 
 /**
- * Sign in user via a session.
- *
- * @function authenticateUser
- * @returns {object}
- */
-export const authenticateUser = ({ req }) => ({
-	type: types.USER_SIGNIN_SESSION,
-	req,
-});
-
-/**
- * Check if signed in user is at least a member.
- *
- * @function requireBasicCreds
- * @returns {object}
- */
-export const requiresBasicUserCreds = ({ req, res }) => ({
-	type: types.USER_REQUIRE_BASIC_CREDS,
-	req,
-	res,
-});
-
-/**
- * Check if signed in user is a staff member.
- *
- * @function checkStaffAuthCreds
- * @returns {object}
- */
-export const requiresStaffCreds = ({ req, res }) => ({
-	type: types.USER_REQUIRE_STAFF_CREDS,
-	req,
-	res,
-});
-
-/**
  * Creates a user password request via passwordreset form.
  *
  * @function resetPassword

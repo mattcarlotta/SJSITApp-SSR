@@ -227,6 +227,7 @@ export function* fetchEvents() {
 
 export function* fetchScheduleEvents({ req, params }) {
 	try {
+		console.log("triggered fetchScheduleEvents"); /* eslint-disable-line */
 		const headers = yield call(parseCookie, req);
 		const config = headers ? { ...headers, params } : { params };
 

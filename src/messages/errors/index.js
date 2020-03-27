@@ -1,7 +1,7 @@
 // Error Messages //
 
 const accessDenied =
-	"Access denied. You do not have permission to view this content.";
+	"Your access was denied. You do not have the correct permissions to view this content.";
 
 const alreadyLoggedIn =
 	"It looks like you are already logged in to another session. Please refresh your browser.";

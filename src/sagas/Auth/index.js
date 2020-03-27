@@ -3,8 +3,7 @@ import { all, put, call, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
 import { signin, signout } from "~actions/Auth";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
-import { parseCookie, parseData, parseMessage } from "~utils/parseResponse";
-import Redirect from "~utils/redirect";
+import { parseData, parseMessage } from "~utils/parseResponse";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -25,71 +24,6 @@ export function* signoutUserSession() {
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
- * Attempts to automatically sign user in via a session.
- *
- * @generator
- * @function authenticateUser
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set the current user.
- * @throws {action} - A redux action to display a server message by type.
- */
-export function* authenticateUser({ req }) {
-	try {
-		const headers = yield call(parseCookie, req);
-		const res = yield call(app.get, "signedin", headers);
-		const data = yield call(parseData, res);
-
-		yield put(signin(data));
-	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
- * Redirects user if not signed in as at least a member.
- *
- * @generator
- * @function requiresBasicCreds
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set the current user.
- * @throws {action} - A redux action to display a server message by type.
- */
-export function* requiresBasicCreds({ req, res }) {
-	try {
-		const headers = yield call(parseCookie, req);
-		yield call(app.get, "is-member", headers);
-	} catch (e) {
-		yield call(Redirect, res);
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
- * Redirects user if not signed in as a staff member.
- *
- * @generator
- * @function requiresStaffCreds
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set the current user.
- * @throws {action} - A redux action to display a server message by type.
- */
-export function* requiresStaffCreds({ req, res }) {
-	try {
-		const headers = yield call(parseCookie, req);
-		yield call(app.get, "is-staff-member", headers);
-	} catch (e) {
-		yield call(Redirect, res);
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
@@ -229,9 +163,6 @@ export function* updateUserPassword({ props }) {
  */
 export default function* authSagas() {
 	yield all([
-		takeLatest(types.USER_SIGNIN_SESSION, authenticateUser),
-		takeLatest(types.USER_REQUIRE_BASIC_CREDS, requiresBasicCreds),
-		takeLatest(types.USER_REQUIRE_STAFF_CREDS, requiresStaffCreds),
 		takeLatest(types.USER_PASSWORD_RESET, resetPassword),
 		takeLatest(types.USER_SIGNIN_ATTEMPT, signinUser),
 		takeLatest(types.USER_SIGNOUT_SESSION, signoutUserSession),

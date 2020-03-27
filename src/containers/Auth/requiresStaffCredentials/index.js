@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { requiresStaffCreds } from "~actions/Auth";
+import { setServerMessage } from "~actions/Messages";
+import { accessDenied } from "~messages/errors";
+import Redirect from "~utils/redirect";
+import toast from "~components/Body/Toast";
 import Spinner from "~components/Body/Spinner";
 
 const requiresStaffCredentials = WrappedComponent => {
@@ -9,11 +12,16 @@ const requiresStaffCredentials = WrappedComponent => {
 		static async getInitialProps(ctx) {
 			const {
 				store: { dispatch, getState },
+				res,
 			} = ctx;
 
 			const { role, email } = getState().auth;
 
-			if (role !== "staff" || !email) await dispatch(requiresStaffCreds(ctx));
+			if (role !== "staff" || !email) {
+				dispatch(setServerMessage({ message: accessDenied }));
+				toast({ type: "error", message: accessDenied });
+				Redirect(res);
+			}
 
 			if (WrappedComponent.getInitialProps)
 				await WrappedComponent.getInitialProps(ctx);

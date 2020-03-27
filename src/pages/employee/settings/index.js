@@ -14,7 +14,7 @@ SettingsPage.getInitialProps = async ctx => {
 	const {
 		store: { dispatch },
 	} = ctx;
-	await dispatch(fetchMemberSettings(ctx));
+	dispatch(fetchMemberSettings(ctx));
 
 	return {};
 };

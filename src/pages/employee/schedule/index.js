@@ -16,9 +16,7 @@ SchedulePage.getInitialProps = async ctx => {
 		req,
 	} = ctx;
 
-	await dispatch(fetchScheduleEvents({ req }));
-
-	return {};
+	dispatch(fetchScheduleEvents({ req }));
 };
 
 export default requiresBasicCredentials(SchedulePage);

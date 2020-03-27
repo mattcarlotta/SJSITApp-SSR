@@ -7,8 +7,12 @@ import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
-import { authenticateUser } from "~actions/Auth";
 import ServerMessages from "~containers/Auth/ServerMessages";
+import { app } from "~utils";
+import { signin } from "~actions/Auth";
+import { setServerMessage } from "~actions/Messages";
+import { parseCookie, parseData } from "~utils/parseResponse";
+import toast from "~components/Body/Toast";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,10 +24,22 @@ export class MyApp extends App {
 	static async getInitialProps({ Component, ctx }) {
 		const {
 			store: { dispatch, getState },
+			req,
 		} = ctx;
 		const { role } = getState().auth;
 
-		if (!role) await dispatch(authenticateUser(ctx));
+		if (!role) {
+			try {
+				const res = await app.get("signedin", parseCookie(req));
+				const data = parseData(res);
+
+				dispatch(signin(data));
+			} catch (e) {
+				dispatch(setServerMessage({ message: e.toString() }));
+				toast({ type: "error", message: e.toString() });
+				return {};
+			}
+		}
 
 		return {
 			pageProps: {
