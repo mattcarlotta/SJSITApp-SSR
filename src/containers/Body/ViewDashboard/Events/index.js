@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import isEmpty from "lodash.isempty";
@@ -13,7 +13,7 @@ import ScheduleList from "~components/Body/ScheduleList";
 import Flex from "~components/Body/Flex";
 import FlexEnd from "~components/Body/FlexEnd";
 import FlexStart from "~components/Body/FlexStart";
-import { fetchEvents } from "actions/Dashboard";
+import { fetchEvents } from "~actions/Dashboard";
 import CalendarDate from "./CalendarDate";
 import NoEvents from "./NoEvents";
 import columns from "../Columns";
@@ -31,10 +31,6 @@ export class Events extends Component {
 		selectedEvent: "Today",
 		isVisible: false,
 		modalChildren: null,
-	};
-
-	componentDidMount = () => {
-		this.props.fetchEvents(this.state.selectedEvent);
 	};
 
 	handleSelection = selectedEvent => {
@@ -65,15 +61,15 @@ export class Events extends Component {
 		const selectedToday = selectedEvent === "Today";
 
 		return (
-			<Fragment>
+			<>
 				<Col {...columns}>
 					<Card
 						bodyStyle={{ minHeight: "300px" }}
 						title={
-							<Fragment>
+							<>
 								<MdEvent style={iconStyle} />
 								<span css="vertical-align: middle;">Events</span>
-							</Fragment>
+							</>
 						}
 						extra={
 							role === "employee" && (
@@ -155,7 +151,7 @@ export class Events extends Component {
 					loggedinUserId={this.props.loggedinUserId}
 					handleCloseModal={this.handleCloseModal}
 				/>
-			</Fragment>
+			</>
 		);
 	};
 }

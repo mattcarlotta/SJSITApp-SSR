@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Card, Collapse } from "antd";
@@ -67,14 +67,14 @@ const iconStyle = {
 };
 
 const Help = ({ role }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaQuestionCircle style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<Collapse
@@ -369,7 +369,7 @@ const Help = ({ role }) => (
 				</Panel>
 			</Collapse>
 		</Card>
-	</Fragment>
+	</>
 );
 
 Help.propTypes = {

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import moment from "moment";
@@ -61,10 +61,10 @@ const ScheduleModal = ({
 							<Bold>
 								{team}
 								{opponent && (
-									<Fragment>
+									<>
 										<span css="margin: 0 5px;word-wrap: break-word;">vs.</span>
 										{opponent}
-									</Fragment>
+									</>
 								)}
 							</Bold>
 						</ListItem>

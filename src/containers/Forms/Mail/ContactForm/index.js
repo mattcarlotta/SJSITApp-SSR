@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card } from "antd";
 import { connect } from "react-redux";
@@ -50,10 +50,10 @@ export class ContactForm extends Component {
 	render = () => (
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaConciergeBell style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>

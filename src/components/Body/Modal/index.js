@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Router from "next/router";
 import { FaTimes } from "react-icons/fa";
@@ -12,7 +12,7 @@ import ModalContainer from "./ModalContainer";
 import WindowContainer from "./WindowContainer";
 
 export const Modal = ({ children, disableClickHandler, maxWidth, onClick }) => (
-	<Fragment>
+	<>
 		<BackgroundOverlay />
 		<WindowContainer>
 			<ModalContainer>
@@ -34,7 +34,7 @@ export const Modal = ({ children, disableClickHandler, maxWidth, onClick }) => (
 				</Center>
 			</ModalContainer>
 		</WindowContainer>
-	</Fragment>
+	</>
 );
 
 Modal.propTypes = {

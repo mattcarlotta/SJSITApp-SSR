@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Card } from "antd";
 import { FaCopyright } from "react-icons/fa";
 import Head from "~components/Navigation/Head";
@@ -14,14 +14,14 @@ const iconStyle = {
 };
 
 const License = () => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaCopyright style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<div css="padding: 0 30px 30px 30px;">
@@ -61,7 +61,7 @@ const License = () => (
 				</InfoText>
 			</div>
 		</Card>
-	</Fragment>
+	</>
 );
 
 export default License;

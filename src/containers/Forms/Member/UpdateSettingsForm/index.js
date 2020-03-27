@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
@@ -57,7 +57,7 @@ export class UpdateSettingsForm extends Component {
 			{this.state.isLoading ? (
 				<LoadingForm rows={3} />
 			) : (
-				<Fragment>
+				<>
 					<FieldGenerator
 						fields={this.state.fields}
 						onChange={this.handleChange}
@@ -66,7 +66,7 @@ export class UpdateSettingsForm extends Component {
 						title="Update Settings"
 						isSubmitting={this.state.isSubmitting}
 					/>
-				</Fragment>
+				</>
 			)}
 		</form>
 	);

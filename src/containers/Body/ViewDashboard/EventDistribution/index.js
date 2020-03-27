@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
 import { connect } from "react-redux";
@@ -28,14 +28,6 @@ export class EventDistribution extends Component {
 		endDate: moment().endOf("month"),
 	};
 
-	componentDidMount = () => {
-		const { startDate, endDate } = this.state;
-		this.props.fetchEventDistribution({
-			startDate: startDate.format(),
-			endDate: endDate.format(),
-		});
-	};
-
 	handleSelection = dates => {
 		const [startDate, endDate] = dates;
 		this.setState({ startDate, endDate }, () =>
@@ -51,10 +43,10 @@ export class EventDistribution extends Component {
 			<Card
 				bodyStyle={{ minHeight: "500px" }}
 				title={
-					<Fragment>
+					<>
 						<FaChartBar style={iconStyle} />
 						<span css="vertical-align: middle;">Event Distribution</span>
-					</Fragment>
+					</>
 				}
 				extra={
 					<RangePicker

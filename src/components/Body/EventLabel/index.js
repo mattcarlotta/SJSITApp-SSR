@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FormatDate from "~components/Body/FormatDate";
 import DisplayTeam from "~components/Body/DisplayTeam";
@@ -8,11 +8,11 @@ const EventLabel = ({ eventType, eventDate, opponent, style, team }) => (
 		<div css="display: inline-block;margin-right: 10px;margin-top: 10px;">
 			<DisplayTeam folder="lowres" team={team} />{" "}
 			{opponent && (
-				<Fragment>
+				<>
 					<span style={{ margin: "0 5px" }}>vs.</span>
 					<DisplayTeam folder="lowres" team={opponent} />
 					&nbsp;
-				</Fragment>
+				</>
 			)}
 			({eventType})
 		</div>

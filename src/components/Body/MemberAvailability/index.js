@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-boolean-value */
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import debounce from "lodash.debounce";
@@ -144,7 +144,7 @@ class MemberAvailability extends Component {
 		}
 
 		return (
-			<Fragment>
+			<>
 				<ScheduleHeader
 					{...this.state}
 					id="0"
@@ -152,7 +152,7 @@ class MemberAvailability extends Component {
 					handleSelection={this.handleSelection}
 				/>
 				{!isEmpty(memberAvailability) ? (
-					<Fragment>
+					<>
 						{breakpoint && (
 							<Legend style={{ maxWidth: 225, margin: "0 auto" }} />
 						)}
@@ -251,13 +251,13 @@ class MemberAvailability extends Component {
 								}}
 							/>
 						</div>
-					</Fragment>
+					</>
 				) : (
 					<FlexCenter style={{ height: 880 }}>
 						<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
 					</FlexCenter>
 				)}
-			</Fragment>
+			</>
 		);
 	};
 }

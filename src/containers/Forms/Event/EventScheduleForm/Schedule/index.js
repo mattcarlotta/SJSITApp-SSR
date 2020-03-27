@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { DragDropContext } from "react-beautiful-dnd";
 import Bold from "~components/Body/Bold";
@@ -21,7 +21,7 @@ const Schedule = ({ handleDrag, event, columns, users }) => (
 					<div css="text-align: center;color: #fff;background: #025f6d;border-radius: 3px;padding: 10px 5px;text-transform: uppercase;font-size: 17px;">
 						{event.team}{" "}
 						{event.opponent && (
-							<Fragment>
+							<>
 								<span
 									css={`
 										margin: 0 5px;
@@ -31,7 +31,7 @@ const Schedule = ({ handleDrag, event, columns, users }) => (
 								</span>
 								{event.opponent}
 								&nbsp;
-							</Fragment>
+							</>
 						)}
 					</div>
 					<List style={{ padding: "0 5px", fontSize: 17 }}>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Card } from "antd";
@@ -28,19 +28,19 @@ export const ViewMembers = ({
 	fetchMembers,
 	...rest
 }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaUsers style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<QueryHandler {...rest}>
 				{props => (
-					<Fragment>
+					<>
 						<Filters {...props} {...rest} />
 						<Table
 							{...props}
@@ -52,11 +52,11 @@ export const ViewMembers = ({
 							fetchData={fetchMembers}
 							viewLocation="members"
 						/>
-					</Fragment>
+					</>
 				)}
 			</QueryHandler>
 		</Card>
-	</Fragment>
+	</>
 );
 
 ViewMembers.propTypes = {

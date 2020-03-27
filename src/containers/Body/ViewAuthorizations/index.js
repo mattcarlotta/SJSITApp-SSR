@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Card } from "antd";
@@ -25,11 +25,11 @@ export const ViewAuthorizations = ({
 	tokens,
 	...rest
 }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaKey
 						style={{
 							verticalAlign: "middle",
@@ -38,12 +38,12 @@ export const ViewAuthorizations = ({
 						}}
 					/>
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<QueryHandler {...rest}>
 				{props => (
-					<Fragment>
+					<>
 						<Filters {...props} {...rest} />
 						<Table
 							{...props}
@@ -56,11 +56,11 @@ export const ViewAuthorizations = ({
 							editLocation="members/authorizations"
 							sendMail={resendToken}
 						/>
-					</Fragment>
+					</>
 				)}
 			</QueryHandler>
 		</Card>
-	</Fragment>
+	</>
 );
 
 ViewAuthorizations.propTypes = {

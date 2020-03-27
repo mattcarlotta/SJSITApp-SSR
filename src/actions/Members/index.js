@@ -121,12 +121,9 @@ export const fetchMemberNames = () => ({
  * Fetches member's settings.
  *
  * @function fetchMemberSettings
- * @returns {object}
  */
-export const fetchMemberSettings = ({ req, res }) => ({
+export const fetchMemberSettings = () => ({
 	type: types.MEMBERS_FETCH_SETTINGS,
-	req,
-	res,
 });
 
 /**

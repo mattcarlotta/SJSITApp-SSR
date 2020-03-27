@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import debounce from "lodash.debounce";
@@ -90,15 +90,15 @@ export class Settings extends Component {
 		const isStaff = role !== "employee";
 
 		return (
-			<Fragment>
+			<>
 				<Head title={title} />
 				<Card
 					style={{ minHeight: 800 }}
 					title={
-						<Fragment>
+						<>
 							<FaCogs style={iconStyle} />
 							<span css="vertical-align: middle;">{title}</span>
-						</Fragment>
+						</>
 					}
 				>
 					{isEmpty(viewMember) ? (
@@ -133,7 +133,7 @@ export class Settings extends Component {
 						</Tabs>
 					)}
 				</Card>
-			</Fragment>
+			</>
 		);
 	};
 }

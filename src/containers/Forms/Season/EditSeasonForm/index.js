@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
@@ -102,10 +102,10 @@ export class EditSeasonForm extends Component {
 		<Card
 			extra={<BackButton push={Router.back} />}
 			title={
-				<Fragment>
+				<>
 					<FaEdit style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>
@@ -118,7 +118,7 @@ export class EditSeasonForm extends Component {
 					{this.state.isLoading ? (
 						<LoadingForm rows={2} />
 					) : (
-						<Fragment>
+						<>
 							<FieldGenerator
 								fields={this.state.fields}
 								onChange={this.handleChange}
@@ -128,7 +128,7 @@ export class EditSeasonForm extends Component {
 								isSubmitting={this.state.isSubmitting}
 								title="Update Season"
 							/>
-						</Fragment>
+						</>
 					)}
 				</form>
 			</FormContainer>

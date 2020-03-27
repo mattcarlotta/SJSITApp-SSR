@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
 import { FaBan, FaUserPlus } from "react-icons/fa";
@@ -49,13 +49,13 @@ const Profile = ({ viewMember, updateMemberStatus }) => {
 						onClick={() => updateMemberStatus({ _id, status })}
 					>
 						{isActive ? (
-							<Fragment>
+							<>
 								<FaBan style={iconStyle} /> Suspend
-							</Fragment>
+							</>
 						) : (
-							<Fragment>
+							<>
 								<FaUserPlus style={iconStyle} /> Activate
-							</Fragment>
+							</>
 						)}
 					</Button>
 				</FlexEnd>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Card } from "antd";
 import { connect } from "react-redux";
@@ -53,10 +53,10 @@ export class NewMemberForm extends Component {
 				<BackButton push={Router.push} location="/employee/members/viewall" />
 			}
 			title={
-				<Fragment>
+				<>
 					<FaUserPlus style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>

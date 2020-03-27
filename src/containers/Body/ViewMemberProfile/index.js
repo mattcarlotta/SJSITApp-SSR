@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { goBack } from "next/router";
@@ -107,16 +107,16 @@ export class ViewMemberProfile extends PureComponent {
 		const { _id, firstName, lastName } = viewMember;
 
 		return (
-			<Fragment>
+			<>
 				<Head title={title} />
 				<Card
 					style={{ minHeight: 800 }}
 					extra={<BackButton push={goBack} />}
 					title={
-						<Fragment>
+						<>
 							<FaUserEdit style={iconStyle} />
 							<span css="vertical-align: middle;">{title}</span>
-						</Fragment>
+						</>
 					}
 				>
 					{isEmpty(viewMember) ? (
@@ -171,7 +171,7 @@ export class ViewMemberProfile extends PureComponent {
 						</FadeIn>
 					)}
 				</Card>
-			</Fragment>
+			</>
 		);
 	};
 }

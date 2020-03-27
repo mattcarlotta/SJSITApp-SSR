@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Menu } from "antd";
 import Center from "~components/Body/Center";
@@ -23,7 +23,7 @@ const NavMenu = ({
 	const TABS = role !== "employee" ? StaffRoutes : EmployeeRoutes;
 
 	return (
-		<Fragment>
+		<>
 			<Center
 				style={{
 					height: 64,
@@ -84,10 +84,10 @@ const NavMenu = ({
 						<SubMenu
 							key={key}
 							title={
-								<Fragment>
+								<>
 									<i className="anticon">{icon}</i>
 									<Tab>{tab}</Tab>
-								</Fragment>
+								</>
 							}
 						>
 							{submenu.map(({ icon, disabled, tab, value, key }) => (
@@ -101,7 +101,7 @@ const NavMenu = ({
 				)}
 			</Menu>
 			{!isCollapsed && <Legal>© 2019 Matt Carlotta</Legal>}
-		</Fragment>
+		</>
 	);
 };
 

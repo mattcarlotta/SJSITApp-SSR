@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
@@ -77,10 +77,10 @@ export class NewSeasonForm extends Component {
 				/>
 			}
 			title={
-				<Fragment>
+				<>
 					<FaFolderPlus style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>

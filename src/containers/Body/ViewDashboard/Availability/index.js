@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
@@ -7,7 +7,6 @@ import { Card, Col } from "antd";
 import { FaUserClock } from "react-icons/fa";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailabilityAverage from "~components/Body/MemberAvailabilityAverage";
-import { fetchAvailability } from "~actions/Dashboard";
 import columns from "../Columns";
 
 const iconStyle = {
@@ -18,43 +17,33 @@ const iconStyle = {
 
 const format = "MM/DD/YYYY";
 
-export class Availability extends PureComponent {
-	componentDidMount = () => {
-		this.props.fetchAvailability();
-	};
-
-	render = () => {
-		const { months, isLoading } = this.props;
-
-		return (
-			<Col {...columns}>
-				<Card
-					bodyStyle={{ minHeight: "300px" }}
-					title={
-						<Fragment>
-							<FaUserClock style={iconStyle} />
-							<span css="vertical-align: middle;">Availability</span>
-						</Fragment>
-					}
-					extra={
-						!isEmpty(months) ? (
-							<span css="color: #fff; font-size: 16px;">
-								{moment(months[0]).format(format)} -{" "}
-								{moment(months[1]).format(format)}
-							</span>
-						) : null
-					}
-				>
-					{isLoading ? (
-						<LoadingPanel />
-					) : (
-						<MemberAvailabilityAverage {...this.props} />
-					)}
-				</Card>
-			</Col>
-		);
-	};
-}
+const Availability = props => (
+	<Col {...columns}>
+		<Card
+			bodyStyle={{ minHeight: "300px" }}
+			title={
+				<>
+					<FaUserClock style={iconStyle} />
+					<span css="vertical-align: middle;">Availability</span>
+				</>
+			}
+			extra={
+				!isEmpty(props.months) ? (
+					<span css="color: #fff; font-size: 16px;">
+						{moment(props.months[0]).format(format)} -{" "}
+						{moment(props.months[1]).format(format)}
+					</span>
+				) : null
+			}
+		>
+			{props.isLoading ? (
+				<LoadingPanel />
+			) : (
+				<MemberAvailabilityAverage {...props} />
+			)}
+		</Card>
+	</Col>
+);
 
 Availability.propTypes = {
 	eventAvailability: PropTypes.arrayOf(
@@ -65,20 +54,14 @@ Availability.propTypes = {
 		}),
 	),
 	months: PropTypes.arrayOf(PropTypes.string),
-	fetchAvailability: PropTypes.func.isRequired,
 	isLoading: PropTypes.bool.isRequired,
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => ({
-	eventAvailability: state.dashboard.eventAvailability.data,
-	months: state.dashboard.eventAvailability.months,
-	isLoading: state.dashboard.eventAvailability.isLoading,
+const mapStateToProps = ({ dashboard }) => ({
+	eventAvailability: dashboard.eventAvailability.data,
+	months: dashboard.eventAvailability.months,
+	isLoading: dashboard.eventAvailability.isLoading,
 });
 
-/* istanbul ignore next */
-const mapDispatchToProps = {
-	fetchAvailability,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Availability);
+export default connect(mapStateToProps)(Availability);

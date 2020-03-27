@@ -4,9 +4,8 @@ import { app } from "~utils";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { signoutUser, updateUser } from "~actions/Auth";
 import * as actions from "~actions/Members";
-import { parseCookie, parseData, parseMessage } from "~utils/parseResponse";
+import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
-import { redirectTo } from "~utils/redirect";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -339,14 +338,12 @@ export function* fetchMembers() {
  * @throws {actions} - A redux action to push to a URL and to display a server message by type.
  */
 
-export function* fetchSettings({ req, res }) {
+export function* fetchSettings() {
 	try {
-		const headers = yield call(parseCookie, req);
-
-		let res = yield call(app.get, `member/settings`, headers);
+		let res = yield call(app.get, `member/settings`);
 		const basicMemberInfo = yield call(parseData, res);
 
-		res = yield call(app.get, "member/settings/availability", headers);
+		res = yield call(app.get, "member/settings/availability");
 		const memberAvailability = yield call(parseData, res);
 
 		const { member } = basicMemberInfo;
@@ -365,7 +362,6 @@ export function* fetchSettings({ req, res }) {
 			}),
 		);
 	} catch (e) {
-		yield call(redirectTo(res, "/employee/dashboard"));
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
@@ -650,7 +646,7 @@ export function* updateSettings({ props }) {
 		if (message !== "Successfully updated your settings.") {
 			yield put(signoutUser());
 		} else {
-			yield put(actions.fetchMemberSettings({ req: "", res: "" }));
+			yield put(actions.fetchMemberSettings());
 		}
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));

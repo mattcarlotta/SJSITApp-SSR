@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import Router from "next/router";
@@ -33,9 +33,9 @@ const TableActions = ({
 	sendMail,
 	viewLocation,
 }) => (
-	<Fragment>
+	<>
 		{assignLocation && (
-			<Fragment>
+			<>
 				<Button
 					primary
 					padding="3px 0 0 0"
@@ -49,10 +49,10 @@ const TableActions = ({
 					<span>Schedule</span>
 				</Button>
 				<Spacer />
-			</Fragment>
+			</>
 		)}
 		{viewLocation && (
-			<Fragment>
+			<>
 				<Button
 					primary
 					padding="3px 0 0 0"
@@ -66,10 +66,10 @@ const TableActions = ({
 					<span>View</span>
 				</Button>
 				<Spacer />
-			</Fragment>
+			</>
 		)}
 		{editLocation && (
-			<Fragment>
+			<>
 				<Button
 					primary
 					padding="3px 0px 0 3px"
@@ -83,10 +83,10 @@ const TableActions = ({
 					<span>Edit</span>
 				</Button>
 				<Spacer />
-			</Fragment>
+			</>
 		)}
 		{sendMail && (
-			<Fragment>
+			<>
 				<Button
 					primary
 					padding="3px 0 0 0"
@@ -98,10 +98,10 @@ const TableActions = ({
 					<span>Send</span>
 				</Button>
 				<Spacer />
-			</Fragment>
+			</>
 		)}
 		{deleteAction && (
-			<Fragment>
+			<>
 				<Popconfirm
 					placement="top"
 					title="Are you sure? This action is irreversible."
@@ -119,7 +119,7 @@ const TableActions = ({
 					</Button>
 				</Popconfirm>
 				<Spacer />
-			</Fragment>
+			</>
 		)}
 		{!isEmpty(selectedRowKeys) && (
 			<Popconfirm
@@ -141,7 +141,7 @@ const TableActions = ({
 				</Button>
 			</Popconfirm>
 		)}
-	</Fragment>
+	</>
 );
 
 TableActions.propTypes = {

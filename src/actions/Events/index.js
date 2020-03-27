@@ -78,9 +78,8 @@ export const fetchEvents = () => ({
  * @param {array} params - selectedDate and all games or user scheduled games
  * @returns {object}
  */
-export const fetchScheduleEvents = ({ req, ...params }) => ({
+export const fetchScheduleEvents = params => ({
 	type: types.EVENTS_FETCH_SCHEDULE_EVENTS,
-	req,
 	params,
 });
 

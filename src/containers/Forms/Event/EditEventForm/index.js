@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
@@ -120,10 +120,10 @@ export class EditEventForm extends Component {
 				/>
 			}
 			title={
-				<Fragment>
+				<>
 					<FaEdit style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>
@@ -136,7 +136,7 @@ export class EditEventForm extends Component {
 					{this.state.isLoading ? (
 						<LoadingForm rows={9} />
 					) : (
-						<Fragment>
+						<>
 							<FieldGenerator
 								fields={this.state.fields}
 								onChange={this.handleChange}
@@ -150,7 +150,7 @@ export class EditEventForm extends Component {
 								title="Update Event"
 								isSubmitting={this.state.isSubmitting}
 							/>
-						</Fragment>
+						</>
 					)}
 				</form>
 			</FormContainer>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Card } from "antd";
@@ -25,11 +25,11 @@ export const ViewForms = ({
 	resendMail,
 	...rest
 }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaFileSignature
 						style={{
 							verticalAlign: "middle",
@@ -38,12 +38,12 @@ export const ViewForms = ({
 						}}
 					/>
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<QueryHandler {...rest}>
 				{props => (
-					<Fragment>
+					<>
 						<Filters {...props} {...rest} />
 						<Table
 							{...rest}
@@ -57,11 +57,11 @@ export const ViewForms = ({
 							viewLocation="forms"
 							sendMail={resendMail}
 						/>
-					</Fragment>
+					</>
 				)}
 			</QueryHandler>
 		</Card>
-	</Fragment>
+	</>
 );
 
 ViewForms.propTypes = {

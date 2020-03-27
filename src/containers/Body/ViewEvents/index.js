@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
@@ -34,11 +34,11 @@ export class ViewEvents extends PureComponent {
 		} = this.props;
 
 		return (
-			<Fragment>
+			<>
 				<Head title={title} />
 				<Card
 					title={
-						<Fragment>
+						<>
 							<MdEventNote
 								style={{
 									verticalAlign: "middle",
@@ -47,12 +47,12 @@ export class ViewEvents extends PureComponent {
 								}}
 							/>
 							<span css="vertical-align: middle;">{title}</span>
-						</Fragment>
+						</>
 					}
 				>
 					<QueryHandler {...this.props}>
 						{props => (
-							<Fragment>
+							<>
 								<Filters {...props} {...rest} />
 								<Table
 									{...props}
@@ -65,11 +65,11 @@ export class ViewEvents extends PureComponent {
 									assignLocation="events"
 									sendMail={resendMail}
 								/>
-							</Fragment>
+							</>
 						)}
 					</QueryHandler>
 				</Card>
-			</Fragment>
+			</>
 		);
 	};
 }

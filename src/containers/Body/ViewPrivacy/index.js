@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Card } from "antd";
 import { FaBalanceScale } from "react-icons/fa";
 import Head from "~components/Navigation/Head";
@@ -21,14 +21,14 @@ const linkStyle = {
 };
 
 const ViewPrivacyPage = () => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaBalanceScale style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<div css="padding: 0 30px 30px 30px;">
@@ -194,7 +194,7 @@ const ViewPrivacyPage = () => (
 				</InfoText>
 			</div>
 		</Card>
-	</Fragment>
+	</>
 );
 
 export default ViewPrivacyPage;

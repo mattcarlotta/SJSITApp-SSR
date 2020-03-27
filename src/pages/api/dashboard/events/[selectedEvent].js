@@ -21,7 +21,7 @@ const getSelectedEvents = async (req, res) => {
 	try {
 		const { id: _id } = req.session.user;
 		if (!_id) throw missingMemberId;
-		const { selectedEvent } = req.params;
+		const { selectedEvent } = req.query;
 
 		const isEventToday = selectedEvent === "today";
 		const currentDate = getStartOfDay();

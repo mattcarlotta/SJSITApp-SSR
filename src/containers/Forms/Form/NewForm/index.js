@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
@@ -78,10 +78,10 @@ export class NewAPForm extends Component {
 				/>
 			}
 			title={
-				<Fragment>
+				<>
 					<MdNoteAdd style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>
@@ -94,7 +94,7 @@ export class NewAPForm extends Component {
 					{this.state.isLoading ? (
 						<LoadingForm rows={4} />
 					) : (
-						<Fragment>
+						<>
 							<FieldGenerator
 								fields={this.state.fields}
 								onChange={this.handleChange}
@@ -104,7 +104,7 @@ export class NewAPForm extends Component {
 								title="Create Form"
 								isSubmitting={this.state.isSubmitting}
 							/>
-						</Fragment>
+						</>
 					)}
 				</form>
 			</FormContainer>

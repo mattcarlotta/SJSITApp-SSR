@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import moment from "moment-timezone";
@@ -76,7 +76,6 @@ class CustomCalendar extends Component {
 						"MMM YYYY",
 					).format(),
 					selectedGames: this.state.selectedGames,
-					req: "",
 				});
 			},
 		);
@@ -120,7 +119,7 @@ class CustomCalendar extends Component {
 	};
 
 	render = () => (
-		<Fragment>
+		<>
 			<Calendar
 				mode="month"
 				validRange={this.state.validRange}
@@ -134,7 +133,7 @@ class CustomCalendar extends Component {
 				loggedinUserId={this.props.loggedinUserId}
 				handleCloseModal={this.handleCloseModal}
 			/>
-		</Fragment>
+		</>
 	);
 }
 

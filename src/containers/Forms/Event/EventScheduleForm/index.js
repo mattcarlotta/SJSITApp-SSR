@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
@@ -142,10 +142,10 @@ export class EventScheduleForm extends Component {
 		<Card
 			extra={<BackButton push={Router.back} />}
 			title={
-				<Fragment>
+				<>
 					<FaClipboardCheck style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<Center>
@@ -159,7 +159,7 @@ export class EventScheduleForm extends Component {
 				{this.state.isLoading ? (
 					<LoadingScheduleForm />
 				) : (
-					<Fragment>
+					<>
 						<Button
 							id="event-distribution"
 							primary
@@ -174,7 +174,7 @@ export class EventScheduleForm extends Component {
 							Monthly Event Distribution
 						</Button>
 						<Schedule {...this.state} handleDrag={this.onDragEnd} />
-					</Fragment>
+					</>
 				)}
 				<SubmitButton
 					disabled={this.state.isLoading}

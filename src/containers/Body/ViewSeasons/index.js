@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router from "next/router";
@@ -30,14 +30,14 @@ export const ViewSeasons = ({
 	fetchSeasons,
 	...rest
 }) => (
-	<Fragment>
+	<>
 		<Head title={title} />
 		<Card
 			title={
-				<Fragment>
+				<>
 					<FaFolderOpen style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FlexEnd>
@@ -68,7 +68,7 @@ export const ViewSeasons = ({
 				)}
 			</QueryHandler>
 		</Card>
-	</Fragment>
+	</>
 );
 
 ViewSeasons.propTypes = {

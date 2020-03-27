@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import moment from "moment";
@@ -99,10 +99,10 @@ export class ViewApForm extends Component {
 			<Card
 				extra={<BackButton push={Router.push} location="/employee/dashboard" />}
 				title={
-					<Fragment>
+					<>
 						<FaFileSignature style={iconStyle} />
 						<span css="vertical-align: middle;">{title}</span>
-					</Fragment>
+					</>
 				}
 			>
 				<FormContainer>
@@ -113,7 +113,7 @@ export class ViewApForm extends Component {
 					/>
 					<form style={{ textAlign: "center" }} onSubmit={this.handleSubmit}>
 						{isLoading ? (
-							<Fragment>
+							<>
 								<LoadingForm rows={1} minHeight="92px" />
 								{[0, 1, 2].map(num => (
 									<LoadingPanel
@@ -122,9 +122,9 @@ export class ViewApForm extends Component {
 										style={{ marginBottom: 20 }}
 									/>
 								))}
-							</Fragment>
+							</>
 						) : (
-							<Fragment>
+							<>
 								<Title style={{ color: "#025f6d" }}>
 									{moment(viewForm.startMonth).format("MMMM Do YYYY")}
 									&nbsp;-&nbsp;
@@ -148,7 +148,7 @@ export class ViewApForm extends Component {
 									title="Submit AP Form"
 									isSubmitting={isSubmitting}
 								/>
-							</Fragment>
+							</>
 						)}
 					</form>
 				</FormContainer>

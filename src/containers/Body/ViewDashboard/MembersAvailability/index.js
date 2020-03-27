@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
@@ -15,7 +15,6 @@ import List from "~components/Body/List";
 import ListItem from "~components/Body/ListItem";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import NoAvailability from "~components/Body/NoAvailability";
-import { fetchMembersAvailability } from "~actions/Dashboard";
 import columns from "../Columns";
 
 const iconStyle = {
@@ -41,67 +40,56 @@ const tableHeader = {
 
 const format = "MM/DD/YYYY";
 
-export class MembersAvailability extends PureComponent {
-	componentDidMount = () => {
-		this.props.fetchMembersAvailability();
-	};
-
-	render = () => {
-		const { membersAvailability, months, isLoading } = this.props;
-
-		return (
-			<Col {...columns}>
-				<Card
-					bodyStyle={{ minHeight: "300px" }}
-					title={
-						<Fragment>
-							<FaUserClock style={iconStyle} />
-							<span css="vertical-align: middle;">Availability</span>
-						</Fragment>
-					}
-					extra={
-						!isEmpty(months) ? (
-							<span css="color: #fff; font-size: 16px;">
-								{moment(months[0]).format(format)} -{" "}
-								{moment(months[1]).format(format)}
-							</span>
-						) : null
-					}
-				>
-					{isLoading ? (
-						<LoadingPanel />
-					) : !isEmpty(membersAvailability) ? (
-						<CalendarContainer>
-							<Flex style={tableHeader}>
-								<FlexStart>Employee</FlexStart>
-								<FlexEnd>Availability (%)</FlexEnd>
-							</Flex>
-							<List style={listStyle}>
-								{membersAvailability.map(({ id, availability }, key) => (
-									<ListItem
-										key={id}
-										style={{
-											...listItemStyle,
-											backgroundColor: key % 2 ? "#ebebeb" : "transparent",
-										}}
-									>
-										<Bold>{id}</Bold>
-										<Float direction="right">{availability}&#37;</Float>
-									</ListItem>
-								))}
-							</List>
-						</CalendarContainer>
-					) : (
-						<NoAvailability />
-					)}
-				</Card>
-			</Col>
-		);
-	};
-}
+const MembersAvailability = ({ membersAvailability, months, isLoading }) => (
+	<Col {...columns}>
+		<Card
+			bodyStyle={{ minHeight: "300px" }}
+			title={
+				<>
+					<FaUserClock style={iconStyle} />
+					<span css="vertical-align: middle;">Availability</span>
+				</>
+			}
+			extra={
+				!isEmpty(months) ? (
+					<span css="color: #fff; font-size: 16px;">
+						{moment(months[0]).format(format)} -{" "}
+						{moment(months[1]).format(format)}
+					</span>
+				) : null
+			}
+		>
+			{isLoading ? (
+				<LoadingPanel />
+			) : !isEmpty(membersAvailability) ? (
+				<CalendarContainer>
+					<Flex style={tableHeader}>
+						<FlexStart>Employee</FlexStart>
+						<FlexEnd>Availability (%)</FlexEnd>
+					</Flex>
+					<List style={listStyle}>
+						{membersAvailability.map(({ id, availability }, key) => (
+							<ListItem
+								key={id}
+								style={{
+									...listItemStyle,
+									backgroundColor: key % 2 ? "#ebebeb" : "transparent",
+								}}
+							>
+								<Bold>{id}</Bold>
+								<Float direction="right">{availability}&#37;</Float>
+							</ListItem>
+						))}
+					</List>
+				</CalendarContainer>
+			) : (
+				<NoAvailability />
+			)}
+		</Card>
+	</Col>
+);
 
 MembersAvailability.propTypes = {
-	fetchMembersAvailability: PropTypes.func.isRequired,
 	isLoading: PropTypes.bool.isRequired,
 	membersAvailability: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -112,17 +100,10 @@ MembersAvailability.propTypes = {
 	months: PropTypes.arrayOf(PropTypes.string),
 };
 
-const mapStateToProps = state => ({
-	isLoading: state.dashboard.membersAvailability.isLoading,
-	membersAvailability: state.dashboard.membersAvailability.data,
-	months: state.dashboard.membersAvailability.months,
+const mapStateToProps = ({ dashboard }) => ({
+	isLoading: dashboard.membersAvailability.isLoading,
+	membersAvailability: dashboard.membersAvailability.data,
+	months: dashboard.membersAvailability.months,
 });
 
-const mapDispatchToProps = {
-	fetchMembersAvailability,
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(MembersAvailability);
+export default connect(mapStateToProps)(MembersAvailability);

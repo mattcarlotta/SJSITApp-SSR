@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
@@ -88,10 +88,10 @@ export class EditMailForm extends Component {
 		<Card
 			extra={<BackButton push={this.props.goBack} />}
 			title={
-				<Fragment>
+				<>
 					<FaEdit style={iconStyle} />
 					<span css="vertical-align: middle;">{title}</span>
-				</Fragment>
+				</>
 			}
 		>
 			<FormContainer>
@@ -104,7 +104,7 @@ export class EditMailForm extends Component {
 					{this.state.isLoading ? (
 						<LoadingForm rows={5} />
 					) : (
-						<Fragment>
+						<>
 							<FieldGenerator
 								fields={this.state.fields}
 								onChange={this.handleChange}
@@ -120,7 +120,7 @@ export class EditMailForm extends Component {
 									submitTitle="Update"
 								/>
 							)}
-						</Fragment>
+						</>
 					)}
 				</form>
 			</FormContainer>

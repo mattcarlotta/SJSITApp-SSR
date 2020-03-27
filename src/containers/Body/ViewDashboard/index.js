@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Row } from "antd";
@@ -10,7 +10,7 @@ import MembersAvailability from "./MembersAvailability";
 import EventDistribution from "./EventDistribution";
 
 export const ViewDashboard = ({ role }) => (
-	<Fragment>
+	<>
 		<Head title="Dashboard" />
 		<Row gutter={[24, 24]}>
 			<Events />
@@ -18,7 +18,7 @@ export const ViewDashboard = ({ role }) => (
 			{role !== "employee" ? <MembersAvailability /> : <Availability />}
 			<EventDistribution />
 		</Row>
-	</Fragment>
+	</>
 );
 
 ViewDashboard.propTypes = {
