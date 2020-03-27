@@ -1,7 +1,7 @@
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import { Event } from "~models";
-import { sendError } from "~utils/helpers";
+import { findMember, sendError } from "~utils/helpers";
 import { missingUpdateMemberStatusParams } from "~messages/errors";
 
 /**

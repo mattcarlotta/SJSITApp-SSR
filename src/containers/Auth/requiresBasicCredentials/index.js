@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { checkAuthentication } from "~utils/helpers";
+import checkAuthentication from "~utils/checkAuthentication";
 import Spinner from "~components/Body/Spinner";
 
 const requiresBasicCredentials = WrappedComponent => {

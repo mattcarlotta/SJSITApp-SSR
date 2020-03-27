@@ -9,10 +9,6 @@ import {
 	newAuthorizationKeyTemplate,
 	newStaffTemplate,
 } from "~services/templates";
-import { setServerMessage } from "~actions/Messages";
-import { accessDenied } from "~messages/errors";
-import toast from "~components/Body/Toast";
-import Redirect from "~utils/redirect";
 
 const { ObjectId } = Types;
 const { LOCALHOST } = process.env;
@@ -29,35 +25,6 @@ const COLORS = ["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"];
 
 const toAverage = (num, total) =>
 	parseInt(((num / total) * 100).toFixed(2), 10);
-
-/**
- * Helper function to handle authentication.
- *
- * @async
- * @function checkAuthentication
- * @param {boolean} condition - primary conditional boolean
- * @param {object} ctx - server-side context object
- * @param {function} getInitialProps - a Component's getInitialProps function
- * @function dispatch - dispatches a setServerMessage error message
- * @function toast - emits a toast notification
- * @function Redirect - redirects the user client/server side
- * @function getInitialProps - executes a Components getInitialProps if included
- * @returns {array}
- */
-const checkAuthentication = async ({ condition, ctx, getInitialProps }) => {
-	const {
-		store: { dispatch },
-		res,
-	} = ctx;
-
-	if (condition) {
-		Redirect(res);
-		dispatch(setServerMessage({ message: accessDenied }));
-		toast({ type: "error", message: accessDenied });
-	}
-
-	if (getInitialProps) await getInitialProps(ctx);
-};
 
 /**
  * Helper function to generate an auth token email.
@@ -730,7 +697,6 @@ const updateScheduleIds = schedule =>
 
 export {
 	clearSession,
-	checkAuthentication,
 	convertId,
 	createAuthMail,
 	createColumnSchedule,

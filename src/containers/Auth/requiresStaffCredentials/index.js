@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { checkAuthentication } from "~utils/helpers";
+import checkAuthentication from "~utils/checkAuthentication";
 import Spinner from "~components/Body/Spinner";
 
 const requiresStaffCredentials = WrappedComponent => {
 	const RequiresStaffAuthentication = ({ email, role, ...rest }) =>
-		email && role && role === "staff" ? (
+		email && role && (role === "staff" || role === "admin") ? (
 			<WrappedComponent {...rest} />
 		) : (
 			<Spinner />
@@ -20,7 +20,7 @@ const requiresStaffCredentials = WrappedComponent => {
 		const { getInitialProps } = WrappedComponent;
 
 		await checkAuthentication({
-			condition: role !== "staff" || !email,
+			condition: (role !== "staff" && role !== "admin") || !email,
 			ctx,
 			getInitialProps,
 		});
