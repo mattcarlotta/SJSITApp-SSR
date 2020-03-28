@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const ViewSeasons = () => (
-	<AppLayout>
-		<div>View All Seasons</div>
-	</AppLayout>
-);
+const ViewSeasons = () => <div>View All Seasons</div>;
 
 export default requiresStaffCredentials(ViewSeasons);

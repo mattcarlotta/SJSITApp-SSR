@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const EditEvent = () => (
-	<AppLayout>
-		<div>Edit Event</div>
-	</AppLayout>
-);
+const EditEvent = () => <div>Edit Event</div>;
 
 export default requiresStaffCredentials(EditEvent);

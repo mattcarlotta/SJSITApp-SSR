@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const ScheduleEvent = () => (
-	<AppLayout>
-		<div>Schedule Event</div>
-	</AppLayout>
-);
+const ScheduleEvent = () => <div>Schedule Event</div>;
 
 export default requiresStaffCredentials(ScheduleEvent);

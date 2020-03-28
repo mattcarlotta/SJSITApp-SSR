@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const EditAuthorizations = () => (
-	<AppLayout>
-		<div>Edit Authorizations</div>
-	</AppLayout>
-);
+const EditAuthorizations = () => <div>Edit Authorizations</div>;
 
 export default requiresStaffCredentials(EditAuthorizations);

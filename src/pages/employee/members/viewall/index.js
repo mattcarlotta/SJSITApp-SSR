@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const ViewMembers = () => (
-	<AppLayout>
-		<div>View Members</div>
-	</AppLayout>
-);
+const ViewMembers = () => <div>View Members</div>;
 
 export default requiresStaffCredentials(ViewMembers);

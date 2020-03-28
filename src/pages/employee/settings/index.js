@@ -1,6 +1,5 @@
 import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
-import AppLayout from "~components/App";
 import ViewSettings from "~containers/Body/ViewSettings";
 import { app } from "~utils";
 import { updateUser } from "~actions/Auth";
@@ -8,11 +7,7 @@ import { setMemberToReview } from "~actions/Members";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";
 
-const SettingsPage = () => (
-	<AppLayout>
-		<ViewSettings />
-	</AppLayout>
-);
+const SettingsPage = () => <ViewSettings />;
 
 SettingsPage.getInitialProps = async ({ req, store: { dispatch } }) => {
 	try {

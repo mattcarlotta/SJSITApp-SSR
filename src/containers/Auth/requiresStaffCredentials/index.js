@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import checkAuthentication from "~utils/checkAuthentication";
 import Spinner from "~components/Body/Spinner";
+import AppLayout from "~components/App";
 
 const requiresStaffCredentials = WrappedComponent => {
 	const RequiresStaffAuthentication = ({ email, role, ...rest }) =>
 		email && role && (role === "staff" || role === "admin") ? (
-			<WrappedComponent {...rest} />
+			<AppLayout>
+				<WrappedComponent {...rest} />
+			</AppLayout>
 		) : (
 			<Spinner />
 		);

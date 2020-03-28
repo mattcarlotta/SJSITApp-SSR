@@ -31,6 +31,10 @@ Home.propTypes = {
 	signoutUser: PropTypes.func,
 };
 
-export default connect(({ auth }) => ({ email: auth.email }), { signoutUser })(
-	Home,
-);
+const mapStateToProps = ({ auth }) => ({ email: auth.email });
+
+const mapDispatchToProps = {
+	signoutUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

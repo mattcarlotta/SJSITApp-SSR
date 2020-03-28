@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const CreateMember = () => (
-	<AppLayout>
-		<div>Create Member</div>
-	</AppLayout>
-);
+const CreateMember = () => <div>Create Member</div>;
 
 export default requiresStaffCredentials(CreateMember);

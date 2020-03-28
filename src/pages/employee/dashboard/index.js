@@ -1,18 +1,13 @@
 import React from "react";
 import moment from "moment-timezone";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
-import AppLayout from "~components/App";
 import ViewDashboard from "~containers/Body/ViewDashboard";
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import * as actions from "~actions/Dashboard";
 import dispatchError from "~utils/dispatchError";
 
-const Dashboard = () => (
-	<AppLayout>
-		<ViewDashboard />
-	</AppLayout>
-);
+const Dashboard = () => <ViewDashboard />;
 
 Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 	const { role } = getState().auth;

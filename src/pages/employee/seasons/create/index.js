@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const CreateSeason = () => (
-	<AppLayout>
-		<div>Create Season</div>
-	</AppLayout>
-);
+const CreateSeason = () => <div>Create Season</div>;
 
 export default requiresStaffCredentials(CreateSeason);

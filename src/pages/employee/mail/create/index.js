@@ -1,11 +1,6 @@
 import React from "react";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import AppLayout from "~components/App";
 
-const SendMail = () => (
-	<AppLayout>
-		<div>Send Mail</div>
-	</AppLayout>
-);
+const SendMail = () => <div>Send Mail</div>;
 
 export default requiresStaffCredentials(SendMail);

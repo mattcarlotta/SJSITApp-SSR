@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import checkAuthentication from "~utils/checkAuthentication";
 import Spinner from "~components/Body/Spinner";
+import AppLayout from "~components/App";
 
 const requiresBasicCredentials = WrappedComponent => {
 	const RequiresAuthentication = ({ email, role, ...rest }) =>
 		email && role && role !== "guest" ? (
-			<WrappedComponent {...rest} />
+			<AppLayout>
+				<WrappedComponent {...rest} />
+			</AppLayout>
 		) : (
 			<Spinner />
 		);

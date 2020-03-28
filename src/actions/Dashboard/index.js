@@ -2,25 +2,6 @@ import isEmpty from "lodash.isempty";
 import * as types from "~types";
 
 /**
- * Fetches current month AP form.
- *
- * @function fetchAPForm
- * @returns {object}
- */
-export const fetchAPForm = () => ({
-	type: types.DASHBOARD_FETCH_APFORM,
-});
-
-/**
- * Fetches current month AP form availability.
- *
- * @function fetchAvailability
- * @returns {object}
- */
-export const fetchAvailability = () => ({
-	type: types.DASHBOARD_FETCH_AVAILABILITY,
-});
-/**
  * Fetches event distribution by month.
  *
  * @function fetchEventDistribution
@@ -42,16 +23,6 @@ export const fetchEventDistribution = params => ({
 export const fetchEvents = selectedEvent => ({
 	type: types.DASHBOARD_FETCH_EVENTS,
 	selectedEvent: selectedEvent.toLowerCase(),
-});
-
-/**
- * Fetches current month AP form members' availabilities.
- *
- * @function fetchMembersAvailability
- * @returns {object}
- */
-export const fetchMembersAvailability = () => ({
-	type: types.DASHBOARD_FETCH_MEMBERS_AVAILABILITY,
 });
 
 /**
