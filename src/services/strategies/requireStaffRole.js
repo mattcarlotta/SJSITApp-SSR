@@ -9,16 +9,20 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res) => {
-	const user = get(req, ["session", "user"]);
-	const role = get(user, ["role"]);
+export default next => async (req, res, resolve) => {
+	try {
+		const user = get(req, ["session", "user"]);
+		const role = get(user, ["role"]);
 
-	if (!user || (role !== "admin" && role !== "staff"))
-		return sendError(accessDenied, 403, res);
+		if (!user || (role !== "admin" && role !== "staff"))
+			throw String(accessDenied);
 
-	const existingUser = await User.findOne({ _id: user.id });
-	if (!existingUser || existingUser.status === "suspended")
-		return sendError(badCredentials, 403, res);
+		const existingUser = await User.findOne({ _id: user.id });
+		if (!existingUser || existingUser.status === "suspended")
+			throw String(badCredentials);
 
-	next(req, res);
+		return resolve(next(req, res));
+	} catch (err) {
+		return resolve(sendError(err, 403, res));
+	}
 };

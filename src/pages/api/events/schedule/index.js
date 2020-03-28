@@ -56,8 +56,7 @@ const getScheduledEvents = async (req, res) => {
 
 		res.status(200).json({ events });
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

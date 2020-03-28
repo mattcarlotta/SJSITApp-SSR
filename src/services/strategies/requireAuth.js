@@ -1,5 +1,5 @@
 import { badCredentials } from "~messages/errors";
-import { parseSession, clearSession, sendError } from "~utils/helpers";
+import { parseSession, sendError } from "~utils/helpers";
 import { User } from "~models";
 
 /**
@@ -8,13 +8,17 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res) => {
-	const _id = parseSession(req);
-	if (!_id) return clearSession(req, res, 403, badCredentials);
+export default next => async (req, res, resolve) => {
+	try {
+		const _id = parseSession(req);
+		if (!_id) throw String(badCredentials);
 
-	const existingUser = await User.findOne({ _id });
-	if (!existingUser || existingUser.status === "suspended")
-		return sendError(badCredentials, 403, res);
+		const existingUser = await User.findOne({ _id });
+		if (!existingUser || existingUser.status === "suspended")
+			throw String(badCredentials);
 
-	next(req, res);
+		return resolve(next(req, res));
+	} catch (error) {
+		return resolve(sendError(error, 403, res));
+	}
 };

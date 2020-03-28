@@ -75,7 +75,7 @@ const getMemberEventCounts = async (req, res) => {
 			}),
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

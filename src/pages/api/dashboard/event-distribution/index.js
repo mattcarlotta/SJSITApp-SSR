@@ -63,8 +63,7 @@ const getEventDistribution = async (req, res) => {
 			}),
 		});
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

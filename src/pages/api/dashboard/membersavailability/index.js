@@ -17,7 +17,7 @@ import {
  * @returns {object} - membersAvailability: { eventCounts, eventResponses, members }), months (start month, endmonth),
  * @throws {string}
  */
-const getAvailabilityForAllMembers = async (req, res) => {
+const getAvailabilityForAllMembers = async (_, res) => {
 	try {
 		const membersAvailability = [];
 		let months = [];
@@ -62,8 +62,9 @@ const getAvailabilityForAllMembers = async (req, res) => {
 			},
 		).lean();
 		/* istanbul ignore next */
-		if (!existingForm)
-			return res.status(200).json({ membersAvailability, months });
+		if (!existingForm) {
+			res.status(200).json({ membersAvailability, months });
+		}
 
 		const startOfMonth = moment(existingForm.startMonth).toDate();
 		const endOfMonth = moment(existingForm.endMonth).toDate();
@@ -71,8 +72,9 @@ const getAvailabilityForAllMembers = async (req, res) => {
 
 		const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
 		/* istanbul ignore next */
-		if (eventCounts === 0)
-			return res.status(200).json({ membersAvailability, months });
+		if (eventCounts === 0) {
+			res.status(200).json({ membersAvailability, months });
+		}
 
 		const eventResponses = await Event.aggregate([
 			{
@@ -109,7 +111,7 @@ const getAvailabilityForAllMembers = async (req, res) => {
 			},
 		]);
 
-		return res.status(200).json({
+		res.status(200).json({
 			membersAvailability: createMemberAvailabilityAverages({
 				eventCounts,
 				eventResponses,
@@ -118,8 +120,7 @@ const getAvailabilityForAllMembers = async (req, res) => {
 			months,
 		});
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

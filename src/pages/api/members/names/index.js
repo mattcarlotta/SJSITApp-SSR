@@ -30,8 +30,7 @@ const getAllMemberNames = async (_, res) => {
 
 		res.status(200).json({ members });
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

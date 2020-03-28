@@ -20,7 +20,7 @@ const getEventForViewing = async (req, res) => {
 
 		res.status(200).json({ event: existingEvent });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

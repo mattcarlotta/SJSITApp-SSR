@@ -7,24 +7,28 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res) => {
-	const _id = parseSession(req);
-	if (!_id) return clearSession(req, res, 200);
+export default next => async (req, res, resolve) => {
+	try {
+		const _id = parseSession(req);
+		if (!_id) throw String("No previous session detected.");
 
-	const existingUser = await User.findOne(
-		{ _id },
-		{ _v: 0, password: 0, token: 0 },
-	);
-	if (!existingUser || existingUser.status === "suspended")
-		return clearSession(req, res, 200);
+		const existingUser = await User.findOne(
+			{ _id },
+			{ _v: 0, password: 0, token: 0 },
+		);
+		if (!existingUser || existingUser.status === "suspended")
+			throw String("Not a valid user.");
 
-	req.user = {
-		id: existingUser._id,
-		email: existingUser.email,
-		firstName: existingUser.firstName,
-		lastName: existingUser.lastName,
-		role: existingUser.role,
-	};
+		req.user = {
+			id: existingUser._id,
+			email: existingUser.email,
+			firstName: existingUser.firstName,
+			lastName: existingUser.lastName,
+			role: existingUser.role,
+		};
 
-	next(req, res);
+		return resolve(next(req, res));
+	} catch (err) {
+		return resolve(clearSession(req, res, 200));
+	}
 };

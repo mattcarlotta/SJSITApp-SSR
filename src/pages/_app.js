@@ -55,6 +55,13 @@ export class MyApp extends App {
 		return (
 			<>
 				<Head>
+					<meta charSet="utf-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<meta name="theme-color" content="#000000" />
+					<meta
+						name="description"
+						content="Official website for the Sharks Ice Team."
+					/>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 				<GlobalStylesheet />

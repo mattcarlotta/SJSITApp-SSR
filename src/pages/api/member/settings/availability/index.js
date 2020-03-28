@@ -21,7 +21,7 @@ const getMemberSettingsAvailability = async (req, res) => {
 
 		await findMemberAvailabilty(existingMember, selectedDate, res);
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

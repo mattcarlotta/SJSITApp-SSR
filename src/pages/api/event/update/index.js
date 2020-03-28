@@ -72,7 +72,7 @@ const updateEvent = async (req, res) => {
 
 		res.status(201).json({ message: "Successfully updated the event." });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

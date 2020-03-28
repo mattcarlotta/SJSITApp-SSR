@@ -514,7 +514,9 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
 
 	const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
 	/* instanbul ignore next */
-	if (eventCounts === 0) return res.status(200).send({});
+	if (eventCounts === 0) {
+		res.status(200).send({});
+	}
 
 	const eventResponses = await Event.aggregate([
 		{
@@ -573,7 +575,7 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
 		},
 	});
 
-	return res.status(200).json({
+	res.status(200).json({
 		eventAvailability: createMemberAvailabilityAverage({
 			eventCounts,
 			eventResponses,
@@ -653,8 +655,9 @@ const parseSession = req => get(req, ["session", "user", "id"]);
  * @param res - res object
  * @returns {function}
  */
-const sendError = (err, statusCode, res) =>
+const sendError = (err, statusCode, res) => {
 	res.status(statusCode).json({ err: err.toString() });
+};
 
 /**
  * Helper function to sort a schedule list based upon last name.

@@ -49,7 +49,7 @@ passport.use(
  * @returns {function}
  * @throws {string}
  */
-export const updatePassword = next => async (req, res) => {
+export const updatePassword = next => async (req, res, resolve) => {
 	try {
 		const { token, password } = req.body;
 
@@ -57,17 +57,17 @@ export const updatePassword = next => async (req, res) => {
 		if (!password) throw emptyPassword;
 		req.body.email = token;
 
-		const existingUser = await new Promise((resolve, reject) => {
+		const existingUser = await new Promise((resolveResetPassword, reject) => {
 			passport.authenticate("reset-password", (err, existingEmail) =>
-				err ? reject(err) : resolve(existingEmail),
+				err ? reject(err) : resolveResetPassword(existingEmail),
 			)(req, res, next);
 		});
 
 		req.user = existingUser;
 
-		next(req, res);
+		return resolve(next(req, res));
 	} catch (err) {
-		sendError(err, 404, res);
+		return resolve(sendError(err, 404, res));
 	}
 };
 

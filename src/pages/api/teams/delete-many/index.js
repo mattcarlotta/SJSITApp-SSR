@@ -21,7 +21,7 @@ const deleteManyTeams = async (req, res) => {
 
 		res.status(200).json({ message: "Successfully deleted the teams." });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

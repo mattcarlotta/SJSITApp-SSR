@@ -21,7 +21,7 @@ const getMailForViewing = async (req, res) => {
 
 		res.status(200).json({ email: existingEmail });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

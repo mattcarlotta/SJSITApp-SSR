@@ -21,7 +21,7 @@ const getFormForViewing = async (req, res) => {
 
 		res.status(200).json({ form: existingForm });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

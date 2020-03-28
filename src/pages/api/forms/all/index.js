@@ -32,8 +32,7 @@ const getAllForms = async (req, res) => {
 
 		res.status(200).json({ forms, totalDocs });
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

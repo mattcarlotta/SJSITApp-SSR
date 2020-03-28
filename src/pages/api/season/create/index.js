@@ -22,9 +22,10 @@ const createSeason = async (req, res) => {
 
 		const [startDate, endDate] = seasonDuration;
 		await Season.create({ seasonId, startDate, endDate });
+
 		res.status(201).json({ message: "Successfully created a new season!" });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

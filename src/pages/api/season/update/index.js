@@ -36,7 +36,7 @@ const updateSeason = async (req, res) => {
 
 		res.status(201).json({ message: "Successfully updated the season." });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

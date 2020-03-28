@@ -111,8 +111,7 @@ const getAvailability = async (req, res) => {
 			months,
 		});
 	} catch (err) {
-		/* istanbul ignore next */
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

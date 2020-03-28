@@ -10,7 +10,7 @@ import { unableToLocateMember } from "~messages/errors";
  * @returns {object} - memberAvailablity
  * @throws {string}
  */
-const getMemberAvailability = async (req, res) => {
+const getMemberAvailability = async (req, res, resolve) => {
 	try {
 		const { id: _id, selectedDate } = req.query;
 
@@ -19,7 +19,7 @@ const getMemberAvailability = async (req, res) => {
 
 		await findMemberAvailabilty(existingMember, selectedDate, res);
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

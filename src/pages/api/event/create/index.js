@@ -76,7 +76,7 @@ const createEvent = async (req, res) => {
 			message: `Successfully added a new event to the ${seasonId} season.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

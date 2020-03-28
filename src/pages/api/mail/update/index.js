@@ -47,7 +47,7 @@ const updateMail = async (req, res) => {
 			message: `Successfully updated the email and it will be sent ${sentDateMessage}!`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

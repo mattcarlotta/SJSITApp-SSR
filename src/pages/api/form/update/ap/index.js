@@ -64,7 +64,7 @@ const updateApForm = async (req, res) => {
 			.status(201)
 			.json({ message: "Successfully added your responses to the A/P form!" });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

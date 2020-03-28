@@ -30,7 +30,7 @@ const createTeam = async (req, res) => {
 			message: `Successfully added the ${team} to the ${league}.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

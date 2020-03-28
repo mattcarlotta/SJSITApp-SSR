@@ -49,7 +49,7 @@ const updateToken = async (req, res) => {
 			message: `Succesfully updated and sent a new authorization key to ${authorizedEmail}.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

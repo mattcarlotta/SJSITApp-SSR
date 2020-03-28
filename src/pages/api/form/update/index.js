@@ -69,7 +69,7 @@ const updateForm = async (req, res) => {
 
 		res.status(201).json({ message: "Successfully updated the form!" });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

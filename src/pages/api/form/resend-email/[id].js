@@ -28,7 +28,7 @@ const resendFormEmail = async (req, res) => {
 			message: "Email notifications for that form will be resent shortly.",
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

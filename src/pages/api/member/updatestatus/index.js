@@ -41,7 +41,7 @@ const updateMemberStatus = async (req, res) => {
 			message: `Member has been ${wasSuspended ? "suspended" : "reactivated"}.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

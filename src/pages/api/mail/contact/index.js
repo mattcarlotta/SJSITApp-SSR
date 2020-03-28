@@ -51,7 +51,7 @@ const contactUs = async (req, res) => {
 			message: `Thank you for contacting us. The ${role} has received your message. Expect a response within 24 hours.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

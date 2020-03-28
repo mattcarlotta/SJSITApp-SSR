@@ -23,7 +23,7 @@ const deleteManyTokens = async (req, res) => {
 			.status(200)
 			.json({ message: "Successfully deleted the authorization keys." });
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

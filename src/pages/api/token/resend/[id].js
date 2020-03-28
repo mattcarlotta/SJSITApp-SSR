@@ -45,7 +45,7 @@ const resendToken = async (req, res) => {
 			message: `An authorization key will be resent to ${authorizedEmail} shortly.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

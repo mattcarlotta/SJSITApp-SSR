@@ -38,7 +38,7 @@ const createMail = async (req, res) => {
 			message: `An email has been created and will be sent ${sentDateMessage}!`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

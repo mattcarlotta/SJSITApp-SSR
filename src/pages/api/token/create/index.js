@@ -43,7 +43,7 @@ const createToken = async (req, res) => {
 			message: `Succesfully created and sent an authorization key to ${authorizedEmail}.`,
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 

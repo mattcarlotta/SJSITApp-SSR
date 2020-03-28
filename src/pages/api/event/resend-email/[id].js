@@ -27,7 +27,7 @@ const resendEventEmail = async (req, res) => {
 				"Email notifications for that event will be resent within 24 hours of the event date.",
 		});
 	} catch (err) {
-		return sendError(err, 400, res);
+		sendError(err, 400, res);
 	}
 };
 
