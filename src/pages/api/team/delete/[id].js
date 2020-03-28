@@ -12,7 +12,7 @@ import { missingTeamId, unableToDeleteTeam } from "~messages/errors";
  */
 const deleteTeam = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingTeamId;
 
 		const existingTeam = await Team.findOne({ _id });

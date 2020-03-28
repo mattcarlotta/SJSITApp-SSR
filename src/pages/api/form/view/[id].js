@@ -21,7 +21,7 @@ import {
 const viewApForm = async (req, res) => {
 	try {
 		const { id: userId } = req.session.user;
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingFormId;
 
 		const existingForm = await Form.findOne({ _id }, { __v: 0, seasonId: 0 });

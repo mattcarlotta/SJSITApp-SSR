@@ -23,7 +23,7 @@ import {
  */
 const getEventForScheduling = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingEventId;
 
 		const event = await findEventById(_id);

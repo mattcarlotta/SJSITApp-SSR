@@ -13,7 +13,7 @@ import { missingMailId, unableToLocateMail } from "~messages/errors";
  */
 const getMailForViewing = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingMailId;
 
 		const existingEmail = await Mail.findOne({ _id }, { __v: 0 });

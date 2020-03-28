@@ -13,7 +13,7 @@ import { missingFormId, unableToDeleteForm } from "~messages/errors";
  */
 const deleteForm = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingFormId;
 
 		const existingForm = await Form.findOne({ _id });

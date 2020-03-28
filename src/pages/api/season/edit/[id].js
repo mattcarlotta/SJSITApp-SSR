@@ -13,7 +13,7 @@ import { missingSeasonId, unableToLocateSeason } from "~messages/errors";
  */
 const getSeasonForViewing = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingSeasonId;
 
 		const existingSeason = await Season.findOne({ _id });

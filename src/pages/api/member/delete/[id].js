@@ -13,7 +13,7 @@ import { missingMemberId, unableToDeleteMember } from "~messages/errors";
  */
 const deleteMember = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingMemberId;
 
 		const existingUser = await User.findOne({ _id });

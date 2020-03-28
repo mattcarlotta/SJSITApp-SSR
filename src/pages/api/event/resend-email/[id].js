@@ -12,7 +12,7 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
  */
 const resendEventEmail = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingEventId;
 
 		const existingEvent = await findEventById(_id);

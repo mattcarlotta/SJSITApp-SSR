@@ -13,7 +13,7 @@ import { invalidDeleteTokenRequest } from "~messages/errors";
  */
 const deleteToken = async (req, res) => {
 	try {
-		const { id } = req.params;
+		const { id } = req.query;
 		if (!id) throw invalidDeleteTokenRequest;
 
 		const token = await Token.findOne({ _id: id });

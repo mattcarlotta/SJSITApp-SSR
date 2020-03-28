@@ -13,26 +13,19 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 	const { role } = getState().auth;
 	const headers = parseCookie(req);
 
-	// fetch events
-	try {
+	const fetchEvents = async () => {
 		const res = await app.get("dashboard/events/today", headers);
 		const data = parseData(res);
 		dispatch(actions.setEvents(data));
-	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
-	}
+	};
 
-	// fetch AP form
-	try {
+	const fetchAPForm = async () => {
 		const res = await app.get("dashboard/ap-form", headers);
 		const data = parseData(res);
 		dispatch(actions.setAPForm(data));
-	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
-	}
+	};
 
-	// fetch availability
-	try {
+	const fetchAvailability = async () => {
 		if (role !== "employee") {
 			// all member availability
 			const res = await app.get("dashboard/membersavailability", headers);
@@ -44,12 +37,9 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 			const data = parseData(res);
 			dispatch(actions.setAvailability(data));
 		}
-	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
-	}
+	};
 
-	// fetch event distribution chart
-	try {
+	const fetchEventDistribution = async () => {
 		const res = await app.get("dashboard/event-distribution", {
 			...headers,
 			params: {
@@ -59,9 +49,18 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		});
 		const data = parseData(res);
 		dispatch(actions.setEventDistribution(data));
-	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
-	}
+	};
+
+	await Promise.all(
+		[
+			fetchEvents(),
+			fetchAPForm(),
+			fetchAvailability(),
+			fetchEventDistribution(),
+		].map(p =>
+			p.catch(e => dispatchError({ dispatch, message: e.toString() })),
+		),
+	);
 
 	return {};
 };

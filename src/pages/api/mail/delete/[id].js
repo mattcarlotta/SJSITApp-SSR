@@ -13,7 +13,7 @@ import { missingMailId, unableToDeleteMail } from "~messages/errors";
  */
 const deleteMail = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingMailId;
 
 		const existingMail = await Mail.findOne({ _id });

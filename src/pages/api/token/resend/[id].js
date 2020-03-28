@@ -22,7 +22,7 @@ import {
  */
 const resendToken = async (req, res) => {
 	try {
-		const { id: _id } = req.params;
+		const { id: _id } = req.query;
 		if (!_id) throw missingTokenId;
 
 		const existingToken = await Token.findOne({ _id }, { __v: 0, token: 0 });
