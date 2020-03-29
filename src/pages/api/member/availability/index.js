@@ -10,7 +10,7 @@ import { unableToLocateMember } from "~messages/errors";
  * @returns {object} - memberAvailablity
  * @throws {string}
  */
-const getMemberAvailability = async (req, res, resolve) => {
+const getMemberAvailability = async (req, res) => {
 	try {
 		const { id: _id, selectedDate } = req.query;
 

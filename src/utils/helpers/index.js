@@ -515,7 +515,7 @@ const findMemberAvailabilty = async (existingMember, selectedDate, res) => {
 	const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
 	/* instanbul ignore next */
 	if (eventCounts === 0) {
-		res.status(200).send({});
+		return res.status(200).send({});
 	}
 
 	const eventResponses = await Event.aggregate([
