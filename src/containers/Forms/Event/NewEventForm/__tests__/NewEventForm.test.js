@@ -2,7 +2,6 @@ import moment from "moment-timezone";
 import { NewEventForm } from "../index";
 
 const createEvent = jest.fn();
-const initializeNewEvent = jest.fn();
 const push = jest.fn();
 const seasonIds = ["20002001", "20012002", "20022003"];
 
@@ -12,7 +11,6 @@ const newDate = moment("2019-08-11T02:30:30.036+00:00");
 
 const initProps = {
 	createEvent,
-	initializeNewEvent,
 	newEvent: {},
 	push,
 	serverMessage: "",
@@ -26,7 +24,6 @@ describe("New Event Form", () => {
 
 	afterEach(() => {
 		createEvent.mockClear();
-		initializeNewEvent.mockClear();
 	});
 
 	it("renders without errors", () => {
@@ -37,33 +34,21 @@ describe("New Event Form", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
 	});
 
-	it("calls fetchSeasonsIds on mount", () => {
-		expect(initializeNewEvent).toHaveBeenCalledTimes(1);
-	});
-
 	describe("Form Initializied", () => {
 		beforeEach(() => {
 			wrapper.setProps({ newEvent: { seasonIds, teams } });
 		});
 
 		it("initializes the SeasonID field with seasonIds options", () => {
-			expect(
-				wrapper
-					.find("Select")
-					.first()
-					.props().selectOptions,
-			).toEqual(seasonIds);
+			expect(wrapper.find("Select").first().props().selectOptions).toEqual(
+				seasonIds,
+			);
 
 			expect(wrapper.state("isLoading")).toBeFalsy();
 		});
 
 		it("initializes the opponent field with team options", () => {
-			expect(
-				wrapper
-					.find("Select")
-					.at(3)
-					.props().selectOptions,
-			).toEqual(teams);
+			expect(wrapper.find("Select").at(3).props().selectOptions).toEqual(teams);
 
 			expect(wrapper.state("isLoading")).toBeFalsy();
 		});
@@ -71,10 +56,7 @@ describe("New Event Form", () => {
 		it("adds/removes another call time slot", () => {
 			expect(wrapper.find(".ant-row.ant-form-item")).toHaveLength(3);
 
-			wrapper
-				.find("button[type='button']")
-				.at(1)
-				.simulate("click");
+			wrapper.find("button[type='button']").at(1).simulate("click");
 
 			expect(wrapper.find(".ant-row.ant-form-item")).toHaveLength(4);
 
@@ -89,12 +71,7 @@ describe("New Event Form", () => {
 			wrapper.instance().handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("input")
-					.at(1)
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("input").at(1).props().value).toEqual(newValue);
 		});
 
 		it("doesn't submit the form if a field has errors", () => {

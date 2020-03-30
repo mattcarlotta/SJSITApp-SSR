@@ -94,14 +94,6 @@ describe("Events Actions", () => {
 		});
 	});
 
-	it("returns EVENTS_INIT_NEW_EVENT", () => {
-		const value = actions.initializeNewEvent();
-
-		expect(value).toEqual({
-			type: types.EVENTS_INIT_NEW_EVENT,
-		});
-	});
-
 	it("returns EVENTS_RESEND_MAIL", () => {
 		const value = actions.resendMail(eventId);
 

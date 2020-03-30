@@ -1,10 +1,9 @@
 import Router from "next/router";
-import { all, put, call, select, takeLatest } from "redux-saga/effects";
+import { all, put, call, takeLatest } from "redux-saga/effects";
 import { app } from "~utils";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Events";
 import { parseData, parseMessage } from "~utils/parseResponse";
-import { selectQuery } from "~utils/selectors";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -55,7 +54,7 @@ export function* createEvent({ props }) {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* deleteEvent({ eventId }) {
+export function* deleteEvent({ eventId, query }) {
 	try {
 		yield put(resetServerMessage());
 
@@ -69,7 +68,7 @@ export function* deleteEvent({ eventId }) {
 		);
 		yield call(toast, { type: "success", message });
 
-		yield put(actions.fetchEvents());
+		yield put(actions.fetchEvents(query));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -82,6 +81,7 @@ export function* deleteEvent({ eventId }) {
  * @generator
  * @function deleteManyEvents
  * @param {object} ids
+ * @param {string} query
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
  * @yields {action} - A redux action to display a server message by type.
@@ -89,7 +89,7 @@ export function* deleteEvent({ eventId }) {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* deleteManyEvents({ ids }) {
+export function* deleteManyEvents({ ids, query }) {
 	try {
 		yield put(resetServerMessage());
 
@@ -103,7 +103,7 @@ export function* deleteManyEvents({ ids }) {
 		);
 		yield call(toast, { type: "success", message });
 
-		yield put(actions.fetchEvents());
+		yield put(actions.fetchEvents(query));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -199,11 +199,9 @@ export function* fetchEventForScheduling({ eventId }) {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* fetchEvents() {
+export function* fetchEvents({ query }) {
 	try {
-		const query = yield select(selectQuery);
-
-		const res = yield call(app.get, `events/all${query}`);
+		const res = yield call(app.get, `events/all?${query}`);
 		const data = yield call(parseData, res);
 
 		yield put(actions.setEvents(data));
@@ -238,42 +236,6 @@ export function* fetchScheduleEvents({ params }) {
 }
 
 /**
- * Attempts to initialize an event form with season and team data.
- *
- * @generator
- * @function initializeNewEvent
- * @yields {action} - A redux action to reset server messages.
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {object} - A response from a call to the API (team names).
- * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set event form data to redux state.
- * @throws {action} - A redux action to display a server message by type.
- */
-
-export function* initializeNewEvent() {
-	try {
-		yield put(resetServerMessage());
-
-		let res = yield call(app.get, "seasons/all/ids");
-		const seasons = yield call(parseData, res);
-
-		res = yield call(app.get, "teams/all/names");
-		const teams = yield call(parseData, res);
-
-		yield put(
-			actions.setNewEvent({
-				seasonIds: seasons.seasonIds,
-				teams: teams.names,
-			}),
-		);
-	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
  * Attempts to resend form emails.
  *
  * @generator
@@ -286,7 +248,7 @@ export function* initializeNewEvent() {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* resendEventEmails({ eventId }) {
+export function* resendEventEmails({ eventId, query }) {
 	try {
 		yield put(resetServerMessage());
 
@@ -300,7 +262,7 @@ export function* resendEventEmails({ eventId }) {
 		);
 		yield call(toast, { type: "info", message });
 
-		yield put(actions.fetchEvents());
+		yield put(actions.fetchEvents(query));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -392,7 +354,6 @@ export default function* eventsSagas() {
 		takeLatest(types.EVENTS_FETCH, fetchEvents),
 		takeLatest(types.EVENTS_FETCH_SCHEDULE, fetchEventForScheduling),
 		takeLatest(types.EVENTS_FETCH_SCHEDULE_EVENTS, fetchScheduleEvents),
-		takeLatest(types.EVENTS_INIT_NEW_EVENT, initializeNewEvent),
 		takeLatest(types.EVENTS_RESEND_MAIL, resendEventEmails),
 		takeLatest(types.EVENTS_UPDATE, updateEvent),
 		takeLatest(types.EVENTS_UPDATE_SCHEDULE, updateEventSchedule),

@@ -15,7 +15,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { createEvent, initializeNewEvent } from "~actions/Events";
+import { createEvent } from "~actions/Events";
 import updateFormFields from "./UpdateFormFields";
 import fields from "./Fields";
 
@@ -44,10 +44,6 @@ export class NewEventForm extends Component {
 		if (serverMessage) return { isSubmitting: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		this.props.initializeNewEvent();
 	};
 
 	handleAddField = () => {
@@ -146,7 +142,6 @@ NewEventForm.propTypes = {
 		seasonIds: PropTypes.arrayOf(PropTypes.string),
 		teams: PropTypes.arrayOf(PropTypes.string),
 	}),
-	initializeNewEvent: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 };
 
@@ -157,7 +152,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	createEvent,
-	initializeNewEvent,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewEventForm);

@@ -15,7 +15,7 @@ const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
 const format = "MM-DD-YYYY";
 
-const EventFilters = ({ clearFilters, queries, push, teams, updateQuery }) => {
+const EventFilters = ({ clearFilters, queries, teams, updateQuery }) => {
 	const startDate = queries.startDate
 		? moment(queries.startDate, format)
 		: null;
@@ -163,7 +163,6 @@ EventFilters.propTypes = {
 		team: PropTypes.string,
 		type: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	updateQuery: PropTypes.func.isRequired,
 	teams: PropTypes.arrayOf(PropTypes.string),
 };

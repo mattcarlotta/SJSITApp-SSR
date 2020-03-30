@@ -15,17 +15,10 @@ export const stringifyQuery = query => qs.stringify(query, { skipNulls: true });
  * @function parseQuery
  * @returns {object} - A redux action to display a server message by type.
  */
-export const parseQuery = query => {
-	const queries = qs.parse(query, {
-		ignoreQueryPrefix: true,
-	});
-
-	/* istanbul ignore next */
-	return {
-		...queries,
-		page: parseInt(queries.page || 1, 10),
-	};
-};
+export const parseQuery = query => ({
+	...query,
+	page: parseInt(query.page || 1, 10),
+});
 
 /**
  * Utilizes the functions above to parse and strinify a query.

@@ -15,9 +15,9 @@ class CustomTable extends Component {
 		selectedRowKeys: [],
 	};
 
-	componentDidMount = () => {
-		this.props.fetchData();
-	};
+	// componentDidMount = () => {
+	// 	this.props.fetchData();
+	// };
 
 	shouldComponentUpdate = (nextProps, nextState) =>
 		nextProps.isLoading !== this.props.isLoading ||
@@ -28,7 +28,8 @@ class CustomTable extends Component {
 	componentDidUpdate = prevProps => {
 		const { data, isLoading, queryString, totalDocs } = this.props;
 
-		if (queryString !== prevProps.queryString) this.props.fetchData();
+		if (queryString !== prevProps.queryString)
+			this.props.fetchData(queryString);
 
 		if (
 			isEmpty(data) &&
@@ -39,11 +40,12 @@ class CustomTable extends Component {
 			this.props.updateQuery({ page: Math.ceil(totalDocs / 10) });
 	};
 
-	handleClickAction = (action, record) => action(record._id);
+	handleClickAction = (action, record) =>
+		action(record._id, this.props.queryString);
 
 	handleDeleteRecords = selectedRowKeys => {
 		this.setState({ selectedRowKeys: [] }, () => {
-			this.props.deleteManyRecords(selectedRowKeys);
+			this.props.deleteManyRecords(selectedRowKeys, this.props.queryString);
 		});
 	};
 
@@ -137,7 +139,6 @@ CustomTable.propTypes = {
 	deleteManyRecords: PropTypes.func.isRequired,
 	editLocation: PropTypes.string,
 	fetchData: PropTypes.func.isRequired,
-	push: PropTypes.func.isRequired,
 	sendMail: PropTypes.func,
 	totalDocs: PropTypes.number,
 	viewLocation: PropTypes.string,

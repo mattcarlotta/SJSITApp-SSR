@@ -1,6 +1,5 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
 import { Card } from "antd";
 import { MdEventNote } from "react-icons/md";
@@ -13,66 +12,55 @@ import {
 	fetchEvents,
 	resendMail,
 } from "~actions/Events";
-import { fetchTeamNames } from "~actions/Teams";
 import Filters from "./Filters";
 import columns from "./Columns";
 
 const title = "Events";
 
-export class ViewEvents extends PureComponent {
-	componentDidMount = () => {
-		if (isEmpty(this.props.teams)) this.props.fetchTeamNames();
-	};
-
-	render = () => {
-		const {
-			deleteEvent,
-			deleteManyEvents,
-			fetchEvents,
-			resendMail,
-			...rest
-		} = this.props;
-
-		return (
-			<>
-				<Head title={title} />
-				<Card
-					title={
-						<>
-							<MdEventNote
-								style={{
-									verticalAlign: "middle",
-									marginRight: 10,
-									fontSize: 22,
-								}}
-							/>
-							<span css="vertical-align: middle;">{title}</span>
-						</>
-					}
-				>
-					<QueryHandler {...this.props}>
-						{props => (
-							<>
-								<Filters {...props} {...rest} />
-								<Table
-									{...props}
-									{...rest}
-									columns={columns}
-									deleteAction={deleteEvent}
-									deleteManyRecords={deleteManyEvents}
-									fetchData={fetchEvents}
-									editLocation="events"
-									assignLocation="events"
-									sendMail={resendMail}
-								/>
-							</>
-						)}
-					</QueryHandler>
-				</Card>
-			</>
-		);
-	};
-}
+export const ViewEvents = ({
+	deleteEvent,
+	deleteManyEvents,
+	fetchEvents,
+	resendMail,
+	...rest
+}) => (
+	<>
+		<Head title={title} />
+		<Card
+			title={
+				<>
+					<MdEventNote
+						style={{
+							verticalAlign: "middle",
+							marginRight: 10,
+							fontSize: 22,
+						}}
+					/>
+					<span css="vertical-align: middle;">{title}</span>
+				</>
+			}
+		>
+			<QueryHandler>
+				{props => (
+					<>
+						<Filters {...props} {...rest} />
+						<Table
+							{...props}
+							{...rest}
+							columns={columns}
+							deleteAction={deleteEvent}
+							deleteManyRecords={deleteManyEvents}
+							fetchData={fetchEvents}
+							editLocation="events"
+							assignLocation="events"
+							sendMail={resendMail}
+						/>
+					</>
+				)}
+			</QueryHandler>
+		</Card>
+	</>
+);
 
 ViewEvents.propTypes = {
 	deleteEvent: PropTypes.func.isRequired,
@@ -107,28 +95,22 @@ ViewEvents.propTypes = {
 		}),
 	),
 	isLoading: PropTypes.bool.isRequired,
-	fetchTeamNames: PropTypes.func.isRequired,
-	location: PropTypes.shape({
-		pathname: PropTypes.string,
-		search: PropTypes.string,
-	}),
 	resendMail: PropTypes.func.isRequired,
 	teams: PropTypes.arrayOf(PropTypes.string),
 	totalDocs: PropTypes.number,
 };
 
-const mapStateToProps = state => ({
-	data: state.events.data,
-	isLoading: state.events.isLoading,
-	totalDocs: state.events.totalDocs,
-	teams: state.teams.data,
+const mapStateToProps = ({ events, teams }) => ({
+	data: events.data,
+	isLoading: events.isLoading,
+	totalDocs: events.totalDocs,
+	teams: teams.data,
 });
 
 const mapDispatchToProps = {
 	deleteEvent,
 	deleteManyEvents,
 	fetchEvents,
-	fetchTeamNames,
 	resendMail,
 };
 

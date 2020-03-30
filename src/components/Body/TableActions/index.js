@@ -27,7 +27,6 @@ const TableActions = ({
 	editLocation,
 	handleClickAction,
 	handleDeleteRecords,
-	push,
 	record,
 	selectedRowKeys,
 	sendMail,
