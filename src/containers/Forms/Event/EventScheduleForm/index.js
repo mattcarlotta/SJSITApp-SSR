@@ -4,7 +4,7 @@ import isEmpty from "lodash.isempty";
 import { Card } from "antd";
 import { connect } from "react-redux";
 import Router from "next/router";
-import { FaChartBar, FaClipboardCheck } from "react-icons/fa";
+import { FaClipboardCheck, FaChartBar } from "react-icons/fa";
 import Button from "~components/Body/Button";
 import BackButton from "~components/Body/BackButton";
 import Center from "~components/Body/Center";
@@ -13,7 +13,7 @@ import Modal from "~components/Body/Modal";
 import SubmitButton from "~components/Body/SubmitButton";
 import FormTitle from "~components/Forms/FormTitle";
 import LoadingScheduleForm from "~components/Forms/LoadingScheduleForm";
-import { fetchEventForScheduling, updateEventSchedule } from "~actions/Events";
+import { updateEventSchedule } from "~actions/Events";
 import Schedule from "./Schedule";
 
 const title = "Event Scheduling";
@@ -40,11 +40,6 @@ export class EventScheduleForm extends Component {
 		if (serverMessage) return { isSubmitting: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		const { id } = this.props.match.params;
-		this.props.fetchEventForScheduling(id);
 	};
 
 	onDragEnd = ({ source, destination, draggableId }) => {
@@ -174,14 +169,14 @@ export class EventScheduleForm extends Component {
 							Monthly Event Distribution
 						</Button>
 						<Schedule {...this.state} handleDrag={this.onDragEnd} />
+						<SubmitButton
+							disabled={this.state.isLoading}
+							title="Submit Schedule"
+							style={{ maxWidth: 300, margin: "0 auto" }}
+							isSubmitting={this.state.isSubmitting}
+						/>
 					</>
 				)}
-				<SubmitButton
-					disabled={this.state.isLoading}
-					title="Submit Schedule"
-					style={{ maxWidth: 300, margin: "0 auto" }}
-					isSubmitting={this.state.isSubmitting}
-				/>
 			</form>
 			{this.state.isVisible && (
 				<Modal maxWidth="100%" onClick={this.handleToggleModal}>
@@ -195,6 +190,10 @@ export class EventScheduleForm extends Component {
 		</Card>
 	);
 }
+
+/*
+
+				*/
 
 EventScheduleForm.propTypes = {
 	members: PropTypes.arrayOf(
@@ -240,12 +239,6 @@ EventScheduleForm.propTypes = {
 			}),
 		),
 	}),
-	fetchEventForScheduling: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}).isRequired,
 	serverMessage: PropTypes.string,
 	updateEventSchedule: PropTypes.func.isRequired,
 };
@@ -257,7 +250,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	fetchEventForScheduling,
 	updateEventSchedule,
 };
 

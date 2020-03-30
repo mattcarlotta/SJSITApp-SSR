@@ -1,6 +1,6 @@
 import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
-import { requireStaffRole } from "~services/strategies";
+// import { requireStaffRole } from "~services/strategies";
 import { Event } from "~models";
 import {
 	createMemberEventCount,
@@ -20,8 +20,8 @@ import { missingEventId, unableToLocateEvent } from "~messages/errors";
  */
 const getMemberEventCounts = async (req, res) => {
 	try {
-		const { eventId } = req.query;
-		if (!eventId) throw missingEventId;
+		const { id } = req.query;
+		if (!id) throw missingEventId;
 
 		const members = await getUsers({
 			match: {
@@ -36,7 +36,7 @@ const getMemberEventCounts = async (req, res) => {
 		/* istanbul ignore next */
 		if (isEmpty(members)) return res.status(200).json({ members: [] });
 
-		const existingEvent = await findEventById(eventId);
+		const existingEvent = await findEventById(id);
 		if (!existingEvent) throw unableToLocateEvent;
 
 		const { startOfMonth, endOfMonth } = getMonthDateRange(
@@ -79,4 +79,4 @@ const getMemberEventCounts = async (req, res) => {
 	}
 };
 
-export default withMiddleware(requireStaffRole(getMemberEventCounts));
+export default withMiddleware(getMemberEventCounts);

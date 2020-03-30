@@ -4,4 +4,4 @@
  * @function selectQuery
  * @returns {string}
  */
-export const selectQuery = state => state.router.location.search;
+export const selectQuery = () => window.location.search;

@@ -16,12 +16,14 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 	const fetchEvents = async () => {
 		const res = await app.get("dashboard/events/today", headers);
 		const data = parseData(res);
+
 		dispatch(actions.setEvents(data));
 	};
 
 	const fetchAPForm = async () => {
 		const res = await app.get("dashboard/ap-form", headers);
 		const data = parseData(res);
+
 		dispatch(actions.setAPForm(data));
 	};
 
@@ -30,11 +32,13 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 			// all member availability
 			const res = await app.get("dashboard/membersavailability", headers);
 			const data = parseData(res);
+
 			dispatch(actions.setMembersAvailability(data));
 		} else {
 			// signed in user availability
 			const res = await app.get("dashboard/availability", headers);
 			const data = parseData(res);
+
 			dispatch(actions.setAvailability(data));
 		}
 	};
@@ -48,6 +52,7 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 			},
 		});
 		const data = parseData(res);
+
 		dispatch(actions.setEventDistribution(data));
 	};
 

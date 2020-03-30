@@ -55,15 +55,6 @@ describe("Events Actions", () => {
 		});
 	});
 
-	it("returns EVENTS_FETCH_SCHEDULE", () => {
-		const value = actions.fetchEventForScheduling(eventId);
-
-		expect(value).toEqual({
-			type: types.EVENTS_FETCH_SCHEDULE,
-			eventId,
-		});
-	});
-
 	it("returns EVENTS_FETCH", () => {
 		const value = actions.fetchEvents();
 

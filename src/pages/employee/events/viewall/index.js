@@ -4,7 +4,7 @@ import ViewEvents from "~containers/Body/ViewEvents";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import { setEvents } from "~actions/Events";
+import { resetEvents, setEvents } from "~actions/Events";
 import { setTeamNames } from "~actions/Teams";
 import dispatchError from "~utils/dispatchError";
 import { stringifyQuery } from "~utils/queryHelpers";
@@ -30,6 +30,7 @@ ViewEventsPage.getInitialProps = async ({
 	};
 
 	const fetchAllEvents = async () => {
+		dispatch(resetEvents());
 		const queries = stringifyQuery(!page ? { page: 1, ...query } : query);
 		const res = await app.get(`events/all?${queries}`, headers);
 		const data = parseData(res);

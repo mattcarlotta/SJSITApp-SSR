@@ -15,7 +15,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchEvent, updateEvent } from "~actions/Events";
+import { updateEvent } from "~actions/Events";
 import fields from "./Fields";
 import updateFormFields from "./UpdateFormFields";
 
@@ -37,11 +37,6 @@ export class EditEventForm extends Component {
 		serverMessage ? { isSubmitting: false } : null;
 
 	componentDidMount = () => {
-		const { id } = this.props.match.params;
-		this.props.fetchEvent(id);
-	};
-
-	componentDidUpdate = () => {
 		if (this.state.isLoading && !isEmpty(this.props.editEvent)) {
 			this.setState(prevState => ({
 				...prevState,
@@ -171,23 +166,16 @@ EditEventForm.propTypes = {
 		eventDate: PropTypes.string,
 		notes: PropTypes.string,
 	}).isRequired,
-	fetchEvent: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}).isRequired,
 	serverMessage: PropTypes.string,
 	updateEvent: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-	editEvent: state.events.editEvent,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ events, server }) => ({
+	editEvent: events.editEvent,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
-	fetchEvent,
 	updateEvent,
 };
 

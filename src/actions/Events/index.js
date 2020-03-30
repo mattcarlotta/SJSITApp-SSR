@@ -18,13 +18,11 @@ export const createEvent = props => ({
  *
  * @function deleteEvent
  * @param {string} eventId
- * @param {string} query
  * @returns {object}
  */
-export const deleteEvent = (eventId, query) => ({
+export const deleteEvent = eventId => ({
 	type: types.EVENTS_DELETE,
 	eventId,
-	query,
 });
 
 /**
@@ -32,13 +30,11 @@ export const deleteEvent = (eventId, query) => ({
  *
  * @function deleteManyEvents
  * @param {array} ids
- * @param {string} query
  * @returns {object}
  */
-export const deleteManyEvents = (ids, query) => ({
+export const deleteManyEvents = ids => ({
 	type: types.EVENTS_DELETE_MANY,
 	ids,
-	query,
 });
 
 /**
@@ -54,22 +50,10 @@ export const fetchEvent = eventId => ({
 });
 
 /**
- * Fetches a single event for scheduling.
- *
- * @function fetchEventForSchedudling
- * @param {string} eventId
- * @returns {object}
- */
-export const fetchEventForScheduling = eventId => ({
-	type: types.EVENTS_FETCH_SCHEDULE,
-	eventId,
-});
-
-/**
  * Fetches all events.
  *
  * @function fetchEvents
- * @param {string} query
+ * @param {object} query
  * @returns {object}
  */
 export const fetchEvents = query => ({
@@ -90,17 +74,25 @@ export const fetchScheduleEvents = params => ({
 });
 
 /**
+ * Reset events state.
+ *
+ * @function resetEvents
+ * @returns {object}
+ */
+export const resetEvents = () => ({
+	type: types.EVENTS_RESET,
+});
+
+/**
  * Resend an event's email reminders.
  *
  * @function resendMail
  * @param {string} eventId
- * @param {string} query
  * @returns {object}
  */
-export const resendMail = (eventId, query) => ({
+export const resendMail = eventId => ({
 	type: types.EVENTS_RESEND_MAIL,
 	eventId,
-	query,
 });
 
 /**

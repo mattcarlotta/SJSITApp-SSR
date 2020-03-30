@@ -21,7 +21,7 @@ const eventReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
 		case types.EVENTS_EDIT:
 		case types.EVENTS_FETCH:
-		case types.EVENTS_FETCH_SCHEDULE:
+		case types.EVENTS_RESET:
 		case types.EVENTS_FETCH_SCHEDULE_EVENTS: {
 			return initialState;
 		}

@@ -15,10 +15,6 @@ class CustomTable extends Component {
 		selectedRowKeys: [],
 	};
 
-	// componentDidMount = () => {
-	// 	this.props.fetchData();
-	// };
-
 	shouldComponentUpdate = (nextProps, nextState) =>
 		nextProps.isLoading !== this.props.isLoading ||
 		nextProps.queries !== this.props.queries ||
@@ -40,12 +36,11 @@ class CustomTable extends Component {
 			this.props.updateQuery({ page: Math.ceil(totalDocs / 10) });
 	};
 
-	handleClickAction = (action, record) =>
-		action(record._id, this.props.queryString);
+	handleClickAction = (action, record) => action(record._id);
 
 	handleDeleteRecords = selectedRowKeys => {
 		this.setState({ selectedRowKeys: [] }, () => {
-			this.props.deleteManyRecords(selectedRowKeys, this.props.queryString);
+			this.props.deleteManyRecords(selectedRowKeys);
 		});
 	};
 

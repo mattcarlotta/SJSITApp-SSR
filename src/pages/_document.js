@@ -1,8 +1,10 @@
 import Document from "next/document";
 import { ServerStyleSheet } from "styled-components";
+import { resetServerContext } from "react-beautiful-dnd";
 
 class CustomDocument extends Document {
 	static async getInitialProps(ctx) {
+		resetServerContext();
 		const sheet = new ServerStyleSheet();
 		const originalRenderPage = ctx.renderPage;
 
