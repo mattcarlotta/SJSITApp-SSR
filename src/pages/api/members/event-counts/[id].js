@@ -1,6 +1,6 @@
 import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
-// import { requireStaffRole } from "~services/strategies";
+import { requireStaffRole } from "~services/strategies";
 import { Event } from "~models";
 import {
 	createMemberEventCount,
@@ -79,4 +79,4 @@ const getMemberEventCounts = async (req, res) => {
 	}
 };
 
-export default withMiddleware(getMemberEventCounts);
+export default withMiddleware(requireStaffRole(getMemberEventCounts));
