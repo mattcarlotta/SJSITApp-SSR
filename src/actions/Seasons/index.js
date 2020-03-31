@@ -38,18 +38,6 @@ export const deleteManySeasons = ids => ({
 });
 
 /**
- * Fetches a single season.
- *
- * @function fetchSeason
- * @param {string} seasonId
- * @returns {object}
- */
-export const fetchSeason = seasonId => ({
-	type: types.SEASONS_EDIT,
-	seasonId,
-});
-
-/**
  * Fetches all seasons.
  *
  * @function fetchSeasons

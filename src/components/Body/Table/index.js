@@ -15,6 +15,10 @@ class CustomTable extends Component {
 		selectedRowKeys: [],
 	};
 
+	componentDidMount = () => {
+		this.handlePageOverflowRedirect();
+	};
+
 	shouldComponentUpdate = (nextProps, nextState) =>
 		nextProps.isLoading !== this.props.isLoading ||
 		nextProps.queries !== this.props.queries ||
@@ -22,18 +26,15 @@ class CustomTable extends Component {
 		nextState.selectedRowKeys !== this.state.selectedRowKeys;
 
 	componentDidUpdate = prevProps => {
-		const { data, isLoading, queryString, totalDocs } = this.props;
+		const { isLoading } = this.props;
 
-		if (queryString !== prevProps.queryString)
-			this.props.fetchData(queryString);
+		if (prevProps.isLoading !== isLoading && !isLoading)
+			this.handlePageOverflowRedirect();
+	};
 
-		if (
-			isEmpty(data) &&
-			totalDocs > 0 &&
-			prevProps.isLoading !== isLoading &&
-			!isLoading
-		)
-			this.props.updateQuery({ page: Math.ceil(totalDocs / 10) });
+	handlePageOverflowRedirect = () => {
+		if (isEmpty(this.props.data) && this.props.totalDocs > 0)
+			this.props.updateQuery({ page: Math.ceil(this.props.totalDocs / 10) });
 	};
 
 	handleClickAction = (action, record) => action(record._id);

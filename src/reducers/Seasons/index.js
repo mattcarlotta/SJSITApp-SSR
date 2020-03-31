@@ -16,8 +16,8 @@ export const initialState = {
  */
 const seasonReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
-		case types.SEASONS_EDIT:
 		case types.SEASONS_FETCH:
+		case types.SEASONS_RESET:
 		case types.SEASONS_FETCH_IDS: {
 			return initialState;
 		}

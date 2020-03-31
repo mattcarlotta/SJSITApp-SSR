@@ -109,8 +109,8 @@ NewSeasonForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-	serverMessage: state.server.message,
+const mapStateToProps = ({ server }) => ({
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {

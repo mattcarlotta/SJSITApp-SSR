@@ -22,6 +22,19 @@ describe("Season Reducer", () => {
 		);
 	});
 
+	it("resets to initialState", () => {
+		let state = seasonReducer(undefined, {
+			type: types.SEASONS_SET,
+			payload: seasonsData,
+		});
+
+		state = seasonReducer(state, {
+			type: types.SEASONS_RESET,
+		});
+
+		expect(state).toEqual(initialState);
+	});
+
 	it("sets seasons data", () => {
 		const state = seasonReducer(undefined, {
 			type: types.SEASONS_SET,
@@ -45,19 +58,6 @@ describe("Season Reducer", () => {
 
 		state = seasonReducer(state, {
 			type: types.SEASONS_FETCH,
-		});
-
-		expect(state).toEqual(initialState);
-	});
-
-	it("when fetching a season for editing, resets to initialState", () => {
-		let state = seasonReducer(undefined, {
-			type: types.SEASONS_SET,
-			payload: seasonsData,
-		});
-
-		state = seasonReducer(state, {
-			type: types.SEASONS_EDIT,
 		});
 
 		expect(state).toEqual(initialState);

@@ -48,17 +48,6 @@ describe("Season Actions", () => {
 		});
 	});
 
-	it("returns SEASONS_EDIT", () => {
-		const seasonId = "20052006";
-
-		const value = actions.fetchSeason(seasonId);
-
-		expect(value).toEqual({
-			type: types.SEASONS_EDIT,
-			seasonId,
-		});
-	});
-
 	it("returns SEASONS_FETCH", () => {
 		const value = actions.fetchSeasons();
 
