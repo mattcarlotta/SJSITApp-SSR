@@ -15,7 +15,7 @@ export const initialState = {
  */
 const mailReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
-		case types.MAIL_EDIT:
+		case types.MAIL_RESET:
 		case types.MAIL_FETCH: {
 			return initialState;
 		}

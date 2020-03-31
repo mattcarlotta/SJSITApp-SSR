@@ -62,15 +62,6 @@ describe("Mail Actions", () => {
 		});
 	});
 
-	it("returns MAIL_EDIT with mailId", () => {
-		const value = actions.fetchMail(mailId);
-
-		expect(value).toEqual({
-			type: types.MAIL_EDIT,
-			mailId,
-		});
-	});
-
 	it("returns MAIL_FETCH", () => {
 		const value = actions.fetchMails();
 

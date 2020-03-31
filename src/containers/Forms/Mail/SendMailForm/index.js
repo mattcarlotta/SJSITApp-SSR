@@ -15,7 +15,6 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchMemberNames } from "~actions/Members";
 import { createMail } from "~actions/Mail";
 import updateFormFields from "./UpdateFormFields";
 import fields from "./Fields";
@@ -46,10 +45,6 @@ export class SendMailForm extends Component {
 		if (serverMessage) return { isSubmitting: false, showPreview: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		this.props.fetchMemberNames();
 	};
 
 	handleChange = ({ target: { name, value } }) => {
@@ -125,7 +120,6 @@ export class SendMailForm extends Component {
 
 SendMailForm.propTypes = {
 	createMail: PropTypes.func.isRequired,
-	fetchMemberNames: PropTypes.func.isRequired,
 	memberNames: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string,
@@ -135,14 +129,13 @@ SendMailForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-	memberNames: state.members.names,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ members, server }) => ({
+	memberNames: members.names,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
 	createMail,
-	fetchMemberNames,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendMailForm);

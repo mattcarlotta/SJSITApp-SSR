@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
 import { connect } from "react-redux";
-import { goBack } from "next/router";
+import Router, { withRouter } from "next/router";
 import { FaEdit } from "react-icons/fa";
 import Button from "~components/Body/Button";
 import BackButton from "~components/Body/BackButton";
@@ -15,7 +15,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchMail, updateMail } from "~actions/Mail";
+import { updateMail } from "~actions/Mail";
 import updateFormFields from "./UpdateFormFields";
 import fields from "./Fields";
 
@@ -30,7 +30,7 @@ export class EditMailForm extends Component {
 	constructor(props) {
 		super(props);
 
-		const { id } = this.props.match.params;
+		const { id } = props.router.query;
 
 		this.state = {
 			id,
@@ -52,10 +52,6 @@ export class EditMailForm extends Component {
 		if (serverMessage) return { isSubmitting: false, showPreview: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		this.props.fetchMail(this.state.id);
 	};
 
 	handleChange = ({ target: { name, value } }) => {
@@ -86,7 +82,7 @@ export class EditMailForm extends Component {
 
 	render = () => (
 		<Card
-			extra={<BackButton push={this.props.goBack} />}
+			extra={<BackButton push={Router.back} />}
 			title={
 				<>
 					<FaEdit style={iconStyle} />
@@ -129,7 +125,6 @@ export class EditMailForm extends Component {
 }
 
 EditMailForm.propTypes = {
-	fetchMail: PropTypes.func.isRequired,
 	editMail: PropTypes.shape({
 		dataSource: PropTypes.arrayOf(
 			PropTypes.shape({
@@ -141,12 +136,11 @@ EditMailForm.propTypes = {
 		message: PropTypes.string,
 		sendTo: PropTypes.arrayOf(PropTypes.string),
 	}),
-	match: PropTypes.shape({
-		params: PropTypes.shape({
+	router: PropTypes.shape({
+		query: PropTypes.shape({
 			id: PropTypes.string,
 		}),
 	}).isRequired,
-	goBack: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 	updateMail: PropTypes.func.isRequired,
 };
@@ -157,9 +151,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	fetchMail,
-	goBack,
 	updateMail,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditMailForm);
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(EditMailForm),
+);

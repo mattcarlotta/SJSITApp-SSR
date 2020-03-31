@@ -149,43 +149,6 @@ export function* deleteManyMails({ ids }) {
 }
 
 /**
- * Attempts to get a single mail for editing.
- *
- * @generator
- * @function fetchMail
- * @yields {action} - A redux action to reset server messages.
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set mail data to redux state.
- * @throws {actions} - A redux action to go back to a previous URL and to display a server message by type.
- */
-
-export function* fetchMail({ mailId }) {
-	try {
-		yield put(resetServerMessage());
-
-		let res = yield call(app.get, "members/names");
-		const membersNamesData = yield call(parseData, res);
-
-		res = yield call(app.get, `mail/edit/${mailId}`);
-		const emailData = yield call(parseData, res);
-
-		yield put(
-			actions.setMailToEdit({
-				...emailData.email,
-				dataSource: membersNamesData.members,
-			}),
-		);
-	} catch (e) {
-		yield call(Router.back);
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
  * Attempts to get all mails.
  *
  * @generator
@@ -294,7 +257,6 @@ export default function* mailsSagas() {
 		takeLatest(types.MAIL_CREATE, createMail),
 		takeLatest(types.MAIL_DELETE, deleteMail),
 		takeLatest(types.MAIL_DELETE_MANY, deleteManyMails),
-		takeLatest(types.MAIL_EDIT, fetchMail),
 		takeLatest(types.MAIL_FETCH, fetchMails),
 		takeLatest(types.MAIL_RESEND, resendMail),
 		takeLatest(types.MAIL_UPDATE_EDIT, updateMail),

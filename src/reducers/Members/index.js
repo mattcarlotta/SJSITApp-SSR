@@ -22,7 +22,7 @@ const memberReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
 		case types.MEMBERS_REVIEW:
 		case types.MEMBERS_FETCH:
-		case types.MEMBERS_FETCH_NAMES:
+		case types.MEMBERS_RESET_TOKENS:
 		case types.MEMBERS_FETCH_TOKEN:
 		case types.MEMBERS_FETCH_TOKENS: {
 			return initialState;

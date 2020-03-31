@@ -48,7 +48,7 @@ describe("Mail Reducer", () => {
 		});
 
 		state = mailReducer(state, {
-			type: types.MAIL_EDIT,
+			type: types.MAIL_RESET,
 		});
 
 		expect(state).toEqual(initialState);

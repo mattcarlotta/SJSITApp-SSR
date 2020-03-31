@@ -12,7 +12,7 @@ import FlexStart from "~components/Body/FlexStart";
 
 const Option = Select.Option;
 
-const MembersFilters = ({ clearFilters, queries, push, updateQuery }) => (
+const MembersFilters = ({ clearFilters, queries, updateQuery }) => (
 	<CollapseFlex>
 		<FlexStart>
 			<div css="margin-right: 5px;font-size: 15px; width: 65px;">
@@ -124,7 +124,6 @@ MembersFilters.propTypes = {
 		role: PropTypes.string,
 		status: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	updateQuery: PropTypes.func.isRequired,
 };
 

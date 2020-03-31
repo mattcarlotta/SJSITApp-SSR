@@ -13,7 +13,7 @@ import FlexStart from "~components/Body/FlexStart";
 const Option = Select.Option;
 const format = "MM-DD-YYYY";
 
-const MailFilters = ({ clearFilters, queries, push, updateQuery }) => {
+const MailFilters = ({ clearFilters, queries, updateQuery }) => {
 	const sendDate = queries.sendDate ? moment(queries.sendDate, format) : null;
 
 	return (
@@ -90,7 +90,6 @@ MailFilters.propTypes = {
 		sendDate: PropTypes.string,
 		status: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	updateQuery: PropTypes.func.isRequired,
 };
 

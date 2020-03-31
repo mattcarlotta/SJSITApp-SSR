@@ -1,9 +1,7 @@
 import { EditMailForm } from "../index";
 
 const id = "0123456789";
-const fetchMail = jest.fn();
 const updateMail = jest.fn();
-const goBack = jest.fn();
 
 const dataSource = [
 	{
@@ -26,7 +24,6 @@ const editMail = {
 };
 
 const initProps = {
-	fetchMail,
 	editMail: {},
 	match: {
 		params: {
@@ -62,7 +59,6 @@ describe("Edit Mail Form", () => {
 	});
 
 	afterEach(() => {
-		fetchMail.mockClear();
 		updateMail.mockClear();
 	});
 
@@ -72,10 +68,6 @@ describe("Edit Mail Form", () => {
 
 	it("shows a LoadingForm when fetching names", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
-	});
-
-	it("calls fetchMemberNames on mount", () => {
-		expect(fetchMail).toHaveBeenCalledWith(id);
 	});
 
 	describe("Form Initialized", () => {
@@ -97,12 +89,7 @@ describe("Edit Mail Form", () => {
 				.handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("input")
-					.at(6)
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("input").at(6).props().value).toEqual(newValue);
 		});
 
 		it("opens and closes a preview email modal", () => {

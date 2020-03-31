@@ -126,14 +126,6 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_FETCH_NAMES", () => {
-		const value = actions.fetchMemberNames();
-
-		expect(value).toEqual({
-			type: types.MEMBERS_FETCH_NAMES,
-		});
-	});
-
 	it("returns MEMBERS_FETCH_SETTINGS", () => {
 		const value = actions.fetchMemberSettings();
 

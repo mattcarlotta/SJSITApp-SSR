@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import { Card } from "antd";
 import { connect } from "react-redux";
-import { goBack } from "next/router";
+import Router from "next/router";
 import { FaEdit } from "react-icons/fa";
 import BackButton from "~components/Body/BackButton";
 import FormContainer from "~components/Body/FormContainer";
@@ -14,7 +14,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchToken, updateMemberToken } from "~actions/Members";
+import { updateMemberToken } from "~actions/Members";
 import fields from "./Fields";
 import updateFormFields from "./UpdateFormFields";
 
@@ -45,11 +45,6 @@ export class EditAuthorizationForm extends Component {
 		return null;
 	};
 
-	componentDidMount = () => {
-		const { id } = this.props.match.params;
-		this.props.fetchToken(id);
-	};
-
 	handleChange = ({ target: { name, value } }) => {
 		this.setState(prevState => ({
 			...prevState,
@@ -77,7 +72,7 @@ export class EditAuthorizationForm extends Component {
 
 	render = () => (
 		<Card
-			extra={<BackButton push={this.props.goBack} />}
+			extra={<BackButton push={Router.back} />}
 			title={
 				<>
 					<FaEdit style={iconStyle} />
@@ -118,25 +113,16 @@ EditAuthorizationForm.propTypes = {
 		authorizedEmail: PropTypes.string,
 		role: PropTypes.string,
 	}),
-	fetchToken: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}).isRequired,
-	goBack: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 	updateMemberToken: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-	editToken: state.members.editToken,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ members, server }) => ({
+	editToken: members.editToken,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
-	fetchToken,
-	goBack,
 	updateMemberToken,
 };
 

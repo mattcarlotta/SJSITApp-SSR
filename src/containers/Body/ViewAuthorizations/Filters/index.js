@@ -12,7 +12,7 @@ import FlexStart from "~components/Body/FlexStart";
 
 const Option = Select.Option;
 
-const AuthorizationFilters = ({ clearFilters, queries, push, updateQuery }) => (
+const AuthorizationFilters = ({ clearFilters, queries, updateQuery }) => (
 	<CollapseFlex>
 		<FlexStart>
 			<div css="margin-right: 5px;font-size: 15px; width: 65px;">
@@ -96,7 +96,6 @@ AuthorizationFilters.propTypes = {
 		email: PropTypes.string,
 		role: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	updateQuery: PropTypes.func.isRequired,
 };
 

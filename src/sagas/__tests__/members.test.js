@@ -333,62 +333,6 @@ describe("Member Sagas", () => {
 		});
 	});
 
-	describe("Fetch Members Names", () => {
-		let data;
-		beforeEach(() => {
-			data = { names: mocks.memberNames };
-		});
-
-		it("logical flow matches pattern for fetch member names requests", () => {
-			const res = { data };
-
-			testSaga(sagas.fetchMemberNames)
-				.next()
-				.put(resetServerMessage())
-				.next()
-				.call(app.get, "members/names")
-				.next(res)
-				.call(parseData, res)
-				.next(res.data)
-				.put(actions.setMemberNames(res.data))
-				.next()
-				.isDone();
-		});
-
-		it("successfully fetches member names for viewing", async () => {
-			mockApp.onGet("members/names").reply(200, data);
-
-			return expectSaga(sagas.fetchMemberNames)
-				.dispatch(actions.fetchMemberNames)
-				.withReducer(memberReducer)
-				.hasFinalState({
-					data: [],
-					tokens: [],
-					editToken: {},
-					names: mocks.memberNames,
-					viewMember: {},
-					eventResponses: [],
-					memberAvailability: {},
-					isLoading: true,
-					totalDocs: 0,
-				})
-				.run();
-		});
-
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to fetch member names.";
-			mockApp.onGet("members/names").reply(404, { err });
-
-			return expectSaga(sagas.fetchMemberNames)
-				.dispatch(actions.fetchMemberNames)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
-	});
-
 	describe("Fetch Profile", () => {
 		let basicMemberInfo;
 		let memberAvailability;

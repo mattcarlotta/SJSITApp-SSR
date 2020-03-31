@@ -1,8 +1,6 @@
 import { SendMailForm } from "../index";
 
 const createMail = jest.fn();
-const fetchMemberNames = jest.fn();
-const push = jest.fn();
 
 const memberNames = [
 	{
@@ -17,7 +15,6 @@ const memberNames = [
 
 const initProps = {
 	createMail,
-	fetchMemberNames,
 	memberNames: [],
 	push,
 	serverMessage: "",
@@ -48,7 +45,6 @@ describe("Send Mail Form", () => {
 
 	afterEach(() => {
 		createMail.mockClear();
-		fetchMemberNames.mockClear();
 	});
 
 	it("renders without errors", () => {
@@ -57,10 +53,6 @@ describe("Send Mail Form", () => {
 
 	it("shows a LoadingForm when fetching names", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
-	});
-
-	it("calls fetchMemberNames on mount", () => {
-		expect(fetchMemberNames).toHaveBeenCalledTimes(1);
 	});
 
 	describe("Form Initializied", () => {
@@ -82,12 +74,7 @@ describe("Send Mail Form", () => {
 				.handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("input")
-					.at(6)
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("input").at(6).props().value).toEqual(newValue);
 		});
 
 		it("opens and closes a preview email modal", () => {

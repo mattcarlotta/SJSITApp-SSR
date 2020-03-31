@@ -108,16 +108,6 @@ export const fetchMemberEvents = params => ({
 });
 
 /**
- * Fetches all member's names.
- *
- * @function fetchMemberNames
- * @returns {object}
- */
-export const fetchMemberNames = () => ({
-	type: types.MEMBERS_FETCH_NAMES,
-});
-
-/**
  * Fetches member's settings.
  *
  * @function fetchMemberSettings
@@ -191,6 +181,16 @@ export const resendToken = tokenId => ({
  * @returns {object}
  */
 export const resetMembers = () => ({
+	type: types.MEMBERS_RESET,
+});
+
+/**
+ * Resets member data back to inital state.
+ *
+ * @function resetTokens
+ * @returns {object}
+ */
+export const resetTokens = () => ({
 	type: types.MEMBERS_RESET,
 });
 

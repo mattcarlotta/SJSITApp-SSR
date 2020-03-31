@@ -3,7 +3,7 @@ import ViewSeasons from "~containers/Body/ViewSeasons";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import { setSeasons } from "~actions/Seasons";
+import { resetSeasons, setSeasons } from "~actions/Seasons";
 import dispatchError from "~utils/dispatchError";
 import { stringifyQuery } from "~utils/queryHelpers";
 
@@ -18,6 +18,8 @@ ViewSeasonsPage.getInitialProps = async ({
 	const headers = parseCookie(req);
 
 	try {
+		dispatch(resetSeasons());
+
 		const queries = stringifyQuery(!page ? { page: 1, ...query } : query);
 		const res = await app.get(`seasons/all?${queries}`, headers);
 		const data = parseData(res);

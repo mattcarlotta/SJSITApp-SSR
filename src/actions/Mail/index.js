@@ -50,18 +50,6 @@ export const deleteManyMails = ids => ({
 });
 
 /**
- * Fetches a single mail for viewing/editing.
- *
- * @function fetchMail
- * @param {string} mailId
- * @returns {object}
- */
-export const fetchMail = mailId => ({
-	type: types.MAIL_EDIT,
-	mailId,
-});
-
-/**
  * Fetches all mails.
  *
  * @function fetchMails
@@ -81,6 +69,17 @@ export const fetchMails = () => ({
 export const resendMail = mailId => ({
 	type: types.MAIL_RESEND,
 	mailId,
+});
+
+/**
+ * Resets mail state.
+ *
+ * @function resetMail
+ * @param {string} mailId
+ * @returns {object}
+ */
+export const resetMail = () => ({
+	type: types.MAIL_RESET,
 });
 
 /**

@@ -58,6 +58,16 @@ export const fetchSeasonsIds = () => ({
 });
 
 /**
+ * Resets season state.
+ *
+ * @function resetSeasons
+ * @returns {object}
+ */
+export const resetSeasons = () => ({
+	type: types.SEASONS_RESET,
+});
+
+/**
  * Sets seasons for ViewSeasons page to redux state
  *
  * @function setSeasons

@@ -213,32 +213,6 @@ export function* fetchAvailability({ params }) {
 }
 
 /**
- * Attempts to get all member's names.
- *
- * @generator
- * @function fetchMemberNames
- * @yields {action} - A redux action to reset server messages.
- * @yields {object} - A response from a call to the API.
- * @function parseData - Returns a parsed res.data (members names info).
- * @yields {action} - A redux action to set member names data to redux state.
- * @throws {action} - A redux action to display a server message by type.
- */
-
-export function* fetchMemberNames() {
-	try {
-		yield put(resetServerMessage());
-
-		const res = yield call(app.get, "members/names");
-		const data = yield call(parseData, res);
-
-		yield put(actions.setMemberNames(data));
-	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
  * Attempts to get a single member profile for review/editing.
  *
  * @generator
@@ -669,7 +643,6 @@ export default function* membersSagas() {
 		takeLatest(types.MEMBERS_DELETE_TOKEN, deleteToken),
 		takeLatest(types.MEMBERS_DELETE_MANY_TOKENS, deleteManyTokens),
 		takeLatest(types.MEMBERS_FETCH_AVAILABILITY, fetchAvailability),
-		takeLatest(types.MEMBERS_FETCH_NAMES, fetchMemberNames),
 		takeLatest(types.MEMBERS_REVIEW, fetchProfile),
 		takeLatest(types.MEMBERS_FETCH, fetchMembers),
 		takeLatest(types.MEMBERS_FETCH_EVENTS, fetchMemberEvents),

@@ -53,7 +53,7 @@ export const ViewSeasons = ({
 					&nbsp; New Season
 				</Button>
 			</FlexEnd>
-			<QueryHandler {...rest}>
+			<QueryHandler>
 				{props => (
 					<Table
 						{...rest}

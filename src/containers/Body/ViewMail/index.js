@@ -11,7 +11,7 @@ import {
 	deleteManyMails,
 	fetchMails,
 	resendMail,
-} from "actions/Mail";
+} from "~actions/Mail";
 import Filters from "./Filters";
 import columns from "./Columns";
 
@@ -41,7 +41,7 @@ export const ViewMail = ({
 				</>
 			}
 		>
-			<QueryHandler {...rest}>
+			<QueryHandler>
 				{props => (
 					<>
 						<Filters {...props} {...rest} />
