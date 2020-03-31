@@ -10,9 +10,9 @@ import dispatchError from "~utils/dispatchError";
 const SettingsPage = () => <ViewSettings />;
 
 SettingsPage.getInitialProps = async ({ req, store: { dispatch } }) => {
-	try {
-		const headers = parseCookie(req);
+	const headers = parseCookie(req);
 
+	try {
 		let res = await app.get(`member/settings`, headers);
 		const basicMemberInfo = parseData(res);
 

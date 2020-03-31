@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import { goBack } from "next/router";
+import Router from "next/router";
 import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
 import {
@@ -16,11 +16,10 @@ import {
 	fetchMember,
 	fetchMemberAvailability,
 	fetchMemberEvents,
-	resetMembers,
 	updateMemberStatus,
 } from "~actions/Members";
+import { fetchScheduleEvents } from "~actions/Events";
 import Head from "~components/Navigation/Head";
-import { fetchScheduleEvents } from "actions/Events";
 import BackButton from "~components/Body/BackButton";
 import Calendar from "~components/Body/Calendar";
 import FadeIn from "~components/Body/FadeIn";
@@ -76,105 +75,85 @@ const scheduling = (
 	</span>
 );
 
-export class ViewMemberProfile extends PureComponent {
-	componentDidMount = () => {
-		const {
-			resetServerMessage,
-			fetchMember,
-			match,
-			serverMessage,
-		} = this.props;
+export const ViewMemberProfile = props => {
+	const {
+		eventResponses,
+		fetchMemberAvailability,
+		fetchMemberEvents,
+		fetchScheduleEvents,
+		viewMember,
+	} = props;
 
-		const { id } = match.params;
-		fetchMember(id);
+	const { _id, firstName, lastName } = viewMember;
 
-		if (serverMessage) resetServerMessage();
-	};
-
-	componentWillUnmount = () => {
-		this.props.resetMembers();
-	};
-
-	render = () => {
-		const {
-			eventResponses,
-			fetchMemberAvailability,
-			fetchMemberEvents,
-			goBack,
-			viewMember,
-		} = this.props;
-
-		const { _id, firstName, lastName } = viewMember;
-
-		return (
-			<>
-				<Head title={title} />
-				<Card
-					style={{ minHeight: 800 }}
-					extra={<BackButton push={goBack} />}
-					title={
-						<>
-							<FaUserEdit style={iconStyle} />
-							<span css="vertical-align: middle;">{title}</span>
-						</>
-					}
-				>
-					{isEmpty(viewMember) ? (
-						<LoadingPanel height="685px" />
-					) : (
-						<FadeIn timing="0.6s">
-							<Tabs tabPosition="left">
-								<Pane tab={profile} key="profile">
-									<Profile {...this.props} />
-								</Pane>
-								<Pane tab={availability} key="availability">
-									<PaneBody>
-										<Title centered>
-											{firstName} {lastName}&#39;s Availability
-										</Title>
-										<Line centered width="400px" />
-										<MemberAvailability
-											{...this.props}
-											id={_id}
-											fetchAction={fetchMemberAvailability}
-										/>
-									</PaneBody>
-								</Pane>
-								<Pane tab={responses} key="responses">
-									<PaneBody>
-										<Title centered>
-											{firstName} {lastName}&#39;s Responses
-										</Title>
-										<Line centered width="400px" />
-										<Calendar
-											{...this.props}
-											id={_id}
-											scheduleEvents={eventResponses}
-											fetchAction={fetchMemberEvents}
-										/>
-									</PaneBody>
-								</Pane>
-								<Pane tab={scheduling} key="schedule">
-									<PaneBody>
-										<Title centered>
-											{firstName} {lastName}&#39;s Schedule
-										</Title>
-										<Line centered width="400px" />
-										<Calendar
-											{...this.props}
-											fetchAction={this.props.fetchScheduleEvents}
-											title="View Member Schedule"
-										/>
-									</PaneBody>
-								</Pane>
-							</Tabs>
-						</FadeIn>
-					)}
-				</Card>
-			</>
-		);
-	};
-}
+	return (
+		<>
+			<Head title={title} />
+			<Card
+				style={{ minHeight: 800 }}
+				extra={<BackButton push={Router.back} />}
+				title={
+					<>
+						<FaUserEdit style={iconStyle} />
+						<span css="vertical-align: middle;">{title}</span>
+					</>
+				}
+			>
+				{isEmpty(viewMember) ? (
+					<LoadingPanel height="685px" />
+				) : (
+					<FadeIn timing="0.6s">
+						<Tabs tabPosition="left">
+							<Pane tab={profile} key="profile">
+								<Profile {...props} />
+							</Pane>
+							<Pane tab={availability} key="availability">
+								<PaneBody>
+									<Title centered>
+										{firstName} {lastName}&#39;s Availability
+									</Title>
+									<Line centered width="400px" />
+									<MemberAvailability
+										{...props}
+										id={_id}
+										fetchAction={fetchMemberAvailability}
+									/>
+								</PaneBody>
+							</Pane>
+							<Pane tab={responses} key="responses">
+								<PaneBody>
+									<Title centered>
+										{firstName} {lastName}&#39;s Responses
+									</Title>
+									<Line centered width="400px" />
+									<Calendar
+										{...props}
+										id={_id}
+										scheduleEvents={eventResponses}
+										fetchAction={fetchMemberEvents}
+									/>
+								</PaneBody>
+							</Pane>
+							<Pane tab={scheduling} key="schedule">
+								<PaneBody>
+									<Title centered>
+										{firstName} {lastName}&#39;s Schedule
+									</Title>
+									<Line centered width="400px" />
+									<Calendar
+										{...props}
+										fetchAction={fetchScheduleEvents}
+										title="View Member Schedule"
+									/>
+								</PaneBody>
+							</Pane>
+						</Tabs>
+					</FadeIn>
+				)}
+			</Card>
+		</>
+	);
+};
 
 ViewMemberProfile.propTypes = {
 	eventResponses: PropTypes.arrayOf(
@@ -195,11 +174,6 @@ ViewMemberProfile.propTypes = {
 	fetchMemberEvents: PropTypes.func.isRequired,
 	fetchScheduleEvents: PropTypes.func.isRequired,
 	resetServerMessage: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}),
 	memberAvailability: PropTypes.shape({
 		eventAvailability: PropTypes.arrayOf(
 			PropTypes.shape({
@@ -223,8 +197,6 @@ ViewMemberProfile.propTypes = {
 			}),
 		),
 	}),
-	resetMembers: PropTypes.func.isRequired,
-	goBack: PropTypes.func.isRequired,
 	viewMember: PropTypes.shape({
 		_id: PropTypes.string,
 		email: PropTypes.string,
@@ -265,12 +237,12 @@ ViewMemberProfile.propTypes = {
 	),
 };
 
-const mapStateToProps = state => ({
-	eventResponses: state.members.eventResponses,
-	memberAvailability: state.members.memberAvailability,
-	viewMember: state.members.viewMember,
-	scheduleEvents: state.events.scheduleEvents,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ events, members, server }) => ({
+	eventResponses: members.eventResponses,
+	memberAvailability: members.memberAvailability,
+	viewMember: members.viewMember,
+	scheduleEvents: events.scheduleEvents,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
@@ -279,8 +251,6 @@ const mapDispatchToProps = {
 	fetchMemberEvents,
 	fetchScheduleEvents,
 	resetServerMessage,
-	goBack,
-	resetMembers,
 	updateMemberStatus,
 };
 

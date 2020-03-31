@@ -298,8 +298,6 @@ export function* updateEventSchedule({ props }) {
 		);
 		yield call(toast, { type: "success", message });
 
-		// TODO - Calling Router.back loses window context in development
-		// yield call(Router.push, "/employee/events/viewall?page=1");
 		yield call(Router.back);
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
