@@ -31,7 +31,7 @@ const NavMenu = ({
 					borderBottom: "1px solid #3d8792",
 				}}
 			>
-				<Link href="/" style={{ padding: 0, margin: 0 }}>
+				<Link href="/employee/dashboard" style={{ padding: 0, margin: 0 }}>
 					<div css="text-align:center;padding: 12px 18px 0 18px;">
 						{isCollapsed ? (
 							<div css="border: 1px solid #fff;">

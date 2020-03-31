@@ -243,10 +243,10 @@ EventScheduleForm.propTypes = {
 	updateEventSchedule: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-	members: state.events.members,
-	schedule: state.events.schedule,
-	serverMessage: state.server.message,
+const mapStateToProps = ({ events, server }) => ({
+	members: events.members,
+	schedule: events.schedule,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {

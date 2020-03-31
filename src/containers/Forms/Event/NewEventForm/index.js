@@ -145,9 +145,9 @@ NewEventForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-	serverMessage: state.server.message,
-	newEvent: state.events.newEvent,
+const mapStateToProps = ({ events, server }) => ({
+	newEvent: events.newEvent,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {

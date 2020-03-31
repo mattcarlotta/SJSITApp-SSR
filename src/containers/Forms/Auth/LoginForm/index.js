@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Router from "next/router";
 import { connect } from "react-redux";
 import { FaUnlockAlt } from "react-icons/fa";
 import Center from "~components/Body/Center";
@@ -13,7 +12,6 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import { signinUser } from "~actions/Auth";
-import Spinner from "~components/Body/Spinner";
 import fields from "./Fields";
 
 export class LoginForm extends Component {
@@ -24,10 +22,6 @@ export class LoginForm extends Component {
 
 	static getDerivedStateFromProps = ({ serverMessage }) =>
 		serverMessage ? { isSubmitting: false } : null;
-
-	componentDidMount() {
-		if (this.props.email) Router.replace("/employee/dashboard");
-	}
 
 	handleChange = ({ target: { name, value } }) => {
 		this.setState(prevState => ({
@@ -51,50 +45,45 @@ export class LoginForm extends Component {
 		);
 	};
 
-	render = () =>
-		!this.props.email ? (
-			<Modal>
-				<FormTitle
-					header="Log In"
-					title="Welcome!"
-					description="Sign into your account below."
+	render = () => (
+		<Modal>
+			<FormTitle
+				header="Log In"
+				title="Welcome!"
+				description="Sign into your account below."
+			/>
+			<form onSubmit={this.handleSubmit}>
+				<FieldGenerator
+					fields={this.state.fields}
+					onChange={this.handleChange}
 				/>
-				<form onSubmit={this.handleSubmit}>
-					<FieldGenerator
-						fields={this.state.fields}
-						onChange={this.handleChange}
-					/>
-					<Link
-						blue
-						style={{ padding: 0, margin: 0, fontSize: 16 }}
-						href="/employee/reset-password"
-					>
-						<FaUnlockAlt />
-						&nbsp; Forgot your password?
-					</Link>
-					<SubmitButton isSubmitting={this.state.isSubmitting} title="Log In" />
-				</form>
-				<Center style={{ marginTop: 20 }}>
-					<span>Don&#39;t have an account?</span> &nbsp;
-					<Link blue style={{ padding: 0, margin: 0 }} href="/employee/signup">
-						Sign up
-					</Link>
-				</Center>
-			</Modal>
-		) : (
-			<Spinner />
-		);
+				<Link
+					blue
+					style={{ padding: 0, margin: 0, fontSize: 16 }}
+					href="/employee/reset-password"
+				>
+					<FaUnlockAlt />
+					&nbsp; Forgot your password?
+				</Link>
+				<SubmitButton isSubmitting={this.state.isSubmitting} title="Log In" />
+			</form>
+			<Center style={{ marginTop: 20 }}>
+				<span>Don&#39;t have an account?</span> &nbsp;
+				<Link blue style={{ padding: 0, margin: 0 }} href="/employee/signup">
+					Sign up
+				</Link>
+			</Center>
+		</Modal>
+	);
 }
 
 LoginForm.propTypes = {
-	email: PropTypes.string,
 	serverMessage: PropTypes.string,
 	signinUser: PropTypes.func,
 };
 
 /* istanbul ignore next */
-const mapStateTopProps = ({ auth, server }) => ({
-	email: auth.email,
+const mapStateTopProps = ({ server }) => ({
 	serverMessage: server.message,
 });
 

@@ -3,11 +3,12 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   #root, #app, body, html {
     height: 100%;
+    background: #ebebeb;
   }
 
   html,body {
     height: 100%;
-    width: 100% !important;
+    width: 100%;
   }
 
   body {

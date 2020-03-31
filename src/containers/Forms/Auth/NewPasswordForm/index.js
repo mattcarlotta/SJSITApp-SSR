@@ -85,8 +85,8 @@ NewPasswordForm.propTypes = {
 };
 
 /* istanbul ignore next */
-const mapStateToProps = state => ({
-	serverMessage: state.server.message,
+const mapStateToProps = ({ server }) => ({
+	serverMessage: server.message,
 });
 
 /* istanbul ignore next */
