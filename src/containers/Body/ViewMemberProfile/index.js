@@ -142,6 +142,7 @@ export const ViewMemberProfile = props => {
 									<Line centered width="400px" />
 									<Calendar
 										{...props}
+										id={_id}
 										fetchAction={fetchScheduleEvents}
 										title="View Member Schedule"
 									/>
