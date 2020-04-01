@@ -36,6 +36,11 @@ class CustomCalendar extends Component {
 		};
 	}
 
+	componentDidMount = () => {
+		const { fetchInitialData } = this.props;
+		if (fetchInitialData) fetchInitialData();
+	};
+
 	handleShowModal = modalChildren => {
 		this.setState({
 			isVisible: true,
@@ -140,6 +145,7 @@ class CustomCalendar extends Component {
 CustomCalendar.propTypes = {
 	id: PropTypes.string,
 	fetchAction: PropTypes.func.isRequired,
+	fetchInitialData: PropTypes.func,
 	loggedinUserId: PropTypes.string,
 	role: PropTypes.string,
 	selectedGames: PropTypes.string,

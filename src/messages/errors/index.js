@@ -72,7 +72,7 @@ const invalidSeason =
 const invalidSeasonId = "Invalid season. The selected season does not exist.";
 
 const invalidStatus =
-	"Your access has been denied. The account you're trying to log into has been suspended.";
+	"Access to your account was revoked. The account you're trying to log into has been permanently suspended.";
 
 const invalidToken =
 	"There was a problem authenticating your request. The authorized key and/or email that was supplied was invalid.";

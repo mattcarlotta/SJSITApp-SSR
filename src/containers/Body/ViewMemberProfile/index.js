@@ -84,7 +84,7 @@ export const ViewMemberProfile = props => {
 		viewMember,
 	} = props;
 
-	const { _id, firstName, lastName } = viewMember;
+	const { _id: id, firstName, lastName } = viewMember;
 
 	return (
 		<>
@@ -115,7 +115,7 @@ export const ViewMemberProfile = props => {
 									<Line centered width="400px" />
 									<MemberAvailability
 										{...props}
-										id={_id}
+										id={id}
 										fetchAction={fetchMemberAvailability}
 									/>
 								</PaneBody>
@@ -128,9 +128,10 @@ export const ViewMemberProfile = props => {
 									<Line centered width="400px" />
 									<Calendar
 										{...props}
-										id={_id}
+										id={id}
 										scheduleEvents={eventResponses}
 										fetchAction={fetchMemberEvents}
+										fetchInitialData={() => fetchMemberEvents({ id })}
 									/>
 								</PaneBody>
 							</Pane>
@@ -142,8 +143,12 @@ export const ViewMemberProfile = props => {
 									<Line centered width="400px" />
 									<Calendar
 										{...props}
-										id={_id}
+										id={id}
+										loggedinUser={id}
 										fetchAction={fetchScheduleEvents}
+										fetchInitialData={() =>
+											fetchScheduleEvents({ id, selectedGames: "My Games" })
+										}
 										title="View Member Schedule"
 									/>
 								</PaneBody>

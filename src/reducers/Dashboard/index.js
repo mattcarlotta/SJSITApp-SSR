@@ -40,6 +40,9 @@ export const initialState = {
  */
 const dashboardReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		case types.DASHBOARD_RESET: {
+			return initialState;
+		}
 		case types.DASHBOARD_FETCH_APFORM: {
 			return { ...state, apform };
 		}

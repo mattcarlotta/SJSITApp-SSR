@@ -26,6 +26,16 @@ export const fetchEvents = selectedEvent => ({
 });
 
 /**
+ * Resets dashboard state.
+ *
+ * @function resetDashboard
+ * @returns {object}
+ */
+export const resetDashboard = () => ({
+	type: types.DASHBOARD_RESET,
+});
+
+/**
  * Sets dashboard AP form data to redux state for viewing/editing
  *
  * @function setAPForm

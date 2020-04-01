@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
 import { FaCogs, FaUserCircle, FaChartBar, FaReply } from "react-icons/fa";
 import Head from "~components/Navigation/Head";
-import ResponseCalendar from "~components/Body/ResponseCalendar";
+import Calendar from "~components/Body/Calendar";
 import Line from "~components/Body/Line";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
@@ -83,10 +83,11 @@ export class Settings extends Component {
 		const {
 			eventResponses,
 			fetchMemberSettingsAvailability,
+			fetchMemberSettingsEvents,
 			viewMember,
 		} = this.props;
 
-		const { _id, role } = viewMember;
+		const { _id: id, role } = viewMember;
 		const isStaff = role !== "employee";
 
 		return (
@@ -114,7 +115,7 @@ export class Settings extends Component {
 									<Line centered width="400px" />
 									<MemberAvailability
 										{...this.props}
-										id={_id}
+										id={id}
 										fetchAction={fetchMemberSettingsAvailability}
 									/>
 								</PaneBody>
@@ -123,9 +124,11 @@ export class Settings extends Component {
 								<PaneBody>
 									<Title centered>My Event Responses</Title>
 									<Line centered width="400px" />
-									<ResponseCalendar
+									<Calendar
 										{...this.props}
-										id={_id}
+										id={id}
+										fetchAction={fetchMemberSettingsEvents}
+										fetchInitialData={() => fetchMemberSettingsEvents({ id })}
 										scheduleEvents={eventResponses}
 									/>
 								</PaneBody>

@@ -22,7 +22,7 @@ ViewMembersProfilePage.getInitialProps = async ({
 		let res = await app.get(`member/review/${id}`, headers);
 		const basicMemberInfo = parseData(res);
 
-		res = await app.get(`member/availability?${id}`, headers);
+		res = await app.get(`member/availability?id=${id}`, headers);
 		const memberAvailability = parseData(res);
 
 		dispatch(

@@ -62,9 +62,8 @@ const getAvailabilityForAllMembers = async (_, res) => {
 			},
 		).lean();
 		/* istanbul ignore next */
-		if (!existingForm) {
-			res.status(200).json({ membersAvailability, months });
-		}
+		if (!existingForm)
+			return res.status(200).json({ membersAvailability, months });
 
 		const startOfMonth = moment(existingForm.startMonth).toDate();
 		const endOfMonth = moment(existingForm.endMonth).toDate();
@@ -72,9 +71,8 @@ const getAvailabilityForAllMembers = async (_, res) => {
 
 		const eventCounts = await getEventCounts(startOfMonth, endOfMonth);
 		/* istanbul ignore next */
-		if (eventCounts === 0) {
-			res.status(200).json({ membersAvailability, months });
-		}
+		if (eventCounts === 0)
+			return res.status(200).json({ membersAvailability, months });
 
 		const eventResponses = await Event.aggregate([
 			{

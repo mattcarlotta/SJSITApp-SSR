@@ -1,4 +1,4 @@
-import { badCredentials } from "~messages/errors";
+import { badCredentials, invalidStatus } from "~messages/errors";
 import { parseSession, sendError } from "~utils/helpers";
 import { User } from "~models";
 
@@ -14,8 +14,8 @@ export default next => async (req, res, resolve) => {
 		if (!_id) throw String(badCredentials);
 
 		const existingUser = await User.findOne({ _id });
-		if (!existingUser || existingUser.status === "suspended")
-			throw String(badCredentials);
+		if (!existingUser) throw String(badCredentials);
+		if (existingUser.status === "suspended") throw String(invalidStatus);
 
 		return resolve(next(req, res));
 	} catch (error) {

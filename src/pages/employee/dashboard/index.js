@@ -13,6 +13,8 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 	const { role } = getState().auth;
 	const headers = parseCookie(req);
 
+	dispatch(actions.resetDashboard());
+
 	const fetchEvents = async () => {
 		const res = await app.get("dashboard/events/today", headers);
 		const data = parseData(res);
