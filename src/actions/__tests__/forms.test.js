@@ -42,31 +42,6 @@ describe("Forms Actions", () => {
 		});
 	});
 
-	it("returns FORMS_EDIT", () => {
-		const value = actions.fetchForm(formId);
-
-		expect(value).toEqual({
-			type: types.FORMS_EDIT,
-			formId,
-		});
-	});
-
-	it("returns FORMS_FETCH", () => {
-		const value = actions.fetchForms();
-
-		expect(value).toEqual({
-			type: types.FORMS_FETCH,
-		});
-	});
-
-	it("returns FORMS_RESET_AP", () => {
-		const value = actions.resetApForm();
-
-		expect(value).toEqual({
-			type: types.FORMS_RESET_AP,
-		});
-	});
-
 	it("returns FORMS_RESEND_MAIL", () => {
 		const value = actions.resendMail(formId);
 

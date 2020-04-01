@@ -2,6 +2,6 @@ import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import ContactForm from "~containers/Forms/Mail/ContactForm";
 
-const ContactUs = () => <ContactForm />;
+const ContactUsPage = () => <ContactForm />;
 
-export default requiresBasicCredentials(ContactUs);
+export default requiresBasicCredentials(ContactUsPage);

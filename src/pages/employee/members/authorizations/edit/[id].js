@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetTokens, setToken } from "~actions/Members";
-import { resetServerMessage } from "~actions/Messages";
 import dispatchError from "~utils/dispatchError";
 
 const EditAuthorizationsPage = () => <EditAuthorizationForm />;
@@ -18,7 +17,6 @@ EditAuthorizationsPage.getInitialProps = async ({
 	const headers = parseCookie(req);
 
 	try {
-		dispatch(resetServerMessage());
 		dispatch(resetTokens());
 
 		let res = await app.get(`token/edit/${id}`, headers);

@@ -15,7 +15,6 @@ import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import { createForm } from "~actions/Forms";
-import { fetchSeasonsIds } from "~actions/Seasons";
 import fields from "./Fields";
 
 const title = "New AP Form";
@@ -47,10 +46,6 @@ export class NewAPForm extends Component {
 		if (serverMessage) return { isSubmitting: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		this.props.fetchSeasonsIds();
 	};
 
 	handleChange = ({ target: { name, value } }) => {
@@ -114,7 +109,6 @@ export class NewAPForm extends Component {
 
 NewAPForm.propTypes = {
 	createForm: PropTypes.func.isRequired,
-	fetchSeasonsIds: PropTypes.func.isRequired,
 	seasonIds: PropTypes.arrayOf(PropTypes.string),
 	serverMessage: PropTypes.string,
 };
@@ -126,7 +120,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 	createForm,
-	fetchSeasonsIds,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewAPForm);

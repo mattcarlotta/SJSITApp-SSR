@@ -45,17 +45,22 @@ const updateForm = async (req, res) => {
 		});
 		if (!isEmpty(existingForms)) throw formAlreadyExists;
 
-		// const currentDay = getStartOfDay();
-		const sendEmailsDate = createDate(sendEmailNotificationsDate).format();
-		// const expiration = createDate(expirationDate).format();
+		const format = "MM/DD/YY";
+		const { sentEmails } = formExists;
 
-		// if (expiration < currentDay) throw invalidExpirationDate;
-		// if (sendEmailsDate < currentDay) throw invalidSendDate;
+		// incoming email notification date
+		const incomingSendEmailsDate = createDate(
+			sendEmailNotificationsDate,
+		).format(format);
 
-		const resendEmails = createDate(sendEmailsDate).isSame(
-			createDate(formExists.sendEmailNotificationsDate),
-			"day",
-		);
+		// current form email date
+		const currentSendEmailsDate = createDate(
+			formExists.sendEmailNotificationsDate,
+		).format(format);
+
+		// resend emails if the dates don't match and they were already sent
+		const emailNotificationStatus =
+			incomingSendEmailsDate === currentSendEmailsDate && sentEmails;
 
 		await formExists.updateOne({
 			seasonId,
@@ -63,8 +68,8 @@ const updateForm = async (req, res) => {
 			endMonth,
 			expirationDate,
 			notes,
-			sendEmailNotificationsDate: sendEmailsDate,
-			sentEmails: resendEmails,
+			sendEmailNotificationsDate: incomingSendEmailsDate,
+			sentEmails: emailNotificationStatus,
 		});
 
 		res.status(201).json({ message: "Successfully updated the form!" });

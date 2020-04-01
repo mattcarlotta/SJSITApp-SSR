@@ -11,6 +11,7 @@ import ServerMessages from "~containers/Auth/ServerMessages";
 import { app } from "~utils";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
+import { resetServerMessage } from "~actions/Messages";
 import dispatchError from "~utils/dispatchError";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,6 +27,8 @@ export class MyApp extends App {
 			req,
 		} = ctx;
 		const { role } = getState().auth;
+
+		dispatch(resetServerMessage());
 
 		if (!role) {
 			try {

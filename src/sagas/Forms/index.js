@@ -114,74 +114,6 @@ export function* deleteManyForms({ ids }) {
 }
 
 /**
- * Attempts to get form for editing.
- *
- * @generator
- * @function fetchForm
- * @param {object} formId
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data (form data).
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data (seasonIds data).
- * @yields {action} - A redux action to set form data to redux state.
- * @throws {action} - A redux action to display a server message by type.
- */
-
-export function* fetchForm({ formId }) {
-	try {
-		yield put(resetServerMessage());
-
-		let res = yield call(app.get, `form/edit/${formId}`);
-		const forms = yield call(parseData, res);
-
-		res = yield call(app.get, "seasons/all/ids");
-		const seasons = yield call(parseData, res);
-
-		yield put(
-			actions.setFormToEdit({
-				...forms.form,
-				seasonIds: seasons.seasonIds,
-			}),
-		);
-	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
- * Attempts to get form for viewing/updating.
- *
- * @generator
- * @function fetchFormAp
- * @param {object} formId
- * @yields {action} - A redux action to reset server messages.
- * @yields {object} - A response from a call to the API.
- * @function parseData - returns a parsed res.data (form and forms data).
- * @yields {action} - A redux action to set AP form data to redux state.
- * @throws {actions} - A redux action to go back to previous URL and to display a server message by type.
- */
-
-export function* fetchFormAp({ formId }) {
-	try {
-		yield put(resetServerMessage());
-
-		const res = yield call(app.get, `form/view/${formId}`);
-		const data = yield call(parseData, res);
-
-		yield put(
-			actions.setFormAp({
-				...data,
-			}),
-		);
-	} catch (e) {
-		yield call(Router.back);
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
-	}
-}
-
-/**
  * Attempts to get all forms.
  *
  * @generator
@@ -323,8 +255,6 @@ export default function* formsSagas() {
 		takeLatest(types.FORMS_CREATE, createForm),
 		takeLatest(types.FORMS_DELETE, deleteForm),
 		takeLatest(types.FORMS_DELETE_MANY, deleteManyForms),
-		takeLatest(types.FORMS_EDIT, fetchForm),
-		takeLatest(types.FORMS_FETCH_AP, fetchFormAp),
 		takeLatest(types.FORMS_FETCH, fetchForms),
 		takeLatest(types.FORMS_RESEND_MAIL, resendFormEmails),
 		takeLatest(types.FORMS_UPDATE, updateForm),

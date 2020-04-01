@@ -1,3 +1,5 @@
 import NewPasswordForm from "~containers/Forms/Auth/NewPasswordForm";
 
-export default NewPasswordForm;
+const NewPasswordFormPage = () => <NewPasswordForm />;
+
+export default NewPasswordFormPage;

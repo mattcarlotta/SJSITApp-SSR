@@ -14,7 +14,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchForm, updateForm } from "~actions/Forms";
+import { updateForm } from "~actions/Forms";
 import fields from "./Fields";
 import updateFormFields from "./UpdateFormFields";
 
@@ -43,11 +43,6 @@ export class EditForm extends Component {
 		if (serverMessage) return { isSubmitting: false };
 
 		return null;
-	};
-
-	componentDidMount = () => {
-		const { id } = this.props.match.params;
-		this.props.fetchForm(id);
 	};
 
 	handleChange = ({ target: { name, value } }) => {
@@ -121,12 +116,6 @@ EditForm.propTypes = {
 		sendEmailNotificationsDate: PropTypes.string,
 		notes: PropTypes.string,
 	}),
-	fetchForm: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}).isRequired,
 	serverMessage: PropTypes.string,
 	updateForm: PropTypes.func.isRequired,
 };
@@ -137,7 +126,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-	fetchForm,
 	updateForm,
 };
 

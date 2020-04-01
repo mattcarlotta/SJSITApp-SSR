@@ -38,15 +38,13 @@ export const EVENTS_UPDATE_SCHEDULE = "EVENTS/UPDATE_SCHEDULE";
 export const FORMS_CREATE = "FORMS/CREATE";
 export const FORMS_DELETE = "FORMS/DELETE";
 export const FORMS_DELETE_MANY = "FORMS/DELETE_MANY";
-export const FORMS_EDIT = "FORMS/EDIT";
 export const FORMS_FETCH = "FORMS/FETCH";
-export const FORMS_FETCH_AP = "FORMS/AP_FETCH";
 export const FORMS_RESEND_MAIL = "FORMS/RESEND_MAIL";
+export const FORMS_RESET = "FORMS/RESET";
 export const FORMS_SET = "FORMS/SET";
 export const FORMS_SET_EDIT = "FORMS/SET_EDIT";
 export const FORMS_UPDATE = "FORMS/UPDATE";
 export const FORMS_SET_AP = "FORMS/SET_AP";
-export const FORMS_RESET_AP = "FORMS/RESET_AP";
 export const FORMS_UPDATE_AP = "FORMS/UPDATE_AP";
 
 // mail

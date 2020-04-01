@@ -15,14 +15,14 @@ ViewSeasonsPage.getInitialProps = async ({
 	query,
 }) => {
 	const { page } = query;
-	const headers = parseCookie(req);
 
 	try {
 		dispatch(resetSeasons());
 
 		const queries = stringifyQuery(!page ? { page: 1, ...query } : query);
-		const res = await app.get(`seasons/all?${queries}`, headers);
+		const res = await app.get(`seasons/all?${queries}`, parseCookie(req));
 		const data = parseData(res);
+
 		dispatch(setSeasons(data));
 	} catch (e) {
 		dispatchError({ dispatch, message: e.toString() });

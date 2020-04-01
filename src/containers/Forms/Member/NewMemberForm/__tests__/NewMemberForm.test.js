@@ -1,12 +1,9 @@
 import { NewMemberForm } from "../index";
 
 const createMember = jest.fn();
-const fetchSeasonsIds = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	createMember,
-	push,
 	serverMessage: "",
 };
 
@@ -18,7 +15,6 @@ describe("Edit Authorization Form", () => {
 
 	afterEach(() => {
 		createMember.mockClear();
-		fetchSeasonsIds.mockClear();
 	});
 
 	it("renders without errors", () => {

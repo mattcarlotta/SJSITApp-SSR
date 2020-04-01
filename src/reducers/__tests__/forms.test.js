@@ -64,19 +64,6 @@ describe("Form Reducer", () => {
 		expect(state).toEqual(initialState);
 	});
 
-	it("when fetching an event for editing, resets to initialState", () => {
-		let state = formReducer(undefined, {
-			type: types.FORMS_SET,
-			payload: formsData,
-		});
-
-		state = formReducer(state, {
-			type: types.FORMS_EDIT,
-		});
-
-		expect(state).toEqual(initialState);
-	});
-
 	it("sets event for editing", () => {
 		const state = formReducer(undefined, {
 			type: types.FORMS_SET_EDIT,

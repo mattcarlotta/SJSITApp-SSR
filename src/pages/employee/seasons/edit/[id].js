@@ -3,8 +3,7 @@ import EditSeasonForm from "~containers/Forms/Season/EditSeasonForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import { setSeasonToEdit } from "~actions/Seasons";
-import { resetServerMessage } from "~actions/Messages";
+import { resetSeasons, setSeasonToEdit } from "~actions/Seasons";
 import dispatchError from "~utils/dispatchError";
 
 const EditSeasonsPage = () => <EditSeasonForm />;
@@ -18,7 +17,7 @@ EditSeasonsPage.getInitialProps = async ({
 	const headers = parseCookie(req);
 
 	try {
-		dispatch(resetServerMessage());
+		dispatch(resetSeasons());
 
 		const res = await app.get(`season/edit/${id}`, headers);
 		const data = parseData(res);

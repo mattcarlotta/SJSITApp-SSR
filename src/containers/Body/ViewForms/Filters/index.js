@@ -16,7 +16,7 @@ const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
 const format = "MM-DD-YYYY";
 
-const FormFilters = ({ clearFilters, queries, push, updateQuery }) => {
+const FormFilters = ({ clearFilters, queries, updateQuery }) => {
 	const startMonth = queries.startMonth
 		? moment(queries.startMonth, format)
 		: null;
@@ -136,7 +136,6 @@ FormFilters.propTypes = {
 		sentEmails: PropTypes.string,
 		startMonth: PropTypes.string,
 	}),
-	push: PropTypes.func.isRequired,
 	updateQuery: PropTypes.func.isRequired,
 };
 

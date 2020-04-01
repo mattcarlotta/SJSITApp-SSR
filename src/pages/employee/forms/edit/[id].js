@@ -1,6 +1,37 @@
 import React from "react";
+import EditForm from "~containers/Forms/Form/EditForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
+import { app } from "~utils";
+import { resetForms, setFormToEdit } from "~actions/Forms";
+import { parseCookie, parseData } from "~utils/parseResponse";
+import dispatchError from "~utils/dispatchError";
 
-const EditForm = () => <div>Edit Form</div>;
+const EditFormPage = () => <EditForm />;
 
-export default requiresStaffCredentials(EditForm);
+EditFormPage.getInitialProps = async ({ store: { dispatch }, req, query }) => {
+	const headers = parseCookie(req);
+	const { id } = query;
+
+	try {
+		dispatch(resetForms());
+
+		let res = await app.get(`form/edit/${id}`, headers);
+		const forms = parseData(res);
+
+		res = await app.get("seasons/all/ids", headers);
+		const seasons = parseData(res);
+
+		dispatch(
+			setFormToEdit({
+				...forms.form,
+				seasonIds: seasons.seasonIds,
+			}),
+		);
+	} catch (e) {
+		dispatchError({ dispatch, message: e.toString() });
+	}
+
+	return {};
+};
+
+export default requiresStaffCredentials(EditFormPage);

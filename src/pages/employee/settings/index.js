@@ -3,7 +3,7 @@ import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials"
 import ViewSettings from "~containers/Body/ViewSettings";
 import { app } from "~utils";
 import { updateUser } from "~actions/Auth";
-import { setMemberToReview } from "~actions/Members";
+import { resetMembers, setMemberToReview } from "~actions/Members";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";
 
@@ -13,6 +13,8 @@ SettingsPage.getInitialProps = async ({ req, store: { dispatch } }) => {
 	const headers = parseCookie(req);
 
 	try {
+		dispatch(resetMembers());
+
 		let res = await app.get(`member/settings`, headers);
 		const basicMemberInfo = parseData(res);
 

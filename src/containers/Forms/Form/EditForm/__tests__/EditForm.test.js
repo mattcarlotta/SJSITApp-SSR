@@ -1,8 +1,6 @@
 import { EditForm } from "../index";
 
 const id = "5d54769658ae8d57e19a1ecc";
-const fetchForm = jest.fn();
-const goBack = jest.fn();
 const updateForm = jest.fn();
 
 const editForm = {
@@ -18,13 +16,11 @@ const editForm = {
 
 const initProps = {
 	editForm: {},
-	fetchForm,
 	match: {
 		params: {
 			id,
 		},
 	},
-	goBack,
 	serverMessage: "",
 	updateForm,
 };
@@ -36,7 +32,6 @@ describe("Edit Form", () => {
 	});
 
 	afterEach(() => {
-		fetchForm.mockClear();
 		updateForm.mockClear();
 	});
 
@@ -46,10 +41,6 @@ describe("Edit Form", () => {
 
 	it("shows a LoadingForm when fetching seasonIds", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
-	});
-
-	it("calls fetchEvent on mount", () => {
-		expect(fetchForm).toHaveBeenCalledWith(id);
 	});
 
 	describe("Form Initializied", () => {
@@ -72,10 +63,7 @@ describe("Edit Form", () => {
 		});
 
 		it("doesn't submit the form if a field has errors", () => {
-			wrapper
-				.find(".ant-calendar-picker-clear")
-				.first()
-				.simulate("click");
+			wrapper.find(".ant-calendar-picker-clear").first().simulate("click");
 
 			wrapper.find("form").simulate("submit");
 			expect(updateForm).toHaveBeenCalledTimes(0);

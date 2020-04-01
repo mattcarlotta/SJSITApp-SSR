@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import { app } from "~utils";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetMail, setMailToEdit } from "~actions/Mail";
-import { resetServerMessage } from "~actions/Messages";
 import dispatchError from "~utils/dispatchError";
 
 const EditMailPage = () => <EditMailForm />;
@@ -14,7 +13,6 @@ EditMailPage.getInitialProps = async ({ store: { dispatch }, req, query }) => {
 	const headers = parseCookie(req);
 
 	try {
-		dispatch(resetServerMessage());
 		dispatch(resetMail());
 
 		let res = await app.get("members/names", headers);

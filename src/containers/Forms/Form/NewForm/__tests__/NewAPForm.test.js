@@ -2,12 +2,10 @@ import moment from "moment-timezone";
 import { NewAPForm } from "../index";
 
 const createForm = jest.fn();
-const fetchSeasonsIds = jest.fn();
 const push = jest.fn();
 
 const initProps = {
 	createForm,
-	fetchSeasonsIds,
 	push,
 	seasonIds: [],
 	serverMessage: "",
@@ -23,7 +21,6 @@ describe("New AP Form", () => {
 
 	afterEach(() => {
 		createForm.mockClear();
-		fetchSeasonsIds.mockClear();
 	});
 
 	it("renders without errors", () => {
@@ -34,22 +31,15 @@ describe("New AP Form", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
 	});
 
-	it("calls fetchSeasonsIds on mount", () => {
-		expect(fetchSeasonsIds).toHaveBeenCalledTimes(1);
-	});
-
 	describe("Form Initialized", () => {
 		beforeEach(() => {
 			wrapper.setProps({ seasonIds });
 		});
 
 		it("initializes the SeasonID field with seasonIds options", () => {
-			expect(
-				wrapper
-					.find("Select")
-					.first()
-					.props().selectOptions,
-			).toEqual(seasonIds);
+			expect(wrapper.find("Select").first().props().selectOptions).toEqual(
+				seasonIds,
+			);
 
 			expect(wrapper.state("isLoading")).toBeFalsy();
 		});
@@ -91,12 +81,8 @@ describe("New AP Form", () => {
 				expect(createForm).toHaveBeenCalledWith({
 					seasonId: "20002001",
 					enrollMonth: [
-						moment()
-							.startOf("month")
-							.format(),
-						moment()
-							.endOf("month")
-							.format(),
+						moment().startOf("month").format(),
+						moment().endOf("month").format(),
 					],
 					expirationDate: "2019-08-07T23:59:00-07:00",
 					notes: "",

@@ -2,7 +2,6 @@ import React from "react";
 import EventScheduleForm from "~containers/Forms/Event/EventScheduleForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
 import { app } from "~utils";
-import { resetServerMessage } from "~actions/Messages";
 import { resetEvents, setEventForScheduling } from "~actions/Events";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";
@@ -18,7 +17,6 @@ ScheduleEventPage.getInitialProps = async ({
 	const { id } = query;
 
 	try {
-		dispatch(resetServerMessage());
 		dispatch(resetEvents());
 
 		let res = await app.get(`event/review/${id}`, headers);

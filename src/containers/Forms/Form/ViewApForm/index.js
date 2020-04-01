@@ -18,7 +18,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldValidator from "~utils/fieldValidator";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
-import { fetchFormAp, resetApForm, updateFormAp } from "~actions/Forms";
+import { updateFormAp } from "~actions/Forms";
 import updateFormFields from "./UpdateFormFields";
 import condenseFormFields from "./CondenseFormFields";
 import fields from "./Fields";
@@ -56,15 +56,6 @@ export class ViewApForm extends Component {
 		return null;
 	};
 
-	componentDidMount = () => {
-		const { id } = this.props.match.params;
-		this.props.fetchFormAp(id);
-	};
-
-	componentWillUnmount = () => {
-		this.props.resetApForm();
-	};
-
 	handleChange = ({ target: { name, value } }) => {
 		this.setState(prevState => ({
 			...prevState,
@@ -93,7 +84,7 @@ export class ViewApForm extends Component {
 
 	render = () => {
 		const { fields, isLoading, isSubmitting } = this.state;
-		const { push, viewForm } = this.props;
+		const { viewForm } = this.props;
 
 		return (
 			<Card
@@ -172,14 +163,6 @@ ViewApForm.propTypes = {
 			notes: PropTypes.string,
 		}),
 	),
-	fetchFormAp: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}).isRequired,
-	push: PropTypes.func.isRequired,
-	resetApForm: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 	updateFormAp: PropTypes.func.isRequired,
 	viewForm: PropTypes.shape({
@@ -191,16 +174,13 @@ ViewApForm.propTypes = {
 	}),
 };
 
-const mapStateToProps = state => ({
-	events: state.forms.events,
-	serverMessage: state.server.message,
-	viewForm: state.forms.viewForm,
+const mapStateToProps = ({ forms, server }) => ({
+	events: forms.events,
+	viewForm: forms.viewForm,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
-	fetchFormAp,
-	push,
-	resetApForm,
 	updateFormAp,
 };
 

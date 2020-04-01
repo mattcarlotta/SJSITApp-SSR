@@ -1,9 +1,5 @@
 import { ViewApForm } from "../index";
 
-const id = "5d4e00bcf2d83c45a863e2bc";
-const fetchFormAp = jest.fn();
-const push = jest.fn();
-const resetApForm = jest.fn();
 const updateFormAp = jest.fn();
 
 const viewForm = {
@@ -34,14 +30,6 @@ const events = [
 
 const initProps = {
 	events: [],
-	fetchFormAp,
-	match: {
-		params: {
-			id,
-		},
-	},
-	push,
-	resetApForm,
 	serverMessage: "",
 	updateFormAp,
 	viewForm: {},
@@ -54,8 +42,6 @@ describe("View Ap Form", () => {
 	});
 
 	afterEach(() => {
-		fetchFormAp.mockClear();
-		resetApForm.mockClear();
 		updateFormAp.mockClear();
 	});
 
@@ -66,15 +52,6 @@ describe("View Ap Form", () => {
 	it("shows a LoadingForm and LoadingPanels when fetching events", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
 		expect(wrapper.find("LoadingPanel").exists()).toBeTruthy();
-	});
-
-	it("calls fetchFormAp on mount", () => {
-		expect(fetchFormAp).toHaveBeenCalledWith(id);
-	});
-
-	it("calls resetApForm on unmount", () => {
-		wrapper.unmount();
-		expect(resetApForm).toHaveBeenCalledTimes(1);
 	});
 
 	describe("Form Initialized", () => {

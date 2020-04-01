@@ -38,30 +38,6 @@ export const deleteManyForms = ids => ({
 });
 
 /**
- * Fetches a single form.
- *
- * @function fetchForm
- * @param {string} formId
- * @returns {object}
- */
-export const fetchForm = formId => ({
-	type: types.FORMS_EDIT,
-	formId,
-});
-
-/**
- * Fetches an AP form for viewing/editing.
- *
- * @function fetchFormAp
- * @param {string} formId
- * @returns {object}
- */
-export const fetchFormAp = formId => ({
-	type: types.FORMS_FETCH_AP,
-	formId,
-});
-
-/**
  * Fetches all forms.
  *
  * @function fetchForms
@@ -84,13 +60,13 @@ export const resendMail = formId => ({
 });
 
 /**
- * Reset AP responses to ensure 1:1.
+ * Resets forms state.
  *
- * @function resetApForm
+ * @function resetForms
  * @returns {object}
  */
-export const resetApForm = () => ({
-	type: types.FORMS_RESET_AP,
+export const resetForms = () => ({
+	type: types.FORMS_RESET,
 });
 
 /**
