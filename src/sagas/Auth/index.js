@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
-import { signin, signout } from "~actions/Auth";
+import app, { avatarAPI } from "~utils/axiosConfig";
+import { setUserAvatar, signin, signout } from "~actions/Auth";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import toast from "~components/Body/Toast";
@@ -23,6 +23,39 @@ export function* signoutUserSession() {
 		yield put(signout());
 
 		yield call(Router.push, "/employee/login");
+	} catch (e) {
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
+	}
+}
+
+/**
+ * Attempts to delete a user avatar.
+ *
+ * @generator
+ * @function deleteUserAvatar
+ * @param {object} id - user id.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to sign the user of any sessions.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+export function* deleteUserAvatar({ id }) {
+	try {
+		yield put(resetServerMessage());
+
+		const res = yield call(avatarAPI.delete, `delete-avatar/${id}`);
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				message,
+			}),
+		);
+		yield call(toast, { type: "info", message });
+
+		yield call(setUserAvatar({ avatar: "" }));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -122,6 +155,41 @@ export function* signupUser({ props }) {
 }
 
 /**
+ * Attempts to update a user avatar.
+ *
+ * @generator
+ * @function updateUserAvatar
+ * @param {object} props - props contain a token and (new) password fields.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to push to sign the user out of any sessions.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+export function* updateUserAvatar({ form }) {
+	try {
+		yield put(resetServerMessage());
+
+		const res = yield call(avatarAPI.put, "update-avatar", { form });
+		const data = yield call(parseData, res);
+
+		const { avatar, message } = data;
+
+		yield put(
+			setServerMessage({
+				message,
+			}),
+		);
+		yield call(toast, { type: "success", message });
+
+		yield call(setUserAvatar({ avatar }));
+	} catch (e) {
+		yield put(setServerMessage({ message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
+	}
+}
+
+/**
  * Attempts to create a new user password.
  *
  * @generator
@@ -163,10 +231,12 @@ export function* updateUserPassword({ props }) {
  */
 export default function* authSagas() {
 	yield all([
+		takeLatest(types.USER_DELETE_AVATAR, deleteUserAvatar),
 		takeLatest(types.USER_PASSWORD_RESET, resetPassword),
 		takeLatest(types.USER_SIGNIN_ATTEMPT, signinUser),
 		takeLatest(types.USER_SIGNOUT_SESSION, signoutUserSession),
 		takeLatest(types.USER_SIGNUP, signupUser),
+		takeLatest(types.USER_UPDATE_AVATAR, updateUserAvatar),
 		takeLatest(types.USER_PASSWORD_UPDATE, updateUserPassword),
 	]);
 }

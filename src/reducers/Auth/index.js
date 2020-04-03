@@ -2,6 +2,7 @@ import * as types from "~types";
 
 export const initialState = {
 	id: "",
+	avatar: "",
 	email: "",
 	firstName: "",
 	lastName: "",
@@ -21,6 +22,7 @@ const authReducer = (state = initialState, { payload, type }) => {
 			return { ...state, isCollapsed: !state.isCollapsed };
 		}
 		case types.USER_UPDATE:
+		case types.USER_SET_AVATAR:
 		case types.USER_SIGNIN: {
 			return { ...state, ...payload };
 		}

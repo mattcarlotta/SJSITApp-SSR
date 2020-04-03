@@ -2,7 +2,7 @@
 import get from "lodash.get";
 import axios from "axios";
 
-const { baseURL } = process.env;
+const { AVATARAPI, baseURL } = process.env;
 
 const app = axios.create({
 	baseURL,
@@ -10,6 +10,20 @@ const app = axios.create({
 });
 
 app.interceptors.response.use(
+	response => response,
+	error => {
+		const err = get(error, ["response", "data", "err"]);
+
+		return Promise.reject(err || error.message);
+	},
+);
+
+export const avatarAPI = axios.create({
+	baseURL: AVATARAPI,
+	withCredentials: true,
+});
+
+avatarAPI.interceptors.response.use(
 	response => response,
 	error => {
 		const err = get(error, ["response", "data", "err"]);

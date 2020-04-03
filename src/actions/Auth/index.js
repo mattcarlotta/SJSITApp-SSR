@@ -2,6 +2,18 @@ import isEmpty from "lodash.isempty";
 import * as types from "~types";
 
 /**
+ * Deletes current user avatar.
+ *
+ * @function deleteUserAvatar
+ * @param {string} id - current user id or requested id
+ * @returns {object}
+ */
+export const deleteUserAvatar = id => ({
+	type: types.USER_DELETE_AVATAR,
+	id,
+});
+
+/**
  * Creates a user password request via passwordreset form.
  *
  * @function resetPassword
@@ -22,6 +34,18 @@ export const resetPassword = props => ({
  */
 export const setSidebarState = () => ({
 	type: types.USER_SET_SIDEBAR_STATE,
+});
+
+/**
+ * Updates the user avatar to redux state.
+ *
+ * @function setUserAvatar
+ * @param {string} avatar
+ * @returns {object}
+ */
+export const setUserAvatar = avatar => ({
+	type: types.USER_SET_AVATAR,
+	payload: avatar,
 });
 
 /**
@@ -90,6 +114,18 @@ export const signupUser = props => ({
 export const updateUser = data => ({
 	type: types.USER_UPDATE,
 	payload: data,
+});
+
+/**
+ * Updates current signed in user avatar.
+ *
+ * @function updateUserAvatar
+ * @param {object} form - contains user image upload
+ * @returns {object}
+ */
+export const updateUserAvatar = form => ({
+	type: types.USER_UPDATE_AVATAR,
+	form,
 });
 
 /**

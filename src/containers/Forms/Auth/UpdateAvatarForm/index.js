@@ -1,0 +1,222 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import {
+	FaUpload,
+	FaTimesCircle,
+	FaUndo,
+	FaCloudUploadAlt,
+} from "react-icons/fa";
+import { Tooltip } from "antd";
+import { updateUserAvatar } from "~actions/Auth";
+import Button from "~components/Body/Button";
+import FlexCenter from "~components/Body/FlexCenter";
+import FlexSpaceAround from "~components/Body/FlexSpaceAround";
+import SubmitButton from "~components/Body/SubmitButton";
+import toast from "~components/Body/Toast";
+
+const initialState = {
+	error: "",
+	imagePreview: "",
+	file: null,
+	isSubmitting: false,
+};
+
+export class UpdateImageForm extends Component {
+	state = initialState;
+
+	static getDerivedStateFromProps({ serverMessage }) {
+		return serverMessage ? { isSubmitting: false } : null;
+	}
+
+	componentDidUpdate(prevProps) {
+		const { serverMessage } = this.props;
+
+		if (
+			prevProps.serverMessage !== serverMessage &&
+			serverMessage.indexOf("Successfully updated") > 0
+		) {
+			this.props.closeAvatarForm();
+		}
+	}
+
+	handleChange = async ({ target: { files } }) => {
+		try {
+			const file = files[0];
+
+			const isAccepted = [
+				"image/jpeg",
+				"image/png",
+				"image/gif",
+				"image/bmp",
+			].some(type => type === file.type);
+			const isLt10MB = file.size / 10240000 <= 1;
+
+			if (!isAccepted || !isLt10MB) throw String("Invalid format.");
+
+			const img = new Image();
+			img.src = URL.createObjectURL(file);
+
+			// await new Promise(
+			// 	(resolve, reject) =>
+			// 		(img.onload = () =>
+			// 			img.width <= 256 && img.height <= 256 ? resolve() : reject()),
+			// );
+
+			this.setState({
+				file,
+				imagePreview: img.src,
+			});
+		} catch (e) {
+			toast({
+				type: "error",
+				message: "Only 10MB (image/jpg,png,bmp,gif) files are accepted!",
+			});
+		}
+	};
+
+	handleReset = () =>
+		this.setState(initialState, () => (this.image.value = null));
+
+	handleSubmit = e => {
+		e.preventDefault();
+		const { file } = this.state;
+
+		if (!file) {
+			this.setState({ error: "Required!" }, () =>
+				toast({
+					type: "error",
+					message: "You must provide an image to upload!",
+				}),
+			);
+		} else {
+			this.setState({ error: "", isSubmitting: true }, async () => {
+				const fd = new FormData();
+				fd.append("id", this.props.id);
+				fd.append("file", file);
+				this.props.updateUserAvatar(fd);
+			});
+		}
+	};
+
+	render = () => {
+		const { error, imagePreview, isSubmitting } = this.state;
+
+		return (
+			<form css="width: 100%; max-width: 200px;" onSubmit={this.handleSubmit}>
+				<div
+					css={`
+						height: 195px;
+						width: 100%;
+						margin: 0 auto;
+						background: #efebeb;
+						position: relative;
+						border: ${error ? "1px solid #f0506e" : "1px dashed #03a9f3"};
+					`}
+				>
+					{imagePreview ? (
+						<div css="min-height: 100%;display: flex;justify-content: center;align-items: center;overflow: hidden;margin: 0 5px;">
+							<img
+								css="max-height: 180px;"
+								src={imagePreview}
+								alt="imagePreview"
+							/>
+						</div>
+					) : (
+						<FlexCenter
+							style={{ padding: 5, textAlign: "center" }}
+							direction="column"
+						>
+							<div css="margin-left: auto;margin-right: auto; margin-top: 10px;">
+								<FaCloudUploadAlt style={{ fontSize: 70 }} />
+							</div>
+							<div css="font-size: 14px;margin: 5px 0;">
+								Click <strong>here</strong> or drag an image to this area.
+							</div>
+							<div css="font-size: 12px;margin: 5px 0;">
+								&#40;jpg/png/gif/bmp &#8804; 10MB&#41;
+							</div>
+						</FlexCenter>
+					)}
+					<input
+						css="position: absolute;top: 0px;right: 0px;bottom: 0px;left: 0px;opacity: 1e-05;width: 100%;cursor: pointer;z-index: 10;"
+						ref={node => (this.image = node)}
+						type="file"
+						accept="image/*"
+						multiple={false}
+						onChange={this.handleChange}
+					/>
+				</div>
+				{isSubmitting ? (
+					<SubmitButton
+						isSubmitting
+						title="Uploading..."
+						style={{ minHeight: 44 }}
+						submitBtnStyle={{ height: 44 }}
+					/>
+				) : (
+					<FlexSpaceAround style={{ width: "200px" }}>
+						<Tooltip placement="top" title="Upload">
+							<Button
+								primary
+								type="submit"
+								width="50px"
+								marginRight="0"
+								padding="5px"
+								style={{ marginTop: 8 }}
+							>
+								<FaUpload
+									style={{ fontSize: 17, position: "relative", top: 3 }}
+								/>
+							</Button>
+						</Tooltip>
+						<Tooltip placement="top" title="Reset">
+							<Button
+								type="button"
+								width="50px"
+								marginRight="0"
+								padding="5px"
+								style={{ marginTop: 8 }}
+								onClick={this.handleReset}
+							>
+								<FaUndo style={{ position: "relative", top: 5 }} />
+							</Button>
+						</Tooltip>
+						<Tooltip placement="top" title="Cancel">
+							<Button
+								danger
+								type="button"
+								width="50px"
+								marginRight="0"
+								padding="5px"
+								style={{ marginTop: 8 }}
+								onClick={this.props.closeAvatarForm}
+							>
+								<FaTimesCircle
+									style={{ fontSize: 18, position: "relative", top: 3 }}
+								/>
+							</Button>
+						</Tooltip>
+					</FlexSpaceAround>
+				)}
+			</form>
+		);
+	};
+}
+
+UpdateImageForm.propTypes = {
+	id: PropTypes.string.isRequired,
+	closeAvatarForm: PropTypes.func.isRequired,
+	serverMessage: PropTypes.string,
+	updateUserAvatar: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({ server }) => ({
+	serverMessage: server.message,
+});
+
+const mapDispatchToProps = {
+	updateUserAvatar,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateImageForm);

@@ -12,6 +12,7 @@ import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
 import PaneBody from "~components/Body/PaneBody";
 import Title from "~components/Body/Title";
+import { deleteUserAvatar } from "~actions/Auth";
 import {
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
@@ -57,6 +58,7 @@ const responses = (
 
 export class Settings extends Component {
 	state = {
+		showAvatarForm: false,
 		windowWidth: 0,
 	};
 
@@ -68,6 +70,11 @@ export class Settings extends Component {
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.handleResize);
 	}
+
+	toggleAvatarForm = () =>
+		this.setState(prevState => ({
+			showAvatarForm: !prevState.showAvatarForm,
+		}));
 
 	/* istanbul ignore next */
 	handleResize = debounce(
@@ -107,7 +114,13 @@ export class Settings extends Component {
 					) : (
 						<Tabs tabPosition={windowWidth <= 900 ? "top" : "left"}>
 							<Pane tab={profile} key="profile">
-								<Profile {...this.props.viewMember} />
+								<Profile
+									{...this.state}
+									{...this.props.viewMember}
+									deleteUserAvatar={this.props.deleteUserAvatar}
+									id={id}
+									toggleAvatarForm={this.toggleAvatarForm}
+								/>
 							</Pane>
 							<Pane tab={availability} disabled={isStaff} key="availability">
 								<PaneBody>
@@ -142,6 +155,7 @@ export class Settings extends Component {
 }
 
 Settings.propTypes = {
+	deleteUserAvatar: PropTypes.func.isRequired,
 	eventResponses: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string,
@@ -201,6 +215,7 @@ const mapStateToProps = ({ members, server }) => ({
 });
 
 const mapDispatchToProps = {
+	deleteUserAvatar,
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
 	updateMemberStatus,

@@ -11,7 +11,7 @@ import MenuItemTitle from "~components/Body/MenuItemTitle";
 
 const MenuItem = Menu.Item;
 
-export const AccountButton = ({ firstName, lastName, signoutUser }) => {
+export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 	const options = (
 		<Menu style={{ padding: 0 }}>
 			<MenuItem>
@@ -42,7 +42,11 @@ export const AccountButton = ({ firstName, lastName, signoutUser }) => {
 				hoverable
 				style={{ padding: "0 20px", marginRight: 0, height: 64 }}
 			>
-				<FaUserCircle style={{ verticalAlign: "middle" }} />
+				{avatar ? (
+					<img src={avatar} alt="avatar" width="30px" />
+				) : (
+					<FaUserCircle style={{ verticalAlign: "middle", fontSize: 30 }} />
+				)}
 				<MenuItemTitle
 					className="loggedin-user"
 					style={{ verticalAlign: "middle" }}
@@ -56,6 +60,7 @@ export const AccountButton = ({ firstName, lastName, signoutUser }) => {
 };
 
 AccountButton.propTypes = {
+	avatar: PropTypes.string,
 	firstName: PropTypes.string.isRequired,
 	lastName: PropTypes.string.isRequired,
 	signoutUser: PropTypes.func.isRequired,

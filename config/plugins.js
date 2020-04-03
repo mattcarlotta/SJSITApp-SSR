@@ -17,6 +17,7 @@ const REMOTEADDRESS = address.ip();
 
 const {
 	analyze,
+	AVATARAPI,
 	baseURL,
 	cookieSecret,
 	DATABASE,
@@ -46,6 +47,7 @@ module.exports = isServer => {
 			/* envs for client */
 			new DefinePlugin({
 				"process.env": {
+					AVATARAPI: JSON.stringify(AVATARAPI),
 					baseURL: JSON.stringify(baseURL),
 					DATABASE: JSON.stringify(DATABASE),
 					cookieSecret: JSON.stringify(cookieSecret),

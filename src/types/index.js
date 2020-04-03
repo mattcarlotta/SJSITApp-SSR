@@ -112,10 +112,16 @@ export const SEASONS_SET_IDS = "SEASONS/SET_IDS";
 export const TEAMS_FETCH_NAMES = "TEAMS/FETCH_NAMES";
 export const TEAMS_SET_NAMES = "TEAMS/SET_NAMES";
 
-// user authethenication
+// user avatar
+export const USER_DELETE_AVATAR = "USER/DELETE_AVATAR";
+export const USER_UPDATE_AVATAR = "USER/UPDATE_AVATAR";
+export const USER_SET_AVATAR = "USER/SET_AVATAR";
+// user password
 export const USER_PASSWORD_UPDATE = "USER/PASSWORD_UPDATE";
 export const USER_PASSWORD_RESET = "USER/PASSWORD_RESET";
+// ui sidebar state
 export const USER_SET_SIDEBAR_STATE = "USER/SET_SIDEBAR_STATE";
+// user auth
 export const USER_SIGNIN = "USER/SIGNIN";
 export const USER_SIGNIN_ATTEMPT = "USER/SIGNIN_ATTEMPT";
 export const USER_SIGNOUT = "USER/SIGNOUT";
