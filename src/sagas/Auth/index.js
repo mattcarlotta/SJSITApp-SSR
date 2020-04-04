@@ -2,7 +2,7 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import app, { avatarAPI } from "~utils/axiosConfig";
 import { setUserAvatar, signin, signout } from "~actions/Auth";
-import { fetchMember } from "~actions/Members";
+import { fetchMemberSettings } from "~actions/Members";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import toast from "~components/Body/Toast";
@@ -57,7 +57,7 @@ export function* deleteUserAvatar({ id }) {
 		yield call(toast, { type: "info", message });
 
 		yield put(setUserAvatar({ avatar: "" }));
-		yield put(fetchMember(id));
+		yield put(fetchMemberSettings());
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -185,7 +185,7 @@ export function* updateUserAvatar({ form, id }) {
 		yield call(toast, { type: "info", message });
 
 		yield put(setUserAvatar({ avatar }));
-		yield put(fetchMember(id));
+		yield put(fetchMemberSettings());
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
