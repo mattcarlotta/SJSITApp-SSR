@@ -174,6 +174,7 @@ export class UpdateImageForm extends Component {
 						<Tooltip placement="top" title="Reset Image">
 							<Button
 								danger
+								className={!file ? "disabled" : undefined}
 								type="button"
 								width="50px"
 								marginRight="0"
