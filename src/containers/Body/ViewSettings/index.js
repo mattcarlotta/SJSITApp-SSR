@@ -171,11 +171,6 @@ Settings.propTypes = {
 	),
 	fetchMemberSettingsAvailability: PropTypes.func.isRequired,
 	fetchMemberSettingsEvents: PropTypes.func.isRequired,
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string,
-		}),
-	}),
 	memberAvailability: PropTypes.shape({
 		memberScheduleEvents: PropTypes.arrayOf(
 			PropTypes.shape({
@@ -194,6 +189,7 @@ Settings.propTypes = {
 	}),
 	viewMember: PropTypes.shape({
 		_id: PropTypes.string,
+		avatar: PropTypes.string,
 		email: PropTypes.string,
 		emailReminders: PropTypes.bool,
 		firstName: PropTypes.string,

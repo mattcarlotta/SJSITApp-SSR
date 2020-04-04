@@ -43,7 +43,12 @@ export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 				style={{ padding: "0 20px", marginRight: 0, height: 64 }}
 			>
 				{avatar ? (
-					<img src={avatar} alt="avatar" width="30px" />
+					<img
+						css="border-radius: 50%;width: 35px;"
+						src={avatar}
+						alt="avatar"
+						width="30px"
+					/>
 				) : (
 					<FaUserCircle style={{ verticalAlign: "middle", fontSize: 30 }} />
 				)}
@@ -66,8 +71,10 @@ AccountButton.propTypes = {
 	signoutUser: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = ({ auth }) => ({ avatar: auth.avatar });
+
 const mapDispatchToProps = {
 	signoutUser,
 };
 
-export default connect(null, mapDispatchToProps)(AccountButton);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountButton);

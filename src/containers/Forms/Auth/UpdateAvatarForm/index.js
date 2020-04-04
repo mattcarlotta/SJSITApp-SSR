@@ -34,7 +34,7 @@ export class UpdateImageForm extends Component {
 
 		if (
 			prevProps.serverMessage !== serverMessage &&
-			serverMessage.indexOf("Successfully updated") > 0
+			serverMessage.indexOf("Successfully") >= 0
 		) {
 			this.props.closeAvatarForm();
 		}
@@ -81,6 +81,7 @@ export class UpdateImageForm extends Component {
 	handleSubmit = e => {
 		e.preventDefault();
 		const { file } = this.state;
+		const { id } = this.props;
 
 		if (!file) {
 			this.setState({ error: "Required!" }, () =>
@@ -91,16 +92,15 @@ export class UpdateImageForm extends Component {
 			);
 		} else {
 			this.setState({ error: "", isSubmitting: true }, async () => {
-				const fd = new FormData();
-				fd.append("id", this.props.id);
-				fd.append("file", file);
-				this.props.updateUserAvatar(fd);
+				const form = new FormData();
+				form.append("file", file);
+				this.props.updateUserAvatar({ form, id });
 			});
 		}
 	};
 
 	render = () => {
-		const { error, imagePreview, isSubmitting } = this.state;
+		const { error, file, imagePreview, isSubmitting } = this.state;
 
 		return (
 			<form css="width: 100%; max-width: 200px;" onSubmit={this.handleSubmit}>
@@ -155,22 +155,25 @@ export class UpdateImageForm extends Component {
 						submitBtnStyle={{ height: 44 }}
 					/>
 				) : (
-					<FlexSpaceAround style={{ width: "200px" }}>
-						<Tooltip placement="top" title="Upload">
+					<FlexSpaceAround style={{ width: "200px", paddingBottom: "6px" }}>
+						<Tooltip placement="top" title="Upload Image">
 							<Button
 								primary
+								className={!file ? "disabled" : undefined}
 								type="submit"
 								width="50px"
 								marginRight="0"
 								padding="5px"
-								style={{ marginTop: 8 }}
+								style={{
+									marginTop: 8,
+								}}
 							>
 								<FaUpload
 									style={{ fontSize: 17, position: "relative", top: 3 }}
 								/>
 							</Button>
 						</Tooltip>
-						<Tooltip placement="top" title="Reset">
+						<Tooltip placement="top" title="Reset Image">
 							<Button
 								type="button"
 								width="50px"

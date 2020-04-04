@@ -1,60 +1,93 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tooltip } from "antd";
-import { FaUserCircle } from "react-icons/fa";
+import {
+	FaUserCircle,
+	FaTrash,
+	FaSyncAlt,
+	FaCloudUploadAlt,
+} from "react-icons/fa";
 import Button from "~components/Body/Button";
+import FlexCenter from "~components/Body/FlexCenter";
+// import FlexCenter from "~components/Body/FlexCenter";
 
-const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => {
-	return (
-		<>
-			<div css="height: 244px;max-width:200px;border-radius: 50%;">
-				{avatar ? (
-					<img src={avatar} alt="avatar" />
-				) : (
-					<FaUserCircle
-						style={{
-							height: 190,
-							width: 190,
-							margin: "0 auto",
-							display: "block",
-						}}
-					/>
-				)}
-				<div css="margin-top: 10px;">
-					<Tooltip placement="top" title="Change Avatar">
-						<Button
-							danger
-							type="button"
-							padding="5px"
-							style={{
-								margin: "5 auto",
-							}}
-							onClick={openAvatarForm}
-						>
-							Change
-						</Button>
-					</Tooltip>
-					{avatar && (
-						<Tooltip placement="top" title="Delete Avatar">
-							<Button
-								danger
-								type="button"
+const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
+	<div css="height: 250px;width:200px;border-radius: 50%;">
+		{avatar ? (
+			<FlexCenter style={{ height: 192 }}>
+				<img
+					css="display: block; max-height: 192px;max-width: 192px;border-radius: 50%;margin: 10px auto 0;"
+					src={avatar}
+					alt="avatar"
+				/>
+			</FlexCenter>
+		) : (
+			<FaUserCircle
+				style={{
+					height: 190,
+					width: 190,
+					margin: "0 auto",
+					display: "block",
+				}}
+			/>
+		)}
+		<FlexCenter
+			style={{
+				width: "192px",
+				marginTop: 10,
+				marginLeft: "auto",
+				marginRight: "auto",
+			}}
+		>
+			<Tooltip
+				placement="top"
+				title={avatar ? "Update Avatar" : "Upload An Avatar"}
+			>
+				<Button
+					primary
+					type="button"
+					padding="3px"
+					style={{
+						margin: !avatar ? "5px auto" : "5px 10px 0 0",
+						width: !avatar ? 170 : 50,
+					}}
+					onClick={openAvatarForm}
+				>
+					{avatar ? (
+						<FaSyncAlt style={{ fontSize: 16 }} />
+					) : (
+						<>
+							<FaCloudUploadAlt
 								style={{
-									maxWidth: 100,
-									marginTop: 5,
-									marginLeft: 20,
+									fontSize: 16,
+									marginRight: 5,
+									position: "relative",
+									top: 2,
 								}}
-								onClick={deleteUserAvatar}
-							>
-								Delete
-							</Button>
-						</Tooltip>
+							/>{" "}
+							Upload
+						</>
 					)}
-				</div>
-			</div>
-		</>
-	);
-};
+				</Button>
+			</Tooltip>
+			{avatar && (
+				<Tooltip placement="top" title="Delete Avatar">
+					<Button
+						danger
+						type="button"
+						padding="3px"
+						width="50px"
+						marginRight="0"
+						style={{ marginTop: 5 }}
+						onClick={deleteUserAvatar}
+					>
+						<FaTrash style={{ fontSize: 16 }} />
+					</Button>
+				</Tooltip>
+			)}
+		</FlexCenter>
+	</div>
+);
 
 Avatar.propTypes = {
 	avatar: PropTypes.string,

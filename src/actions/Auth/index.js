@@ -120,12 +120,14 @@ export const updateUser = data => ({
  * Updates current signed in user avatar.
  *
  * @function updateUserAvatar
- * @param {object} form - contains user image upload
+ * @param {object} formData - contains user image upload
+ * @param {string} id - contains user id
  * @returns {object}
  */
-export const updateUserAvatar = form => ({
+export const updateUserAvatar = ({ form, id }) => ({
 	type: types.USER_UPDATE_AVATAR,
 	form,
+	id,
 });
 
 /**

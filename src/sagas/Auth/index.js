@@ -2,6 +2,7 @@ import Router from "next/router";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import app, { avatarAPI } from "~utils/axiosConfig";
 import { setUserAvatar, signin, signout } from "~actions/Auth";
+import { fetchMember } from "~actions/Members";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import toast from "~components/Body/Toast";
@@ -45,7 +46,7 @@ export function* deleteUserAvatar({ id }) {
 	try {
 		yield put(resetServerMessage());
 
-		const res = yield call(avatarAPI.delete, `delete-avatar/${id}`);
+		const res = yield call(avatarAPI.delete, `delete/${id}`);
 		const message = yield call(parseMessage, res);
 
 		yield put(
@@ -55,7 +56,8 @@ export function* deleteUserAvatar({ id }) {
 		);
 		yield call(toast, { type: "info", message });
 
-		yield call(setUserAvatar({ avatar: "" }));
+		yield put(setUserAvatar({ avatar: "" }));
+		yield put(fetchMember(id));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });
@@ -166,11 +168,11 @@ export function* signupUser({ props }) {
  * @yields {action} - A redux action to push to sign the user out of any sessions.
  * @throws {action} - A redux action to display a server message by type.
  */
-export function* updateUserAvatar({ form }) {
+export function* updateUserAvatar({ form, id }) {
 	try {
 		yield put(resetServerMessage());
 
-		const res = yield call(avatarAPI.put, "update-avatar", { form });
+		const res = yield call(avatarAPI.put, `update/${id}`, form);
 		const data = yield call(parseData, res);
 
 		const { avatar, message } = data;
@@ -180,9 +182,10 @@ export function* updateUserAvatar({ form }) {
 				message,
 			}),
 		);
-		yield call(toast, { type: "success", message });
+		yield call(toast, { type: "info", message });
 
-		yield call(setUserAvatar({ avatar }));
+		yield put(setUserAvatar({ avatar }));
+		yield put(fetchMember(id));
 	} catch (e) {
 		yield put(setServerMessage({ message: e.toString() }));
 		yield call(toast, { type: "error", message: e.toString() });

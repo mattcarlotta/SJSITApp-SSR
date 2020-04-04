@@ -21,6 +21,7 @@ export default next => async (req, res, resolve) => {
 
 		req.user = {
 			id: existingUser._id,
+			avatar: existingUser.avatar,
 			email: existingUser.email,
 			firstName: existingUser.firstName,
 			lastName: existingUser.lastName,

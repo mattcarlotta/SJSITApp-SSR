@@ -2,6 +2,9 @@
 import styled from "styled-components";
 
 export default styled.div`
-	flex-direction: ${({ direction }) => direction || "row"};
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	width: 100%;
 `;

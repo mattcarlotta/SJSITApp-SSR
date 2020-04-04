@@ -34,8 +34,8 @@ export default next => (req, res) => {
 					path: "/",
 					keys: [cookieKey],
 					name: "SJSITApp",
-					sameSite: inProd, // specifies same-site cookie attribute enforcement
-					maxAge: 2592000000, // 30 * 24 * 60 * 60 * 1000 expire after 30 days, 30days/24hr/60m/60s/1000ms
+					maxAge: 2592000000,
+					sameSite: inProd,
 					httpOnly: true,
 					// secure: inProd,
 				}),
