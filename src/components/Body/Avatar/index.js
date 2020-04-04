@@ -4,7 +4,7 @@ import { Tooltip } from "antd";
 import {
 	FaUserCircle,
 	FaTrash,
-	FaSyncAlt,
+	FaUpload,
 	FaCloudUploadAlt,
 } from "react-icons/fa";
 import Button from "~components/Body/Button";
@@ -53,7 +53,7 @@ const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 					onClick={openAvatarForm}
 				>
 					{avatar ? (
-						<FaSyncAlt style={{ fontSize: 16 }} />
+						<FaUpload style={{ fontSize: 16 }} />
 					) : (
 						<>
 							<FaCloudUploadAlt
