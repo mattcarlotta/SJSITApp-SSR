@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import {
 	FaUpload,
 	FaTimesCircle,
-	FaUndo,
 	FaCloudUploadAlt,
+	FaTrash,
 } from "react-icons/fa";
 import { Tooltip } from "antd";
 import { updateUserAvatar } from "~actions/Auth";
@@ -44,12 +44,9 @@ export class UpdateImageForm extends Component {
 		try {
 			const file = files[0];
 
-			const isAccepted = [
-				"image/jpeg",
-				"image/png",
-				"image/gif",
-				"image/bmp",
-			].some(type => type === file.type);
+			const isAccepted = ["image/jpg", "image/jpeg", "image/png"].some(
+				type => type === file.type,
+			);
 			const isLt10MB = file.size / 10240000 <= 1;
 
 			if (!isAccepted || !isLt10MB) throw String("Invalid format.");
@@ -57,11 +54,11 @@ export class UpdateImageForm extends Component {
 			const img = new Image();
 			img.src = URL.createObjectURL(file);
 
-			// await new Promise(
-			// 	(resolve, reject) =>
-			// 		(img.onload = () =>
-			// 			img.width <= 256 && img.height <= 256 ? resolve() : reject()),
-			// );
+			await new Promise(
+				(resolve, reject) =>
+					(img.onload = () =>
+						img.width <= 10000 && img.height <= 10000 ? resolve() : reject()),
+			);
 
 			this.setState({
 				file,
@@ -70,7 +67,7 @@ export class UpdateImageForm extends Component {
 		} catch (e) {
 			toast({
 				type: "error",
-				message: "Only 10MB (image/jpg,png,bmp,gif) files are accepted!",
+				message: "Only 10mb or less .jpg/.jpeg/.png files are accepted!",
 			});
 		}
 	};
@@ -127,15 +124,16 @@ export class UpdateImageForm extends Component {
 							style={{ padding: 5, textAlign: "center" }}
 							direction="column"
 						>
-							<div css="margin-left: auto;margin-right: auto; margin-top: 10px;">
-								<FaCloudUploadAlt style={{ fontSize: 70 }} />
+							<div css="margin-left: auto;margin-right: auto; margin: 0;">
+								<FaCloudUploadAlt style={{ fontSize: 80 }} />
 							</div>
-							<div css="font-size: 14px;margin: 5px 0;">
+							<div css="font-size: 14px;">
 								Click <strong>here</strong> or drag an image to this area.
 							</div>
-							<div css="font-size: 12px;margin: 5px 0;">
-								&#40;jpg/png/gif/bmp &#8804; 10MB&#41;
+							<div css="font-size: 12px;margin: 5px 0 0 0;">
+								Accepted formats:
 							</div>
+							<div css="font-size: 12px;">jpg/jpeg/png &#8804; 10mb</div>
 						</FlexCenter>
 					)}
 					<input
@@ -175,6 +173,7 @@ export class UpdateImageForm extends Component {
 						</Tooltip>
 						<Tooltip placement="top" title="Reset Image">
 							<Button
+								danger
 								type="button"
 								width="50px"
 								marginRight="0"
@@ -182,10 +181,10 @@ export class UpdateImageForm extends Component {
 								style={{ marginTop: 8 }}
 								onClick={this.handleReset}
 							>
-								<FaUndo style={{ position: "relative", top: 5 }} />
+								<FaTrash style={{ position: "relative", top: 3 }} />
 							</Button>
 						</Tooltip>
-						<Tooltip placement="top" title="Cancel">
+						<Tooltip placement="top" title="Cancel Upload">
 							<Button
 								danger
 								type="button"

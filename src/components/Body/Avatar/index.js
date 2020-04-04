@@ -9,14 +9,13 @@ import {
 } from "react-icons/fa";
 import Button from "~components/Body/Button";
 import FlexCenter from "~components/Body/FlexCenter";
-// import FlexCenter from "~components/Body/FlexCenter";
 
 const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 	<div css="height: 250px;width:200px;border-radius: 50%;">
 		{avatar ? (
 			<FlexCenter style={{ height: 192 }}>
 				<img
-					css="display: block; max-height: 192px;max-width: 192px;border-radius: 50%;margin: 10px auto 0;"
+					css="display: block;max-height: 192px;max-width: 192px;border-radius: 50%;margin: 10px auto 0;"
 					src={avatar}
 					alt="avatar"
 				/>
@@ -33,7 +32,7 @@ const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 		)}
 		<FlexCenter
 			style={{
-				width: "192px",
+				width: 192,
 				marginTop: 10,
 				marginLeft: "auto",
 				marginRight: "auto",
@@ -59,13 +58,13 @@ const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 						<>
 							<FaCloudUploadAlt
 								style={{
-									fontSize: 16,
+									fontSize: 18,
 									marginRight: 5,
 									position: "relative",
-									top: 2,
+									top: 3,
 								}}
-							/>{" "}
-							Upload
+							/>
+							&nbsp;Upload
 						</>
 					)}
 				</Button>
