@@ -1,7 +1,7 @@
 import React from "react";
 import ViewForms from "~containers/Body/ViewForms";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetForms, setForms } from "~actions/Forms";
 import dispatchError from "~utils/dispatchError";

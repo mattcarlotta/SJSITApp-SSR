@@ -1,10 +1,11 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Seasons";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -38,8 +39,7 @@ export function* createSeason({ props }) {
 
 		yield call(Router.push, "/employee/seasons/viewall?page=1");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -73,8 +73,7 @@ export function* deleteSeason({ seasonId }) {
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -110,8 +109,7 @@ export function* deleteManySeasons({ ids }) {
 
 		yield put(actions.fetchSeasons());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -136,8 +134,7 @@ export function* fetchSeasons() {
 
 		yield put(actions.setSeasons(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -162,8 +159,7 @@ export function* fetchSeasonsIds() {
 
 		yield put(actions.setSeasonsIds(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -197,8 +193,7 @@ export function* updateSeason({ props }) {
 
 		yield call(Router.back);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

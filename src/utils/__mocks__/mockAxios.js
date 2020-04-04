@@ -1,6 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
-import axios from "utils/axiosConfig";
+import app, { avatarAPI } from "~utils/axiosConfig";
 
-const mockApp = new MockAdapter(axios);
+const mockApp = new MockAdapter(app);
+const mockAPI = new MockAdapter(avatarAPI);
 
-export default mockApp;
+export { mockApp, mockAPI };

@@ -1,10 +1,11 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Mail";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -38,8 +39,7 @@ export function* contactUs({ props }) {
 
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -73,8 +73,7 @@ export function* createMail({ props }) {
 
 		yield call(Router.push, "/employee/mail/viewall?page=1");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -108,8 +107,7 @@ export function* deleteMail({ mailId }) {
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -143,8 +141,7 @@ export function* deleteManyMails({ ids }) {
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -169,8 +166,7 @@ export function* fetchMails() {
 
 		yield put(actions.setMails(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -204,8 +200,7 @@ export function* resendMail({ mailId }) {
 
 		yield put(actions.fetchMails());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -239,8 +234,7 @@ export function* updateMail({ props }) {
 
 		yield call(Router.back);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

@@ -1,11 +1,12 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { signoutUser, updateUser } from "~actions/Auth";
 import * as actions from "~actions/Members";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -39,8 +40,7 @@ export function* createMember({ props }) {
 
 		yield call(Router.push, "/employee/members/authorizations/viewall?page=1");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -74,8 +74,7 @@ export function* deleteMember({ memberId }) {
 
 		yield put(actions.fetchMembers());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -111,8 +110,7 @@ export function* deleteManyMembers({ ids }) {
 
 		yield put(actions.fetchMembers());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -146,8 +144,7 @@ export function* deleteToken({ tokenId }) {
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -181,8 +178,7 @@ export function* deleteManyTokens({ ids }) {
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -207,8 +203,7 @@ export function* fetchAvailability({ params }) {
 
 		yield put(actions.setMemberAvailability(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -244,8 +239,7 @@ export function* fetchProfile({ memberId }) {
 		);
 	} catch (e) {
 		yield call(Router.back);
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -268,8 +262,7 @@ export function* fetchMemberEvents({ params }) {
 
 		yield put(actions.setMemberEventsByDate(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -294,8 +287,7 @@ export function* fetchMembers() {
 
 		yield put(actions.setMembers(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -336,8 +328,7 @@ export function* fetchSettings() {
 			}),
 		);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -362,8 +353,7 @@ export function* fetchSettingsAvailability({ params }) {
 
 		yield put(actions.setMemberAvailability(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -386,8 +376,7 @@ export function* fetchMemberSettingsEvents({ params }) {
 
 		yield put(actions.setMemberEventsByDate(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -418,8 +407,7 @@ export function* fetchToken({ tokenId }) {
 		);
 	} catch (e) {
 		yield call(Router.back);
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -444,8 +432,7 @@ export function* fetchTokens() {
 
 		yield put(actions.setTokens(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -479,8 +466,7 @@ export function* resendToken({ tokenId }) {
 
 		yield put(actions.fetchTokens());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -512,10 +498,9 @@ export function* updateMember({ props }) {
 		);
 		yield call(toast, { type: "info", message });
 
-		yield put(actions.fetchMember(props._id));
+		yield call(actions.fetchMember(props._id));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -549,8 +534,7 @@ export function* updateMemberStatus({ props }) {
 
 		yield put(actions.fetchMember(props._id));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -584,8 +568,7 @@ export function* updateMemberToken({ props }) {
 
 		yield call(Router.back);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -623,8 +606,7 @@ export function* updateSettings({ props }) {
 			yield put(actions.fetchMemberSettings());
 		}
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

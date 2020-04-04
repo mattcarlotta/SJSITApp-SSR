@@ -1,5 +1,5 @@
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import * as actions from "~actions/Teams";
 import * as sagas from "~sagas/Teams";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";

@@ -1,7 +1,7 @@
 import React from "react";
 import EventScheduleForm from "~containers/Forms/Event/EventScheduleForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetEvents, setEventForScheduling } from "~actions/Events";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";

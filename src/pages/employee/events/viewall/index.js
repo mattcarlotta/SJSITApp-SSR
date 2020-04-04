@@ -2,7 +2,7 @@ import React from "react";
 import isEmpty from "lodash.isempty";
 import ViewEvents from "~containers/Body/ViewEvents";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetEvents, setEvents } from "~actions/Events";
 import { setTeamNames } from "~actions/Teams";

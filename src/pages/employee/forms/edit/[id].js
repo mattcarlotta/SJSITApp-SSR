@@ -1,7 +1,7 @@
 import React from "react";
 import EditForm from "~containers/Forms/Form/EditForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetForms, setFormToEdit } from "~actions/Forms";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";

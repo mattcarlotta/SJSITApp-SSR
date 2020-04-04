@@ -1,7 +1,7 @@
 import React from "react";
 import EditSeasonForm from "~containers/Forms/Season/EditSeasonForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetSeasons, setSeasonToEdit } from "~actions/Seasons";
 import dispatchError from "~utils/dispatchError";

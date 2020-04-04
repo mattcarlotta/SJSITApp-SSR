@@ -1,9 +1,8 @@
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { setTeamNames } from "~actions/Teams";
-import { setServerMessage } from "~actions/Messages";
 import { parseData } from "~utils/parseResponse";
-import toast from "~components/Body/Toast";
+import setError from "~utils/setError";
 import * as types from "~types";
 
 /**
@@ -24,8 +23,7 @@ export function* fetchTeamNames() {
 
 		yield put(setTeamNames(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

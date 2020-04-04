@@ -1,7 +1,7 @@
 import React from "react";
 import NewEventForm from "~containers/Forms/Event/NewEventForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { setNewEvent } from "~actions/Events";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import dispatchError from "~utils/dispatchError";

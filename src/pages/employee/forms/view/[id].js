@@ -1,7 +1,7 @@
 import React from "react";
 import ViewApForm from "~containers/Forms/Form/ViewApForm";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetForms, setFormAp } from "~actions/Forms";
 import dispatchError from "~utils/dispatchError";

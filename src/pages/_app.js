@@ -8,7 +8,7 @@ import withReduxSaga from "next-redux-saga";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import ServerMessages from "~containers/Auth/ServerMessages";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";

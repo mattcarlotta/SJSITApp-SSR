@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import * as actions from "~actions/Events";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as sagas from "~sagas/Events";

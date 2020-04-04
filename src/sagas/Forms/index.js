@@ -1,10 +1,11 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import * as actions from "~actions/Forms";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -38,8 +39,7 @@ export function* createForm({ props }) {
 
 		yield call(Router.push, "/employee/forms/viewall?page=1");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -73,8 +73,7 @@ export function* deleteForm({ formId }) {
 
 		yield put(actions.fetchForms());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -108,8 +107,7 @@ export function* deleteManyForms({ ids }) {
 
 		yield put(actions.fetchForms());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -134,8 +132,7 @@ export function* fetchForms() {
 
 		yield put(actions.setForms(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -168,8 +165,7 @@ export function* resendFormEmails({ formId }) {
 
 		yield put(actions.fetchForms());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -203,8 +199,7 @@ export function* updateForm({ props }) {
 
 		yield call(Router.back);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -238,8 +233,7 @@ export function* updateFormAp({ props }) {
 
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

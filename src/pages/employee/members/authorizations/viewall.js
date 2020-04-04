@@ -1,7 +1,7 @@
 import React from "react";
 import ViewAuthorizations from "~containers/Body/ViewAuthorizations";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetTokens, setTokens } from "~actions/Members";
 import dispatchError from "~utils/dispatchError";

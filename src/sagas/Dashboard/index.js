@@ -1,9 +1,8 @@
 import { all, put, call, takeLatest } from "redux-saga/effects";
-import { app } from "~utils";
-import { setServerMessage } from "~actions/Messages";
+import app from "~utils/axiosConfig";
 import { setEventDistribution, setEvents } from "~actions/Dashboard";
 import { parseData } from "~utils/parseResponse";
-import toast from "~components/Body/Toast";
+import setError from "~utils/setError";
 import * as types from "~types";
 
 /**
@@ -26,8 +25,7 @@ export function* fetchEventDistribution({ params }) {
 
 		yield put(setEventDistribution(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -50,8 +48,7 @@ export function* fetchEvents({ selectedEvent }) {
 
 		yield put(setEvents(data));
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

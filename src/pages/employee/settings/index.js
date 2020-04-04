@@ -1,7 +1,7 @@
 import React from "react";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import ViewSettings from "~containers/Body/ViewSettings";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { updateUser } from "~actions/Auth";
 import { resetMembers, setMemberToReview } from "~actions/Members";
 import { parseCookie, parseData } from "~utils/parseResponse";

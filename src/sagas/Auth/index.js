@@ -5,6 +5,7 @@ import { setUserAvatar, signin, signout } from "~actions/Auth";
 import { fetchMemberSettings } from "~actions/Members";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
+import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
 
@@ -25,8 +26,7 @@ export function* signoutUserSession() {
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -59,8 +59,7 @@ export function* deleteUserAvatar({ id }) {
 		yield put(setUserAvatar({ avatar: "" }));
 		yield put(fetchMemberSettings());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -92,8 +91,7 @@ export function* resetPassword({ props }) {
 
 		yield call(signoutUserSession);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -118,8 +116,7 @@ export function* signinUser({ props }) {
 		yield put(signin(data));
 		yield call(Router.push, "/employee/dashboard");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -151,8 +148,7 @@ export function* signupUser({ props }) {
 
 		yield call(Router.push, "/employee/login");
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -187,8 +183,7 @@ export function* updateUserAvatar({ form, id }) {
 		yield put(setUserAvatar({ avatar }));
 		yield put(fetchMemberSettings());
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 
@@ -220,8 +215,7 @@ export function* updateUserPassword({ props }) {
 
 		yield call(signoutUserSession);
 	} catch (e) {
-		yield put(setServerMessage({ message: e.toString() }));
-		yield call(toast, { type: "error", message: e.toString() });
+		yield call(setError, e.toString());
 	}
 }
 

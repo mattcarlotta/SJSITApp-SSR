@@ -1,7 +1,7 @@
 import React from "react";
 import EditAuthorizationForm from "~containers/Forms/Member/EditAuthorizationForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetTokens, setToken } from "~actions/Members";
 import dispatchError from "~utils/dispatchError";

@@ -1,7 +1,7 @@
 import React from "react";
 import NewForm from "~containers/Forms/Form/NewForm";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { setSeasonsIds } from "~actions/Seasons";
 import dispatchError from "~utils/dispatchError";

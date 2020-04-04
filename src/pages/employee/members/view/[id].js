@@ -1,7 +1,7 @@
 import React from "react";
 import ViewMemberProfile from "~containers/Body/ViewMemberProfile";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetMembers, setMemberToReview } from "~actions/Members";
 import dispatchError from "~utils/dispatchError";

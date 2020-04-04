@@ -1,7 +1,7 @@
 import React from "react";
 import ViewMail from "~containers/Body/ViewMail";
 import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials";
-import { app } from "~utils";
+import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetMail, setMails } from "~actions/Mail";
 import dispatchError from "~utils/dispatchError";
