@@ -55,7 +55,7 @@ export class UpdateSettingsForm extends Component {
 	render = () => (
 		<form className="update-settings" onSubmit={this.handleSubmit}>
 			{this.state.isLoading ? (
-				<LoadingForm rows={3} />
+				<LoadingForm rows={4} />
 			) : (
 				<>
 					<FieldGenerator

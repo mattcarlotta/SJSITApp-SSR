@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import Router from "next/router";
 import { connect } from "react-redux";
 import { Menu, Dropdown } from "antd";
-import { FaUserCircle, FaSignOutAlt, FaCogs } from "react-icons/fa";
+import { FaSignOutAlt, FaCogs } from "react-icons/fa";
 import { signoutUser } from "~actions/Auth";
+import DisplayAvatar from "~components/Body/DisplayAvatar";
 import MenuButton from "~components/Body/MenuButton";
 import MenuItemContainer from "~components/Body/MenuItemContainer";
 import MenuItemTitle from "~components/Body/MenuItemTitle";
@@ -42,16 +43,7 @@ export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 				hoverable
 				style={{ padding: "0 20px", marginRight: 0, height: 64 }}
 			>
-				{avatar ? (
-					<img
-						css="border-radius: 50%;width: 35px;"
-						src={avatar}
-						alt="avatar"
-						width="30px"
-					/>
-				) : (
-					<FaUserCircle style={{ verticalAlign: "middle", fontSize: 30 }} />
-				)}
+				<DisplayAvatar avatar={avatar} />
 				<MenuItemTitle
 					className="loggedin-user"
 					style={{ verticalAlign: "middle" }}

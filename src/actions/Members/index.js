@@ -26,6 +26,18 @@ export const deleteMember = memberId => ({
 });
 
 /**
+ * Deletes a member's avatar.
+ *
+ * @function deleteMemberAvatar
+ * @param {string} id - current user id or requested id
+ * @returns {object}
+ */
+export const deleteMemberAvatar = id => ({
+	type: types.MEMBERS_DELETE_AVATAR,
+	id,
+});
+
+/**
  * Deletes many members.
  *
  * @function deleteManyMembers
@@ -288,6 +300,20 @@ export const setTokens = data => ({
 export const updateMember = props => ({
 	type: types.MEMBERS_UPDATE,
 	props,
+});
+
+/**
+ * Updates a member's avatar.
+ *
+ * @function updateMemberAvatar
+ * @param {object} formData - contains user image upload
+ * @param {string} id - contains user id
+ * @returns {object}
+ */
+export const updateMemberAvatar = ({ form, id }) => ({
+	type: types.MEMBERS_UPDATE_AVATAR,
+	form,
+	id,
 });
 
 /**

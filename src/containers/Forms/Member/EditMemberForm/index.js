@@ -11,12 +11,6 @@ import parseFields from "~utils/parseFields";
 import { updateMember } from "~actions/Members";
 import fields from "./Fields";
 
-const formStyles = {
-	width: 400,
-	marginTop: 50,
-	marginBottom: 60,
-};
-
 export class EditMemberForm extends Component {
 	state = {
 		fields,
@@ -66,9 +60,9 @@ export class EditMemberForm extends Component {
 	};
 
 	render = () => (
-		<form style={formStyles} onSubmit={this.handleSubmit}>
+		<form className="update-settings" onSubmit={this.handleSubmit}>
 			{this.state.isLoading ? (
-				<LoadingForm rows={4} />
+				<LoadingForm rows={5} />
 			) : (
 				<>
 					<FieldGenerator

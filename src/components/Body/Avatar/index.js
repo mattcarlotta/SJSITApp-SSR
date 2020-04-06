@@ -10,7 +10,7 @@ import {
 import Button from "~components/Body/Button";
 import FlexCenter from "~components/Body/FlexCenter";
 
-const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
+const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
 	<div css="height: 250px;width:200px;border-radius: 50%;">
 		{avatar ? (
 			<FlexCenter style={{ height: 192 }}>
@@ -78,7 +78,7 @@ const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 						width="50px"
 						marginRight="0"
 						style={{ marginTop: 5 }}
-						onClick={deleteUserAvatar}
+						onClick={deleteAvatar}
 					>
 						<FaTrash style={{ fontSize: 16 }} />
 					</Button>
@@ -91,7 +91,7 @@ const Avatar = ({ avatar, deleteUserAvatar, openAvatarForm }) => (
 Avatar.propTypes = {
 	avatar: PropTypes.string,
 	openAvatarForm: PropTypes.func.isRequired,
-	deleteUserAvatar: PropTypes.func.isRequired,
+	deleteAvatar: PropTypes.func.isRequired,
 };
 
 export default Avatar;

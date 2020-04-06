@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import {
 	FaUpload,
 	FaTimesCircle,
@@ -8,7 +7,6 @@ import {
 	FaTrash,
 } from "react-icons/fa";
 import { Tooltip } from "antd";
-import { updateUserAvatar } from "~actions/Auth";
 import Button from "~components/Body/Button";
 import FlexCenter from "~components/Body/FlexCenter";
 import FlexSpaceAround from "~components/Body/FlexSpaceAround";
@@ -22,7 +20,7 @@ const initialState = {
 	isSubmitting: false,
 };
 
-export class UpdateImageForm extends Component {
+export class UpdateAvatarForm extends Component {
 	state = initialState;
 
 	static getDerivedStateFromProps({ serverMessage }) {
@@ -91,7 +89,7 @@ export class UpdateImageForm extends Component {
 			this.setState({ error: "", isSubmitting: true }, async () => {
 				const form = new FormData();
 				form.append("file", file);
-				this.props.updateUserAvatar({ form, id });
+				this.props.updateAvatar({ form, id });
 			});
 		}
 	};
@@ -207,19 +205,11 @@ export class UpdateImageForm extends Component {
 	};
 }
 
-UpdateImageForm.propTypes = {
+UpdateAvatarForm.propTypes = {
 	id: PropTypes.string.isRequired,
 	closeAvatarForm: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
-	updateUserAvatar: PropTypes.func.isRequired,
+	updateAvatar: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ server }) => ({
-	serverMessage: server.message,
-});
-
-const mapDispatchToProps = {
-	updateUserAvatar,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateImageForm);
+export default UpdateAvatarForm;

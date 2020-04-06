@@ -157,7 +157,8 @@ export function* signupUser({ props }) {
  *
  * @generator
  * @function updateUserAvatar
- * @param {object} props - props contain a token and (new) password fields.
+ * @param {object} form - formData contains image.
+ * @param {string} id - user's id.
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
  * @yields {action} - A redux action to display a server message by type.

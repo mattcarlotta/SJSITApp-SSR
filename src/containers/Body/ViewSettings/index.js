@@ -12,7 +12,7 @@ import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
 import PaneBody from "~components/Body/PaneBody";
 import Title from "~components/Body/Title";
-import { deleteUserAvatar } from "~actions/Auth";
+import { deleteUserAvatar, updateUserAvatar } from "~actions/Auth";
 import {
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
@@ -58,12 +58,11 @@ const responses = (
 
 export class Settings extends Component {
 	state = {
-		showAvatarForm: false,
-		windowWidth: 0,
+		isCollapsed: false,
 	};
 
 	componentDidMount = () => {
-		this.setState({ windowWidth: window.innerWidth });
+		this.setState({ isCollapsed: window.innerWidth <= 900 });
 		window.addEventListener("resize", this.handleResize);
 	};
 
@@ -71,22 +70,17 @@ export class Settings extends Component {
 		window.removeEventListener("resize", this.handleResize);
 	}
 
-	toggleAvatarForm = () =>
-		this.setState(prevState => ({
-			showAvatarForm: !prevState.showAvatarForm,
-		}));
-
 	/* istanbul ignore next */
 	handleResize = debounce(
 		() =>
 			this.setState({
-				windowWidth: window.innerWidth,
+				isCollapsed: window.innerWidth <= 900,
 			}),
 		100,
 	);
 
 	render = () => {
-		const { windowWidth } = this.state;
+		const { isCollapsed } = this.state;
 		const {
 			eventResponses,
 			fetchMemberSettingsAvailability,
@@ -112,15 +106,9 @@ export class Settings extends Component {
 					{isEmpty(viewMember) ? (
 						<LoadingPanel height="685px" />
 					) : (
-						<Tabs tabPosition={windowWidth <= 900 ? "top" : "left"}>
+						<Tabs tabPosition={isCollapsed ? "top" : "left"}>
 							<Pane tab={profile} key="profile">
-								<Profile
-									{...this.state}
-									{...this.props.viewMember}
-									deleteUserAvatar={this.props.deleteUserAvatar}
-									id={id}
-									toggleAvatarForm={this.toggleAvatarForm}
-								/>
+								<Profile {...this.props} />
 							</Pane>
 							<Pane tab={availability} disabled={isStaff} key="availability">
 								<PaneBody>
@@ -200,6 +188,7 @@ Settings.propTypes = {
 		status: PropTypes.string,
 	}),
 	updateMemberStatus: PropTypes.func.isRequired,
+	updateUserAvatar: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 };
 
@@ -215,6 +204,7 @@ const mapDispatchToProps = {
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
 	updateMemberStatus,
+	updateUserAvatar,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

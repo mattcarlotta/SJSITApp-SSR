@@ -6,4 +6,5 @@ export default styled.div`
 	display: flex;
 	align-items: center;
 	width: 100%;
+	flex-wrap: wrap;
 `;

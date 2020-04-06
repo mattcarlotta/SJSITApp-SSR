@@ -9,6 +9,7 @@ import ColumnTitle from "~components/Body/ColumnTitle";
 import Footer from "~components/Body/Footer";
 import NoUsers from "~components/Body/NoUsers";
 import User from "~components/Body/User";
+import DisplayAvatar from "~components/Body/DisplayAvatar";
 import UserContainer from "~components/Body/UserContainer";
 
 const DropContainer = ({ id, title, users, width }) => (
@@ -19,7 +20,10 @@ const DropContainer = ({ id, title, users, width }) => (
 				<UserContainer ref={innerRef} isDraggingOver={isDraggingOver}>
 					{!isEmpty(users) ? (
 						users.map(
-							({ _id, firstName, lastName, response, notes }, index) => (
+							(
+								{ _id, avatar, firstName, lastName, response, notes },
+								index,
+							) => (
 								<Draggable key={_id} draggableId={_id} index={index}>
 									{(
 										{
@@ -36,7 +40,11 @@ const DropContainer = ({ id, title, users, width }) => (
 											isDragging={isDragging}
 											response={response}
 										>
-											<div>
+											<DisplayAvatar
+												avatar={avatar}
+												style={{ border: "1px dashed #fff" }}
+											/>
+											<div css="display: inline-block;margin-left: 8px;font-size: 16px;vertical-align: middle;">
 												{firstName} {lastName}
 												{notes && (
 													<Tooltip trigger="hover" title={notes}>
@@ -73,6 +81,7 @@ DropContainer.propTypes = {
 	users: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string,
+			avatar: PropTypes.string,
 			firstName: PropTypes.string,
 			lastName: PropTypes.string,
 			response: PropTypes.string,

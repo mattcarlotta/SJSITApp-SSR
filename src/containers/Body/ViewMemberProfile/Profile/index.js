@@ -1,17 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import { FaBan, FaUserPlus } from "react-icons/fa";
 import Button from "~components/Body/Button";
-import DisplayStatus from "~components/Body/DisplayStatus";
 import Flex from "~components/Body/Flex";
-import FlexEnd from "~components/Body/FlexEnd";
-import FlexStart from "~components/Body/FlexStart";
-import LightText from "~components/Body/LightText";
 import Line from "~components/Body/Line";
 import PaneBody from "~components/Body/PaneBody";
-import Small from "~components/Body/Small";
-import Title from "~components/Body/Title";
+import ShowAvatar from "~components/Body/ShowAvatar";
+import ShowMemberDetails from "~components/Body/ShowMemberDetails";
+import FlexAlignItemsCenter from "~components/Body/FlexAlignItemsCenter";
 import EditMemberForm from "~containers/Forms/Member/EditMemberForm";
 
 const iconStyle = {
@@ -19,34 +15,48 @@ const iconStyle = {
 	top: 3,
 };
 
-const btnStyle = {
-	marginTop: 4,
-	marginLeft: 25,
-	display: "inline-block",
-	height: 40,
-};
-
-const Profile = ({ viewMember, updateMemberStatus }) => {
-	const { _id, firstName, lastName, registered, status } = viewMember;
-
-	const isActive = status === "active";
+const Profile = ({
+	deleteMemberAvatar,
+	isCollapsed,
+	updateMemberAvatar,
+	updateMemberStatus,
+	serverMessage,
+	viewMember,
+}) => {
+	const isActive = viewMember.status === "active";
 
 	return (
 		<PaneBody>
-			<Flex>
-				<FlexStart>
-					<Title style={{ fontSize: 36, margin: 0 }}>
-						{firstName} {lastName}
-					</Title>
-				</FlexStart>
-				<FlexEnd>
+			<Flex direction={`${isCollapsed ? "column" : "row"}`}>
+				<FlexAlignItemsCenter style={{ marginBottom: 10 }}>
+					<ShowAvatar
+						id={viewMember._id}
+						avatar={viewMember.avatar}
+						serverMessage={serverMessage}
+						updateAvatar={updateMemberAvatar}
+						deleteAvatar={() => deleteMemberAvatar(viewMember._id)}
+					/>
+					<ShowMemberDetails {...viewMember} />
+				</FlexAlignItemsCenter>
+				<div
+					css={`
+						display: flex;
+						align-self: flex-start;
+						margin: ${isCollapsed ? "0 0 10px 35px" : "55px 0 0 0"};
+					`}
+				>
 					<Button
 						primary={!isActive}
 						danger={isActive}
 						width="130px"
 						padding="0px"
-						style={btnStyle}
-						onClick={() => updateMemberStatus({ _id, status })}
+						style={{ height: 40, marginLeft: isCollapsed ? 0 : 20 }}
+						onClick={() =>
+							updateMemberStatus({
+								_id: viewMember._id,
+								status: viewMember.status,
+							})
+						}
 					>
 						{isActive ? (
 							<>
@@ -58,30 +68,23 @@ const Profile = ({ viewMember, updateMemberStatus }) => {
 							</>
 						)}
 					</Button>
-				</FlexEnd>
+				</div>
 			</Flex>
-			<LightText>
-				Unique id: <Small>{_id}</Small>
-			</LightText>
-			<LightText>
-				Account Status:{" "}
-				<Small>
-					<DisplayStatus status={status} />
-					<span css="margin-left: 5px;">({status})</span>
-				</Small>
-			</LightText>
-			<LightText>
-				Registered: <Small>{moment(registered).format("MMMM Do, YYYY")}</Small>
-			</LightText>
-			<Line width="400px" />
+			<Line width="550px" />
 			<EditMemberForm />
 		</PaneBody>
 	);
 };
 
 Profile.propTypes = {
+	deleteMemberAvatar: PropTypes.func.isRequired,
+	isCollapsed: PropTypes.bool.isRequired,
+	serverMessage: PropTypes.string,
+	updateMemberAvatar: PropTypes.func.isRequired,
+	updateMemberStatus: PropTypes.func.isRequired,
 	viewMember: PropTypes.shape({
 		_id: PropTypes.string,
+		avatar: PropTypes.string,
 		email: PropTypes.string,
 		events: PropTypes.any,
 		firstName: PropTypes.string,
@@ -91,7 +94,6 @@ Profile.propTypes = {
 		schedule: PropTypes.any,
 		status: PropTypes.string,
 	}),
-	updateMemberStatus: PropTypes.func.isRequired,
 };
 
 export default Profile;

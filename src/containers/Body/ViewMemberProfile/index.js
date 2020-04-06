@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
+import debounce from "lodash.debounce";
 import Router from "next/router";
 import { connect } from "react-redux";
 import { Card, Tabs } from "antd";
@@ -13,16 +14,17 @@ import {
 } from "react-icons/fa";
 import { resetServerMessage } from "~actions/Messages";
 import {
+	deleteMemberAvatar,
 	fetchMember,
 	fetchMemberAvailability,
 	fetchMemberEvents,
+	updateMemberAvatar,
 	updateMemberStatus,
 } from "~actions/Members";
 import { fetchScheduleEvents } from "~actions/Events";
 import Head from "~components/Navigation/Head";
 import BackButton from "~components/Body/BackButton";
 import Calendar from "~components/Body/Calendar";
-import FadeIn from "~components/Body/FadeIn";
 import Line from "~components/Body/Line";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailability from "~components/Body/MemberAvailability";
@@ -75,37 +77,59 @@ const scheduling = (
 	</span>
 );
 
-export const ViewMemberProfile = props => {
-	const {
-		eventResponses,
-		fetchMemberAvailability,
-		fetchMemberEvents,
-		fetchScheduleEvents,
-		viewMember,
-	} = props;
+export class ViewMemberProfile extends Component {
+	state = {
+		isCollapsed: false,
+	};
 
-	const { _id: id, firstName, lastName } = viewMember;
+	componentDidMount = () => {
+		this.setState({ isCollapsed: window.innerWidth <= 900 });
+		window.addEventListener("resize", this.handleResize);
+	};
 
-	return (
-		<>
-			<Head title={title} />
-			<Card
-				style={{ minHeight: 800 }}
-				extra={<BackButton push={Router.back} />}
-				title={
-					<>
-						<FaUserEdit style={iconStyle} />
-						<span css="vertical-align: middle;">{title}</span>
-					</>
-				}
-			>
-				{isEmpty(viewMember) ? (
-					<LoadingPanel height="685px" />
-				) : (
-					<FadeIn timing="0.6s">
-						<Tabs tabPosition="left">
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.handleResize);
+	}
+
+	/* istanbul ignore next */
+	handleResize = debounce(
+		() =>
+			this.setState({
+				isCollapsed: window.innerWidth <= 900,
+			}),
+		100,
+	);
+
+	render = () => {
+		const {
+			eventResponses,
+			fetchMemberAvailability,
+			fetchMemberEvents,
+			fetchScheduleEvents,
+			viewMember,
+		} = this.props;
+		const { isCollapsed } = this.state;
+		const { _id: id, firstName, lastName } = viewMember;
+
+		return (
+			<>
+				<Head title={title} />
+				<Card
+					style={{ minHeight: 800 }}
+					extra={<BackButton push={Router.back} />}
+					title={
+						<>
+							<FaUserEdit style={iconStyle} />
+							<span css="vertical-align: middle;">{title}</span>
+						</>
+					}
+				>
+					{isEmpty(viewMember) ? (
+						<LoadingPanel height="685px" />
+					) : (
+						<Tabs tabPosition={isCollapsed ? "top" : "left"}>
 							<Pane tab={profile} key="profile">
-								<Profile {...props} />
+								<Profile {...this.props} isCollapsed={isCollapsed} />
 							</Pane>
 							<Pane tab={availability} key="availability">
 								<PaneBody>
@@ -114,7 +138,7 @@ export const ViewMemberProfile = props => {
 									</Title>
 									<Line centered width="400px" />
 									<MemberAvailability
-										{...props}
+										{...this.props}
 										id={id}
 										fetchAction={fetchMemberAvailability}
 									/>
@@ -127,7 +151,7 @@ export const ViewMemberProfile = props => {
 									</Title>
 									<Line centered width="400px" />
 									<Calendar
-										{...props}
+										{...this.props}
 										id={id}
 										scheduleEvents={eventResponses}
 										fetchAction={fetchMemberEvents}
@@ -142,7 +166,7 @@ export const ViewMemberProfile = props => {
 									</Title>
 									<Line centered width="400px" />
 									<Calendar
-										{...props}
+										{...this.props}
 										id={id}
 										loggedinUser={id}
 										fetchAction={fetchScheduleEvents}
@@ -154,14 +178,15 @@ export const ViewMemberProfile = props => {
 								</PaneBody>
 							</Pane>
 						</Tabs>
-					</FadeIn>
-				)}
-			</Card>
-		</>
-	);
-};
+					)}
+				</Card>
+			</>
+		);
+	};
+}
 
 ViewMemberProfile.propTypes = {
+	deleteMemberAvatar: PropTypes.func.isRequired,
 	eventResponses: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string,
@@ -205,6 +230,7 @@ ViewMemberProfile.propTypes = {
 	}),
 	viewMember: PropTypes.shape({
 		_id: PropTypes.string,
+		avatar: PropTypes.string,
 		email: PropTypes.string,
 		emailReminders: PropTypes.bool,
 		firstName: PropTypes.string,
@@ -214,6 +240,7 @@ ViewMemberProfile.propTypes = {
 		schedule: PropTypes.any,
 		status: PropTypes.string,
 	}),
+	updateMemberAvatar: PropTypes.func.isRequired,
 	updateMemberStatus: PropTypes.func.isRequired,
 	serverMessage: PropTypes.string,
 	scheduleEvents: PropTypes.arrayOf(
@@ -252,11 +279,13 @@ const mapStateToProps = ({ events, members, server }) => ({
 });
 
 const mapDispatchToProps = {
+	deleteMemberAvatar,
 	fetchMember,
 	fetchMemberAvailability,
 	fetchMemberEvents,
 	fetchScheduleEvents,
 	resetServerMessage,
+	updateMemberAvatar,
 	updateMemberStatus,
 };
 

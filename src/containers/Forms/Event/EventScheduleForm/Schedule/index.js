@@ -101,6 +101,7 @@ Schedule.propTypes = {
 	users: PropTypes.arrayOf(
 		PropTypes.shape({
 			_id: PropTypes.string.isRequired,
+			avatar: PropTypes.string,
 			firstName: PropTypes.string.isRequired,
 			lastName: PropTypes.string.isRequired,
 			response: PropTypes.string.isRequired,

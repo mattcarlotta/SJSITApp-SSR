@@ -31,7 +31,7 @@ const getEventForScheduling = async (req, res) => {
 
 		const members = await getUsers({
 			match: { role: { $eq: "employee" }, status: "active" },
-			project: { firstName: 1, lastName: 1 },
+			project: { avatar: 1, firstName: 1, lastName: 1 },
 		});
 		/* istanbul ignore next */
 		if (isEmpty(members)) throw unableToLocateMembers;

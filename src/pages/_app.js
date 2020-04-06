@@ -16,11 +16,17 @@ import dispatchError from "~utils/dispatchError";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-Router.events.on("routeChangeComplete", () => {
-	window.scrollTo(0, 0);
-});
+const scrollToTop = () => window.scrollTo(0, 0);
 
 export class MyApp extends App {
+	componentDidMount = () => {
+		Router.events.on("routeChangeComplete", scrollToTop);
+	};
+
+	componentWillUnmount = () => {
+		Router.events.off("routeChangeComplete", scrollToTop);
+	};
+
 	static async getInitialProps({ Component, ctx }) {
 		const {
 			store: { dispatch, getState },

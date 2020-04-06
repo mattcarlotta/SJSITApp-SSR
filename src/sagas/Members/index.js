@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
-import app from "~utils/axiosConfig";
+import app, { avatarAPI } from "~utils/axiosConfig";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { signoutUser, updateUser } from "~actions/Auth";
 import * as actions from "~actions/Members";
@@ -73,6 +73,38 @@ export function* deleteMember({ memberId }) {
 		yield call(toast, { type: "success", message });
 
 		yield put(actions.fetchMembers());
+	} catch (e) {
+		yield call(setError, e.toString());
+	}
+}
+
+/**
+ * Attempts to delete a member avatar.
+ *
+ * @generator
+ * @function deleteMemberAvatar
+ * @param {object} id - user id.
+ * @yields {object} - A response from a call to the API.
+ * @function parseMessage - returns a parsed res.data.message.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to sign the user of any sessions.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+export function* deleteMemberAvatar({ id }) {
+	try {
+		yield put(resetServerMessage());
+
+		const res = yield call(avatarAPI.delete, `delete/${id}`);
+		const message = yield call(parseMessage, res);
+
+		yield put(
+			setServerMessage({
+				message,
+			}),
+		);
+		yield call(toast, { type: "info", message });
+
+		yield put(actions.fetchMember(id));
 	} catch (e) {
 		yield call(setError, e.toString());
 	}
@@ -498,7 +530,42 @@ export function* updateMember({ props }) {
 		);
 		yield call(toast, { type: "info", message });
 
-		yield call(actions.fetchMember(props._id));
+		yield put(actions.fetchMember(props._id));
+	} catch (e) {
+		yield call(setError, e.toString());
+	}
+}
+
+/**
+ * Attempts to update a member's avatar.
+ *
+ * @generator
+ * @function updateMemberAvatar
+ * @param {object} form - formData contains image.
+ * @param {string} id - member's id.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to push to sign the user out of any sessions.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+export function* updateMemberAvatar({ form, id }) {
+	try {
+		yield put(resetServerMessage());
+
+		const res = yield call(avatarAPI.put, `update/${id}`, form);
+		const data = yield call(parseData, res);
+
+		const { message } = data;
+
+		yield put(
+			setServerMessage({
+				message,
+			}),
+		);
+		yield call(toast, { type: "info", message });
+
+		yield put(actions.fetchMember(id));
 	} catch (e) {
 		yield call(setError, e.toString());
 	}
@@ -621,6 +688,7 @@ export default function* membersSagas() {
 	yield all([
 		takeLatest(types.MEMBERS_CREATE, createMember),
 		takeLatest(types.MEMBERS_DELETE, deleteMember),
+		takeLatest(types.MEMBERS_DELETE_AVATAR, deleteMemberAvatar),
 		takeLatest(types.MEMBERS_DELETE_MANY, deleteManyMembers),
 		takeLatest(types.MEMBERS_DELETE_TOKEN, deleteToken),
 		takeLatest(types.MEMBERS_DELETE_MANY_TOKENS, deleteManyTokens),
@@ -639,6 +707,7 @@ export default function* membersSagas() {
 		takeLatest(types.MEMBERS_UPDATE, updateMember),
 		takeLatest(types.MEMBERS_RESEND_TOKEN, resendToken),
 		takeLatest(types.MEMBERS_UPDATE_SETTINGS, updateSettings),
+		takeLatest(types.MEMBERS_UPDATE_AVATAR, updateMemberAvatar),
 		takeLatest(types.MEMBERS_UPDATE_STATUS, updateMemberStatus),
 		takeLatest(types.MEMBERS_UPDATE_TOKEN, updateMemberToken),
 	]);

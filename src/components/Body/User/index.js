@@ -15,7 +15,7 @@ const responseColor = response => {
 			return "background-color: #FF8060;color: #fff;";
 		}
 		case "No response.": {
-			return "background-color: #BFBFBF;color: #555;"; // F4A261
+			return "background-color: #BFBFBF;color: #7c7c7c;"; // F4A261
 		}
 	}
 };
