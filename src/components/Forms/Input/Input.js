@@ -28,7 +28,7 @@ const Input = ({
 					className={[
 						isFocused && "focused",
 						errors && "error",
-						disabled && "disabled",
+						disabled && "disabled-input",
 					]
 						.filter(c => !!c)
 						.join(" ")}

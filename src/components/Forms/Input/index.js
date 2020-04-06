@@ -50,7 +50,7 @@ export default styled(Input)`
 		}
 	}
 
-	.disabled {
+	.disabled-input {
 		& .icon > svg {
 			cursor: not-allowed;
 			color: rgba(0, 0, 0, 0.25);
