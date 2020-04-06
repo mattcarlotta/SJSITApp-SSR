@@ -42,7 +42,13 @@ const DropContainer = ({ id, title, users, width }) => (
 										>
 											<DisplayAvatar
 												avatar={avatar}
-												style={{ border: "1px dashed #fff" }}
+												width="40px"
+												style={{
+													border:
+														response !== "No response."
+															? "2px solid #ddd"
+															: "2px solid #bbb",
+												}}
 											/>
 											<div css="display: inline-block;margin-left: 8px;font-size: 16px;vertical-align: middle;">
 												{firstName} {lastName}

@@ -12,6 +12,13 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const Divider = Menu.Divider;
 
+const titleStyle = {
+	color: "#fff",
+	margin: 0,
+	padding: "4px 0",
+	fontSize: 26,
+};
+
 const NavMenu = ({
 	role,
 	isCollapsed,
@@ -35,28 +42,10 @@ const NavMenu = ({
 					<div css="text-align:center;padding: 12px 18px 0 18px;">
 						{isCollapsed ? (
 							<div css="border: 1px solid #fff;">
-								<Title
-									style={{
-										color: "#fff",
-										margin: 0,
-										padding: "4px 0",
-										fontSize: 26,
-									}}
-								>
-									IT
-								</Title>
+								<Title style={titleStyle}>IT</Title>
 							</div>
 						) : (
-							<Title
-								style={{
-									color: "#fff",
-									margin: 0,
-									padding: "4px 0",
-									fontSize: 26,
-								}}
-							>
-								Ice Team
-							</Title>
+							<Title style={titleStyle}>Sharks Ice Team</Title>
 						)}
 					</div>
 				</Link>
