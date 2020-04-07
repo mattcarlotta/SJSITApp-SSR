@@ -40,7 +40,10 @@ const TableActions = ({
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() =>
-						Router.push(`/employee/${assignLocation}/assign/${record._id}`)
+						Router.push(
+							`/employee/${assignLocation}/assign/[id]`,
+							`/employee/${assignLocation}/assign/${record._id}`,
+						)
 					}
 				>
 					<FaClipboardCheck style={{ ...iconStyle, fontSize: 17 }} />
@@ -57,7 +60,10 @@ const TableActions = ({
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() =>
-						Router.push(`/employee/${viewLocation}/view/${record._id}`)
+						Router.push(
+							`/employee/${viewLocation}/view/[id]`,
+							`/employee/${viewLocation}/view/${record._id}`,
+						)
 					}
 				>
 					<FaSearchPlus style={{ ...iconStyle, fontSize: 16 }} />
@@ -74,7 +80,10 @@ const TableActions = ({
 					padding="3px 0px 0 3px"
 					marginRight="0px"
 					onClick={() =>
-						Router.push(`/employee/${editLocation}/edit/${record._id}`)
+						Router.push(
+							`/employee/${editLocation}/edit/[id]`,
+							`/employee/${editLocation}/edit/${record._id}`,
+						)
 					}
 				>
 					<FaEdit style={iconStyle} />

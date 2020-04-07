@@ -53,7 +53,12 @@ const Forms = ({ apform, isLoading }) => {
 							padding="5px"
 							marginRight="0px"
 							style={{ fontSize: 16 }}
-							onClick={() => Router.push(`/employee/forms/view/${apform._id}`)}
+							onClick={() =>
+								Router.push(
+									`/employee/forms/view/[id]`,
+									`/employee/forms/view/${apform._id}`,
+								)
+							}
 						>
 							View
 						</Button>

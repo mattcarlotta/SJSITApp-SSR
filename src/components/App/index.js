@@ -22,6 +22,8 @@ const openedKey = path => {
 	return opened ? [opened] : [];
 };
 
+// TODO - Fix collapsed sidenavigation openkeys bug
+
 class AppLayout extends Component {
 	constructor(props) {
 		super(props);
