@@ -22,18 +22,17 @@ const openedKey = path => {
 	return opened ? [opened] : [];
 };
 
-// TODO - Fix collapsed sidenavigation openkeys bug
-
 class AppLayout extends Component {
 	constructor(props) {
 		super(props);
 
 		const { pathname } = props.router;
+		const { isCollapsed } = props;
 
 		this.state = {
 			hideSideBar: false,
 			showDrawer: false,
-			openKeys: openedKey(pathname),
+			openKeys: !isCollapsed ? openedKey(pathname) : [],
 			selectedKey: selectedTab(pathname),
 		};
 	}
@@ -54,10 +53,13 @@ class AppLayout extends Component {
 	};
 
 	handleBreakpoint = isBroken => {
+		const { isCollapsed } = this.props;
+
 		this.setState(prevState => ({
 			...prevState,
 			hideSideBar: isBroken,
-			openKeys: isBroken ? [] : openedKey(this.props.router.pathname),
+			openKeys:
+				isCollapsed || isBroken ? [] : openedKey(this.props.router.pathname),
 			showDrawer: false,
 		}));
 	};
@@ -73,19 +75,11 @@ class AppLayout extends Component {
 	};
 
 	handleTabClick = ({
-		key,
 		item: {
 			props: { value },
 		},
 	}) => {
-		this.setState(() => {
-			Router.push(`/employee/${value}`);
-			const openKeys = ROOTTABS.find(tab => key.includes(tab));
-
-			return {
-				openKeys: openKeys ? [openKeys] : [],
-			};
-		});
+		Router.push(`/employee/${value}`);
 	};
 
 	toggleDrawerMenu = () =>
