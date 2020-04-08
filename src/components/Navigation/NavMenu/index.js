@@ -34,7 +34,8 @@ const NavMenu = ({
 			<Center
 				style={{
 					height: 64,
-					backgroundColor: "#025f6d",
+					// backgroundColor: "#025f6d",
+					backgroundColor: "#1f1f23",
 					borderBottom: "1px solid #3d8792",
 				}}
 			>

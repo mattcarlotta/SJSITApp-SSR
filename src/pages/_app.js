@@ -13,6 +13,7 @@ import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
 import dispatchError from "~utils/dispatchError";
+import { version } from "../../package.json";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -69,6 +70,7 @@ export class MyApp extends App {
 						name="description"
 						content="Official website for the Sharks Ice Team."
 					/>
+					<meta name="build version" content={`${version}`} />
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 				<GlobalStylesheet />

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Router, { withRouter } from "next/router";
 import { Layout } from "antd";
-// import BuildVersion from "~components/Body/BuildVersion";
 import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
 import SideMenu from "~components/Navigation/SideMenu";
@@ -53,15 +52,13 @@ class AppLayout extends Component {
 	};
 
 	handleBreakpoint = isBroken => {
-		const { isCollapsed } = this.props;
+		const { router, isCollapsed } = this.props;
 
-		this.setState(prevState => ({
-			...prevState,
+		this.setState({
 			hideSideBar: isBroken,
-			openKeys:
-				isCollapsed || isBroken ? [] : openedKey(this.props.router.pathname),
+			openKeys: isCollapsed || isBroken ? [] : openedKey(router.pathname),
 			showDrawer: false,
-		}));
+		});
 	};
 
 	handleOpenMenuChange = openKeys => {
@@ -104,8 +101,7 @@ class AppLayout extends Component {
 			<Layout>
 				<SideMenu
 					{...this.state}
-					isCollapsed={this.props.isCollapsed}
-					role={this.props.role}
+					{...this.props}
 					onHandleBreakpoint={this.handleBreakpoint}
 					onHandleTabClick={this.handleTabClick}
 					onHandleOpenMenuChange={this.handleOpenMenuChange}
@@ -115,17 +111,13 @@ class AppLayout extends Component {
 						<LeftMenu toggleSideMenu={this.toggleSideMenu} />
 						<RightMenu {...this.props} />
 					</Header>
-					<Content>
-						{this.props.children}
-						{/* <BuildVersion /> */}
-					</Content>
+					<Content>{this.props.children}</Content>
 				</Layout>
 			</Layout>
 			{this.state.hideSideBar && (
 				<DrawerMenu
 					{...this.state}
-					role={this.props.role}
-					isCollapsed={this.props.isCollapsed}
+					{...this.props}
 					onHandleTabClick={this.handleTabClick}
 					onHandleToggleDrawer={this.toggleDrawerMenu}
 					onHandleOpenMenuChange={this.handleOpenMenuChange}
