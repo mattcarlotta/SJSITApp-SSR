@@ -112,11 +112,11 @@
 
 .disabled {
 	cursor: not-allowed !important;
-	background-color: #c5c5c5 !important;
+	background: #c5c5c5 !important;
 	border: 2px solid #c5c5c5 !important;
 
 	&:hover {
-		background-color: #c5c5c5 !important;
+		background: #c5c5c5 !important;
 	}
 }
 

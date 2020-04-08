@@ -50,9 +50,11 @@ const ScheduleModal = ({
 						<ListItem
 							className="team"
 							style={{
-								background: `linear-gradient(90deg, rgba(31, 31, 35,1) 0%, rgba(${
-									team === "San Jose Sharks" ? "15,120,136,1" : "245,99,66,1"
-								}) 50%, rgba(31, 31, 35,1) 100%)`,
+								background: `${
+									team === "San Jose Sharks"
+										? "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)"
+										: "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)"
+								}`,
 								marginTop: 0,
 								color: "#fff",
 								textAlign: "center",

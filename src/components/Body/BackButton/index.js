@@ -17,13 +17,13 @@ const textStyle = {
 const BackButton = ({ push, location, style, title }) => (
 	<Button
 		primary
-		width="90px"
+		width="110px"
 		padding="4px"
 		style={{ ...style, lineHeight: 1.5 }}
 		onClick={() => push(location)}
 	>
 		<FaChevronLeft style={iconStyle} />
-		<span style={textStyle}>{title || "Back"}</span>
+		<span style={textStyle}>{title || "Go Back"}</span>
 	</Button>
 );
 

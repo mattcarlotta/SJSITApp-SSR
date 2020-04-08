@@ -147,8 +147,8 @@ export class UpdateAvatarForm extends Component {
 					<SubmitButton
 						isSubmitting
 						title="Uploading..."
-						style={{ minHeight: 44 }}
-						submitBtnStyle={{ height: 44 }}
+						style={{ minHeight: 45 }}
+						submitBtnStyle={{ height: 45 }}
 					/>
 				) : (
 					<FlexSpaceAround style={{ width: "200px", paddingBottom: "6px" }}>

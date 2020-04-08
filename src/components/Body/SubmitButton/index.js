@@ -11,7 +11,7 @@ const SubmitButton = ({
 	style,
 	submitBtnStyle,
 }) => (
-	<ButtonContainer style={{ marginTop: 5, minHeight: 63, ...style }} primary>
+	<ButtonContainer style={{ marginTop: 10, ...style }} primary>
 		{isSubmitting ? (
 			<Submitting style={{ ...submitBtnStyle }} />
 		) : (

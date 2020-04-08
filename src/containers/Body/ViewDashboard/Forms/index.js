@@ -48,7 +48,7 @@ const Forms = ({ apform, isLoading }) => {
 					!isEmpty(apform) && !hasExpired ? (
 						<Button
 							tertiary
-							width="88px"
+							width="120px"
 							disabled={hasExpired}
 							padding="5px"
 							marginRight="0px"
@@ -60,7 +60,7 @@ const Forms = ({ apform, isLoading }) => {
 								)
 							}
 						>
-							View
+							View Form
 						</Button>
 					) : null
 				}
@@ -71,14 +71,10 @@ const Forms = ({ apform, isLoading }) => {
 					<CalendarContainer>
 						{!isEmpty(apform) ? (
 							<div css="margin-top: 10px;">
-								<div css="text-align: center;background-color: #025f6d;color: #fff;border-radius: 3px;font-size: 18px;">
+								<div css="text-align: center;background: linear-gradient(90deg,#1f2226 0%,#107180 50%,#1f2226 100%);padding: 5px 0;color: #fff;border-radius: 3px;font-size: 18px;">
 									Sharks & Barracuda A/P Form
 								</div>
 								<div css="font-size: 17px;padding: 0 5px;margin-top: 15px;">
-									{/* <div>
-											<Bold>Form Id:</Bold>
-											{apform._id}
-										</div> */}
 									<div>
 										<Bold>Form Dates:</Bold>
 										{moment(apform.startMonth).format(simpleFormat)} -{" "}
@@ -95,7 +91,7 @@ const Forms = ({ apform, isLoading }) => {
 									<WarningText
 										style={{
 											...warningStyle,
-											backgroundColor: hasExpired ? "#f56342" : "#2979ff",
+											background: hasExpired ? "#f56342" : "#0f7786",
 										}}
 									>
 										{hasExpired

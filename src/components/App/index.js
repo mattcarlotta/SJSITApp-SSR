@@ -72,11 +72,20 @@ class AppLayout extends Component {
 	};
 
 	handleTabClick = ({
+		key,
 		item: {
 			props: { value },
 		},
 	}) => {
-		Router.push(`/employee/${value}`);
+		const openKeys = ROOTTABS.find(tab => key.includes(tab));
+		this.setState(
+			{
+				openKeys: openKeys ? [openKeys] : [],
+			},
+			() => {
+				Router.push(`/employee/${value}`);
+			},
+		);
 	};
 
 	toggleDrawerMenu = () =>

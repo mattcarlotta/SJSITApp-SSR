@@ -1,17 +1,13 @@
 import moment from "moment-timezone";
 import { Forms } from "../index";
 
-const activeDate = moment()
-	.add(6, "days")
-	.format();
+const activeDate = moment().add(6, "days").format();
 
 const apform = {
 	_id: "5dbdc074387e5310fbd5fca1",
 	endMonth: "2019-12-01T07:59:59.000Z",
 	eventCounts: 11,
-	expirationDate: `${moment()
-		.subtract(30, "days")
-		.format()}`,
+	expirationDate: `${moment().subtract(30, "days").format()}`,
 	startMonth: "2019-11-01T07:00:00.000Z",
 };
 
@@ -63,7 +59,7 @@ describe("Dashboard Forms", () => {
 			const warningText = wrapper.find("WarningText").first();
 
 			expect(warningText.text()).toContain(" This form will expire in");
-			expect(warningText.get(0).props.style.backgroundColor).toEqual("#2979ff");
+			expect(warningText.get(0).props.style.backgroundColor).toEqual("#0f7786");
 		});
 	});
 

@@ -35,7 +35,8 @@ const NavMenu = ({
 				style={{
 					height: 64,
 					// backgroundColor: "#025f6d",
-					backgroundColor: "#1f1f23",
+					background:
+						"linear-gradient(90deg, #1f1f23 0%, #145e6b 50%, #1f1f23 100%)",
 					borderBottom: "1px solid #3d8792",
 				}}
 			>

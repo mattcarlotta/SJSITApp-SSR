@@ -61,13 +61,15 @@ Button.defaultProps = {
 export default styled(Button)`
 	cursor: ${({ disabled }) => (!disabled ? "pointer" : "not-allowed")};
 	display: ${({ display }) => display || "block"};
-	color: ${props => (!props.primary && !props.danger ? "#025f6d" : "#fff")};
+	color: ${props =>
+		!props.primary && !props.danger && !props.tertiary ? "#025f6d" : "#fff"};
 	background: ${props => {
 		if (props.primary)
-			return "linear-gradient(90deg, rgba(31, 31, 35, 1) 0%, rgba(15,120,136,1) 50%, rgba(31, 31, 35,1) 100%)";
+			return "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)";
 		if (props.danger)
-			return "linear-gradient(90deg, rgba(31, 31, 35, 1) 0%, rgba(245,99,66,1) 50%, rgba(31, 31, 35,1) 100%)";
-		if (props.tertiary) return "#fff";
+			return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
+		if (props.tertiary)
+			return "linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)";
 		return "transparent";
 	}};
 	text-transform: ${props => {
@@ -83,9 +85,9 @@ export default styled(Button)`
 	border-radius: 4px;
 	border: 2px solid
 		${props => {
-			if (props.primary) return "#025f6d";
-			if (props.danger) return "#f56342";
-			if (props.tertiary) return "#fff";
+			if (props.primary) return "#04515d";
+			if (props.danger) return "#d24b2e";
+			if (props.tertiary) return "#2e7c8a";
 			return "transparent";
 		}};
 	width: ${({ width }) => width || "100%"};
@@ -95,19 +97,14 @@ export default styled(Button)`
 
 	&:hover {
 		color: ${props => {
-			if (props.primary || props.danger) return "#fff";
+			if (props.primary || props.danger || props.tertiary) return "#e4e3e3";
 			return "#04515d";
-		}};
-		background-color: ${props => {
-			if (props.primary) return "#04515d";
-			if (props.danger) return "#d24b2e";
-			return "#d8d8d8";
 		}};
 		border: 2px solid
 			${props => {
-				if (props.primary) return "#04515d";
-				if (props.danger) return "#d24b2e";
-				if (props.tertiary) return "#d8d8d8";
+				if (props.primary) return "#025f6d";
+				if (props.danger) return "#f56342";
+				if (props.tertiary) return "#3794a5";
 				return "transparent";
 			}};
 	}

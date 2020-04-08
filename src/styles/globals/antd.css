@@ -6073,7 +6073,9 @@ a.ant-btn-sm {
 .ant-menu.ant-menu-dark .ant-menu-item-selected,
 .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
   color: #fff;
-  background: linear-gradient(90deg, rgba(2,95,109,1) 0%, rgba(15,120,136,1) 50%, rgba(2,95,109,1) 100%);
+  background: linear-gradient(90deg, #1f2126 0%, #135561 50%, rgb(30, 33, 37) 100%);
+  border-top: 1px solid #144d58;
+  border-bottom: 1px solid #144d58;
 }
 .ant-menu-dark .ant-menu-item-disabled,
 .ant-menu-dark .ant-menu-submenu-disabled,
@@ -7151,7 +7153,7 @@ span.ant-radio + * {
 }
 .ant-card-head {
   /* background-color: #025f6d; */
-  background: linear-gradient(90deg, rgb(31, 31, 35) 0%, rgba(15,120,136,1) 50%, rgb(31, 31, 35) 100%);
+  background: linear-gradient(90deg, #1f1f23 0%, #145e6b 50%, #1f1f23 100%);
   color: white;
   min-height: 48px;
   margin-bottom: -1px;
