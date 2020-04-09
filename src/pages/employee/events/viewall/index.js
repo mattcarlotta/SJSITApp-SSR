@@ -6,7 +6,6 @@ import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetEvents, setEvents } from "~actions/Events";
 import { setTeamNames } from "~actions/Teams";
-import dispatchError from "~utils/dispatchError";
 import { stringifyQuery } from "~utils/queryHelpers";
 
 const ViewEventsPage = () => <ViewEvents />;
@@ -40,7 +39,7 @@ ViewEventsPage.getInitialProps = async ({
 
 	await Promise.all(
 		[fetchTeams(), fetchAllEvents()].map(p =>
-			p.catch(e => dispatchError({ dispatch, message: e.toString() })),
+			p.catch(e => ({ serverError: e.toString() })),
 		),
 	);
 

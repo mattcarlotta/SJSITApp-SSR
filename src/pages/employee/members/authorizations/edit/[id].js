@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetTokens, setToken } from "~actions/Members";
-import dispatchError from "~utils/dispatchError";
 
 const EditAuthorizationsPage = () => <EditAuthorizationForm />;
 
@@ -27,7 +26,7 @@ EditAuthorizationsPage.getInitialProps = async ({
 
 		dispatch(setToken({ ...tokenData.token, seasonIds: seasonData.seasonIds }));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

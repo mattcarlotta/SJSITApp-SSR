@@ -5,7 +5,6 @@ import app from "~utils/axiosConfig";
 import { updateUser } from "~actions/Auth";
 import { resetMembers, setMemberToReview } from "~actions/Members";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import dispatchError from "~utils/dispatchError";
 
 const SettingsPage = () => <ViewSettings />;
 
@@ -45,7 +44,7 @@ SettingsPage.getInitialProps = async ({
 			}),
 		);
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

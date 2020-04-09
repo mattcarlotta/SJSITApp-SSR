@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetSeasons, setSeasonToEdit } from "~actions/Seasons";
-import dispatchError from "~utils/dispatchError";
 
 const EditSeasonsPage = () => <EditSeasonForm />;
 
@@ -23,7 +22,7 @@ EditSeasonsPage.getInitialProps = async ({
 		const data = parseData(res);
 		dispatch(setSeasonToEdit(data));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

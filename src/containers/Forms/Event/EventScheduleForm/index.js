@@ -239,6 +239,7 @@ EventScheduleForm.propTypes = {
 			}),
 		),
 	}),
+	serverError: PropTypes.string,
 	serverMessage: PropTypes.string,
 	updateEventSchedule: PropTypes.func.isRequired,
 };

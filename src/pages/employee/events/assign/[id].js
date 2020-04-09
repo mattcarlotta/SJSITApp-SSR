@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { resetEvents, setEventForScheduling } from "~actions/Events";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import dispatchError from "~utils/dispatchError";
 
 const ScheduleEventPage = () => <EventScheduleForm />;
 
@@ -27,7 +26,7 @@ ScheduleEventPage.getInitialProps = async ({
 
 		dispatch(setEventForScheduling({ ...scheduleData, ...memberCountData }));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

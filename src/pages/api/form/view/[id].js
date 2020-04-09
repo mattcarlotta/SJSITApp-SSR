@@ -77,7 +77,6 @@ const viewApForm = async (req, res) => {
 		});
 	} catch (err) {
 		/* eslint-disable-next-line */
-		console.log("err", err);
 		sendError(err, 400, res);
 	}
 };

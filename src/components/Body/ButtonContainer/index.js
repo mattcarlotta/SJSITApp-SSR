@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export default styled.div`
-	min-height: 54px;
 	width: 100%;
 	border-radius: 4px;
 	background: ${props => {

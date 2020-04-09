@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetMembers, setMemberToReview } from "~actions/Members";
-import dispatchError from "~utils/dispatchError";
 
 const ViewMembersProfilePage = () => <ViewMemberProfile />;
 
@@ -32,7 +31,7 @@ ViewMembersProfilePage.getInitialProps = async ({
 			}),
 		);
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

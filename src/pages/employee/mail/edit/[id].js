@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetMail, setMailToEdit } from "~actions/Mail";
-import dispatchError from "~utils/dispatchError";
 
 const EditMailPage = () => <EditMailForm />;
 
@@ -28,7 +27,7 @@ EditMailPage.getInitialProps = async ({ store: { dispatch }, req, query }) => {
 			}),
 		);
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

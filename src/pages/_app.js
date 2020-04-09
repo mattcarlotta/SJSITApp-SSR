@@ -9,10 +9,10 @@ import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import ServerMessages from "~containers/Auth/ServerMessages";
 import app from "~utils/axiosConfig";
+import toast from "~components/Body/Toast";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
-import dispatchError from "~utils/dispatchError";
 import { version } from "../../package.json";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,6 +22,9 @@ const scrollToTop = () => window.scrollTo(0, 0);
 export class MyApp extends App {
 	componentDidMount = () => {
 		Router.events.on("routeChangeComplete", scrollToTop);
+
+		const { serverError } = this.props;
+		if (serverError) toast({ type: "error", message: serverError });
 	};
 
 	componentWillUnmount = () => {
@@ -44,8 +47,7 @@ export class MyApp extends App {
 
 				dispatch(signin(data));
 			} catch (e) {
-				dispatchError({ dispatch, message: e.toString() });
-				return {};
+				return { serverError: e.toString() };
 			}
 		}
 

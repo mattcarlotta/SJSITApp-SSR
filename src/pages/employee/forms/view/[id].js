@@ -4,7 +4,6 @@ import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetForms, setFormAp } from "~actions/Forms";
-import dispatchError from "~utils/dispatchError";
 
 const ViewAPFormPage = () => <ViewApForm />;
 
@@ -23,7 +22,7 @@ ViewAPFormPage.getInitialProps = async ({
 
 		dispatch(setFormAp(data));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

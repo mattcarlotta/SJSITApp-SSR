@@ -16,7 +16,7 @@ const SubmitButton = ({
 			<Submitting style={{ ...submitBtnStyle }} />
 		) : (
 			<Button
-				{...style}
+				style={{ ...style, minHeight: 54 }}
 				className="submit"
 				disabled={disabled}
 				primary

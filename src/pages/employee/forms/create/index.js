@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { setSeasonsIds } from "~actions/Seasons";
-import dispatchError from "~utils/dispatchError";
 
 const CreateFormPage = () => <NewForm />;
 
@@ -15,7 +14,7 @@ CreateFormPage.getInitialProps = async ({ store: { dispatch }, req }) => {
 
 		dispatch(setSeasonsIds(data));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

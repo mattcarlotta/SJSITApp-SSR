@@ -4,7 +4,6 @@ import requiresStaffCredentials from "~containers/Auth/requiresStaffCredentials"
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetForms, setForms } from "~actions/Forms";
-import dispatchError from "~utils/dispatchError";
 import { stringifyQuery } from "~utils/queryHelpers";
 
 const ViewFormsPage = () => <ViewForms />;
@@ -22,7 +21,7 @@ ViewFormsPage.getInitialProps = async ({ store: { dispatch }, req, query }) => {
 
 		dispatch(setForms(data));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};

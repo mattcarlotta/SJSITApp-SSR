@@ -4,7 +4,6 @@ import ViewSchedule from "~containers/Body/ViewSchedule";
 import app from "~utils/axiosConfig";
 import { setScheduleEvents } from "~actions/Events";
 import { parseCookie, parseData } from "~utils/parseResponse";
-import dispatchError from "~utils/dispatchError";
 
 const SchedulePage = () => <ViewSchedule />;
 
@@ -15,7 +14,7 @@ SchedulePage.getInitialProps = async ({ store: { dispatch }, req }) => {
 
 		dispatch(setScheduleEvents(data));
 	} catch (e) {
-		dispatchError({ dispatch, message: e.toString() });
+		return { serverError: e.toString() };
 	}
 
 	return {};
