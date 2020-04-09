@@ -57,6 +57,7 @@ export default (result, field, events) => {
 			innerStyle: {
 				maxWidth: "350px",
 				minHeight: "101px",
+				marginBottom: "20px",
 			},
 		};
 

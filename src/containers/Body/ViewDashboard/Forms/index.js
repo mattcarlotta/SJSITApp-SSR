@@ -8,7 +8,6 @@ import { Card, Col } from "antd";
 import { FaFileSignature } from "react-icons/fa";
 import Bold from "~components/Body/Bold";
 import Button from "~components/Body/Button";
-import CalendarContainer from "~components/Body/CalendarContainer";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import WarningText from "~components/Body/WarningText";
 import NoForms from "./NoForms";
@@ -21,14 +20,15 @@ const iconStyle = {
 };
 
 const warningStyle = {
+	background: "transparent",
 	verticalAlign: "middle",
-	marginTop: 15,
-	padding: "5px 8px",
+	marginTop: 35,
+	padding: 0,
 	borderRadius: 3,
 };
 
-const format = "MMM Do YYYY @ hh:mm a";
-const simpleFormat = "MM/DD/YYYY";
+const format = "MMM Do @ hh:mm a";
+const simpleFormat = "MMM Do";
 
 const Forms = ({ apform, isLoading }) => {
 	const expDate = moment(apform.expirationDate);
@@ -67,43 +67,39 @@ const Forms = ({ apform, isLoading }) => {
 			>
 				{isLoading ? (
 					<LoadingPanel />
-				) : (
-					<CalendarContainer>
-						{!isEmpty(apform) ? (
-							<div css="margin-top: 10px;">
-								<div css="text-align: center;background: linear-gradient(90deg,#1f2226 0%,#107180 50%,#1f2226 100%);padding: 5px 0;color: #fff;border-radius: 3px;font-size: 18px;">
-									Sharks & Barracuda A/P Form
-								</div>
-								<div css="font-size: 17px;padding: 0 5px;margin-top: 15px;">
-									<div>
-										<Bold>Form Dates:</Bold>
-										{moment(apform.startMonth).format(simpleFormat)} -{" "}
-										{moment(apform.endMonth).format(simpleFormat)}
-									</div>
-									<div>
-										<Bold>Expiration Date:</Bold>
-										{expDate.format(format)}
-									</div>
-									<div>
-										<Bold>Event Count:</Bold>
-										{apform.eventCounts}
-									</div>
-									<WarningText
-										style={{
-											...warningStyle,
-											background: hasExpired ? "#f56342" : "#0f7786",
-										}}
-									>
-										{hasExpired
-											? "This form has expired and is no longer viewable."
-											: `This form will expire ${moment(expDate).fromNow()}!`}
-									</WarningText>
-								</div>
+				) : !isEmpty(apform) ? (
+					<>
+						<div css="text-align: center;background: linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%);padding: 5px 0;color: #fff;font-size: 18px;border-top-right-radius: 3px;border-top-left-radius: 3px;">
+							Sharks & Barracuda A/P Form
+						</div>
+						<div css="height:215px;overflow-y: auto;font-size: 17px;padding: 5px;border-right: 1px solid rgba(12, 137, 157, 0.4);border-bottom: 1px solid rgba(12, 137, 157, 0.4);border-left: 1px solid rgba(12, 137, 157, 0.4);background: #f7f6f6;">
+							<div>
+								<Bold>Form Dates:</Bold>
+								{moment(apform.startMonth).format(simpleFormat)} -{" "}
+								{moment(apform.endMonth).format(simpleFormat)}
 							</div>
-						) : (
-							<NoForms />
-						)}
-					</CalendarContainer>
+							<div>
+								<Bold>Expiration Date:</Bold>
+								{expDate.format(format)}
+							</div>
+							<div>
+								<Bold>Event Count:</Bold>
+								{apform.eventCounts}
+							</div>
+							<WarningText
+								style={{
+									...warningStyle,
+									color: hasExpired ? "#f56342" : "#155a67",
+								}}
+							>
+								{hasExpired
+									? "This form has expired and is no longer viewable."
+									: `This form will expire ${moment(expDate).fromNow()}!`}
+							</WarningText>
+						</div>
+					</>
+				) : (
+					<NoForms />
 				)}
 			</Card>
 		</Col>

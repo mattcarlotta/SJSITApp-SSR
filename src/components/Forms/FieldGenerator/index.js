@@ -44,9 +44,9 @@ const removeIconStyle = {
 const radioLabelStyle = {
 	height: "auto",
 	paddingBottom: 10,
-	background: "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+	background:
+		"linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)",
 	color: "#fff",
-	marginBottom: 25,
 };
 
 const radioStyle = {

@@ -5790,6 +5790,8 @@ a.ant-btn-sm {
 .ant-menu-inline .ant-menu-submenu {
   padding-bottom: 0.01px;
   color: #0f7888;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 .ant-menu-vertical .ant-menu-item:not(:last-child),
 .ant-menu-vertical-left .ant-menu-item:not(:last-child),
@@ -5991,6 +5993,8 @@ a.ant-btn-sm {
   margin-left: 0;
   border-right: 0;
   color: #0f7888;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 .ant-menu-dark.ant-menu-inline .ant-menu-item::after,
 .ant-menu-dark.ant-menu-vertical .ant-menu-item::after,
@@ -16703,7 +16707,6 @@ textarea.ant-input-number {
   min-height: 0;
   margin: 16px;
   padding: 24px;
-  background: rgb(240, 242, 245);
   min-height: 280px;
 }
 .ant-layout-sider {

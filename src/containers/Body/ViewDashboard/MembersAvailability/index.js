@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { Card, Col } from "antd";
 import { FaUserClock } from "react-icons/fa";
 import Bold from "~components/Body/Bold";
-import CalendarContainer from "~components/Body/CalendarContainer";
 import Flex from "~components/Body/Flex";
 import FlexEnd from "~components/Body/FlexEnd";
 import FlexStart from "~components/Body/FlexStart";
@@ -25,16 +24,26 @@ const iconStyle = {
 
 const listItemStyle = {
 	fontSize: 16,
+	paddingLeft: 5,
 };
 
-const listStyle = { height: 200, overflowY: "auto", padding: "0 5px" };
+const listStyle = {
+	height: 215,
+	overflowY: "auto",
+	padding: "0 5px",
+	backgroundColor: "#f7f6f6",
+	borderLeft: "1px solid rgba(12, 137, 157, 0.4)",
+	borderRight: "1px solid rgba(12, 137, 157, 0.4)",
+	borderBottom: "1px solid rgba(12, 137, 157, 0.4)",
+};
 
 const tableHeader = {
-	backgroundColor: "#025f6d",
+	background:
+		"linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)",
 	color: "#fff",
-	marginTop: 10,
-	padding: "0 5px",
-	borderRadius: 3,
+	padding: "5px",
+	borderTopLeftRadius: 3,
+	borderTopRightRadius: 3,
 	fontSize: 18,
 };
 
@@ -62,10 +71,16 @@ const MembersAvailability = ({ membersAvailability, months, isLoading }) => (
 			{isLoading ? (
 				<LoadingPanel />
 			) : !isEmpty(membersAvailability) ? (
-				<CalendarContainer>
+				<>
 					<Flex style={tableHeader}>
-						<FlexStart>Employee</FlexStart>
-						<FlexEnd>Availability (%)</FlexEnd>
+						<FlexStart
+							style={{ marginLeft: 5, marginBottom: "0px !important" }}
+						>
+							Employee
+						</FlexStart>
+						<FlexEnd style={{ marginRight: 5, textAlign: "right" }}>
+							Availability &#40;%&#41;
+						</FlexEnd>
 					</Flex>
 					<List style={listStyle}>
 						{membersAvailability.map(({ id, availability }, key) => (
@@ -73,15 +88,17 @@ const MembersAvailability = ({ membersAvailability, months, isLoading }) => (
 								key={id}
 								style={{
 									...listItemStyle,
-									backgroundColor: key % 2 ? "#ebebeb" : "transparent",
+									backgroundColor: key % 2 ? "#d8d8d8" : "transparent",
 								}}
 							>
 								<Bold>{id}</Bold>
-								<Float direction="right">{availability}&#37;</Float>
+								<Float direction="right" style={{ paddingRight: 5 }}>
+									{availability}&#37;
+								</Float>
 							</ListItem>
 						))}
 					</List>
-				</CalendarContainer>
+				</>
 			) : (
 				<NoAvailability />
 			)}

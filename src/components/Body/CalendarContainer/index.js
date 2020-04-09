@@ -9,7 +9,7 @@ export default styled.div`
 	color: rgba(0, 0, 0, 0.65);
 	background-color: #f7f6f6;
 	text-align: left;
-	border: 2px solid #e8e8e8;
+	border: 1px solid rgba(12, 137, 157, 0.4);
 	overflow-y: auto;
 	transition: background 0.3s;
 `;
