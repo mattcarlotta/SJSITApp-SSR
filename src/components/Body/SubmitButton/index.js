@@ -21,6 +21,7 @@ const SubmitButton = ({
 				disabled={disabled}
 				primary
 				fontSize="22px"
+				padding="8.5px 18px"
 				type="submit"
 			>
 				{title}

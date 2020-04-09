@@ -168,7 +168,7 @@ export class ViewMemberProfile extends Component {
 									<Calendar
 										{...this.props}
 										id={id}
-										loggedinUser={id}
+										loggedinUserId={id}
 										fetchAction={fetchScheduleEvents}
 										fetchInitialData={() =>
 											fetchScheduleEvents({ id, selectedGames: "My Games" })

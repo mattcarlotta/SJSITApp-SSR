@@ -91,7 +91,7 @@ const NavMenu = ({
 					),
 				)}
 			</Menu>
-			{!isCollapsed && <Legal>© 2019 Matt Carlotta</Legal>}
+			{!isCollapsed && <Legal>© 2019-2020 Matt Carlotta</Legal>}
 		</>
 	);
 };

@@ -9,8 +9,13 @@ import dispatchError from "~utils/dispatchError";
 
 const SettingsPage = () => <ViewSettings />;
 
-SettingsPage.getInitialProps = async ({ req, store: { dispatch } }) => {
+SettingsPage.getInitialProps = async ({
+	req,
+	store: { dispatch, getState },
+}) => {
 	const headers = parseCookie(req);
+	const { role } = getState().auth;
+	const isEmployee = role === "employee";
 
 	try {
 		dispatch(resetMembers());
@@ -18,8 +23,11 @@ SettingsPage.getInitialProps = async ({ req, store: { dispatch } }) => {
 		let res = await app.get(`member/settings`, headers);
 		const basicMemberInfo = parseData(res);
 
-		res = await app.get("member/settings/availability", headers);
-		const memberAvailability = parseData(res);
+		let memberAvailability;
+		if (isEmployee) {
+			res = await app.get("member/settings/availability", headers);
+			memberAvailability = parseData(res);
+		}
 
 		const { member } = basicMemberInfo;
 
