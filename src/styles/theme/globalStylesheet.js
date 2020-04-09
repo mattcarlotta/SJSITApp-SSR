@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   #root, #app, body, html {
     height: 100%;
-    background: #ebebeb;
+    background: #010404;
   }
 
   html,body {
