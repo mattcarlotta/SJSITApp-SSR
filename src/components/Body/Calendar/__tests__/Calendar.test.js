@@ -55,12 +55,7 @@ const initState = {
 			.fill()
 			.map(
 				(_, key) =>
-					parseInt(
-						moment()
-							.subtract(5, "year")
-							.format("YYYY"),
-						10,
-					) + key,
+					parseInt(moment().subtract(5, "year").format("YYYY"), 10) + key,
 			),
 	],
 };
@@ -80,7 +75,9 @@ const initProps = {
 describe("Calendar", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(CustomCalendar, initProps, initState);
+		wrapper = mount(<CustomCalendar {...initProps} />);
+		wrapper.setState(initState);
+		wrapper.update();
 	});
 
 	afterEach(() => {
@@ -133,10 +130,7 @@ describe("Calendar", () => {
 	it("updates the calendar date when the panel is changed", () => {
 		const newValue = moment("2019-10-01T00:00:00-07:00");
 
-		wrapper
-			.find("CustomCalendar")
-			.instance()
-			.handlePanelChange(newValue);
+		wrapper.find("CustomCalendar").instance().handlePanelChange(newValue);
 
 		expect(wrapper.find("CustomCalendar").state("value")).toEqual(newValue);
 	});

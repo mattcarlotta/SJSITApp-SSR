@@ -3,14 +3,14 @@ import Link from "../index";
 const initProps = {
 	children: "Test",
 	style: {},
-	to: "/test",
+	href: "/test",
 };
 
 describe("Styled Link", () => {
 	let wrapper;
 	let StyledLink;
 	beforeEach(() => {
-		wrapper = HOCWrap(Link, initProps);
+		wrapper = mount(<Link {...initProps} />);
 		StyledLink = wrapper.find("Link");
 	});
 

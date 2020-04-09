@@ -40,7 +40,7 @@ Object.defineProperty(global.document, "getSelection", { value: jest.fn() });
 describe("Send Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(SendMailForm, initProps);
+		wrapper = mount(<SendMailForm {...initProps} />);
 	});
 
 	afterEach(() => {

@@ -12,7 +12,7 @@ describe("Login Form", () => {
 	let wrapper;
 	let submitForm;
 	beforeEach(() => {
-		wrapper = HOCWrap(LoginForm, initProps);
+		wrapper = mount(<LoginForm {...initProps} />);
 		submitForm = () => wrapper.find("form").simulate("submit");
 	});
 

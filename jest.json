@@ -12,9 +12,9 @@
 	"testPathIgnorePatterns": [
 		"<rootDir>/.next",
 		"<rootDir>/config",
-		"<rootDir>/middlewares",
 		"<rootDir>/node_modules",
 		"<rootDir>/public",
+		"<rootDir>/src/middlewares/index.js",
 		"<rootDir>/babel.config.js",
 		"<rootDir>/next.config.js"
 	],

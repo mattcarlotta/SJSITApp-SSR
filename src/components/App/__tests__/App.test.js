@@ -20,7 +20,7 @@ const nextProps = {
 describe("Employee App", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(App, initProps, null, ["/employee/dashboard"]);
+		wrapper = mount(<App {...initProps} />);
 		jest.useFakeTimers();
 	});
 
@@ -36,7 +36,7 @@ describe("Employee App", () => {
 		expect(wrapper.find("App").state("openKeys")).toEqual([]);
 		wrapper.unmount();
 
-		wrapper = HOCWrap(App, nextProps, null, ["/employee/forms/create"]);
+		wrapper = mount(<App {...nextProps} />);
 		expect(wrapper.find("App").state("openKeys")).toEqual(["forms"]);
 	});
 

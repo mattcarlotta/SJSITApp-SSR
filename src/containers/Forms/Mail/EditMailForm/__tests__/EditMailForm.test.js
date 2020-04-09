@@ -55,7 +55,7 @@ Object.defineProperty(global.document, "getSelection", { value: jest.fn() });
 describe("Edit Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(EditMailForm, initProps);
+		wrapper = mount(<EditMailForm {...initProps} />);
 	});
 
 	afterEach(() => {

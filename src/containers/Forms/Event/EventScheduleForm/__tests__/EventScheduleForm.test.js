@@ -96,7 +96,7 @@ describe("Event Schedule Form", () => {
 		root = document.createElement("div");
 		root.id = "root";
 		document.body.appendChild(root);
-		wrapper = HOCWrap(EventScheduleForm, initProps, null, ["/"], {
+		wrapper = mount(<EventScheduleForm {...initProps} />, {
 			attachTo: root,
 		});
 	});
@@ -129,17 +129,11 @@ describe("Event Schedule Form", () => {
 		});
 
 		it("shows and hides a modal", () => {
-			wrapper
-				.find("#event-distribution")
-				.first()
-				.simulate("click");
+			wrapper.find("#event-distribution").first().simulate("click");
 			expect(wrapper.find("EventScheduleForm").state("isVisible")).toBeTruthy();
 			expect(wrapper.find("Modal").exists()).toBeTruthy();
 
-			wrapper
-				.find("#close-modal")
-				.first()
-				.simulate("click");
+			wrapper.find("#close-modal").first().simulate("click");
 			expect(wrapper.find("EventScheduleForm").state("isVisible")).toBeFalsy();
 			expect(wrapper.find("Modal").exists()).toBeFalsy();
 		});
