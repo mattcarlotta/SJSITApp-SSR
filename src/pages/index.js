@@ -14,7 +14,7 @@ const Home = ({ role }) => {
 				tertiary
 				marginRight="0px"
 				width="200px"
-				style={{ margin: "10px auto", background: "transparent" }}
+				style={{ margin: "20px auto 0" }}
 				onClick={() =>
 					Router.push(isLoggedin ? "/employee/dashboard" : "/employee/login")
 				}

@@ -58,6 +58,8 @@ Button.defaultProps = {
 	type: "button",
 };
 
+// linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)
+
 export default styled(Button)`
 	cursor: ${({ disabled }) => (!disabled ? "pointer" : "not-allowed")};
 	display: ${({ display }) => display || "block"};
@@ -68,8 +70,7 @@ export default styled(Button)`
 			return "linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)";
 		if (props.danger)
 			return "linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)";
-		if (props.tertiary)
-			return "linear-gradient(90deg,#12454e 0%,rgb(16,116,131) 50%,#12454e 100%)";
+		if (props.tertiary) return "transparent";
 		return "transparent";
 	}};
 	text-transform: ${props => {
