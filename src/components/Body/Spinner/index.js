@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Spinner = ({ className }) => (
+const Spinner = ({ className, children }) => (
 	<div className={className}>
 		<div className="text-wrapper">
 			<span className="text sharks" data-text="sharks">
@@ -18,14 +18,26 @@ const Spinner = ({ className }) => (
 			<span className="gradient"></span>
 			<span className="spotlight"></span>
 		</div>
+		{children}
 	</div>
 );
 
 Spinner.propTypes = {
 	className: PropTypes.string.isRequired,
+	children: PropTypes.node,
 };
 
 export default styled(Spinner)`
+	@media (max-width: 600px) {
+		.sharks {
+			font-size: 55px !important;
+		}
+
+		.iceteam {
+			font-size: 50px !important;
+		}
+	}
+
 	@keyframes light {
 		to {
 			transform: translate(50%, 50%);
