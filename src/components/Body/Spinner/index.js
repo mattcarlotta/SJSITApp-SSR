@@ -34,7 +34,7 @@ export default styled(Spinner)`
 		}
 
 		.iceteam {
-			font-size: 50px !important;
+			font-size: 48px !important;
 		}
 	}
 

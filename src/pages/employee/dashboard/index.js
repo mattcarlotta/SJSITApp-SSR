@@ -5,7 +5,6 @@ import ViewDashboard from "~containers/Body/ViewDashboard";
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import * as actions from "~actions/Dashboard";
-import dispatchError from "~utils/dispatchError";
 
 const Dashboard = () => <ViewDashboard />;
 
@@ -58,18 +57,19 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		dispatch(actions.setEventDistribution(data));
 	};
 
-	await Promise.all(
-		[
+	let serverError;
+	try {
+		await Promise.all([
 			fetchEvents(),
 			fetchAPForm(),
 			fetchAvailability(),
 			fetchEventDistribution(),
-		].map(p =>
-			p.catch(e => dispatchError({ dispatch, message: e.toString() })),
-		),
-	);
+		]);
+	} catch (e) {
+		serverError = e.toString();
+	}
 
-	return {};
+	return { serverError };
 };
 
 export default requiresBasicCredentials(Dashboard);
