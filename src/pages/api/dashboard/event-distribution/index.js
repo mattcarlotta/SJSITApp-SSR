@@ -16,7 +16,7 @@ import { missingDates } from "~messages/errors";
 const getEventDistribution = async (req, res) => {
 	try {
 		const { startDate, endDate } = req.query;
-		if (!startDate || !endDate) throw missingDates;
+		if (!startDate || !endDate) throw String(missingDates);
 
 		const members = await getUsers({
 			match: {

@@ -32,6 +32,7 @@ const requiresStaffCredentials = WrappedComponent => {
 				} else {
 					Router.push("/employee/login");
 				}
+
 				toast({ type: "error", message: serverError });
 			}
 		};

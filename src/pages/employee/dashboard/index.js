@@ -57,19 +57,16 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		dispatch(actions.setEventDistribution(data));
 	};
 
-	let serverError;
-	try {
-		await Promise.all([
+	const serverErrors = await Promise.all(
+		[
 			fetchEvents(),
 			fetchAPForm(),
 			fetchAvailability(),
 			fetchEventDistribution(),
-		]);
-	} catch (e) {
-		serverError = e.toString();
-	}
+		].map(p => p.catch(e => e.toString())),
+	);
 
-	return { serverError };
+	return { serverError: serverErrors.join("") };
 };
 
 export default requiresBasicCredentials(Dashboard);

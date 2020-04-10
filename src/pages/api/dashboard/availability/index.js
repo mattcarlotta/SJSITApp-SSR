@@ -21,7 +21,7 @@ import { missingMemberId } from "~messages/errors";
 const getAvailability = async (req, res) => {
 	try {
 		const { id: _id } = req.session.user;
-		if (!_id) throw missingMemberId;
+		if (!_id) throw String(missingMemberId);
 
 		const currentDate = createDate().add(1, "months").toDate();
 		const eventAvailability = [];

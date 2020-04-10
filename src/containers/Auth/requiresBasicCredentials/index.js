@@ -24,10 +24,11 @@ const requiresBasicCredentials = WrappedComponent => {
 
 		componentDidMount = () => {
 			const { email, serverError, signoutUser, router } = this.props;
+
 			if (serverError) {
 				if (email && serverError.indexOf("account was revoked") >= 0) {
 					signoutUser();
-				} else if (router.pathname !== "/employee/dashboard") {
+				} else if (!email || router.pathname !== "/employee/dashboard") {
 					Router.push("/employee/login");
 				}
 
