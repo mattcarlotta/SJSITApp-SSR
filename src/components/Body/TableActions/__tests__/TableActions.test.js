@@ -1,3 +1,4 @@
+import Router from "next/router";
 import TableActions from "../index";
 
 const record = {
@@ -14,7 +15,6 @@ const deleteAction = jest.fn();
 const handleDeleteRecords = jest.fn();
 const editLocation = "seasons";
 const handleClickAction = jest.fn();
-const push = jest.fn();
 const sendMail = jest.fn();
 const viewLocation = "seasons";
 
@@ -24,7 +24,6 @@ const initProps = {
 	editLocation,
 	handleClickAction,
 	handleDeleteRecords,
-	push,
 	record,
 	sendMail,
 	viewLocation,
@@ -40,56 +39,44 @@ describe("Table Actions", () => {
 	afterEach(() => {
 		handleClickAction.mockClear();
 		handleDeleteRecords.mockClear();
-		push.mockClear();
+		Router.push.mockClear();
 	});
 
 	it("views and assigns the selected record", () => {
-		wrapper
-			.find("Button")
-			.first()
-			.simulate("click");
+		wrapper.find("Button").first().simulate("click");
 
-		expect(push).toHaveBeenCalledWith(
+		expect(Router.push).toHaveBeenCalledWith(
+			"/employee/seasons/assign/[id]",
 			"/employee/seasons/assign/5d323ee2b02dee15483e5d9f",
 		);
 	});
 
 	it("views the selected record", () => {
-		wrapper
-			.find("Button")
-			.at(1)
-			.simulate("click");
+		wrapper.find("Button").at(1).simulate("click");
 
-		expect(push).toHaveBeenCalledWith(
+		expect(Router.push).toHaveBeenCalledWith(
+			"/employee/seasons/view/[id]",
 			"/employee/seasons/view/5d323ee2b02dee15483e5d9f",
 		);
 	});
 
 	it("edits the selected record", () => {
-		wrapper
-			.find("Button")
-			.at(2)
-			.simulate("click");
+		wrapper.find("Button").at(2).simulate("click");
 
-		expect(push).toHaveBeenCalledWith(
+		expect(Router.push).toHaveBeenCalledWith(
+			"/employee/seasons/edit/[id]",
 			"/employee/seasons/edit/5d323ee2b02dee15483e5d9f",
 		);
 	});
 
 	it("sends an email according to the selected record", () => {
-		wrapper
-			.find("Button")
-			.at(3)
-			.simulate("click");
+		wrapper.find("Button").at(3).simulate("click");
 
 		expect(handleClickAction).toHaveBeenCalledWith(sendMail, record);
 	});
 
 	it("deletes the selected record", () => {
-		wrapper
-			.find("Button")
-			.at(4)
-			.simulate("click");
+		wrapper.find("Button").at(4).simulate("click");
 
 		wrapper
 			.find("div.ant-popover-buttons")
@@ -102,10 +89,7 @@ describe("Table Actions", () => {
 	it("deletes all selected records", () => {
 		const selectedRowKeys = ["01", "02", "03"];
 		wrapper.setProps({ selectedRowKeys });
-		wrapper
-			.find("Button")
-			.at(5)
-			.simulate("click");
+		wrapper.find("Button").at(5).simulate("click");
 
 		wrapper
 			.find("div.ant-popover-buttons")

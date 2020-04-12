@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { Modal } from "../index";
 
 const onClick = jest.fn();

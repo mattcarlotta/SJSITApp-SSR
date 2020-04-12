@@ -64,6 +64,7 @@ export class Events extends Component {
 			<>
 				<Col {...columns}>
 					<Card
+						style={{ marginBottom: 0 }}
 						bodyStyle={{ minHeight: "300px" }}
 						title={
 							<>

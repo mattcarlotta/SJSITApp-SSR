@@ -26,7 +26,6 @@ const data = [
 const deleteMember = jest.fn();
 const deleteManyMembers = jest.fn();
 const fetchMembers = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	data: [],
@@ -34,14 +33,10 @@ const initProps = {
 	deleteMember,
 	fetchMembers,
 	isLoading: true,
-	location: {
-		search: "?page=1",
-	},
-	push,
 	totalDocs: 0,
 };
 
-const wrapper = mount(<ViewMembers {...initProps} />);
+const wrapper = withRouterContext(ViewMembers, initProps);
 describe("View All Members", () => {
 	it("renders without errors", () => {
 		expect(wrapper.find("Card").exists()).toBeTruthy();

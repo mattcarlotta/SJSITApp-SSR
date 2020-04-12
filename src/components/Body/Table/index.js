@@ -2,24 +2,26 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import { Popover, Table } from "antd";
+import { Popover } from "antd";
 import { FaTools } from "react-icons/fa";
+import dynamic from "next/dynamic";
 import Button from "~components/Body/Button";
 import FadeIn from "~components/Body/FadeIn";
 import FlexCenter from "~components/Body/FlexCenter";
 import LoadingTable from "~components/Body/LoadingTable";
 import TableActions from "~components/Body/TableActions";
 
+const Table = dynamic(() => import("antd").then(mod => mod.Table), {
+	ssr: false,
+});
+
 class CustomTable extends Component {
 	state = {
 		selectedRowKeys: [],
-		isMounted: false,
 	};
 
 	componentDidMount = () => {
-		this.setState({ isMounted: true }, () => {
-			this.handlePageOverflowRedirect();
-		});
+		this.handlePageOverflowRedirect();
 	};
 
 	shouldComponentUpdate = (nextProps, nextState) =>
@@ -89,7 +91,7 @@ class CustomTable extends Component {
 	};
 
 	render = () =>
-		this.props.isLoading || !this.state.isMounted ? (
+		this.props.isLoading ? (
 			<LoadingTable />
 		) : (
 			<FadeIn timing="0.4s">

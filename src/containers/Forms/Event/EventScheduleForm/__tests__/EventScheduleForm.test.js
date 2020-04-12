@@ -61,10 +61,9 @@ const schedule = {
 
 const fetchEventForScheduling = jest.fn();
 const updateEventSchedule = jest.fn();
-const goBack = jest.fn();
 const id = "0123456789";
-const match = {
-	params: {
+const router = {
+	query: {
 		id,
 	},
 };
@@ -82,8 +81,7 @@ const members = [
 
 const initProps = {
 	fetchEventForScheduling,
-	match,
-	goBack,
+	router,
 	schedule: {},
 	serverMessage: "",
 	updateEventSchedule,

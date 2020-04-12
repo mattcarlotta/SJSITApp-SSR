@@ -20,7 +20,7 @@ describe("User", () => {
 	it("initially displays an unselected User", () => {
 		const StyledUser = findStyledUser();
 		expect(StyledUser).toHaveStyleRule("background-color", "#BFBFBF");
-		expect(StyledUser).toHaveStyleRule("color", "#555");
+		expect(StyledUser).toHaveStyleRule("color", "#7c7c7c");
 		expect(StyledUser).toHaveStyleRule(
 			"box-shadow",
 			"0 1px 0 rgba(9,30,66,.25)",

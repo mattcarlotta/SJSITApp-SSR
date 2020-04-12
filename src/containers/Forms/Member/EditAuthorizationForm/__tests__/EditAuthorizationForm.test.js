@@ -1,17 +1,13 @@
 import { EditAuthorizationForm } from "../index";
 
-const fetchToken = jest.fn();
-const goBack = jest.fn();
 const updateMemberToken = jest.fn();
 
 const initProps = {
-	fetchToken,
-	match: {
-		params: {
+	router: {
+		query: {
 			id: "5d44a76ad49a24023e0af7dc",
 		},
 	},
-	goBack,
 	serverMessage: "",
 	updateMemberToken,
 };
@@ -30,7 +26,6 @@ describe("Edit Authorization Form", () => {
 	});
 
 	afterEach(() => {
-		fetchToken.mockClear();
 		updateMemberToken.mockClear();
 	});
 
@@ -42,22 +37,15 @@ describe("Edit Authorization Form", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
 	});
 
-	it("calls fetchToken on mount", () => {
-		expect(fetchToken).toHaveBeenCalledTimes(1);
-	});
-
 	describe("Form Initialized", () => {
 		beforeEach(() => {
 			wrapper.setProps({ editToken });
 		});
 
 		it("initializes the fields with editToken and seasonIds values", () => {
-			expect(
-				wrapper
-					.find("DisplayOption")
-					.first()
-					.props().value,
-			).toEqual(editToken.role);
+			expect(wrapper.find("DisplayOption").first().props().value).toEqual(
+				editToken.role,
+			);
 			expect(wrapper.find("input").props().value).toEqual(
 				editToken.authorizedEmail,
 			);

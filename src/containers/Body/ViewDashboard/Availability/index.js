@@ -17,9 +17,10 @@ const iconStyle = {
 
 const format = "MM/DD/YYYY";
 
-const Availability = props => (
+export const Availability = props => (
 	<Col {...columns}>
 		<Card
+			style={{ marginBottom: 0 }}
 			bodyStyle={{ minHeight: "300px" }}
 			title={
 				<>

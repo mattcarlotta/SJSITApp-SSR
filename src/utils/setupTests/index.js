@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { shallowWrap } from "~utils/testing";
+import { shallowWrap, withRouterContext } from "~utils/testing";
 import { mockApp, mockAPI } from "~utils/__mocks__/mockAxios.js";
 import "jest-styled-components";
 
@@ -26,8 +26,9 @@ global.shallow = shallowWrap;
 global.mount = mount;
 global.mockApp = mockApp;
 global.mockAPI = mockAPI;
+global.withRouterContext = withRouterContext;
 global.React = require("react");
-global.Router = require("Router");
+global.Router = require("next/router");
 
 Object.keys(document.defaultView).forEach(property => {
 	if (typeof global[property] === "undefined") {

@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { QueryHandler } from "../index";
 
 const pathname = "pathname/viewall";

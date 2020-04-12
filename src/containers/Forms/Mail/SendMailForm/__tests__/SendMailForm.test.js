@@ -16,7 +16,9 @@ const memberNames = [
 const initProps = {
 	createMail,
 	memberNames: [],
-	push,
+	router: {
+		query: { id: "0123456789" },
+	},
 	serverMessage: "",
 };
 
@@ -112,7 +114,7 @@ describe("Send Mail Form", () => {
 					sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
 					sendDate: "",
 					subject: "Test",
-					message: "<p>Test</p>",
+					message: "<span>Test</span>",
 				});
 			});
 

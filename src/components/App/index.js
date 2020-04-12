@@ -21,7 +21,7 @@ const openedKey = path => {
 	return opened ? [opened] : [];
 };
 
-class AppLayout extends Component {
+export class AppLayout extends Component {
 	constructor(props) {
 		super(props);
 

@@ -1,8 +1,8 @@
+import Router from "next/router";
 import moment from "moment-timezone";
 import Filters from "../index";
 
 const clearFilters = jest.fn();
-const push = jest.fn();
 const updateQuery = jest.fn();
 const teams = ["kings", "knights"];
 
@@ -12,7 +12,6 @@ const today = moment().format(format);
 const initProps = {
 	clearFilters,
 	queries: {},
-	push,
 	updateQuery,
 };
 
@@ -24,16 +23,13 @@ describe("Event Filters", () => {
 
 	afterEach(() => {
 		clearFilters.mockClear();
-		push.mockClear();
+		Router.push.mockClear();
 		updateQuery.mockClear();
 	});
 
 	it("handles Event Date filters", () => {
 		const runEventFilter = () => {
-			wrapper
-				.find("#event-date")
-				.first()
-				.simulate("click");
+			wrapper.find("#event-date").first().simulate("click");
 			wrapper
 				.find(".ant-calendar-range-picker-input")
 				.first()
@@ -41,14 +37,8 @@ describe("Event Filters", () => {
 		};
 
 		runEventFilter();
-		wrapper
-			.find(".ant-calendar-today")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-calendar-today")
-			.first()
-			.simulate("click");
+		wrapper.find(".ant-calendar-today").first().simulate("click");
+		wrapper.find(".ant-calendar-today").first().simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({
 			page: 1,
@@ -65,10 +55,7 @@ describe("Event Filters", () => {
 
 		runEventFilter();
 
-		wrapper
-			.find(".anticon-close-circle")
-			.first()
-			.simulate("click");
+		wrapper.find(".anticon-close-circle").first().simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({
 			page: 1,
@@ -78,53 +65,26 @@ describe("Event Filters", () => {
 	});
 
 	it("handles Event Type filters", () => {
-		wrapper
-			.find("#event-type")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select-dropdown-menu-item")
-			.first()
-			.simulate("click");
+		wrapper.find("#event-type").first().simulate("click");
+		wrapper.find(".ant-select").first().simulate("click");
+		wrapper.find(".ant-select-dropdown-menu-item").first().simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({ page: 1, type: "game" });
 	});
 
 	it("handles Team filters", () => {
-		wrapper
-			.find("#team")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select-dropdown-menu-item")
-			.first()
-			.simulate("click");
+		wrapper.find("#team").first().simulate("click");
+		wrapper.find(".ant-select").first().simulate("click");
+		wrapper.find(".ant-select-dropdown-menu-item").first().simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({ page: 1, team: "sharks" });
 	});
 
 	it("handles Opponent filters", () => {
 		const runOpponentFilter = () => {
-			wrapper
-				.find("#opponent")
-				.first()
-				.simulate("click");
-			wrapper
-				.find(".ant-select")
-				.first()
-				.simulate("click");
-			wrapper
-				.find(".ant-select-dropdown-menu-item")
-				.first()
-				.simulate("click");
+			wrapper.find("#opponent").first().simulate("click");
+			wrapper.find(".ant-select").first().simulate("click");
+			wrapper.find(".ant-select-dropdown-menu-item").first().simulate("click");
 		};
 
 		runOpponentFilter();
@@ -139,18 +99,9 @@ describe("Event Filters", () => {
 	});
 
 	it("handles Email Status filters", () => {
-		wrapper
-			.find("#sent-emails")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select")
-			.first()
-			.simulate("click");
-		wrapper
-			.find(".ant-select-dropdown-menu-item")
-			.first()
-			.simulate("click");
+		wrapper.find("#sent-emails").first().simulate("click");
+		wrapper.find(".ant-select").first().simulate("click");
+		wrapper.find(".ant-select-dropdown-menu-item").first().simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({
 			page: 1,
@@ -159,20 +110,14 @@ describe("Event Filters", () => {
 	});
 
 	it("handles clearing filters", () => {
-		wrapper
-			.find("#clear-filters")
-			.first()
-			.simulate("click");
+		wrapper.find("#clear-filters").first().simulate("click");
 
 		expect(clearFilters).toHaveBeenCalledTimes(1);
 	});
 
 	it("clicking on the 'Add Event' button, moves the user to the New Event Form page", () => {
-		wrapper
-			.find("Button.add-event")
-			.first()
-			.simulate("click");
+		wrapper.find("Button.add-event").first().simulate("click");
 
-		expect(push).toHaveBeenCalledWith("/employee/events/create");
+		expect(Router.push).toHaveBeenCalledWith("/employee/events/create");
 	});
 });

@@ -1,3 +1,4 @@
+import Router from "next/router";
 import { ViewSeasons } from "../index";
 
 const data = [
@@ -12,7 +13,6 @@ const data = [
 const deleteSeason = jest.fn();
 const deleteManySeasons = jest.fn();
 const fetchSeasons = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	data: [],
@@ -20,17 +20,13 @@ const initProps = {
 	deleteSeason,
 	fetchSeasons,
 	isLoading: true,
-	location: {
-		search: "?page=1",
-	},
 	totalDocs: 0,
-	push,
 };
 
 describe("View All Seasons", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = mount(<ViewSeasons {...initProps} />);
+		wrapper = withRouterContext(ViewSeasons, initProps);
 	});
 
 	it("renders without errors", () => {
@@ -38,12 +34,9 @@ describe("View All Seasons", () => {
 	});
 
 	it("clicking on the 'New Season' button, moves the user to the New Season Form page", () => {
-		wrapper
-			.find("Button")
-			.at(0)
-			.simulate("click");
+		wrapper.find("Button").at(0).simulate("click");
 
-		expect(push).toHaveBeenCalledWith("/employee/seasons/create");
+		expect(Router.push).toHaveBeenCalledWith("/employee/seasons/create");
 	});
 
 	it("renders a LoadingTable", () => {

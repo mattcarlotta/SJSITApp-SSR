@@ -49,9 +49,14 @@ const tableHeader = {
 
 const format = "MM/DD/YYYY";
 
-const MembersAvailability = ({ membersAvailability, months, isLoading }) => (
+export const MembersAvailability = ({
+	membersAvailability,
+	months,
+	isLoading,
+}) => (
 	<Col {...columns}>
 		<Card
+			style={{ marginBottom: 0 }}
 			bodyStyle={{ minHeight: "300px" }}
 			title={
 				<>

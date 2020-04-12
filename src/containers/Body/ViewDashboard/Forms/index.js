@@ -30,13 +30,14 @@ const warningStyle = {
 const format = "MMM Do @ hh:mm a";
 const simpleFormat = "MMM Do";
 
-const Forms = ({ apform, isLoading }) => {
+export const Forms = ({ apform, isLoading }) => {
 	const expDate = moment(apform.expirationDate);
 	const hasExpired = expDate.toDate() < moment().toDate();
 
 	return (
 		<Col {...columns}>
 			<Card
+				style={{ marginBottom: 0 }}
 				bodyStyle={{ minHeight: "300px" }}
 				title={
 					<>

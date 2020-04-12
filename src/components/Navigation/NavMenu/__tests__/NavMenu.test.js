@@ -24,7 +24,7 @@ describe("NavMenu", () => {
 	});
 
 	it("renders without errors", () => {
-		expect(wrapper.find("Title").text()).toEqual("Ice Team");
+		expect(wrapper.find("Title").text()).toEqual("Sharks Ice Team");
 		expect(wrapper.find("Legal").exists()).toBeTruthy();
 	});
 
