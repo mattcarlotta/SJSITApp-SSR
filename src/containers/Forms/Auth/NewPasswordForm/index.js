@@ -54,26 +54,23 @@ export class NewPasswordForm extends Component {
 	};
 
 	render = () => (
-		<>
-			<div css="height: 100vh;background: #ebebeb;" />
-			<Modal>
-				<FormTitle
-					header="Update Password"
-					title="Update Password"
-					description="	Enter a new password to update your current password."
+		<Modal>
+			<FormTitle
+				header="Update Password"
+				title="Update Password"
+				description="	Enter a new password to update your current password."
+			/>
+			<form onSubmit={this.handleSubmit}>
+				<FieldGenerator
+					fields={this.state.fields}
+					onChange={this.handleChange}
 				/>
-				<form onSubmit={this.handleSubmit}>
-					<FieldGenerator
-						fields={this.state.fields}
-						onChange={this.handleChange}
-					/>
-					<SubmitButton
-						isSubmitting={this.state.isSubmitting}
-						title="Update Password"
-					/>
-				</form>
-			</Modal>
-		</>
+				<SubmitButton
+					isSubmitting={this.state.isSubmitting}
+					title="Update Password"
+				/>
+			</form>
+		</Modal>
 	);
 }
 

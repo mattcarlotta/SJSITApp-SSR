@@ -1,6 +1,6 @@
 import * as types from "~types";
 import messageReducer, { initialState } from "~reducers/Messages";
-import * as mocks from "~reducers/__mocks__/~reducers.mocks";
+import * as mocks from "~reducers/__mocks__/reducers.mocks";
 
 describe("Message Reducer", () => {
 	it("initially matches the initialState pattern", () => {

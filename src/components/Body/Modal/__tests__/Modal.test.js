@@ -1,6 +1,5 @@
 import { Modal } from "../index";
 
-const push = jest.fn();
 const onClick = jest.fn();
 
 const initProps = {
@@ -17,7 +16,7 @@ describe("Modal", () => {
 
 	it("redirects the user back to home if closed", () => {
 		wrapper.find("button").simulate("click");
-		expect(push).toHaveBeenCalled();
+		expect(Router.push).toHaveBeenCalled();
 	});
 
 	it("calls a passed in 'onClick' prop function", () => {

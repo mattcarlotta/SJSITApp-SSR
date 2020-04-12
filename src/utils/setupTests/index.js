@@ -27,6 +27,7 @@ global.mount = mount;
 global.mockApp = mockApp;
 global.mockAPI = mockAPI;
 global.React = require("react");
+global.Router = require("Router");
 
 Object.keys(document.defaultView).forEach(property => {
 	if (typeof global[property] === "undefined") {

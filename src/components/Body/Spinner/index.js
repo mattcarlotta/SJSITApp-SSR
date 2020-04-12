@@ -4,21 +4,23 @@ import styled from "styled-components";
 
 const Spinner = ({ className, children }) => (
 	<div className={className}>
-		<div className="text-wrapper">
-			<span className="text sharks" data-text="sharks">
-				sharks
-			</span>
-			<span className="gradient"></span>
-			<span className="spotlight"></span>
+		<div className="container">
+			<div className="text-wrapper">
+				<span className="text sharks" data-text="sharks">
+					sharks
+				</span>
+				<span className="gradient"></span>
+				<span className="spotlight"></span>
+			</div>
+			<div className="text-wrapper">
+				<span className="text iceteam" data-text="ice team">
+					ice team
+				</span>
+				<span className="gradient"></span>
+				<span className="spotlight"></span>
+			</div>
+			{children}
 		</div>
-		<div className="text-wrapper">
-			<span className="text iceteam" data-text="ice team">
-				ice team
-			</span>
-			<span className="gradient"></span>
-			<span className="spotlight"></span>
-		</div>
-		{children}
 	</div>
 );
 
@@ -44,12 +46,16 @@ export default styled(Spinner)`
 		}
 	}
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-height: 90vh;
-	background-color: black;
+	background: #010404;
+	height: 100%;
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		min-height: 90%;
+	}
 
 	.text-wrapper {
 		position: relative;

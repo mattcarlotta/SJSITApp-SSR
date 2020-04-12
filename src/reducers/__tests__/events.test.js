@@ -1,6 +1,6 @@
 import * as types from "~types";
 import eventReducer, { initialState } from "~reducers/Events";
-import * as mocks from "~reducers/__mocks__/~reducers.mocks";
+import * as mocks from "~reducers/__mocks__/reducers.mocks";
 
 const eventsData = {
 	events: mocks.eventsData,

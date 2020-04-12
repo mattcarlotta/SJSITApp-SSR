@@ -13,16 +13,20 @@ import TableActions from "~components/Body/TableActions";
 class CustomTable extends Component {
 	state = {
 		selectedRowKeys: [],
+		isMounted: false,
 	};
 
 	componentDidMount = () => {
-		this.handlePageOverflowRedirect();
+		this.setState({ isMounted: true }, () => {
+			this.handlePageOverflowRedirect();
+		});
 	};
 
 	shouldComponentUpdate = (nextProps, nextState) =>
 		nextProps.isLoading !== this.props.isLoading ||
 		nextProps.queries !== this.props.queries ||
 		nextProps.queryString !== this.props.queryString ||
+		nextState.isMounted !== this.state.isMounted ||
 		nextState.selectedRowKeys !== this.state.selectedRowKeys;
 
 	componentDidUpdate = prevProps => {
@@ -85,7 +89,7 @@ class CustomTable extends Component {
 	};
 
 	render = () =>
-		this.props.isLoading ? (
+		this.props.isLoading || !this.state.isMounted ? (
 			<LoadingTable />
 		) : (
 			<FadeIn timing="0.4s">

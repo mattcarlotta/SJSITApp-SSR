@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Router from "next/router";
 import Spinner from "~components/Body/Spinner";
 import AppLayout from "~components/App";
+import FadeIn from "~components/Body/FadeIn";
 import { accessDenied } from "~messages/errors";
 import { signoutUser } from "~actions/Auth";
 import toast from "~components/Body/Toast";
@@ -45,7 +46,9 @@ const requiresStaffCredentials = WrappedComponent => {
 					<WrappedComponent {...this.props} />
 				</AppLayout>
 			) : (
-				<Spinner />
+				<FadeIn style={{ height: "100%" }} timing="1.5s">
+					<Spinner />
+				</FadeIn>
 			);
 	}
 

@@ -46,37 +46,34 @@ export class LoginForm extends Component {
 	};
 
 	render = () => (
-		<>
-			<div css="height: 100vh;background: #ebebeb;" />
-			<Modal>
-				<FormTitle
-					header="Log In"
-					title="Welcome!"
-					description="Sign into your account below."
+		<Modal>
+			<FormTitle
+				header="Log In"
+				title="Welcome!"
+				description="Sign into your account below."
+			/>
+			<form onSubmit={this.handleSubmit}>
+				<FieldGenerator
+					fields={this.state.fields}
+					onChange={this.handleChange}
 				/>
-				<form onSubmit={this.handleSubmit}>
-					<FieldGenerator
-						fields={this.state.fields}
-						onChange={this.handleChange}
-					/>
-					<Link
-						blue
-						style={{ padding: 0, margin: 0, fontSize: 16 }}
-						href="/employee/reset-password"
-					>
-						<FaUnlockAlt />
-						&nbsp; Forgot your password?
-					</Link>
-					<SubmitButton isSubmitting={this.state.isSubmitting} title="Log In" />
-				</form>
-				<Center style={{ marginTop: 20 }}>
-					<span>Don&#39;t have an account?</span> &nbsp;
-					<Link blue style={{ padding: 0, margin: 0 }} href="/employee/signup">
-						Sign up
-					</Link>
-				</Center>
-			</Modal>
-		</>
+				<Link
+					blue
+					style={{ padding: 0, margin: 0, fontSize: 16 }}
+					href="/employee/reset-password"
+				>
+					<FaUnlockAlt />
+					&nbsp; Forgot your password?
+				</Link>
+				<SubmitButton isSubmitting={this.state.isSubmitting} title="Log In" />
+			</form>
+			<Center style={{ marginTop: 20 }}>
+				<span>Don&#39;t have an account?</span> &nbsp;
+				<Link blue style={{ padding: 0, margin: 0 }} href="/employee/signup">
+					Sign up
+				</Link>
+			</Center>
+		</Modal>
 	);
 }
 

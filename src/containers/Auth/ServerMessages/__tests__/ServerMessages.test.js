@@ -3,7 +3,7 @@ import { ServerMessages } from "../index";
 const resetServerMessage = jest.fn();
 
 const initProps = {
-	message: "",
+	serverMessage: "",
 	resetServerMessage,
 };
 
@@ -22,7 +22,7 @@ describe("Server Messages", () => {
 	it("automatically resets server messages after 8 seconds", done => {
 		jest.useFakeTimers();
 		wrapper.setProps({
-			message: "This message auto resets in 8 seconds.",
+			serverMessage: "This message auto resets in 8 seconds.",
 		});
 		jest.advanceTimersByTime(8500);
 

@@ -13,6 +13,15 @@ export default (initialState, { isServer, req = null }) => {
 		composeWithDevTools(applyMiddleware(saga)),
 	);
 
+	if (module.hot) {
+		module.hot.accept("../reducers", () => {
+			/* eslint-disable-next-line */
+			const createNextReducer = require("../reducers/index").default;
+
+			store.replaceReducer(createNextReducer(initialState));
+		});
+	}
+
 	/* istanbul ignore next */
 	if (req || !isServer) {
 		store.sagaTask = saga.run(rootSaga);

@@ -1,6 +1,6 @@
 import * as types from "~types";
 import formReducer, { initialState } from "~reducers/Forms";
-import * as mocks from "~reducers/__mocks__/~reducers.mocks";
+import * as mocks from "~reducers/__mocks__/reducers.mocks";
 
 const formsData = {
 	forms: mocks.formData,
