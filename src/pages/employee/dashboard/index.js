@@ -1,9 +1,9 @@
 import React from "react";
-import moment from "moment-timezone";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import ViewDashboard from "~containers/Body/ViewDashboard";
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
+import moment from "~utils/momentWithTZ";
 import * as actions from "~actions/Dashboard";
 
 const Dashboard = () => <ViewDashboard />;

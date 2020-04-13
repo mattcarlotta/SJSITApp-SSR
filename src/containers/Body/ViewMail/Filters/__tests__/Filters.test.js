@@ -1,5 +1,5 @@
 import Router from "next/router";
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import Filters from "../index";
 
 const clearFilters = jest.fn();

@@ -1,6 +1,5 @@
 import get from "lodash.get";
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
 import random from "lodash.random";
 import sortBy from "lodash.sortby";
 import { Types } from "mongoose";
@@ -9,6 +8,7 @@ import {
 	newAuthorizationKeyTemplate,
 	newStaffTemplate,
 } from "~services/templates";
+import moment from "~utils/momentWithTZ";
 
 const { ObjectId } = Types;
 const { LOCALHOST } = process.env;

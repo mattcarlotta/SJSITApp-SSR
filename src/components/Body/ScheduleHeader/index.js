@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import { Select } from "antd";
 import FlexEnd from "~components/Body/FlexEnd";
+import moment from "~utils/momentWithTZ";
 
 const Option = Select.Option;
 

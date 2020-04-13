@@ -1,6 +1,5 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import { ViewEvents } from "../index";
-import { withRouterContext } from "../../../../utils/testing";
 
 const deleteEvent = jest.fn();
 const deleteManyEvents = jest.fn();

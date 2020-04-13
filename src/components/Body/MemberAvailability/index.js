@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
 import debounce from "lodash.debounce";
-import moment from "moment-timezone";
 import { Empty } from "antd";
 import { ResponsivePie } from "@nivo/pie";
 import { ResponsiveBar } from "@nivo/bar";
@@ -13,6 +12,7 @@ import FlexCenter from "~components/Body/FlexCenter";
 import Legend from "~components/Body/Legend";
 import Line from "~components/Body/Line";
 import ScheduleHeader from "~components/Body/ScheduleHeader";
+import moment from "~utils/momentWithTZ";
 
 const COLORS = ["#247BA0", "#2A9D8F", "#F4A261", "#FF8060", "#BFBFBF"];
 

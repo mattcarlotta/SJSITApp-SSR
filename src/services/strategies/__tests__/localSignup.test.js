@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import { localSignup } from "~services/strategies/localSignup";
 import {
 	expiredToken,
@@ -9,6 +8,7 @@ import {
 	usernameAlreadyTaken,
 } from "~messages/errors";
 import { createSignupToken } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import { Season, Token } from "~models";
 
 const next = jest.fn();

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
 import { Card, Col } from "antd";
@@ -14,6 +13,7 @@ import List from "~components/Body/List";
 import ListItem from "~components/Body/ListItem";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import NoAvailability from "~components/Body/NoAvailability";
+import moment from "~utils/momentWithTZ";
 import columns from "../Columns";
 
 const iconStyle = {

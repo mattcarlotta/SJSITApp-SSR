@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import Profile from "../index";
 
 const push = jest.fn();
@@ -44,12 +44,7 @@ describe("Profile", () => {
 	});
 
 	it("displays the member's id", () => {
-		expect(
-			wrapper
-				.find("LightText")
-				.first()
-				.text(),
-		).toContain(viewMember._id);
+		expect(wrapper.find("LightText").first().text()).toContain(viewMember._id);
 	});
 
 	it("displays the member's status, as well as a activate/suspend button", () => {
@@ -78,12 +73,9 @@ describe("Profile", () => {
 	});
 
 	it("displays the member's registration date", () => {
-		expect(
-			wrapper
-				.find("LightText")
-				.at(2)
-				.text(),
-		).toContain(`${moment(viewMember.registered).format("MMMM Do, YYYY")}`);
+		expect(wrapper.find("LightText").at(2).text()).toContain(
+			`${moment(viewMember.registered).format("MMMM Do, YYYY")}`,
+		);
 	});
 
 	it("displays the EditMemberForm", () => {

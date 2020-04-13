@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event } from "~models";
@@ -8,6 +7,7 @@ import {
 	getStartOfDay,
 	sendError,
 } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import { missingMemberId } from "~messages/errors";
 
 /**

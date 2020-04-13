@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event, Form } from "~models";
@@ -10,6 +9,7 @@ import {
 	sendError,
 } from "~utils/helpers";
 import { missingMemberId } from "~messages/errors";
+import moment from "~utils/momentWithTZ";
 
 /**
  * Retrieves a members availabilty for a percentage chart.

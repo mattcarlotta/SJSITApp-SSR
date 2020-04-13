@@ -14,7 +14,15 @@ import UserContainer from "~components/Body/UserContainer";
 
 const DropContainer = ({ id, title, users, width }) => (
 	<Column width={width}>
-		<ColumnTitle style={{ marginBottom: 5 }}>{title}</ColumnTitle>
+		<ColumnTitle
+			style={{
+				marginBottom: 5,
+				background:
+					"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+			}}
+		>
+			{title}
+		</ColumnTitle>
 		<Droppable droppableId={id}>
 			{({ innerRef, placeholder }, { isDraggingOver }) => (
 				<UserContainer ref={innerRef} isDraggingOver={isDraggingOver}>

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import "~env";
 import "~models/all";
-import moment from "moment-timezone";
 import { connectDatabase } from "~database";
 import { Event, Form, Mail, User, Season, Team, Token } from "~models";
 import {
@@ -11,6 +10,7 @@ import {
 	createRandomToken,
 	expirationDate,
 } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import teams from "./Teams";
 
 const { SEED } = process.env;

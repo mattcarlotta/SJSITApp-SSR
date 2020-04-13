@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import Profile from "../index";
 
 const initProps = {
@@ -26,29 +26,18 @@ describe("Profile", () => {
 	});
 
 	it("displays the member's id", () => {
-		expect(
-			wrapper
-				.find("LightText")
-				.first()
-				.text(),
-		).toContain(initProps.status);
+		expect(wrapper.find("LightText").first().text()).toContain(
+			initProps.status,
+		);
 	});
 
 	it("displays the member's registration date", () => {
-		expect(
-			wrapper
-				.find("LightText")
-				.at(1)
-				.text(),
-		).toContain(`${moment(initProps.registered).format("MMMM Do, YYYY")}`);
+		expect(wrapper.find("LightText").at(1).text()).toContain(
+			`${moment(initProps.registered).format("MMMM Do, YYYY")}`,
+		);
 	});
 
 	it("displays the member's role", () => {
-		expect(
-			wrapper
-				.find("LightText")
-				.at(2)
-				.text(),
-		).toContain(initProps.role);
+		expect(wrapper.find("LightText").at(2).text()).toContain(initProps.role);
 	});
 });

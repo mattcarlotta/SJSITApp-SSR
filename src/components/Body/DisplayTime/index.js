@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
+import moment from "~utils/momentWithTZ";
+
+moment.tz.setDefault("America/Los_Angeles");
 
 const DisplayTime = ({ times }) =>
 	!isEmpty(times) ? (

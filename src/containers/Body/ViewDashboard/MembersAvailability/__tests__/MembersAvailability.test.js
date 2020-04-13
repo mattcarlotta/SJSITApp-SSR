@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import { MembersAvailability } from "../index";
 
 const format = "MM/DD/YYYY";

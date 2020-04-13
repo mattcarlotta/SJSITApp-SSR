@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Router, { withRouter } from "next/router";
+import { withRouter } from "next/router";
 import { Layout } from "antd";
 import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
@@ -71,21 +71,11 @@ export class AppLayout extends Component {
 		this.setState({ openKeys: containsLatestKey ? openKeys : [latestOpenKey] });
 	};
 
-	handleTabClick = ({
-		key,
-		item: {
-			props: { value },
-		},
-	}) => {
+	handleTabClick = ({ key }) => {
 		const openKeys = ROOTTABS.find(tab => key.includes(tab));
-		this.setState(
-			{
-				openKeys: openKeys ? [openKeys] : [],
-			},
-			() => {
-				Router.push(`/employee/${value}`);
-			},
-		);
+		this.setState({
+			openKeys: openKeys ? [openKeys] : [],
+		});
 	};
 
 	toggleDrawerMenu = () =>

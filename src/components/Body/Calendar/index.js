@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
 import { Calendar } from "antd";
+import moment from "~utils/momentWithTZ";
 import ScheduleList from "~components/Body/ScheduleList";
 import ScheduleHeader from "~components/Body/ScheduleHeader";
 import ScheduleModal from "~components/Body/ScheduleModal";

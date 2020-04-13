@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { Card } from "antd";
@@ -15,6 +14,7 @@ import LoadingForm from "~components/Forms/LoadingForm";
 import fieldUpdater from "~utils/fieldUpdater";
 import parseFields from "~utils/parseFields";
 import { updateSeason } from "~actions/Seasons";
+import moment from "~utils/momentWithTZ";
 import fields from "./Fields";
 
 const title = "Edit Season";

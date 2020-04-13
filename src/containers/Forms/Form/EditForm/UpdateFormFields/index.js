@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 
 export default (field, editForm) => {
 	switch (field.name) {

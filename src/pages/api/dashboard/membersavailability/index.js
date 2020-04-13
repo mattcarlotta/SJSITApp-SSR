@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
@@ -9,6 +8,7 @@ import {
 	getEventCounts,
 	sendError,
 } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 
 /**
  * Retrieves all members availabilty for a percentage table.

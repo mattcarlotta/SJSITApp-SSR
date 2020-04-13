@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import { EditSeasonForm } from "../index";
 
 const seasonId = "20002001";

@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import CustomCalendar, { setValidRange } from "../index";
 
 const calendarDate = moment("2019-09-01T00:00:00-07:00");
