@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
 import { connect } from "react-redux";
 import { Card, Col } from "antd";
 import { FaUserClock } from "react-icons/fa";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import MemberAvailabilityAverage from "~components/Body/MemberAvailabilityAverage";
+import moment from "~utils/momentWithTZ";
 import columns from "../Columns";
+
+moment.tz.setDefault("America/Los_Angeles");
 
 const iconStyle = {
 	verticalAlign: "middle",
@@ -17,9 +19,10 @@ const iconStyle = {
 
 const format = "MM/DD/YYYY";
 
-const Availability = props => (
+export const Availability = props => (
 	<Col {...columns}>
 		<Card
+			style={{ marginBottom: 0 }}
 			bodyStyle={{ minHeight: "300px" }}
 			title={
 				<>

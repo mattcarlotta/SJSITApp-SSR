@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import { Availability } from "../index";
 
 const fetchAvailability = jest.fn();
@@ -28,7 +28,6 @@ const wrapper = mount(<Availability {...initProps} />);
 
 describe("Dashboard Availability", () => {
 	it("initially displays a LoadingPanel", () => {
-		expect(fetchAvailability).toHaveBeenCalledTimes(1);
 		expect(wrapper.find("LoadingPanel").exists()).toBeTruthy();
 	});
 

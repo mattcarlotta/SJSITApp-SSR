@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";
 import { FaPaperPlane } from "react-icons/fa";
@@ -9,6 +8,7 @@ import CollapseFlex from "~components/Body/CollapseFlex";
 import FilterButton from "~components/Body/FilterButton";
 import FlexEnd from "~components/Body/FlexEnd";
 import FlexStart from "~components/Body/FlexStart";
+import moment from "~utils/momentWithTZ";
 
 const Option = Select.Option;
 const format = "MM-DD-YYYY";

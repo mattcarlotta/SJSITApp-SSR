@@ -338,7 +338,7 @@ export function* fetchMembers() {
 
 export function* fetchSettings() {
 	try {
-		let res = yield call(app.get, `member/settings`);
+		let res = yield call(app.get, "member/settings");
 		const basicMemberInfo = yield call(parseData, res);
 
 		res = yield call(app.get, "member/settings/availability");

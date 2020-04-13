@@ -11,9 +11,9 @@ describe("Auth Reducer", () => {
 
 	it("toggles sidebar state", () => {
 		const state = authReducer(undefined, {
-			type: types.types.USER_SET_SIDEBAR_STATE,
+			type: types.USER_SET_SIDEBAR_STATE,
 		});
-		expect(state).toEqual({ ...mocks.userSession, isCollapsed: true });
+		expect(state).toEqual({ ...initialState, isCollapsed: true });
 	});
 
 	it("updates a signed in user", () => {

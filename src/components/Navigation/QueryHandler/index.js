@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Router, { withRouter } from "next/router";
 import { setQuery, stringifyQuery } from "~utils/queryHelpers";
 
-class QueryHandler extends PureComponent {
+export class QueryHandler extends PureComponent {
 	state = setQuery(this.props.router.query);
 
 	static getDerivedStateFromProps = ({ router }) => setQuery(router.query);

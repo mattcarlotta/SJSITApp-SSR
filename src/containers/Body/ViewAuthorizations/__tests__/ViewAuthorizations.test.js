@@ -1,8 +1,8 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewAuthorizations } from "../index";
 
 const deleteManyTokens = jest.fn();
 const deleteToken = jest.fn();
-const push = jest.fn();
 const fetchTokens = jest.fn();
 const resendToken = jest.fn();
 
@@ -10,14 +10,10 @@ const initProps = {
 	deleteToken,
 	deleteManyTokens,
 	fetchTokens,
-	location: {
-		search: "?page=1",
-	},
 	isLoading: true,
 	resendToken,
 	tokens: [],
 	totalDocs: 0,
-	push,
 };
 
 const tokens = [
@@ -46,7 +42,11 @@ const tokens = [
 describe("View Member Profile", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = mount(<ViewAuthorizations {...initProps} />);
+		wrapper = withRouterContext(ViewAuthorizations, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {
@@ -69,11 +69,7 @@ describe("View Member Profile", () => {
 
 		expect(emptyExpirationDate.text()).toContain("-");
 
-		const expirationDate = wrapper
-			.find("TableRow")
-			.at(1)
-			.find("td")
-			.at(5);
+		const expirationDate = wrapper.find("TableRow").at(1).find("td").at(5);
 
 		expect(expirationDate.text()).toContain("10/31/2019");
 	});

@@ -1,4 +1,4 @@
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 import { EditSeasonForm } from "../index";
 
 const seasonId = "20002001";
@@ -8,20 +8,11 @@ const editSeason = {
 	startDate: new Date(2000, 9, 6),
 	endDate: new Date(2001, 7, 6),
 };
-const fetchSeason = jest.fn();
-const goBack = jest.fn();
 const updateSeason = jest.fn();
 
 const initProps = {
-	match: {
-		params: {
-			id: seasonId,
-		},
-	},
 	editSeason: {},
-	fetchSeason,
 	isLoading: true,
-	goBack,
 	serverMessage: "",
 	updateSeason,
 };
@@ -45,20 +36,12 @@ describe("Edit Season Form", () => {
 		submitForm = () => wrapper.find("form").simulate("submit");
 	});
 
-	afterEach(() => {
-		fetchSeason.mockClear();
-	});
-
 	it("renders without errors", () => {
 		expect(wrapper.find("form").exists()).toBeTruthy();
 	});
 
 	it("shows a LoadingForm when fetching seasonIds and the token to edit", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
-	});
-
-	it("initially calls fetchSeason when isLoading is true", () => {
-		expect(fetchSeason).toHaveBeenCalledWith(seasonId);
 	});
 
 	describe("Form has been loaded", () => {
@@ -68,17 +51,10 @@ describe("Edit Season Form", () => {
 
 		it("enables the inputs and submit button", () => {
 			expect(
-				wrapper
-					.find("input.ant-calendar-range-picker-input")
-					.first()
-					.props().disabled,
+				wrapper.find("input.ant-calendar-range-picker-input").first().props()
+					.disabled,
 			).toBeFalsy();
-			expect(
-				wrapper
-					.find("button")
-					.at(1)
-					.props().disabled,
-			).toBeFalsy();
+			expect(wrapper.find("button").at(1).props().disabled).toBeFalsy();
 		});
 
 		it("initially sets the seasonId, handles changes based upon selected values, and resets to prop values when cleared", () => {

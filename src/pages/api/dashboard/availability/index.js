@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event, Form } from "~models";
@@ -10,6 +9,7 @@ import {
 	sendError,
 } from "~utils/helpers";
 import { missingMemberId } from "~messages/errors";
+import moment from "~utils/momentWithTZ";
 
 /**
  * Retrieves a members availabilty for a percentage chart.
@@ -21,7 +21,7 @@ import { missingMemberId } from "~messages/errors";
 const getAvailability = async (req, res) => {
 	try {
 		const { id: _id } = req.session.user;
-		if (!_id) throw missingMemberId;
+		if (!_id) throw String(missingMemberId);
 
 		const currentDate = createDate().add(1, "months").toDate();
 		const eventAvailability = [];

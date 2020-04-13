@@ -72,19 +72,13 @@ describe("Select - Selection", () => {
 	});
 
 	it("calls handleSelectClick when SelectText is clicked", () => {
-		wrapper
-			.find("SelectText")
-			.at(1)
-			.simulate("click");
+		wrapper.find("SelectText").at(1).simulate("click");
 		expect(handleSelectClick).toHaveBeenCalledTimes(1);
 	});
 
 	it("if disabled doesn't call handleSelectClick", () => {
 		wrapper.setProps({ disabled: true });
-		wrapper
-			.find("SelectText")
-			.at(1)
-			.simulate("click");
+		wrapper.find("SelectText").at(1).simulate("click");
 		expect(handleSelectClick).toHaveBeenCalledTimes(0);
 	});
 
@@ -165,10 +159,7 @@ describe("Select - Selection", () => {
 		it("clicking on the FaTimesCircle calls handleSearchClear", () => {
 			wrapper.setProps({ isSearchable: true, searchText: "Test" });
 
-			wrapper
-				.find("Icon")
-				.at(1)
-				.simulate("click");
+			wrapper.find("Icon").at(1).simulate("click");
 
 			expect(handleSearchClear).toHaveBeenCalledWith({
 				target: {

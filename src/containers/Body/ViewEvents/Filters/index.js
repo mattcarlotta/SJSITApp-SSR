@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
 import Router from "next/router";
 import { Button as AntButton, DatePicker, Select } from "antd";
 import { FaCalendarPlus } from "react-icons/fa";
@@ -10,6 +9,7 @@ import CollapseFlex from "~components/Body/CollapseFlex";
 import FilterButton from "~components/Body/FilterButton";
 import FlexEnd from "~components/Body/FlexEnd";
 import FlexStart from "~components/Body/FlexStart";
+import moment from "~utils/momentWithTZ";
 
 const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;

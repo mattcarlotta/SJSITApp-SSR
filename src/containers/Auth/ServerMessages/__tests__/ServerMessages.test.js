@@ -3,16 +3,14 @@ import { ServerMessages } from "../index";
 const resetServerMessage = jest.fn();
 
 const initProps = {
-	message: "",
+	serverMessage: "",
 	resetServerMessage,
 };
 
 describe("Server Messages", () => {
 	let wrapper;
-	let findMsgCtnr;
 	beforeEach(() => {
 		wrapper = mount(<ServerMessages {...initProps} />);
-		findMsgCtnr = () => wrapper.find("MessageContainer");
 	});
 
 	afterEach(() => {
@@ -22,7 +20,7 @@ describe("Server Messages", () => {
 	it("automatically resets server messages after 8 seconds", done => {
 		jest.useFakeTimers();
 		wrapper.setProps({
-			message: "This message auto resets in 8 seconds.",
+			serverMessage: "This message auto resets in 8 seconds.",
 		});
 		jest.advanceTimersByTime(8500);
 

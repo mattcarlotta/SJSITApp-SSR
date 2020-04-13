@@ -25,12 +25,9 @@ const editMail = {
 
 const initProps = {
 	editMail: {},
-	match: {
-		params: {
-			id,
-		},
+	router: {
+		query: { id: "0123456789" },
 	},
-	goBack,
 	serverMessage: "",
 	updateMail,
 };
@@ -55,7 +52,7 @@ Object.defineProperty(global.document, "getSelection", { value: jest.fn() });
 describe("Edit Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(EditMailForm, initProps);
+		wrapper = mount(<EditMailForm {...initProps} />);
 	});
 
 	afterEach(() => {
@@ -134,7 +131,7 @@ describe("Edit Mail Form", () => {
 					sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
 					sendDate: "2019-10-15T00:00:00-07:00",
 					subject: "Edited Test",
-					message: "<p>Edited Test</p>",
+					message: "<span>Edited Test</span>",
 				});
 			});
 

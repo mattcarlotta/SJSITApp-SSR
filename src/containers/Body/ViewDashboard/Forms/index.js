@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import moment from "moment-timezone";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { Card, Col } from "antd";
@@ -10,6 +9,7 @@ import Bold from "~components/Body/Bold";
 import Button from "~components/Body/Button";
 import LoadingPanel from "~components/Body/LoadingPanel";
 import WarningText from "~components/Body/WarningText";
+import moment from "~utils/momentWithTZ";
 import NoForms from "./NoForms";
 import columns from "../Columns";
 
@@ -30,13 +30,14 @@ const warningStyle = {
 const format = "MMM Do @ hh:mm a";
 const simpleFormat = "MMM Do";
 
-const Forms = ({ apform, isLoading }) => {
+export const Forms = ({ apform, isLoading }) => {
 	const expDate = moment(apform.expirationDate);
 	const hasExpired = expDate.toDate() < moment().toDate();
 
 	return (
 		<Col {...columns}>
 			<Card
+				style={{ marginBottom: 0 }}
 				bodyStyle={{ minHeight: "300px" }}
 				title={
 					<>

@@ -18,7 +18,7 @@ const Schedule = ({ handleDrag, event, columns, users }) => (
 			<Container>
 				<Legend />
 				<GameDetailsContainer>
-					<div css="text-align: center;color: #fff;background: #025f6d;border-radius: 3px;padding: 10px 5px;text-transform: uppercase;font-size: 17px;">
+					<div css="text-align: center;color: #fff;background: linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%);border-radius: 3px;padding: 10px 5px;text-transform: uppercase;font-size: 17px;">
 						{event.team}{" "}
 						{event.opponent && (
 							<>

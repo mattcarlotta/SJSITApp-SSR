@@ -6,7 +6,15 @@ import ColumnTitle from "~components/Body/ColumnTitle";
 
 const Legend = ({ className, style }) => (
 	<div className={className} style={style}>
-		<ColumnTitle style={{ marginBottom: 5 }}>Legend</ColumnTitle>
+		<ColumnTitle
+			style={{
+				marginBottom: 5,
+				background:
+					"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+			}}
+		>
+			Legend
+		</ColumnTitle>
 		{[
 			"I want to work.",
 			"Available to work.",

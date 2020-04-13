@@ -10,6 +10,7 @@ import messageReducer from "~reducers/Messages";
 import eventReducer from "~reducers/Events";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
 
 const eventId = "0123456789";
 const ids = mocks.ids;
@@ -46,7 +47,7 @@ describe("Event Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/events/viewall?page=1")
+				.call(Router.push, "/employee/events/viewall?page=1")
 				.next()
 				.isDone();
 		});
@@ -254,76 +255,6 @@ describe("Event Sagas", () => {
 
 			return expectSaga(sagas.fetchEvent, { eventId })
 				.dispatch(actions.fetchEvent)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
-	});
-
-	describe("Fetch Event For Scheduling", () => {
-		let scheduleData;
-		let memberCountData;
-		beforeEach(() => {
-			scheduleData = { schedule: mocks.eventForSchedulingData };
-			memberCountData = { members: mocks.memberCountData };
-		});
-
-		it("logical flow matches pattern for fetch event for scheduling requests", () => {
-			const res = { scheduleData };
-			const res2 = { memberCountData };
-
-			const params = { params: { eventId } };
-
-			testSaga(sagas.fetchEventForScheduling, { eventId })
-				.next()
-				.put(resetServerMessage())
-				.next()
-				.call(app.get, `event/review/${eventId}`)
-				.next(res)
-				.call(parseData, res)
-				.next(res.scheduleData)
-				.call(app.get, `members/eventcounts`, params)
-				.next(res2)
-				.call(parseData, res2)
-				.next(res2.memberCountData)
-				.put(
-					actions.setEventForScheduling({
-						...res.scheduleData,
-						...res2.memberCountData,
-					}),
-				)
-				.next()
-				.isDone();
-		});
-
-		it("successfully fetches a fetch event for scheduling", async () => {
-			mockApp.onGet(`event/review/${eventId}`).reply(200, scheduleData);
-			mockApp.onGet(`members/eventcounts`).reply(200, memberCountData);
-
-			return expectSaga(sagas.fetchEventForScheduling, { eventId })
-				.dispatch(actions.fetchEventForScheduling)
-				.withReducer(eventReducer)
-				.hasFinalState({
-					data: [],
-					editEvent: {},
-					members: mocks.memberCountData,
-					newEvent: {},
-					schedule: mocks.eventForSchedulingData,
-					scheduleEvents: [],
-					isLoading: true,
-					totalDocs: 0,
-				})
-				.run();
-		});
-
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to fetch that event for scheduling.";
-			mockApp.onGet(`event/review/${eventId}`).reply(404, { err });
-
-			return expectSaga(sagas.fetchEventForScheduling, { eventId })
-				.dispatch(actions.fetchEventForScheduling)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,

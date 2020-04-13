@@ -1,5 +1,5 @@
-import moment from "moment-timezone";
 import { Select } from "antd";
+import moment from "~utils/momentWithTZ";
 import ScheduleHeader from "../index";
 
 const handleSelection = jest.fn();
@@ -10,12 +10,7 @@ const years = [
 		.fill()
 		.map(
 			(_, key) =>
-				parseInt(
-					moment()
-						.subtract(5, "year")
-						.format("YYYY"),
-					10,
-				) + key,
+				parseInt(moment().subtract(5, "year").format("YYYY"), 10) + key,
 		),
 ];
 const value = moment("Aug 2019", "MMM YYYY");
@@ -54,17 +49,11 @@ describe("Name of the group", () => {
 	it("calls handleSelection when 'selectedGames' option is selected", () => {
 		jest.useFakeTimers();
 
-		wrapper
-			.find(Select)
-			.first()
-			.simulate("click");
+		wrapper.find(Select).first().simulate("click");
 
 		jest.runAllTimers();
 
-		wrapper
-			.find("li.ant-select-dropdown-menu-item")
-			.at(1)
-			.simulate("click");
+		wrapper.find("li.ant-select-dropdown-menu-item").at(1).simulate("click");
 
 		expect(handleSelection).toHaveBeenCalledWith({
 			calendarDate: value,
@@ -77,17 +66,11 @@ describe("Name of the group", () => {
 	it("renders 12 months and calls handleSelection when 'selectedMonth' option is selected", () => {
 		jest.useFakeTimers();
 
-		wrapper
-			.find(Select)
-			.at(1)
-			.simulate("click");
+		wrapper.find(Select).at(1).simulate("click");
 
 		jest.runAllTimers();
 
-		wrapper
-			.find("li.ant-select-dropdown-menu-item")
-			.at(0)
-			.simulate("click");
+		wrapper.find("li.ant-select-dropdown-menu-item").at(0).simulate("click");
 
 		expect(wrapper.find("ul.ant-select-dropdown-menu").find("li")).toHaveLength(
 			12,
@@ -109,17 +92,11 @@ describe("Name of the group", () => {
 	it("renders 5+- years from current year and calls handleSelection when 'selectedYear' option is selected", () => {
 		jest.useFakeTimers();
 
-		wrapper
-			.find(Select)
-			.at(2)
-			.simulate("click");
+		wrapper.find(Select).at(2).simulate("click");
 
 		jest.runAllTimers();
 
-		wrapper
-			.find("li.ant-select-dropdown-menu-item")
-			.at(0)
-			.simulate("click");
+		wrapper.find("li.ant-select-dropdown-menu-item").at(0).simulate("click");
 
 		expect(wrapper.find("ul.ant-select-dropdown-menu").find("li")).toHaveLength(
 			11,
@@ -129,12 +106,7 @@ describe("Name of the group", () => {
 			calendarDate: value,
 			name: "selectedYear",
 			updateCalendarDate: onChange,
-			value: parseInt(
-				moment()
-					.subtract(5, "years")
-					.format("YYYY"),
-				10,
-			),
+			value: parseInt(moment().subtract(5, "years").format("YYYY"), 10),
 		});
 	});
 });

@@ -43,17 +43,11 @@ describe("Render Email SendTo", () => {
 			},
 		});
 
-		expect(
-			wrapper
-				.find("#multipleemailaddresses")
-				.first()
-				.text(),
-		).toEqual(`Test Test, `);
-		expect(
-			wrapper
-				.find("#multipleemailaddresses")
-				.at(1)
-				.text(),
-		).toEqual(`Test2 Test.`);
+		expect(wrapper.find("#multipleemailaddresses").first().text()).toEqual(
+			`Test Test, `,
+		);
+		expect(wrapper.find("#multipleemailaddresses").at(1).text()).toEqual(
+			`Test2 Test.`,
+		);
 	});
 });

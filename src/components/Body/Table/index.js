@@ -2,13 +2,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
-import { Popover, Table } from "antd";
+import { Popover } from "antd";
 import { FaTools } from "react-icons/fa";
+import dynamic from "next/dynamic";
 import Button from "~components/Body/Button";
 import FadeIn from "~components/Body/FadeIn";
 import FlexCenter from "~components/Body/FlexCenter";
 import LoadingTable from "~components/Body/LoadingTable";
 import TableActions from "~components/Body/TableActions";
+
+const Table = dynamic(() => import("antd").then(mod => mod.Table), {
+	ssr: false,
+});
 
 class CustomTable extends Component {
 	state = {
@@ -23,6 +28,7 @@ class CustomTable extends Component {
 		nextProps.isLoading !== this.props.isLoading ||
 		nextProps.queries !== this.props.queries ||
 		nextProps.queryString !== this.props.queryString ||
+		nextState.isMounted !== this.state.isMounted ||
 		nextState.selectedRowKeys !== this.state.selectedRowKeys;
 
 	componentDidUpdate = prevProps => {

@@ -16,7 +16,9 @@ const memberNames = [
 const initProps = {
 	createMail,
 	memberNames: [],
-	push,
+	router: {
+		query: { id: "0123456789" },
+	},
 	serverMessage: "",
 };
 
@@ -40,7 +42,7 @@ Object.defineProperty(global.document, "getSelection", { value: jest.fn() });
 describe("Send Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = HOCWrap(SendMailForm, initProps);
+		wrapper = mount(<SendMailForm {...initProps} />);
 	});
 
 	afterEach(() => {
@@ -112,7 +114,7 @@ describe("Send Mail Form", () => {
 					sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
 					sendDate: "",
 					subject: "Test",
-					message: "<p>Test</p>",
+					message: "<span>Test</span>",
 				});
 			});
 

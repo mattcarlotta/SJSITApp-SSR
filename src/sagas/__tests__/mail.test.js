@@ -10,6 +10,7 @@ import messageReducer from "~reducers/Messages";
 import mailReducer from "~reducers/Mail";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
 
 const mailId = "0123456789";
 const ids = mocks.ids;
@@ -46,7 +47,7 @@ describe("Mail Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/dashboard")
+				.call(Router.push, "/employee/dashboard")
 				.next()
 				.isDone();
 		});
@@ -100,7 +101,7 @@ describe("Mail Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/mail/viewall?page=1")
+				.call(Router.push, "/employee/mail/viewall?page=1")
 				.next()
 				.isDone();
 		});

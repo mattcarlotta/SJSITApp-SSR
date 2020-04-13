@@ -1,11 +1,10 @@
 import React from "react";
-import moment from "moment-timezone";
 import requiresBasicCredentials from "~containers/Auth/requiresBasicCredentials";
 import ViewDashboard from "~containers/Body/ViewDashboard";
 import app from "~utils/axiosConfig";
 import { parseCookie, parseData } from "~utils/parseResponse";
+import moment from "~utils/momentWithTZ";
 import * as actions from "~actions/Dashboard";
-import dispatchError from "~utils/dispatchError";
 
 const Dashboard = () => <ViewDashboard />;
 
@@ -58,18 +57,16 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		dispatch(actions.setEventDistribution(data));
 	};
 
-	await Promise.all(
+	const serverErrors = await Promise.all(
 		[
 			fetchEvents(),
 			fetchAPForm(),
 			fetchAvailability(),
 			fetchEventDistribution(),
-		].map(p =>
-			p.catch(e => dispatchError({ dispatch, message: e.toString() })),
-		),
+		].map(p => p.catch(e => e.toString())),
 	);
 
-	return {};
+	return { serverError: serverErrors.join("") };
 };
 
 export default requiresBasicCredentials(Dashboard);

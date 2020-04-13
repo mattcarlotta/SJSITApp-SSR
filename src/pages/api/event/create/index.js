@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
@@ -10,6 +9,7 @@ import {
 	mustContainUniqueCallTimes,
 	unableToLocateSeason,
 } from "~messages/errors";
+import moment from "~utils/momentWithTZ";
 
 /**
  * Creates a new event.

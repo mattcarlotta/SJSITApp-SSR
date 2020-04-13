@@ -1,7 +1,7 @@
 import { JSDOM } from "jsdom";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { HOCWrap, shallowWrap } from "~utils/testing";
+import { shallowWrap, withRouterContext } from "~utils/testing";
 import { mockApp, mockAPI } from "~utils/__mocks__/mockAxios.js";
 import "jest-styled-components";
 
@@ -22,13 +22,13 @@ global.document = document;
 global.window = document.defaultView;
 global.HTMLElement = window.HTMLElement;
 global.HTMLAnchorElement = window.HTMLAnchorElement;
-global.HOCWrap = HOCWrap;
 global.shallow = shallowWrap;
 global.mount = mount;
 global.mockApp = mockApp;
 global.mockAPI = mockAPI;
+global.withRouterContext = withRouterContext;
 global.React = require("react");
-global.Provider = require("react-redux").Provider;
+global.Router = require("next/router");
 
 Object.keys(document.defaultView).forEach(property => {
 	if (typeof global[property] === "undefined") {

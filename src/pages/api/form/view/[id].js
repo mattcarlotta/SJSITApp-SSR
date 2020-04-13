@@ -1,15 +1,16 @@
-import moment from "moment-timezone";
 import isEmpty from "lodash.isempty";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event, Form } from "~models";
 import { convertId, sendError } from "~utils/helpers";
+
 import {
 	expiredForm,
 	missingFormId,
 	unableToLocateEvents,
 	unableToLocateForm,
 } from "~messages/errors";
+import moment from "~utils/momentWithTZ";
 
 /**
  * Retrieves an AP form and all events existing within its start and end months.

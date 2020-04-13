@@ -1,12 +1,11 @@
+import Router from "next/router";
 import { AccountButton } from "../index";
 
 const signoutUser = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	firstName: "Beta",
 	lastName: "Tester",
-	push,
 	signoutUser,
 };
 
@@ -17,7 +16,7 @@ describe("Account Button", () => {
 	});
 
 	afterEach(() => {
-		push.mockClear();
+		Router.push.mockClear();
 		signoutUser.mockClear();
 	});
 
@@ -26,30 +25,16 @@ describe("Account Button", () => {
 	});
 
 	it("renders a Settings button that pushes to '/employee/settings'", () => {
-		wrapper
-			.find("Dropdown")
-			.at(0)
-			.simulate("click");
+		wrapper.find("Dropdown").at(0).simulate("click");
 
-		wrapper
-			.find("Tooltip")
-			.find("button")
-			.at(0)
-			.simulate("click");
-		expect(push).toHaveBeenCalledWith("/employee/settings");
+		wrapper.find("Tooltip").find("button").at(0).simulate("click");
+		expect(Router.push).toHaveBeenCalledWith("/employee/settings");
 	});
 
 	it("renders a Logout button that calls a 'signoutUser' action creator", () => {
-		wrapper
-			.find("Dropdown")
-			.at(0)
-			.simulate("click");
+		wrapper.find("Dropdown").at(0).simulate("click");
 
-		wrapper
-			.find("Tooltip")
-			.find("button")
-			.at(1)
-			.simulate("click");
+		wrapper.find("Tooltip").find("button").at(1).simulate("click");
 		expect(signoutUser).toHaveBeenCalledTimes(1);
 	});
 });

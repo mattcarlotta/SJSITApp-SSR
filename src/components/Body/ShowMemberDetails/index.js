@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import DisplayStatus from "~components/Body/DisplayStatus";
 import LightText from "~components/Body/LightText";
 import Small from "~components/Body/Small";
 import Title from "~components/Body/Title";
+import moment from "~utils/momentWithTZ";
 
 const ShowMemberDetails = ({
 	firstName,

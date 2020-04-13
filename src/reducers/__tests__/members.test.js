@@ -1,6 +1,6 @@
 import * as types from "~types";
 import memberReducer, { initialState } from "~reducers/Members";
-import * as mocks from "~reducers/__mocks__/~reducers.mocks";
+import * as mocks from "~reducers/__mocks__/reducers.mocks";
 
 const membersData = {
 	members: mocks.membersData,

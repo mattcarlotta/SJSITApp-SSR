@@ -3,8 +3,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 
-const LinkComponent = ({ className, children, dHref, href, style, target }) => (
-	<Link href={href} as={dHref} prefetch={false} passHref>
+const LinkComponent = ({ as, className, children, href, style, target }) => (
+	<Link href={href} as={as} prefetch={false} passHref>
 		<a style={style} className={className} target={target}>
 			{children}
 		</a>
@@ -12,9 +12,9 @@ const LinkComponent = ({ className, children, dHref, href, style, target }) => (
 );
 
 LinkComponent.propTypes = {
+	as: PropTypes.string,
 	className: PropTypes.string.isRequired,
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-	dHref: PropTypes.string,
 	href: PropTypes.string.isRequired,
 	style: PropTypes.objectOf(
 		PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

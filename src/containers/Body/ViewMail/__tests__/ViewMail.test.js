@@ -1,8 +1,8 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewMail } from "../index";
 
 const deleteMail = jest.fn();
 const deleteManyMails = jest.fn();
-const push = jest.fn();
 const fetchMails = jest.fn();
 const resendMail = jest.fn();
 
@@ -12,10 +12,6 @@ const initProps = {
 	deleteManyMails,
 	fetchMails,
 	isLoading: true,
-	location: {
-		search: "?page=1",
-	},
-	push,
 	totalDocs: 0,
 	resendMail,
 };
@@ -35,7 +31,11 @@ const data = [
 describe("View Mail", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = mount(<ViewMail {...initProps} />);
+		wrapper = withRouterContext(ViewMail, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

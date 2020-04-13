@@ -1,9 +1,10 @@
 import { Settings } from "../index";
 
+const deleteUserAvatar = jest.fn();
 const fetchMemberSettingsAvailability = jest.fn();
 const fetchMemberSettingsEvents = jest.fn();
-const fetchMemberSettings = jest.fn();
 const updateMemberStatus = jest.fn();
+const updateUserAvatar = jest.fn();
 
 const viewMember = {
 	email: "test@example.com",
@@ -21,15 +22,10 @@ const staffMember = {
 };
 
 const initProps = {
+	deleteUserAvatar,
 	eventResponses: [],
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
-	fetchMemberSettings,
-	match: {
-		params: {
-			id: "",
-		},
-	},
 	memberAvailability: {},
 	viewMember: {
 		_id: "10393489438",
@@ -41,8 +37,9 @@ const initProps = {
 		schedule: [],
 		status: "active",
 	},
-	updateMemberStatus,
 	serverMessage: "",
+	updateMemberStatus,
+	updateUserAvatar,
 };
 
 describe("View Settings", () => {
@@ -52,17 +49,9 @@ describe("View Settings", () => {
 		wrapper.setState({ windowWidth: 1000 });
 	});
 
-	afterEach(() => {
-		fetchMemberSettings.mockClear();
-	});
-
 	it("initially renders a LoadingPanel", () => {
 		wrapper.setProps({ viewMember: {} });
 		expect(wrapper.find("LoadingPanel").exists()).toBeTruthy();
-	});
-
-	it("initially calls fetchMemberSettings on mount", () => {
-		expect(fetchMemberSettings).toHaveBeenCalledTimes(1);
 	});
 
 	it("initially renders tabs along the side", () => {
@@ -70,39 +59,19 @@ describe("View Settings", () => {
 	});
 
 	it("renders tabs along the top if the windowWidth is less than 900", () => {
-		wrapper.setState({ windowWidth: 800 });
+		wrapper.setState({ isCollapsed: true });
 		expect(wrapper.find("Tabs").props().tabPosition).toEqual("top");
 	});
 
 	it("renders 3 active tabs if the role is 'employee'", () => {
 		wrapper.setProps({ viewMember });
-		expect(
-			wrapper
-				.find("TabPane")
-				.at(1)
-				.props().disabled,
-		).toBeFalsy();
-		expect(
-			wrapper
-				.find("TabPane")
-				.at(2)
-				.props().disabled,
-		).toBeFalsy();
+		expect(wrapper.find("TabPane").at(1).props().disabled).toBeFalsy();
+		expect(wrapper.find("TabPane").at(2).props().disabled).toBeFalsy();
 	});
 
 	it("renders 1 active tab if the role is 'staff' or 'admin'", () => {
 		wrapper.setProps({ viewMember: staffMember });
-		expect(
-			wrapper
-				.find("TabPane")
-				.at(1)
-				.props().disabled,
-		).toBeTruthy();
-		expect(
-			wrapper
-				.find("TabPane")
-				.at(2)
-				.props().disabled,
-		).toBeTruthy();
+		expect(wrapper.find("TabPane").at(1).props().disabled).toBeTruthy();
+		expect(wrapper.find("TabPane").at(2).props().disabled).toBeTruthy();
 	});
 });

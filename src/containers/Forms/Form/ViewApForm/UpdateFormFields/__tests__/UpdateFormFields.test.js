@@ -91,7 +91,7 @@ describe("UpdateFormFields", () => {
 				innerStyle: {
 					maxWidth: "350px",
 					minHeight: "101px",
-					marginBototm: "20px",
+					marginBottom: "20px",
 				},
 			},
 		]);
@@ -154,6 +154,7 @@ describe("UpdateFormFields", () => {
 				innerStyle: {
 					maxWidth: "350px",
 					minHeight: "101px",
+					marginBottom: "20px",
 				},
 			},
 		]);

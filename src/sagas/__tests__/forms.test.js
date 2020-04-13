@@ -10,6 +10,7 @@ import messageReducer from "~reducers/Messages";
 import formReducer from "~reducers/Forms";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
 
 const formId = "0123456789";
 const ids = mocks.ids;
@@ -46,7 +47,7 @@ describe("Form Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/forms/viewall?page=1")
+				.call(Router.push, "/employee/forms/viewall?page=1")
 				.next()
 				.isDone();
 		});
@@ -167,66 +168,6 @@ describe("Form Sagas", () => {
 
 			return expectSaga(sagas.deleteManyForms, { ids })
 				.dispatch(actions.deleteManyForms)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
-	});
-
-	describe("Fetch Form AP", () => {
-		let data;
-		beforeEach(() => {
-			data = {
-				form: mocks.formsData,
-				events: mocks.eventsData,
-			};
-		});
-
-		it("logical flow matches pattern for fetch form AP requests", () => {
-			const res = { data };
-
-			testSaga(sagas.fetchFormAp, { formId })
-				.next()
-				.put(resetServerMessage())
-				.next()
-				.call(app.get, `form/view/${formId}`)
-				.next(res)
-				.call(parseData, res)
-				.next(res.data)
-				.put(
-					actions.setFormAp({
-						...res.data,
-					}),
-				)
-				.next()
-				.isDone();
-		});
-
-		it("successfully fetches an AP form for editing", async () => {
-			mockApp.onGet(`form/view/${formId}`).reply(200, data);
-
-			return expectSaga(sagas.fetchFormAp, { formId })
-				.dispatch(actions.fetchFormAp)
-				.withReducer(formReducer)
-				.hasFinalState({
-					data: [],
-					editForm: {},
-					events: mocks.eventsData,
-					viewForm: mocks.formsData,
-					isLoading: true,
-					totalDocs: 0,
-				})
-				.run();
-		});
-
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to fetch that AP form.";
-			mockApp.onGet(`form/view/${formId}`).reply(404, { err });
-
-			return expectSaga(sagas.fetchFormAp, { formId })
-				.dispatch(actions.fetchFormAp)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
@@ -418,7 +359,7 @@ describe("Form Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/dashboard")
+				.call(Router.push, "/employee/dashboard")
 				.next()
 				.isDone();
 		});

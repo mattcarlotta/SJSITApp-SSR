@@ -61,10 +61,9 @@ const schedule = {
 
 const fetchEventForScheduling = jest.fn();
 const updateEventSchedule = jest.fn();
-const goBack = jest.fn();
 const id = "0123456789";
-const match = {
-	params: {
+const router = {
+	query: {
 		id,
 	},
 };
@@ -82,8 +81,7 @@ const members = [
 
 const initProps = {
 	fetchEventForScheduling,
-	match,
-	goBack,
+	router,
 	schedule: {},
 	serverMessage: "",
 	updateEventSchedule,
@@ -96,13 +94,12 @@ describe("Event Schedule Form", () => {
 		root = document.createElement("div");
 		root.id = "root";
 		document.body.appendChild(root);
-		wrapper = HOCWrap(EventScheduleForm, initProps, null, ["/"], {
+		wrapper = mount(<EventScheduleForm {...initProps} />, {
 			attachTo: root,
 		});
 	});
 
 	afterEach(() => {
-		fetchEventForScheduling.mockClear();
 		updateEventSchedule.mockClear();
 	});
 
@@ -112,10 +109,6 @@ describe("Event Schedule Form", () => {
 
 	it("renders without errors", () => {
 		expect(wrapper.find("Card").exists()).toBeTruthy();
-	});
-
-	it("initally calls fetchEventForScheduling on mount", () => {
-		expect(fetchEventForScheduling).toHaveBeenCalledTimes(1);
 	});
 
 	it("initially shows a 'LoadingScheduleForm' component", () => {
@@ -129,17 +122,11 @@ describe("Event Schedule Form", () => {
 		});
 
 		it("shows and hides a modal", () => {
-			wrapper
-				.find("#event-distribution")
-				.first()
-				.simulate("click");
+			wrapper.find("#event-distribution").first().simulate("click");
 			expect(wrapper.find("EventScheduleForm").state("isVisible")).toBeTruthy();
 			expect(wrapper.find("Modal").exists()).toBeTruthy();
 
-			wrapper
-				.find("#close-modal")
-				.first()
-				.simulate("click");
+			wrapper.find("#close-modal").first().simulate("click");
 			expect(wrapper.find("EventScheduleForm").state("isVisible")).toBeFalsy();
 			expect(wrapper.find("Modal").exists()).toBeFalsy();
 		});

@@ -1,6 +1,6 @@
 import * as types from "~types";
 import seasonReducer, { initialState } from "~reducers/Seasons";
-import * as mocks from "~reducers/__mocks__/~reducers.mocks";
+import * as mocks from "~reducers/__mocks__/reducers.mocks";
 
 const seasonsData = {
 	seasons: mocks.seasonsData,

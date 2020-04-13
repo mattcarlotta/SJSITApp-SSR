@@ -1,8 +1,8 @@
 /* eslint disable */
 import morgan from "morgan";
-import moment from "moment-timezone";
 import session from "cookie-session";
 import passport from "passport";
+import moment from "~utils/momentWithTZ";
 import { sendError } from "~utils/helpers";
 
 moment.tz.setDefault("America/Los_Angeles");

@@ -20,11 +20,11 @@ const titleStyle = {
 };
 
 const NavMenu = ({
-	role,
 	isCollapsed,
 	onHandleTabClick,
 	onHandleOpenMenuChange,
 	openKeys,
+	role,
 	selectedKey,
 }) => {
 	const TABS = role !== "employee" ? StaffRoutes : EmployeeRoutes;
@@ -34,7 +34,6 @@ const NavMenu = ({
 			<Center
 				style={{
 					height: 64,
-					// backgroundColor: "#025f6d",
 					background:
 						"linear-gradient(90deg, #1f1f23 0%, #145e6b 50%, #1f1f23 100%)",
 					borderBottom: "1px solid #3d8792",
@@ -68,8 +67,12 @@ const NavMenu = ({
 						/>
 					) : !submenu ? (
 						<MenuItem value={key} key={key}>
-							<i className="anticon">{icon}</i>
-							<Tab>{tab}</Tab>
+							<Tab href={`/employee/${tab}`}>
+								<i className="anticon">{icon}</i>
+								<span className={`${isCollapsed ? "hidden" : undefined}`}>
+									{tab}
+								</span>
+							</Tab>
 						</MenuItem>
 					) : (
 						<SubMenu
@@ -77,14 +80,16 @@ const NavMenu = ({
 							title={
 								<>
 									<i className="anticon">{icon}</i>
-									<Tab>{tab}</Tab>
+									<span css="font-size: 18px;text-transform: capitalize;user-select: none;">
+										{tab}
+									</span>
 								</>
 							}
 						>
 							{submenu.map(({ icon, disabled, tab, value, key }) => (
 								<MenuItem disabled={disabled} value={value} key={key}>
 									<i className="anticon">{icon}</i>
-									<Tab>{tab}</Tab>
+									<Tab href={`/employee/${value}`}>{tab}</Tab>
 								</MenuItem>
 							))}
 						</SubMenu>

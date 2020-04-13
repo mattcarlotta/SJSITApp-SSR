@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Router from "next/router";
+import Router, { withRouter } from "next/router";
 import Spinner from "~components/Body/Spinner";
 import AppLayout from "~components/App";
+import FadeIn from "~components/Body/FadeIn";
 import { accessDenied } from "~messages/errors";
+import { signoutUser } from "~actions/Auth";
 import toast from "~components/Body/Toast";
 
 const requiresBasicCredentials = WrappedComponent => {
@@ -22,9 +24,15 @@ const requiresBasicCredentials = WrappedComponent => {
 		};
 
 		componentDidMount = () => {
-			const { serverError } = this.props;
+			const { email, serverError, signoutUser, router } = this.props;
+
 			if (serverError) {
-				Router.push("/employee/login");
+				if (email && serverError.indexOf("account was revoked") >= 0) {
+					signoutUser();
+				} else if (!email || router.pathname !== "/employee/dashboard") {
+					Router.push("/employee/login");
+				}
+
 				toast({ type: "error", message: serverError });
 			}
 		};
@@ -35,14 +43,20 @@ const requiresBasicCredentials = WrappedComponent => {
 					<WrappedComponent {...this.props} />
 				</AppLayout>
 			) : (
-				<Spinner />
+				<FadeIn style={{ height: "100%" }} timing="1.5s">
+					<Spinner />
+				</FadeIn>
 			);
 	}
 
 	RequiresAuthentication.propTypes = {
 		email: PropTypes.string,
 		role: PropTypes.string,
+		router: PropTypes.shape({
+			pathname: PropTypes.string,
+		}),
 		serverError: PropTypes.string,
+		signoutUser: PropTypes.func.isRequired,
 	};
 
 	const mapStateToProps = ({ auth }) => ({
@@ -50,7 +64,9 @@ const requiresBasicCredentials = WrappedComponent => {
 		role: auth.role,
 	});
 
-	return connect(mapStateToProps)(RequiresAuthentication);
+	return withRouter(
+		connect(mapStateToProps, { signoutUser })(RequiresAuthentication),
+	);
 };
 
 requiresBasicCredentials.propTypes = {

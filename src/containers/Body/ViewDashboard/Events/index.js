@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import isEmpty from "lodash.isempty";
 import get from "lodash.get";
-import moment from "moment-timezone";
 import { Card, Col, Select } from "antd";
 import { MdEvent } from "react-icons/md";
 import CalendarContainer from "~components/Body/CalendarContainer";
@@ -14,6 +13,7 @@ import Flex from "~components/Body/Flex";
 import FlexEnd from "~components/Body/FlexEnd";
 import FlexStart from "~components/Body/FlexStart";
 import { fetchEvents } from "~actions/Dashboard";
+import moment from "~utils/momentWithTZ";
 import CalendarDate from "./CalendarDate";
 import NoEvents from "./NoEvents";
 import columns from "../Columns";
@@ -64,6 +64,7 @@ export class Events extends Component {
 			<>
 				<Col {...columns}>
 					<Card
+						style={{ marginBottom: 0 }}
 						bodyStyle={{ minHeight: "300px" }}
 						title={
 							<>

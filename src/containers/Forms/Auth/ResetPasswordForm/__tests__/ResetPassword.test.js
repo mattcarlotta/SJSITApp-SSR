@@ -12,7 +12,7 @@ describe("Reset Password Form", () => {
 	let wrapper;
 	let submitForm;
 	beforeEach(() => {
-		wrapper = HOCWrap(ResetPasswordForm, initProps);
+		wrapper = mount(<ResetPasswordForm {...initProps} />);
 		submitForm = () => wrapper.find("form").simulate("submit");
 	});
 

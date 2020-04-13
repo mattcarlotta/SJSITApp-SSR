@@ -1,10 +1,11 @@
 /* istanbul ignore file */
-import { createElement } from "react";
 import { Provider } from "react-redux";
+import { createElement } from "react";
 import { shallow, mount } from "enzyme";
+import { RouterContext } from "next/dist/next-server/lib/router-context";
 import configureStore from "~store";
 
-const store = configureStore();
+const store = configureStore(undefined, { isServer: false, req: null });
 
 //= =============================================================================//
 // CUSTOM TESTING FUNCTIONS                                                       /
@@ -24,28 +25,35 @@ export const shallowWrap = (Component, state = null) => {
 };
 
 /**
- * Factory function to create a Mounted MemoryRouter Wrapper for a component
- * @function HOCWrap
+ * Factory function to create a mounted RouterContext wrapper for a Reactcomponent
+ * @function withRouterContext
  * @param {node} Component - Component to be mounted
  * @param {object} initialProps - Component props specific to this setup.
  * @param {object} state - Component initial state for setup.
- * @param {array} initialEntries - Initial route entries for MemoryRouter.
- * @param {object} options - Options for mount
+ * @param {array} router - Initial route options for RouterContext.
+ * @param {object} options - Options for enzyme's mount
  * @function createElement - Creates a wrapper around passed in component (now we can use wrapper.setProps on root)
  * @returns {MountedRouterWrapper}
  */
-export const HOCWrap = (
+export const withRouterContext = (
 	Component,
 	initialProps = {},
 	state = null,
-	initialEntries = ["/"],
+	router = {
+		pathname: "/pathname/viewall",
+		route: "/pathname/viewall",
+		query: { page: "1" },
+		asPath: "/pathname/viewall",
+	},
 	options = {},
 ) => {
 	const wrapper = mount(
 		createElement(
 			props => (
 				<Provider store={store}>
-					<Component {...props} />
+					<RouterContext.Provider value={router}>
+						<Component {...props} />
+					</RouterContext.Provider>
 				</Provider>
 			),
 			initialProps,

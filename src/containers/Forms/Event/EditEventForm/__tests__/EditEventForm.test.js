@@ -1,8 +1,6 @@
 import { EditEventForm } from "../index";
 
 const id = "5d4e00bcf2d83c45a863e2bc";
-const fetchEvent = jest.fn();
-const push = jest.fn();
 const updateEvent = jest.fn();
 
 const editEvent = {
@@ -26,13 +24,6 @@ const editEvent = {
 
 const initProps = {
 	editEvent: {},
-	fetchEvent,
-	match: {
-		params: {
-			id,
-		},
-	},
-	push,
 	serverMessage: "",
 	updateEvent,
 };
@@ -44,7 +35,6 @@ describe("New Event Form", () => {
 	});
 
 	afterEach(() => {
-		fetchEvent.mockClear();
 		updateEvent.mockClear();
 	});
 
@@ -56,13 +46,10 @@ describe("New Event Form", () => {
 		expect(wrapper.find("LoadingForm").exists()).toBeTruthy();
 	});
 
-	it("calls fetchEvent on mount", () => {
-		expect(fetchEvent).toHaveBeenCalledWith(id);
-	});
-
 	describe("Form Initialized", () => {
 		beforeEach(() => {
 			wrapper.setProps({ editEvent });
+			wrapper.instance().componentDidMount();
 			wrapper.update();
 		});
 
@@ -73,17 +60,11 @@ describe("New Event Form", () => {
 		it("adds/removes another call time slot", () => {
 			expect(wrapper.find(".ant-row.ant-form-item")).toHaveLength(6);
 
-			wrapper
-				.find("button[type='button']")
-				.at(1)
-				.simulate("click");
+			wrapper.find("button[type='button']").at(1).simulate("click");
 
 			expect(wrapper.find(".ant-row.ant-form-item")).toHaveLength(7);
 
-			wrapper
-				.find("i.remove-time-slot")
-				.first()
-				.simulate("click");
+			wrapper.find("i.remove-time-slot").first().simulate("click");
 
 			expect(wrapper.find(".ant-row.ant-form-item")).toHaveLength(6);
 		});
@@ -94,12 +75,7 @@ describe("New Event Form", () => {
 			wrapper.instance().handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("input")
-					.first()
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("input").first().props().value).toEqual(newValue);
 		});
 
 		it("doesn't submit the form if a field has errors", () => {

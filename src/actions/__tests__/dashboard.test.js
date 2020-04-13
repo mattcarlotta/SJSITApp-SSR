@@ -2,18 +2,6 @@ import * as types from "types";
 import * as actions from "actions/Dashboard";
 
 describe("Dashboard Actions", () => {
-	it("returns DASHBOARD_FETCH_APFORM", () => {
-		const value = actions.fetchAPForm();
-
-		expect(value).toEqual({ type: types.DASHBOARD_FETCH_APFORM });
-	});
-
-	it("returns DASHBOARD_FETCH_AVAILABILITY", () => {
-		const value = actions.fetchAvailability();
-
-		expect(value).toEqual({ type: types.DASHBOARD_FETCH_AVAILABILITY });
-	});
-
 	it("returns DASHBOARD_FETCH_EVENT_DISTRIBUTION", () => {
 		const params = {
 			startDate: "2019-08-01T02:30:30.036+00:00",

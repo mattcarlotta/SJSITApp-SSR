@@ -154,8 +154,8 @@ describe("Schedule Modal", () => {
 		});
 
 		expect(wrapper.find(".team").prop("style")).toHaveProperty(
-			"backgroundColor",
-			"#025f6d",
+			"background",
+			"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
 		);
 
 		expect(wrapper.find(".employee").prop("style")).toHaveProperty(
@@ -180,8 +180,8 @@ describe("Schedule Modal", () => {
 		});
 
 		expect(wrapper.find(".team").prop("style")).toHaveProperty(
-			"backgroundColor",
-			"#f56342",
+			"background",
+			"linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)",
 		);
 
 		expect(wrapper.find(".employee").prop("style")).toHaveProperty(

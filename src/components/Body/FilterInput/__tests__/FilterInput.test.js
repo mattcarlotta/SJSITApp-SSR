@@ -25,10 +25,7 @@ describe("Filter Input", () => {
 	});
 
 	it("calls updateQuery when the 'Search' button is clicked", () => {
-		wrapper
-			.find("Button")
-			.at(0)
-			.simulate("click");
+		wrapper.find("button").at(0).simulate("click");
 
 		expect(updateQuery).toHaveBeenCalledWith({
 			page: 1,
@@ -37,10 +34,7 @@ describe("Filter Input", () => {
 	});
 
 	it("clears the input and calls updateQuery when the 'Reset' button is clicked", () => {
-		wrapper
-			.find("Button")
-			.at(1)
-			.simulate("click");
+		wrapper.find("button").at(1).simulate("click");
 		expect(wrapper.state(name)).toBeNull();
 		expect(updateQuery).toHaveBeenCalledWith({
 			[name]: null,

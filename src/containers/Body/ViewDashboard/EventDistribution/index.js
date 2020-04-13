@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import moment from "moment-timezone";
 import { connect } from "react-redux";
 import { Card, Col, DatePicker } from "antd";
 import { FaChartBar } from "react-icons/fa";
 import { fetchEventDistribution } from "~actions/Dashboard";
 import MemberEventCountChart from "~components/Body/MemberEventCountChart";
+import moment from "~utils/momentWithTZ";
 import columns from "../Columns";
+
+moment.tz.setDefault("America/Los_Angeles");
 
 const RangePicker = DatePicker.RangePicker;
 

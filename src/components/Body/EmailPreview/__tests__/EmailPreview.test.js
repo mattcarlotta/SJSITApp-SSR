@@ -13,7 +13,7 @@ const initProps = {
 	submitTitle: "Submit",
 };
 
-const wrapper = HOCWrap(EmailPreview, initProps);
+const wrapper = mount(<EmailPreview {...initProps} />);
 
 describe("Email Preview", () => {
 	it("renders without errors", () => {

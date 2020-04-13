@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import withMiddleware from "~middlewares";
 import { requireAuth } from "~services/strategies";
 import { Event } from "~models";
@@ -8,6 +7,7 @@ import {
 	getStartOfDay,
 	sendError,
 } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import { missingMemberId } from "~messages/errors";
 
 /**
@@ -20,7 +20,7 @@ import { missingMemberId } from "~messages/errors";
 const getSelectedEvents = async (req, res) => {
 	try {
 		const { id: _id } = req.session.user;
-		if (!_id) throw missingMemberId;
+		if (!_id) throw String(missingMemberId);
 		const { selectedEvent } = req.query;
 
 		const isEventToday = selectedEvent === "today";

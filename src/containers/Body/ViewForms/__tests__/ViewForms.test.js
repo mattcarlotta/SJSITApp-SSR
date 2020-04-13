@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewForms } from "../index";
 
 const data = [
@@ -17,7 +18,6 @@ const deleteForm = jest.fn();
 const deleteManyForms = jest.fn();
 const fetchForms = jest.fn();
 const resendMail = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	data: [],
@@ -25,10 +25,6 @@ const initProps = {
 	deleteManyForms,
 	fetchForms,
 	isLoading: true,
-	location: {
-		search: "?page=1",
-	},
-	push,
 	resendMail,
 	totalDocs: 0,
 };
@@ -36,7 +32,11 @@ const initProps = {
 describe("View All Forms", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = mount(<ViewForms {...initProps} />);
+		wrapper = withRouterContext(ViewForms, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

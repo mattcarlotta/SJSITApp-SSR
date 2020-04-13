@@ -45,26 +45,17 @@ describe("Edit Member Form", () => {
 		});
 
 		it("fills in the fields when loaded", () => {
-			expect(
-				wrapper
-					.find("input")
-					.first()
-					.props().value,
-			).toEqual(viewMember.email);
+			expect(wrapper.find("input").first().props().value).toEqual(
+				viewMember.email,
+			);
 
-			expect(
-				wrapper
-					.find("input")
-					.at(1)
-					.props().value,
-			).toEqual(viewMember.firstName);
+			expect(wrapper.find("input").at(1).props().value).toEqual(
+				viewMember.firstName,
+			);
 
-			expect(
-				wrapper
-					.find("input")
-					.at(2)
-					.props().value,
-			).toEqual(viewMember.lastName);
+			expect(wrapper.find("input").at(2).props().value).toEqual(
+				viewMember.lastName,
+			);
 
 			expect(wrapper.find("DisplayOption").props().value).toEqual(
 				viewMember.role,
@@ -78,12 +69,7 @@ describe("Edit Member Form", () => {
 			wrapper.instance().handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("input")
-					.first()
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("input").first().props().value).toEqual(newValue);
 		});
 
 		it("doesn't submit the form if a field has errors", () => {

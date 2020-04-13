@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import moment from "moment-timezone";
+import moment from "~utils/momentWithTZ";
 
 export default [
 	{

@@ -1,24 +1,18 @@
-import moment from "moment-timezone";
+import preloadAll from "jest-next-dynamic";
+import moment from "~utils/momentWithTZ";
 import { ViewEvents } from "../index";
 
 const deleteEvent = jest.fn();
 const deleteManyEvents = jest.fn();
 const fetchEvents = jest.fn();
-const fetchTeamNames = jest.fn();
 const resendMail = jest.fn();
-const push = jest.fn();
 
 const initProps = {
 	data: [],
 	deleteEvent,
 	deleteManyEvents,
 	fetchEvents,
-	fetchTeamNames,
 	isLoading: true,
-	location: {
-		search: "?page=1",
-	},
-	push,
 	resendMail,
 	totalDocs: 0,
 	teams: [],
@@ -64,29 +58,15 @@ const data = [
 describe("View All Events", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = mount(<ViewEvents {...initProps} />);
+		wrapper = withRouterContext(ViewEvents, initProps);
 	});
 
-	afterEach(() => {
-		fetchTeamNames.mockClear();
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {
 		expect(wrapper.find("Card").exists()).toBeTruthy();
-	});
-
-	it("initially calls fetchTeamNames", () => {
-		expect(fetchTeamNames).toHaveBeenCalledTimes(1);
-	});
-
-	it("doesn't call fetchTeamNames if teams prop isn't empty", () => {
-		const props = {
-			...initProps,
-			teams: ["San Jose Sharks", "San Jose Barracuda"],
-		};
-
-		wrapper = mount(<ViewEvents {...props} />);
-		expect(fetchTeamNames).toHaveBeenCalledTimes(1);
 	});
 
 	it("renders a LoadingTable", () => {

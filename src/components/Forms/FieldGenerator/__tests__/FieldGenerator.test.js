@@ -1,5 +1,5 @@
-import moment from "moment-timezone";
 import { DatePicker, TimePicker, Transfer } from "antd";
+import moment from "~utils/momentWithTZ";
 import FieldGenerator from "../index";
 
 const onChange = jest.fn();
@@ -274,10 +274,7 @@ describe("Field Generator", () => {
 		wrapper.setProps({ fields: [time] });
 
 		const value = moment("2000-01-01 00:00:00");
-		wrapper
-			.find(TimePicker)
-			.instance()
-			.handleChange(value);
+		wrapper.find(TimePicker).instance().handleChange(value);
 
 		expect(wrapper.find("Label").exists()).toBeTruthy();
 		expect(wrapper.find("TimePicker").exists()).toBeTruthy();
@@ -289,10 +286,7 @@ describe("Field Generator", () => {
 	it("returns a removeable TimePicker field when a 'onFieldRemove' is present", () => {
 		wrapper.setProps({ fields: [removetime] });
 
-		wrapper
-			.find("Icon")
-			.first()
-			.simulate("click");
+		wrapper.find("Icon").first().simulate("click");
 
 		expect(onFieldRemove).toHaveBeenCalledWith("callTime");
 		expect(wrapper.find("Label").exists()).toBeFalsy();
@@ -317,10 +311,7 @@ describe("Field Generator", () => {
 
 		expect(wrapper.find("ListItem")).toHaveLength(1);
 
-		wrapper
-			.find(Transfer)
-			.instance()
-			.moveTo("right");
+		wrapper.find(Transfer).instance().moveTo("right");
 
 		expect(onChange).toHaveBeenCalledWith({
 			target: {

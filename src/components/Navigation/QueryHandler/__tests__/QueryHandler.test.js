@@ -1,14 +1,15 @@
-import QueryHandler from "../index";
+import Router from "next/router";
+import { QueryHandler } from "../index";
 
-const push = jest.fn();
 const pathname = "pathname/viewall";
 
 const initProps = {
-	location: {
+	router: {
 		pathname,
-		search: "?page=5",
+		query: {
+			page: "5",
+		},
 	},
-	push,
 };
 
 const wrapper = mount(
@@ -18,7 +19,7 @@ const wrapper = mount(
 				<button
 					className="update"
 					type="button"
-					onClick={() => props.updateQuery({ page: 2 })}
+					onClick={() => props.updateQuery({ page: "2" })}
 				>
 					Update
 				</button>
@@ -31,17 +32,13 @@ const wrapper = mount(
 );
 
 describe("Query Handler", () => {
-	afterEach(() => {
-		push.mockClear();
-	});
-
 	it("initally sets queries and queryString state", () => {
 		expect(wrapper.state("queries")).toEqual({ page: 5 });
 		expect(wrapper.state("queryString")).toEqual("page=5");
 	});
 
-	it("updates queries and queryString state when location prop has changed", () => {
-		wrapper.setProps({ location: { pathname, search: "page=100" } });
+	it("updates queries and queryString state when router prop has changed", () => {
+		wrapper.setProps({ router: { pathname, query: { page: "100" } } });
 
 		expect(wrapper.state("queries")).toEqual({ page: 100 });
 		expect(wrapper.state("queryString")).toEqual("page=100");
@@ -49,11 +46,11 @@ describe("Query Handler", () => {
 
 	it("it handles 'updateQuery' calls", () => {
 		wrapper.find(".update").simulate("click");
-		expect(push).toHaveBeenCalledWith(`${pathname}?page=2`);
+		expect(Router.push).toHaveBeenCalledWith(`${pathname}?page=2`);
 	});
 
 	it("it handles 'clearFilters' calls", () => {
 		wrapper.find(".clear").simulate("click");
-		expect(push).toHaveBeenCalledWith(`${pathname}?page=1`);
+		expect(Router.push).toHaveBeenCalledWith(`${pathname}?page=1`);
 	});
 });

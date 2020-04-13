@@ -18,7 +18,7 @@ import Spacer from "~components/Body/Spacer";
 
 const iconStyle = {
 	position: "relative",
-	top: 2,
+	top: 1,
 };
 
 const TableActions = ({
