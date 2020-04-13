@@ -23,25 +23,22 @@ describe("Styled Button", () => {
 	let findStyledButton;
 	beforeEach(() => {
 		wrapper = mount(<Button {...initProps} />);
-		findStyledButton = () => wrapper.find("StyledButton");
+		findStyledButton = () => wrapper.find("button");
 	});
 
 	it("renders without errors", () => {
-		expect(wrapper.find("StyledButton").exists()).toBeTruthy();
+		expect(wrapper.find("button").exists()).toBeTruthy();
 	});
 
 	it("initially displays a default button", () => {
 		const StyledButton = findStyledButton();
 		expect(StyledButton).toHaveStyleRule("cursor", "pointer");
 		expect(StyledButton).toHaveStyleRule("color", "#025f6d");
-		expect(StyledButton).toHaveStyleRule("background-color", "transparent");
+		expect(StyledButton).toHaveStyleRule("background", "transparent");
 		expect(StyledButton).toHaveStyleRule("text-transform", "none");
 		expect(StyledButton).toHaveStyleRule("border", "2px solid transparent");
 
 		expect(StyledButton).toHaveStyleRule("color", "#04515d", {
-			modifier: ":hover",
-		});
-		expect(StyledButton).toHaveStyleRule("background-color", "#d8d8d8", {
 			modifier: ":hover",
 		});
 		expect(StyledButton).toHaveStyleRule("border", "2px solid transparent", {
@@ -55,17 +52,17 @@ describe("Styled Button", () => {
 
 		expect(StyledButton).toHaveStyleRule("cursor", "pointer");
 		expect(StyledButton).toHaveStyleRule("color", "#fff");
-		expect(StyledButton).toHaveStyleRule("background-color", "#025f6d");
+		expect(StyledButton).toHaveStyleRule(
+			"background",
+			"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+		);
 		expect(StyledButton).toHaveStyleRule("text-transform", "none");
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #025f6d");
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #04515d");
 
-		expect(StyledButton).toHaveStyleRule("color", "#fff", {
+		expect(StyledButton).toHaveStyleRule("color", "#e4e3e3", {
 			modifier: ":hover",
 		});
-		expect(StyledButton).toHaveStyleRule("background-color", "#04515d", {
-			modifier: ":hover",
-		});
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #04515d", {
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #025f6d", {
 			modifier: ":hover",
 		});
 	});
@@ -76,17 +73,17 @@ describe("Styled Button", () => {
 
 		expect(StyledButton).toHaveStyleRule("cursor", "pointer");
 		expect(StyledButton).toHaveStyleRule("color", "#fff");
-		expect(StyledButton).toHaveStyleRule("background-color", "#f56342");
+		expect(StyledButton).toHaveStyleRule(
+			"background",
+			"linear-gradient(90deg,#8a4133 0%,#f56342 50%,#8a4133 100%)",
+		);
 		expect(StyledButton).toHaveStyleRule("text-transform", "none");
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #f56342");
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #d24b2e");
 
-		expect(StyledButton).toHaveStyleRule("color", "#fff", {
+		expect(StyledButton).toHaveStyleRule("color", "#e4e3e3", {
 			modifier: ":hover",
 		});
-		expect(StyledButton).toHaveStyleRule("background-color", "#d24b2e", {
-			modifier: ":hover",
-		});
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #d24b2e", {
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #f56342", {
 			modifier: ":hover",
 		});
 	});
@@ -96,18 +93,15 @@ describe("Styled Button", () => {
 		const StyledButton = findStyledButton();
 
 		expect(StyledButton).toHaveStyleRule("cursor", "pointer");
-		expect(StyledButton).toHaveStyleRule("color", "#025f6d");
-		expect(StyledButton).toHaveStyleRule("background-color", "#fff");
+		expect(StyledButton).toHaveStyleRule("color", "#fff");
+		expect(StyledButton).toHaveStyleRule("background", "transparent");
 		expect(StyledButton).toHaveStyleRule("text-transform", "none");
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #fff");
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #2e7c8a");
 
-		expect(StyledButton).toHaveStyleRule("color", "#04515d", {
+		expect(StyledButton).toHaveStyleRule("color", "#e4e3e3", {
 			modifier: ":hover",
 		});
-		expect(StyledButton).toHaveStyleRule("background-color", "#d8d8d8", {
-			modifier: ":hover",
-		});
-		expect(StyledButton).toHaveStyleRule("border", "2px solid #d8d8d8", {
+		expect(StyledButton).toHaveStyleRule("border", "2px solid #3794a5", {
 			modifier: ":hover",
 		});
 	});
@@ -145,10 +139,7 @@ describe("Styled Button", () => {
 			}, {});
 
 			wrapper.setProps({ ...props });
-			expect(wrapper.find("StyledButton")).toHaveStyleRule(
-				"text-transform",
-				type,
-			);
+			expect(wrapper.find("button")).toHaveStyleRule("text-transform", type);
 		};
 
 		textTransformations.forEach(transformation => {

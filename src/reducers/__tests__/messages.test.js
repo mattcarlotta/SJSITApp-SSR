@@ -17,36 +17,11 @@ describe("Message Reducer", () => {
 		expect(state).toEqual(mocks.serverMessage);
 	});
 
-	it("hides the message", () => {
-		let state = messageReducer(undefined, {
-			type: types.MESSAGE_SET,
-			payload: mocks.serverMessage,
-		});
-
-		expect(state).toEqual(mocks.serverMessage);
-
-		state = messageReducer(state, {
-			type: types.MESSAGE_HIDE,
-			payload: { ...mocks.serverMessage, show: false },
-		});
-
-		expect(state).toEqual({ ...mocks.serverMessage, show: false });
-	});
-
 	it("resets the message", () => {
 		let state = messageReducer(undefined, {
 			type: types.MESSAGE_SET,
 			payload: mocks.serverMessage,
 		});
-
-		expect(state).toEqual(mocks.serverMessage);
-
-		state = messageReducer(state, {
-			type: types.MESSAGE_HIDE,
-			payload: { ...mocks.serverMessage, show: false },
-		});
-
-		expect(state).toEqual({ ...mocks.serverMessage, show: false });
 
 		state = messageReducer(state, {
 			type: types.MESSAGE_RESET,

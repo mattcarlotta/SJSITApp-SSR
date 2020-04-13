@@ -50,8 +50,9 @@ describe("Dashboard Forms", () => {
 		});
 
 		it("enables the 'View' button", () => {
-			wrapper.find("Button").simulate("click");
+			wrapper.find("Button").first().simulate("click");
 			expect(Router.push).toHaveBeenCalledWith(
+				"/employee/forms/view/[id]",
 				`/employee/forms/view/${apform._id}`,
 			);
 		});
@@ -60,7 +61,7 @@ describe("Dashboard Forms", () => {
 			const warningText = wrapper.find("WarningText").first();
 
 			expect(warningText.text()).toContain(" This form will expire in");
-			expect(warningText.get(0).props.color).toEqual("#155a67");
+			expect(warningText.get(0).props.style.color).toEqual("#155a67");
 		});
 	});
 
@@ -79,7 +80,7 @@ describe("Dashboard Forms", () => {
 			expect(warningText.text()).toEqual(
 				" This form has expired and is no longer viewable.",
 			);
-			expect(warningText.get(0).props.style.backgroundColor).toEqual("#f56342");
+			expect(warningText.get(0).props.style.color).toEqual("#f56342");
 		});
 	});
 });

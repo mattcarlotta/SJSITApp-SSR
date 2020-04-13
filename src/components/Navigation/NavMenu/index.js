@@ -20,11 +20,11 @@ const titleStyle = {
 };
 
 const NavMenu = ({
-	role,
 	isCollapsed,
 	onHandleTabClick,
 	onHandleOpenMenuChange,
 	openKeys,
+	role,
 	selectedKey,
 }) => {
 	const TABS = role !== "employee" ? StaffRoutes : EmployeeRoutes;

@@ -8,6 +8,7 @@ import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import authReducer from "~reducers/Auth";
 import messageReducer from "~reducers/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
+import toast from "~components/Body/Toast";
 
 describe("Auth Sagas", () => {
 	afterEach(() => {
@@ -16,76 +17,6 @@ describe("Auth Sagas", () => {
 
 	afterAll(() => {
 		mockApp.restore();
-	});
-
-	describe("Authenticate User", () => {
-		it("logical flow matches pattern for a signed in session", () => {
-			const res = { data: { ...mocks.userSession } };
-
-			testSaga(sagas.authenticateUser)
-				.next()
-				.call(app.get, "signedin")
-				.next(res)
-				.call(parseData, res)
-				.next(res.data)
-				.put(actions.signin(res.data))
-				.next()
-				.isDone();
-		});
-
-		it("logical flow matches pattern for a guest sign in", () => {
-			const res = { data: { role: "guest" } };
-
-			testSaga(sagas.authenticateUser)
-				.next()
-				.call(app.get, "signedin")
-				.next(res)
-				.call(parseData, res)
-				.next(res.data)
-				.put(actions.signin(res.data))
-				.next()
-				.isDone();
-		});
-
-		it("sets the current signed in user from a session", async () => {
-			mockApp.onGet("signedin").reply(200, mocks.userSession);
-
-			return expectSaga(sagas.authenticateUser)
-				.dispatch(actions.authenticateUser)
-				.withReducer(authReducer)
-				.hasFinalState(mocks.userSession)
-				.run();
-		});
-
-		it("sets the current signed as a guest when no session is present", async () => {
-			mockApp.onGet("signedin").reply(200, {});
-
-			return expectSaga(sagas.authenticateUser)
-				.dispatch(actions.authenticateUser)
-				.withReducer(authReducer)
-				.hasFinalState({
-					id: "",
-					email: "",
-					firstName: "",
-					lastName: "",
-					role: "guest",
-					isCollapsed: false,
-				})
-				.run();
-		});
-
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to automatically sign in";
-			mockApp.onGet("signedin").reply(404, { err });
-
-			return expectSaga(sagas.authenticateUser)
-				.dispatch(actions.authenticateUser)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
 	});
 
 	describe("Reset User Password", () => {
@@ -163,6 +94,8 @@ describe("Auth Sagas", () => {
 				.next(res.data)
 				.put(actions.signin(res.data))
 				.next()
+				.call(Router.push, "/employee/dashboard")
+				.next()
 				.isDone();
 		});
 
@@ -211,10 +144,11 @@ describe("Auth Sagas", () => {
 				.withReducer(authReducer)
 				.hasFinalState({
 					id: "",
+					avatar: "",
 					email: "",
 					firstName: "",
 					lastName: "",
-					role: "",
+					role: "guest",
 					isCollapsed: false,
 				})
 				.run();
@@ -256,7 +190,7 @@ describe("Auth Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/login")
+				.call(Router.push, "/employee/login")
 				.next()
 				.isDone();
 		});

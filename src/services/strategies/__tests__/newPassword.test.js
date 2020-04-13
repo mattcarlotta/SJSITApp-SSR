@@ -8,7 +8,7 @@ import { User } from "~models";
 
 const next = jest.fn();
 
-describe("Update Password Request Middleware", () => {
+describe("New Password Request Middleware", () => {
 	let res;
 	beforeEach(() => {
 		res = mockResponse();
@@ -40,7 +40,7 @@ describe("Update Password Request Middleware", () => {
 		done();
 	});
 
-	it("handles empty token requests", async done => {
+	it("handles missing password token requests", async done => {
 		const missingPassword = {
 			password: "",
 			token: "12345",

@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewMembers } from "../index";
 
 const data = [
@@ -38,6 +39,10 @@ const initProps = {
 
 const wrapper = withRouterContext(ViewMembers, initProps);
 describe("View All Members", () => {
+	beforeAll(async () => {
+		await preloadAll();
+	});
+
 	it("renders without errors", () => {
 		expect(wrapper.find("Card").exists()).toBeTruthy();
 	});

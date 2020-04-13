@@ -171,7 +171,7 @@ describe("Calendar", () => {
 		});
 
 		it("displays and hides a modal when an event is clicked", () => {
-			wrapper.find("Button").simulate("click");
+			wrapper.find("Button").first().simulate("click");
 
 			expect(wrapper.find("Modal").exists()).toBeTruthy();
 			expect(wrapper.find("CustomCalendar").state("isVisible")).toBeTruthy();

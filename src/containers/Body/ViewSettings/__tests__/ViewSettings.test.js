@@ -1,8 +1,10 @@
 import { Settings } from "../index";
 
+const deleteUserAvatar = jest.fn();
 const fetchMemberSettingsAvailability = jest.fn();
 const fetchMemberSettingsEvents = jest.fn();
 const updateMemberStatus = jest.fn();
+const updateUserAvatar = jest.fn();
 
 const viewMember = {
 	email: "test@example.com",
@@ -20,6 +22,7 @@ const staffMember = {
 };
 
 const initProps = {
+	deleteUserAvatar,
 	eventResponses: [],
 	fetchMemberSettingsAvailability,
 	fetchMemberSettingsEvents,
@@ -34,8 +37,9 @@ const initProps = {
 		schedule: [],
 		status: "active",
 	},
-	updateMemberStatus,
 	serverMessage: "",
+	updateMemberStatus,
+	updateUserAvatar,
 };
 
 describe("View Settings", () => {

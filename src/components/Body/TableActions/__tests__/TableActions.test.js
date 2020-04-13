@@ -43,7 +43,7 @@ describe("Table Actions", () => {
 	});
 
 	it("views and assigns the selected record", () => {
-		wrapper.find("Button").first().simulate("click");
+		wrapper.find("button").first().simulate("click");
 
 		expect(Router.push).toHaveBeenCalledWith(
 			"/employee/seasons/assign/[id]",
@@ -52,7 +52,7 @@ describe("Table Actions", () => {
 	});
 
 	it("views the selected record", () => {
-		wrapper.find("Button").at(1).simulate("click");
+		wrapper.find("button").at(1).simulate("click");
 
 		expect(Router.push).toHaveBeenCalledWith(
 			"/employee/seasons/view/[id]",
@@ -61,7 +61,7 @@ describe("Table Actions", () => {
 	});
 
 	it("edits the selected record", () => {
-		wrapper.find("Button").at(2).simulate("click");
+		wrapper.find("button").at(2).simulate("click");
 
 		expect(Router.push).toHaveBeenCalledWith(
 			"/employee/seasons/edit/[id]",
@@ -70,13 +70,13 @@ describe("Table Actions", () => {
 	});
 
 	it("sends an email according to the selected record", () => {
-		wrapper.find("Button").at(3).simulate("click");
+		wrapper.find("button").at(3).simulate("click");
 
 		expect(handleClickAction).toHaveBeenCalledWith(sendMail, record);
 	});
 
 	it("deletes the selected record", () => {
-		wrapper.find("Button").at(4).simulate("click");
+		wrapper.find("button").at(4).simulate("click");
 
 		wrapper
 			.find("div.ant-popover-buttons")
@@ -89,7 +89,7 @@ describe("Table Actions", () => {
 	it("deletes all selected records", () => {
 		const selectedRowKeys = ["01", "02", "03"];
 		wrapper.setProps({ selectedRowKeys });
-		wrapper.find("Button").at(5).simulate("click");
+		wrapper.find("button").at(5).simulate("click");
 
 		wrapper
 			.find("div.ant-popover-buttons")

@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewForms } from "../index";
 
 const data = [
@@ -32,6 +33,10 @@ describe("View All Forms", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = withRouterContext(ViewForms, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

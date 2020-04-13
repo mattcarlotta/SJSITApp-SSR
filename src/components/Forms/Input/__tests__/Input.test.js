@@ -47,18 +47,8 @@ describe("Input", () => {
 			tooltip: "Your password must be longer than 5 characters.",
 		});
 
-		expect(
-			wrapper
-				.find("Tooltip")
-				.first()
-				.exists(),
-		).toBeTruthy();
-		expect(
-			wrapper
-				.find("Label")
-				.at(1)
-				.text(),
-		).toContain("Password");
+		expect(wrapper.find("Tooltip").first().exists()).toBeTruthy();
+		expect(wrapper.find("Label").at(1).text()).toContain("Password");
 	});
 
 	it("when invalid, adds a 'error' classname and displays validation errors", () => {
@@ -74,10 +64,10 @@ describe("Input", () => {
 		expect(wrapper.find("div.focused").exists()).toBeTruthy();
 	});
 
-	it("when disabled, adds a 'disabled' className and disables the input", () => {
+	it("when disabled, adds a 'disabled-input' className and disables the input", () => {
 		wrapper.setProps({ disabled: true });
 
-		expect(wrapper.find("div.disabled").exists()).toBeTruthy();
+		expect(wrapper.find("div.disabled-input").exists()).toBeTruthy();
 		expect(wrapper.find("input").prop("disabled")).toEqual(true);
 	});
 });

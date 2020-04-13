@@ -27,20 +27,12 @@ describe("Options", () => {
 		});
 
 		it("displays two options", () => {
-			expect(
-				wrapper
-					.find("Option")
-					.at(1)
-					.find("div")
-					.text(),
-			).toContain("Ducks");
-			expect(
-				wrapper
-					.find("Option")
-					.at(3)
-					.find("div")
-					.text(),
-			).toContain("Kings");
+			expect(wrapper.find("Option").at(1).find("div").text()).toContain(
+				"Ducks",
+			);
+			expect(wrapper.find("Option").at(3).find("div").text()).toContain(
+				"Kings",
+			);
 		});
 
 		it("calls handleOptionSelect when clicked or when enter is pressed", () => {
@@ -79,11 +71,7 @@ describe("Options", () => {
 		describe("Individual Option", () => {
 			let optionNode;
 			beforeEach(() => {
-				optionNode = () =>
-					wrapper
-						.find("Option")
-						.first()
-						.find("div");
+				optionNode = () => wrapper.find("Option").first().find("div");
 			});
 
 			it("initially renders a default option", () => {

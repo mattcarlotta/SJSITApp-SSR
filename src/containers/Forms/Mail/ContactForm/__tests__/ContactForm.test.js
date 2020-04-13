@@ -43,12 +43,7 @@ describe("Contact Form", () => {
 		wrapper.instance().handleChange({ target: { name, value: newValue } });
 		wrapper.update();
 
-		expect(
-			wrapper
-				.find("Input")
-				.first()
-				.props().value,
-		).toEqual(newValue);
+		expect(wrapper.find("Input").first().props().value).toEqual(newValue);
 	});
 
 	describe("Form Submission", () => {

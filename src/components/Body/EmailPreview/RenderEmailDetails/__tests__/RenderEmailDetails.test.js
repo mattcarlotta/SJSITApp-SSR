@@ -35,40 +35,19 @@ describe("Render Emails Details", () => {
 	it("displays email details", () => {
 		wrapper.setProps({ ...nextProps });
 
-		expect(
-			wrapper
-				.find("Text")
-				.at(1)
-				.text(),
-		).toEqual(nextProps.sendFrom);
-		expect(
-			wrapper
-				.find("Text")
-				.at(3)
-				.text(),
-		).toEqual(nextProps.sendTo[0]);
-		expect(
-			wrapper
-				.find("Text")
-				.at(7)
-				.text(),
-		).toEqual(nextProps.subject);
+		expect(wrapper.find("Text").at(1).text()).toEqual(nextProps.sendFrom);
+		expect(wrapper.find("Text").at(3).text()).toEqual(nextProps.sendTo[0]);
+		expect(wrapper.find("Text").at(7).text()).toEqual(nextProps.subject);
 	});
 
 	it("displays multiplerecipients email addresses", () => {
 		wrapper.setProps({ sendTo: multiSendTo });
 
-		expect(
-			wrapper
-				.find("p#multiplerecipients")
-				.first()
-				.text(),
-		).toEqual(`${multiSendTo[0]}, `);
-		expect(
-			wrapper
-				.find("p#multiplerecipients")
-				.at(1)
-				.text(),
-		).toEqual(`${multiSendTo[1]}`);
+		expect(wrapper.find("p#multiplerecipients").first().text()).toEqual(
+			`${multiSendTo[0]}, `,
+		);
+		expect(wrapper.find("p#multiplerecipients").at(1).text()).toEqual(
+			`${multiSendTo[1]}`,
+		);
 	});
 });

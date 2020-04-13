@@ -19,6 +19,7 @@
 		"lint:styles": "stylelint **/*.scss",
 		"start": "NODE_ENV=production next start -p 8080",
 		"test": "NODE_ENV=test jest --config ./jest.json --passWithNoTests",
+		"test:failed": "NODE_ENV=test jest --config ./jest.json --watch --onlyFailures",
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll"
@@ -118,6 +119,7 @@
 		"jest-css-modules-transform": "^4.0.0",
 		"jest-enzyme": "^7.1.2",
 		"jest-haste-map": "^25.2.3",
+		"jest-next-dynamic": "^1.0.1",
 		"jest-resolve": "^25.2.3",
 		"jest-styled-components": "^6.3.4",
 		"jsdom": "^16.2.2",

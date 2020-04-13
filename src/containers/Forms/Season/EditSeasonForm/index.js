@@ -143,11 +143,6 @@ EditSeasonForm.propTypes = {
 			PropTypes.instanceOf(Date),
 		]),
 	}),
-	match: PropTypes.shape({
-		params: PropTypes.shape({
-			id: PropTypes.string.isRequired,
-		}).isRequired,
-	}).isRequired,
 	serverMessage: PropTypes.string,
 	updateSeason: PropTypes.func.isRequired,
 };

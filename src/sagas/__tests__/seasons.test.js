@@ -10,6 +10,7 @@ import messageReducer from "~reducers/Messages";
 import seasonReducer from "~reducers/Seasons";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
 
 const seasonId = "124567890";
 const ids = mocks.ids;
@@ -167,58 +168,6 @@ describe("Season Sagas", () => {
 
 			return expectSaga(sagas.deleteManySeasons, { ids })
 				.dispatch(actions.deleteManySeasons)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
-	});
-
-	describe("Fetch Season", () => {
-		let data;
-		beforeEach(() => {
-			data = { season: mocks.seasonsData };
-		});
-
-		it("logical flow matches pattern for fetch season requests", () => {
-			const res = { data };
-
-			testSaga(sagas.fetchSeason, { seasonId })
-				.next()
-				.put(resetServerMessage())
-				.next()
-				.call(app.get, `season/edit/${seasonId}`)
-				.next(res)
-				.call(parseData, res)
-				.next(res.data)
-				.put(actions.setSeasonToEdit(res.data))
-				.next()
-				.isDone();
-		});
-
-		it("successfully fetches an existing season", async () => {
-			mockApp.onGet(`season/edit/${seasonId}`).reply(200, data);
-
-			return expectSaga(sagas.fetchSeason, { seasonId })
-				.dispatch(actions.fetchSeason)
-				.withReducer(seasonReducer)
-				.hasFinalState({
-					data: [],
-					editSeason: mocks.seasonsData,
-					ids: [],
-					isLoading: true,
-					totalDocs: 0,
-				})
-				.run();
-		});
-
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to fetch that season.";
-			mockApp.onGet(`season/edit/${seasonId}`).reply(404, { err });
-
-			return expectSaga(sagas.fetchSeason, { seasonId })
-				.dispatch(actions.fetchSeason)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,

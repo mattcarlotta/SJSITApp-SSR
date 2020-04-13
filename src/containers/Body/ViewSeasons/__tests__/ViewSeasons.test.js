@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import Router from "next/router";
 import { ViewSeasons } from "../index";
 
@@ -27,6 +28,10 @@ describe("View All Seasons", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = withRouterContext(ViewSeasons, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

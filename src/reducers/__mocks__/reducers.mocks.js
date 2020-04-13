@@ -1,5 +1,6 @@
 export const userSession = {
 	id: "88",
+	avatar: "",
 	email: "test@example.com",
 	firstName: "Beta",
 	lastName: "Tester",
@@ -10,8 +11,6 @@ export const userSession = {
 export const teams = ["sharks", "barracuda"];
 
 export const serverMessage = {
-	type: "success",
-	show: true,
 	message: "Welcome to the team!",
 };
 

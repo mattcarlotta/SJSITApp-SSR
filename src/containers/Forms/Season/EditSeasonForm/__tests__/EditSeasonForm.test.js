@@ -11,11 +11,6 @@ const editSeason = {
 const updateSeason = jest.fn();
 
 const initProps = {
-	router: {
-		query: {
-			id: seasonId,
-		},
-	},
 	editSeason: {},
 	isLoading: true,
 	serverMessage: "",

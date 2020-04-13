@@ -9,10 +9,8 @@ const initProps = {
 
 describe("Server Messages", () => {
 	let wrapper;
-	let findMsgCtnr;
 	beforeEach(() => {
 		wrapper = mount(<ServerMessages {...initProps} />);
-		findMsgCtnr = () => wrapper.find("MessageContainer");
 	});
 
 	afterEach(() => {

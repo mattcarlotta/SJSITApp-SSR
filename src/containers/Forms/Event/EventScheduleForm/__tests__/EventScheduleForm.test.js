@@ -100,7 +100,6 @@ describe("Event Schedule Form", () => {
 	});
 
 	afterEach(() => {
-		fetchEventForScheduling.mockClear();
 		updateEventSchedule.mockClear();
 	});
 
@@ -110,10 +109,6 @@ describe("Event Schedule Form", () => {
 
 	it("renders without errors", () => {
 		expect(wrapper.find("Card").exists()).toBeTruthy();
-	});
-
-	it("initally calls fetchEventForScheduling on mount", () => {
-		expect(fetchEventForScheduling).toHaveBeenCalledTimes(1);
 	});
 
 	it("initially shows a 'LoadingScheduleForm' component", () => {

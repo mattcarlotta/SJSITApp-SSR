@@ -68,9 +68,9 @@ describe("Dashboard Events", () => {
 
 	it("displays todays event, handles open/closing a modal with event details, and handles selection", () => {
 		wrapper.setProps({ events, isLoading: false });
-		expect(wrapper.find("Button")).toHaveLength(1);
+		expect(wrapper.find("button")).toHaveLength(1);
 
-		wrapper.find("Button").simulate("click");
+		wrapper.find("button").simulate("click");
 
 		expect(wrapper.find("Events").state("isVisible")).toBeTruthy();
 		expect(wrapper.find("Events").state("modalChildren")).toEqual([events[0]]);

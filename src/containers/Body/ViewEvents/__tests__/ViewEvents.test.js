@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import moment from "~utils/momentWithTZ";
 import { ViewEvents } from "../index";
 
@@ -58,6 +59,10 @@ describe("View All Events", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = withRouterContext(ViewEvents, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

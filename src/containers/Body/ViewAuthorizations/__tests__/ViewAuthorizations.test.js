@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewAuthorizations } from "../index";
 
 const deleteManyTokens = jest.fn();
@@ -42,6 +43,10 @@ describe("View Member Profile", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = withRouterContext(ViewAuthorizations, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

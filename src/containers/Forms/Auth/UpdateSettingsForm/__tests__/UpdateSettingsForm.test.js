@@ -58,12 +58,7 @@ describe("Update Member Form", () => {
 			wrapper.instance().handleChange({ target: { name, value: newValue } });
 			wrapper.update();
 
-			expect(
-				wrapper
-					.find("Input")
-					.first()
-					.props().value,
-			).toEqual(newValue);
+			expect(wrapper.find("Input").first().props().value).toEqual(newValue);
 		});
 
 		it("doesn't submit the form if a field has errors", () => {

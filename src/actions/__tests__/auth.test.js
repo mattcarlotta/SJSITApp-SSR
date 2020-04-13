@@ -2,12 +2,6 @@ import * as types from "types";
 import * as actions from "actions/Auth";
 
 describe("Authentication Actions", () => {
-	it("returns USER_SIGNIN_SESSION", () => {
-		const value = actions.authenticateUser();
-
-		expect(value).toEqual({ type: types.USER_SIGNIN_SESSION });
-	});
-
 	it("returns USER_PASSWORD_RESET with props", () => {
 		const props = { email: "test@example.com" };
 

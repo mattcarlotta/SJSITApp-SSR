@@ -71,7 +71,7 @@ describe("MembersAvailability", () => {
 
 			expect(ListItem2.find("Bold").text()).toEqual("Bob Dole");
 			expect(ListItem2.find("Float").text()).toEqual("66%");
-			expect(ListItem2.get(0).props.style.backgroundColor).toEqual("#ebebeb");
+			expect(ListItem2.get(0).props.style.backgroundColor).toEqual("#d8d8d8");
 		});
 	});
 });

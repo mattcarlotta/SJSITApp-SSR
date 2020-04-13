@@ -54,12 +54,12 @@ describe("Schedule List", () => {
 	});
 
 	it("initially doesn't show anything", () => {
-		expect(wrapper.find("Button").exists()).toBeFalsy();
+		expect(wrapper.find("button").exists()).toBeFalsy();
 	});
 
 	it("renders a Button when 'content' is present", () => {
 		wrapper.setProps({ content });
-		expect(wrapper.find("Button").exists()).toBeTruthy();
+		expect(wrapper.find("button").exists()).toBeTruthy();
 	});
 
 	it("highlights the loggedinUserId when present", () => {
@@ -73,9 +73,9 @@ describe("Schedule List", () => {
 		expect(wrapper.find("DisplayTeam")).toHaveLength(2);
 	});
 
-	it("calls handleShowModal when the Button is pressed", () => {
+	it("calls handleShowModal when the button is pressed", () => {
 		wrapper.setProps({ content });
-		wrapper.find("Button").simulate("click");
+		wrapper.find("button").simulate("click");
 
 		expect(handleShowModal).toBeCalledTimes(1);
 	});

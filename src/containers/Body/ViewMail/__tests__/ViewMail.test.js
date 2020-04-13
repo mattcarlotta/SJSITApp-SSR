@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { ViewMail } from "../index";
 
 const deleteMail = jest.fn();
@@ -31,6 +32,10 @@ describe("View Mail", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = withRouterContext(ViewMail, initProps);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	it("renders without errors", () => {

@@ -1,7 +1,11 @@
 /* istanbul ignore file */
+import { Provider } from "react-redux";
 import { createElement } from "react";
 import { shallow, mount } from "enzyme";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
+import configureStore from "~store";
+
+const store = configureStore(undefined, { isServer: false, req: null });
 
 //= =============================================================================//
 // CUSTOM TESTING FUNCTIONS                                                       /
@@ -46,9 +50,11 @@ export const withRouterContext = (
 	const wrapper = mount(
 		createElement(
 			props => (
-				<RouterContext.Provider value={router}>
-					<Component {...props} />
-				</RouterContext.Provider>
+				<Provider store={store}>
+					<RouterContext.Provider value={router}>
+						<Component {...props} />
+					</RouterContext.Provider>
+				</Provider>
 			),
 			initialProps,
 		),

@@ -10,10 +10,12 @@ export const ids = ["01", "02", "03"];
 
 export const userSession = {
 	id: "88",
+	avatar: "",
 	email: "test@example.com",
 	firstName: "Beta",
 	lastName: "Tester",
 	role: "staff",
+	isCollapsed: false,
 };
 
 export const contactUsMail = {
@@ -82,6 +84,15 @@ export const memberCountData = [
 	},
 	{ name: "Iris Bolis", "Event Count": 0 },
 ];
+
+export const memberData = {
+	_id: "1234567890",
+	firstName: "Beta",
+	lastName: "Tester",
+	role: "employee",
+	email: "member@example.com",
+	registered: "2000-10-06T07:00:00.000+00:00",
+};
 
 export const membersData = [
 	{

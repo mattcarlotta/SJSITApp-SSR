@@ -11,6 +11,7 @@ import messageReducer from "~reducers/Messages";
 import memberReducer from "~reducers/Members";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import { selectQuery } from "~utils/selectors";
+import toast from "~components/Body/Toast";
 
 const memberId = "124567890";
 const tokenId = "0123456789";
@@ -48,7 +49,7 @@ describe("Member Sagas", () => {
 				.next(res.data.message)
 				.call(toast, { type: "success", message: res.data.message })
 				.next()
-				.put(Router.push, "/employee/members/authorizations/viewall?page=1")
+				.call(Router.push, "/employee/members/authorizations/viewall?page=1")
 				.next()
 				.isDone();
 		});
@@ -357,13 +358,6 @@ describe("Member Sagas", () => {
 				.call(parseData, res2)
 				.next(res2.memberAvailability)
 				.put(
-					updateUser({
-						firstName: res.basicMemberInfo.member.firstName,
-						lastName: res.basicMemberInfo.member.lastName,
-					}),
-				)
-				.next()
-				.put(
 					actions.setMemberToReview({
 						...res.basicMemberInfo,
 						memberAvailability,
@@ -531,7 +525,7 @@ describe("Member Sagas", () => {
 		let basicMemberInfo;
 		let memberAvailability;
 		beforeEach(() => {
-			basicMemberInfo = { member: mocks.membersData };
+			basicMemberInfo = { member: mocks.memberData };
 			memberAvailability = { memberAvailability: mocks.memberAvailability };
 		});
 
@@ -547,11 +541,18 @@ describe("Member Sagas", () => {
 				.next(res.basicMemberInfo)
 				.call(app.get, "member/settings/availability")
 				.next(parseData, res2)
-				.next(res.memberAvailability)
+				.next(res2.memberAvailability)
+				.put(
+					updateUser({
+						firstName: res.basicMemberInfo.member.firstName,
+						lastName: res.basicMemberInfo.member.lastName,
+					}),
+				)
+				.next()
 				.put(
 					actions.setMemberToReview({
 						...res.basicMemberInfo,
-						memberAvailability: res.memberAvailability,
+						memberAvailability: res2.memberAvailability,
 					}),
 				)
 				.next()
@@ -572,7 +573,7 @@ describe("Member Sagas", () => {
 					tokens: [],
 					editToken: {},
 					names: [],
-					viewMember: mocks.membersData,
+					viewMember: mocks.memberData,
 					eventResponses: [],
 					memberAvailability,
 					isLoading: true,
