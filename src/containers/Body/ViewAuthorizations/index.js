@@ -81,6 +81,7 @@ ViewAuthorizations.propTypes = {
 	totalDocs: PropTypes.number.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	tokens: state.members.tokens,
 	isLoading: state.members.isLoading,

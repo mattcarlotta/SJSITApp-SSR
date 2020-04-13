@@ -120,11 +120,13 @@ EditForm.propTypes = {
 	updateForm: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	editForm: state.forms.editForm,
 	serverMessage: state.server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateForm,
 };

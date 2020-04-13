@@ -100,6 +100,7 @@ ViewEvents.propTypes = {
 	totalDocs: PropTypes.number,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ events, teams }) => ({
 	data: events.data,
 	isLoading: events.isLoading,
@@ -107,6 +108,7 @@ const mapStateToProps = ({ events, teams }) => ({
 	teams: teams.data,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteEvent,
 	deleteManyEvents,

@@ -145,11 +145,13 @@ NewEventForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ events, server }) => ({
 	newEvent: events.newEvent,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	createEvent,
 };

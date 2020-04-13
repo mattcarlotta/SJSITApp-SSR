@@ -192,6 +192,7 @@ Settings.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ members, server }) => ({
 	eventResponses: members.eventResponses,
 	memberAvailability: members.memberAvailability,
@@ -199,6 +200,7 @@ const mapStateToProps = ({ members, server }) => ({
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteUserAvatar,
 	fetchMemberSettingsAvailability,

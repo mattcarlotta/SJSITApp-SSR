@@ -270,6 +270,7 @@ ViewMemberProfile.propTypes = {
 	),
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ events, members, server }) => ({
 	eventResponses: members.eventResponses,
 	memberAvailability: members.memberAvailability,
@@ -278,6 +279,7 @@ const mapStateToProps = ({ events, members, server }) => ({
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteMemberAvatar,
 	fetchMember,

@@ -87,12 +87,14 @@ ViewSeasons.propTypes = {
 	totalDocs: PropTypes.number.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	data: state.seasons.data,
 	isLoading: state.seasons.isLoading,
 	totalDocs: state.seasons.totalDocs,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteManySeasons,
 	deleteSeason,

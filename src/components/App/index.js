@@ -138,6 +138,7 @@ AppLayout.propTypes = {
 	setSidebarState: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ auth }) => ({
 	isCollapsed: auth.isCollapsed,
 	firstName: auth.firstName,
@@ -145,6 +146,7 @@ const mapStateToProps = ({ auth }) => ({
 	role: auth.role,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	setSidebarState,
 };

@@ -117,26 +117,29 @@ describe("AppLayout", () => {
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
 	});
 
+	it("doesn't store an opened key if the sidebar is collasped on mount", () => {
+		wrapper = withRouterContext(AppLayout, { ...initProps, isCollapsed: true });
+		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
+	});
+
 	it("collapses the SideMenu when the breakpoint is triggered", () => {
 		wrapper.setProps({ router: { pathname: "/employee/forms/create" } });
 		wrapper.find("AppLayout").instance().handleBreakpoint(false);
 
-		// expect(wrapper.find("AppLayout").state("isCollapsed")).toBeFalsy();
 		expect(wrapper.find("AppLayout").state("hideSideBar")).toBeFalsy();
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual(["forms"]);
 
 		wrapper.find("AppLayout").instance().handleBreakpoint(true);
 
-		// expect(wrapper.find("AppLayout").state("isCollapsed")).toBeTruthy();
 		expect(wrapper.find("AppLayout").state("hideSideBar")).toBeTruthy();
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
 	});
 
-	it("toggles sidebar menu", () => {
-		expect(
-			wrapper.find("aside.ant-layout-sider-collapsed").exists(),
-		).toBeFalsy();
+	it("toggles the Drawer menu open/closed", () => {
+		wrapper.find("AppLayout").setState({ hideSideBar: true });
+		wrapper.update();
 
+		expect(wrapper.find("DrawerWrapper").props().open).toBeFalsy();
 		wrapper.find("AppLayout").instance().toggleSideMenu();
 
 		jest.advanceTimersByTime(3000);
@@ -144,66 +147,41 @@ describe("AppLayout", () => {
 
 		expect(wrapper.find("AppLayout").state("showDrawer")).toBeTruthy();
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
-		// expect(
-		// 	wrapper.find(".ant-layout-sider-collapsed").exists(),
-		// ).toBeTruthy();
+
+		expect(wrapper.find("DrawerWrapper").props().open).toBeTruthy();
+
+		wrapper.find("AppLayout").setState({ hideSideBar: false });
+		wrapper.find("AppLayout").instance().toggleSideMenu();
+		jest.advanceTimersByTime(3000);
+		wrapper.update();
+
 		expect(setSidebarState).toHaveBeenCalledTimes(1);
 	});
 
 	it("stores the openTab when sidebar is collapsed and opened", () => {
 		wrapper.find("AppLayout").instance().handleOpenMenuChange(["", "forms"]);
-		jest.advanceTimersByTime(3000);
 		wrapper.update();
 
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual(["", "forms"]);
 
 		wrapper.find("AppLayout").instance().toggleSideMenu();
-		jest.advanceTimersByTime(3000);
 		wrapper.update();
 
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
-		wrapper.find("AppLayout").instance().toggleSideMenu();
-		jest.advanceTimersByTime(3000);
-		wrapper.update();
 
+		wrapper.find("AppLayout").instance().toggleSideMenu();
+		wrapper.update();
 		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
 	});
 
-	// it("updates the active tab", () => {
-	// 	expect(wrapper.find("li.ant-menu-item-selected").text()).toEqual(
-	// 		"dashboard",
-	// 	);
+	it("reloads open keys when Drawer Menu is opened/closed", () => {
+		wrapper.setProps({ isCollapsed: true, router: { pathname: "forms" } });
+		wrapper.find("AppLayout").setState({ hideSideBar: false });
+		expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
 
-	// 	wrapper.setProps({
-	// 		router: {
-	// 			pathname: "/employee/forms/viewall",
-	// 		},
-	// 	});
-	// 	jest.advanceTimersByTime(3000);
-	// 	wrapper.update();
-
-	// 	expect(wrapper.find("AppLayout").state("openKeys")).toEqual(["forms"]);
-	// 	expect(wrapper.find("AppLayout").state("selectedKey")).toContain(
-	// 		"forms/viewall",
-	// 	);
-	// 	expect(wrapper.find("li.ant-menu-item-selected").text()).toEqual(
-	// 		"View Forms",
-	// 	);
-
-	// 	wrapper.find("AppLayout").instance().toggleSideMenu();
-	// 	wrapper.setProps({
-	// 		location: {
-	// 			pathname: "/employee/events/viewall",
-	// 		},
-	// 	});
-	// 	jest.advanceTimersByTime(3000);
-	// 	wrapper.update();
-
-	// 	expect(wrapper.find("AppLayout").state("openKeys")).toEqual([]);
-	// 	expect(wrapper.find("AppLayout").state("selectedKey")).toContain(
-	// 		"events/viewall",
-	// 	);
-	// });
+		wrapper.setProps({ isCollapsed: false });
+		expect(wrapper.find("AppLayout").state("openKeys")).toEqual(["forms"]);
+	});
 
 	it("handles Drawer Menu open and closing", () => {
 		wrapper.find("AppLayout").instance().toggleDrawerMenu();

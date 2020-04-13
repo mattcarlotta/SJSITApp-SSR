@@ -174,12 +174,14 @@ ViewApForm.propTypes = {
 	}),
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ forms, server }) => ({
 	events: forms.events,
 	viewForm: forms.viewForm,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateFormAp,
 };

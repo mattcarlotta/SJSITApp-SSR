@@ -113,11 +113,13 @@ NewAPForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	serverMessage: state.server.message,
 	seasonIds: state.seasons.ids,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	createForm,
 };

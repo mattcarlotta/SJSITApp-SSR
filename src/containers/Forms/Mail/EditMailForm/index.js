@@ -145,11 +145,13 @@ EditMailForm.propTypes = {
 	updateMail: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	editMail: state.mail.editMail,
 	serverMessage: state.server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateMail,
 };

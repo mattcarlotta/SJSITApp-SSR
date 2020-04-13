@@ -59,6 +59,7 @@ const requiresStaffCredentials = WrappedComponent => {
 		signoutUser: PropTypes.func.isRequired,
 	};
 
+	/* istanbul ignore next */
 	const mapStateToProps = ({ auth }) => ({
 		email: auth.email,
 		role: auth.role,

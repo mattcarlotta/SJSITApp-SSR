@@ -79,12 +79,14 @@ ViewMembers.propTypes = {
 	totalDocs: PropTypes.number.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	data: state.members.data,
 	isLoading: state.members.isLoading,
 	totalDocs: state.members.totalDocs,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteMember,
 	deleteManyMembers,

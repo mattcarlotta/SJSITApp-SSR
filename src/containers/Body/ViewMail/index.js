@@ -83,12 +83,14 @@ ViewMail.propTypes = {
 	totalDocs: PropTypes.number.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	data: state.mail.data,
 	isLoading: state.mail.isLoading,
 	totalDocs: state.mail.totalDocs,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteMail,
 	deleteManyMails,

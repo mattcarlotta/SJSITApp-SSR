@@ -170,11 +170,13 @@ EditEventForm.propTypes = {
 	updateEvent: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ events, server }) => ({
 	editEvent: events.editEvent,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateEvent,
 };

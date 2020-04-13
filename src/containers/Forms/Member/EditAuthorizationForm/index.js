@@ -117,11 +117,13 @@ EditAuthorizationForm.propTypes = {
 	updateMemberToken: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ members, server }) => ({
 	editToken: members.editToken,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateMemberToken,
 };

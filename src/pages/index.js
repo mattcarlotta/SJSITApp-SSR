@@ -29,6 +29,7 @@ Home.propTypes = {
 	role: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ auth }) => ({ role: auth.role });
 
 export default connect(mapStateToProps)(Home);

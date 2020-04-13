@@ -63,8 +63,10 @@ AccountButton.propTypes = {
 	signoutUser: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ auth }) => ({ avatar: auth.avatar });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	signoutUser,
 };

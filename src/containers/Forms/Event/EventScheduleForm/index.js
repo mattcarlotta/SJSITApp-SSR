@@ -244,12 +244,14 @@ EventScheduleForm.propTypes = {
 	updateEventSchedule: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ events, server }) => ({
 	members: events.members,
 	schedule: events.schedule,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateEventSchedule,
 };

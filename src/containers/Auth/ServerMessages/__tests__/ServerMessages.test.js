@@ -29,6 +29,17 @@ describe("Server Messages", () => {
 		done();
 	});
 
+	it("doesn't call resetServerMessage if the serverMessage has been reset", () => {
+		const nextProps = { ...initProps, serverMessage: "Hello" };
+		wrapper = mount(<ServerMessages {...nextProps} />);
+
+		wrapper.setProps({
+			serverMessage: "",
+		});
+
+		expect(resetServerMessage).toHaveBeenCalledTimes(0);
+	});
+
 	it("resets the timer and hide the message on unmount", () => {
 		wrapper.unmount();
 

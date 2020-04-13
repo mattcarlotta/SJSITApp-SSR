@@ -189,6 +189,7 @@ Events.propTypes = {
 	role: PropTypes.string.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	events: state.dashboard.events.data,
 	isLoading: state.dashboard.events.isLoading,
@@ -196,6 +197,7 @@ const mapStateToProps = state => ({
 	role: state.auth.role,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	fetchEvents,
 };

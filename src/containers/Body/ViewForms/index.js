@@ -83,12 +83,14 @@ ViewForms.propTypes = {
 	resendMail: PropTypes.func.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	data: state.forms.data,
 	isLoading: state.forms.isLoading,
 	totalDocs: state.forms.totalDocs,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteForm,
 	deleteManyForms,

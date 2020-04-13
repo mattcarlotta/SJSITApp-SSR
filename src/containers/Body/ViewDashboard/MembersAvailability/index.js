@@ -122,6 +122,7 @@ MembersAvailability.propTypes = {
 	months: PropTypes.arrayOf(PropTypes.string),
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ dashboard }) => ({
 	isLoading: dashboard.membersAvailability.isLoading,
 	membersAvailability: dashboard.membersAvailability.data,

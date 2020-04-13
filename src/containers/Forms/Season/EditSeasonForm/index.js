@@ -151,11 +151,13 @@ EditSeasonForm.defaultProps = {
 	editSeason: {},
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	editSeason: state.seasons.editSeason,
 	serverMessage: state.server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	updateSeason,
 };

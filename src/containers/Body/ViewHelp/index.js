@@ -376,6 +376,7 @@ Help.propTypes = {
 	role: PropTypes.string.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = state => ({
 	role: state.auth.role,
 });

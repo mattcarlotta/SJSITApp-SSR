@@ -118,6 +118,7 @@ Forms.propTypes = {
 	isLoading: PropTypes.bool.isRequired,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ dashboard }) => ({
 	apform: dashboard.apform.data,
 	isLoading: dashboard.apform.isLoading,

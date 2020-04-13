@@ -129,11 +129,13 @@ SendMailForm.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ members, server }) => ({
 	memberNames: members.names,
 	serverMessage: server.message,
 });
 
+/* istanbul ignore next */
 const mapDispatchToProps = {
 	createMail,
 };

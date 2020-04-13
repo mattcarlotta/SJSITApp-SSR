@@ -44,6 +44,7 @@ ServerMessages.propTypes = {
 	serverMessage: PropTypes.string,
 };
 
+/* istanbul ignore next */
 const mapStateToProps = ({ server }) => ({
 	serverMessage: server.message,
 });
