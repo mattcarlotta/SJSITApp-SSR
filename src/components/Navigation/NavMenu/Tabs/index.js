@@ -115,6 +115,7 @@ export const StaffRoutes = [
 	{
 		icon: <FaCalendar />,
 		key: "schedule",
+		value: "schedule",
 		tab: "schedule",
 	},
 	{
@@ -160,10 +161,16 @@ export const StaffRoutes = [
 ];
 
 export const EmployeeRoutes = [
-	{ icon: <MdDashboard />, key: "dashboard", tab: "dashboard" },
+	{
+		icon: <MdDashboard />,
+		key: "dashboard",
+		tab: "dashboard",
+		value: "dashboard",
+	},
 	{
 		icon: <FaCalendar />,
 		key: "schedule",
+		value: "schedule",
 		tab: "schedule",
 	},
 	{ divider: true, key: "accounting" },
