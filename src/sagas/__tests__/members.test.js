@@ -165,7 +165,7 @@ describe("Member Sagas", () => {
 		});
 
 		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to delete the member.";
+			const err = "Unable to delete the member avatar.";
 			mockAPI.onDelete(`delete/${memberId}`).reply(404, { err });
 
 			return expectSaga(sagas.deleteMemberAvatar, { id: memberId })
@@ -1038,7 +1038,7 @@ describe("Member Sagas", () => {
 		});
 
 		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to delete the member.";
+			const err = "Unable to update the member avatar.";
 			mockAPI.onPut(`update/${id}`).reply(404, { err });
 
 			return expectSaga(sagas.updateMemberAvatar, { form, id })

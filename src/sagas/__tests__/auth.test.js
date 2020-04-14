@@ -1,14 +1,17 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
-import app from "~utils/axiosConfig";
+import app, { avatarAPI } from "~utils/axiosConfig";
 import * as actions from "~actions/Auth";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
+import { fetchMemberSettings } from "~actions/Members";
 import * as sagas from "~sagas/Auth";
 import * as mocks from "~sagas/__mocks__/sagas.mocks";
 import authReducer from "~reducers/Auth";
 import messageReducer from "~reducers/Messages";
 import { parseData, parseMessage } from "~utils/parseResponse";
 import toast from "~components/Body/Toast";
+
+const id = "0123456789";
 
 describe("Auth Sagas", () => {
 	afterEach(() => {
@@ -17,6 +20,57 @@ describe("Auth Sagas", () => {
 
 	afterAll(() => {
 		mockApp.restore();
+	});
+
+	describe("Delete User Avatar", () => {
+		it("logical flow matches pattern for delete avatar requests", () => {
+			const message = "Successfully removed avatar.";
+			const res = { data: { message } };
+
+			testSaga(sagas.deleteUserAvatar, { id })
+				.next()
+				.put(resetServerMessage())
+				.next()
+				.call(avatarAPI.delete, `delete/${id}`)
+				.next(res)
+				.call(parseMessage, res)
+				.next(res.data.message)
+				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data.message)
+				.call(toast, { type: "info", message: res.data.message })
+				.next()
+				.put(actions.setUserAvatar({ avatar: "" }))
+				.next()
+				.put(fetchMemberSettings(id))
+				.next()
+				.isDone();
+		});
+
+		it("successfully deletes an avatar", async () => {
+			const message = "Successfully removed avatar.";
+			mockAPI.onDelete(`delete/${id}`).reply(200, { message });
+
+			return expectSaga(sagas.deleteUserAvatar, { id })
+				.dispatch(actions.deleteUserAvatar)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message,
+				})
+				.run();
+		});
+
+		it("if API call fails, it displays a message", async () => {
+			const err = "Unable to delete the member avatar.";
+			mockAPI.onDelete(`delete/${id}`).reply(404, { err });
+
+			return expectSaga(sagas.deleteUserAvatar, { id })
+				.dispatch(actions.deleteUserAvatar)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message: err,
+				})
+				.run();
+		});
 	});
 
 	describe("Reset User Password", () => {
@@ -214,6 +268,64 @@ describe("Auth Sagas", () => {
 
 			return expectSaga(sagas.signupUser, { props })
 				.dispatch(actions.signupUser)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message: err,
+				})
+				.run();
+		});
+	});
+
+	describe("Update User Avatar", () => {
+		let form;
+		let message;
+		let avatar;
+		beforeEach(() => {
+			message = "Successfully updated your current avatar.";
+			avatar = "123.png";
+			form = { image: "123.png" };
+		});
+
+		it("logical flow matches pattern for update user avatar requests", () => {
+			const res = { data: { message, avatar } };
+
+			testSaga(sagas.updateUserAvatar, { form, id })
+				.next()
+				.put(resetServerMessage())
+				.next()
+				.call(avatarAPI.put, `update/${id}`, form)
+				.next(res)
+				.call(parseData, res)
+				.next(res.data)
+				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data)
+				.call(toast, { type: "info", message: res.data.message })
+				.next(res.data)
+				.put(actions.setUserAvatar({ avatar: res.data.avatar }))
+				.next()
+				.put(fetchMemberSettings())
+				.next()
+				.isDone();
+		});
+
+		it("successfully updates a user avatar", async () => {
+			mockAPI.onPut(`update/${id}`).reply(200, { message });
+
+			return expectSaga(sagas.updateUserAvatar, { form, id })
+				.dispatch(actions.updateUserAvatar)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message,
+				})
+				.run();
+		});
+
+		it("if API call fails, it displays a message", async () => {
+			const err = "Unable to update the user avatar.";
+			mockAPI.onPut(`update/${id}`).reply(404, { err });
+
+			return expectSaga(sagas.updateUserAvatar, { form, id })
+				.dispatch(actions.updateUserAvatar)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,

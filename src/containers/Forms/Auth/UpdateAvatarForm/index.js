@@ -47,16 +47,11 @@ export class UpdateAvatarForm extends Component {
 			);
 			const isLt10MB = file.size / 10240000 <= 1;
 
-			if (!isAccepted || !isLt10MB) throw String("Invalid format.");
+			if (!isAccepted || !isLt10MB)
+				throw String("Only 10mb or less .jpg/.jpeg/.png files are accepted!");
 
 			const img = new Image();
 			img.src = URL.createObjectURL(file);
-
-			await new Promise(
-				(resolve, reject) =>
-					(img.onload = () =>
-						img.width <= 10000 && img.height <= 10000 ? resolve() : reject()),
-			);
 
 			this.setState({
 				file,
@@ -65,7 +60,7 @@ export class UpdateAvatarForm extends Component {
 		} catch (e) {
 			toast({
 				type: "error",
-				message: "Only 10mb or less .jpg/.jpeg/.png files are accepted!",
+				message: e.toString(),
 			});
 		}
 	};
@@ -155,6 +150,7 @@ export class UpdateAvatarForm extends Component {
 						<Tooltip placement="top" title="Upload Image">
 							<Button
 								primary
+								id="upload-selection"
 								className={!file ? "disabled" : undefined}
 								type={!file ? "button" : "submit"}
 								width="50px"
@@ -172,6 +168,7 @@ export class UpdateAvatarForm extends Component {
 						<Tooltip placement="top" title="Reset Image">
 							<Button
 								danger
+								id="reset-selection"
 								className={!file ? "disabled" : undefined}
 								type="button"
 								width="50px"
@@ -186,6 +183,7 @@ export class UpdateAvatarForm extends Component {
 						<Tooltip placement="top" title="Cancel Upload">
 							<Button
 								danger
+								id="close-form"
 								type="button"
 								width="50px"
 								marginRight="0"
