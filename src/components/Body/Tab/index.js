@@ -5,13 +5,11 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const Tab = ({ as, className, children, href, style, target }) => (
-	<span>
-		<Link href={href} as={as} prefetch={false} passHref>
-			<a style={style} className={className} target={target}>
-				{children}
-			</a>
-		</Link>
-	</span>
+	<Link href={href} as={as} prefetch={false} passHref>
+		<a style={style} className={className} target={target}>
+			<div css="height: 100%;width: 100%;">{children}</div>
+		</a>
+	</Link>
 );
 
 Tab.propTypes = {
