@@ -5,6 +5,7 @@ import Head from "next/head";
 import Router from "next/router";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
+import NProgress from "nprogress";
 import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import ServerMessages from "~containers/Auth/ServerMessages";
@@ -17,18 +18,30 @@ import { version } from "../../package.json";
 import "~styles/globals/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-const scrollToTop = () => window.scrollTo(0, 0);
+NProgress.configure({
+	trickleSpeed: 50,
+});
 
 export class MyApp extends App {
 	componentDidMount = () => {
-		Router.events.on("routeChangeComplete", scrollToTop);
+		NProgress.configure({
+			showSpinner: false,
+		});
+
+		Router.events.on("routeChangeComplete", this.scrollToTop);
+		Router.events.on("routeChangeStart", this.startProgress);
+		Router.events.on("routeChangeComplete", this.endProgress);
+		Router.events.on("routeChangeError", this.endProgress);
 
 		const { serverError } = this.props;
 		if (serverError) toast({ type: "error", message: serverError });
 	};
 
 	componentWillUnmount = () => {
-		Router.events.off("routeChangeComplete", scrollToTop);
+		Router.events.off("routeChangeComplete", this.scrollToTop);
+		Router.events.off("routeChangeStart", this.startProgress);
+		Router.events.off("routeChangeComplete", this.endProgress);
+		Router.events.off("routeChangeError", this.endProgress);
 	};
 
 	static async getInitialProps({ Component, ctx }) {
@@ -50,7 +63,6 @@ export class MyApp extends App {
 				return { serverError: e.toString() };
 			}
 		}
-
 		return {
 			pageProps: {
 				...(Component.getInitialProps
@@ -59,6 +71,12 @@ export class MyApp extends App {
 			},
 		};
 	}
+
+	scrollToTop = () => window.scrollTo(0, 0);
+
+	startProgress = () => NProgress.start();
+
+	endProgress = () => NProgress.done();
 
 	render() {
 		const { Component, pageProps, store } = this.props;

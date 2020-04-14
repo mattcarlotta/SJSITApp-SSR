@@ -60,7 +60,7 @@ const NavMenu = ({
 				onSelect={onHandleTabClick}
 				selectedKeys={selectedKey}
 			>
-				{TABS.map(({ icon, divider, key, tab, submenu }) =>
+				{TABS.map(({ icon, divider, key, tab, submenu, value }) =>
 					divider ? (
 						<Divider
 							key={key}
@@ -68,7 +68,7 @@ const NavMenu = ({
 						/>
 					) : !submenu ? (
 						<MenuItem value={key} key={key}>
-							<Tab href={`/employee/${tab}`}>
+							<Tab href={`/employee/${value}`}>
 								<i className="anticon">{icon}</i>
 								<span className={`${isCollapsed ? "hidden" : undefined}`}>
 									{tab}

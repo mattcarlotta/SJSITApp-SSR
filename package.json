@@ -65,6 +65,7 @@
 		"next": "^9.3.3",
 		"next-redux-saga": "^4.1.2",
 		"next-redux-wrapper": "^5.0.0",
+		"nprogress": "^0.2.0",
 		"passport": "^0.4.1",
 		"passport-local": "^1.0.0",
 		"qs": "^6.9.3",
