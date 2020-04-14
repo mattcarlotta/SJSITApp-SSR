@@ -35,7 +35,7 @@ class DisplayTeam extends Component {
 				>
 					<img
 						ref={node => (this.imageRef = node)}
-						src={`${IMAGEAPI}/${this.props.folder}/${this.props.team}.png`}
+						src={`${IMAGEAPI}/images/${this.props.folder}/${this.props.team}.png`}
 						alt={`${this.props.team}.png`}
 						onLoad={this.handleLoaded}
 						onError={this.handleLoaded}

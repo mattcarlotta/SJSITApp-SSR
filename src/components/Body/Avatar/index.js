@@ -10,13 +10,15 @@ import {
 import Button from "~components/Body/Button";
 import FlexCenter from "~components/Body/FlexCenter";
 
+const { IMAGEAPI } = process.env;
+
 const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
 	<div css="height: 250px;width:200px;border-radius: 50%;">
 		{avatar ? (
 			<FlexCenter style={{ height: 192 }}>
 				<img
 					css="display: block;max-height: 192px;max-width: 192px;border-radius: 50%;margin: 10px auto 0;"
-					src={avatar}
+					src={`${IMAGEAPI}/uploads/${avatar}`}
 					alt="avatar"
 				/>
 			</FlexCenter>

@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 // admin, staff, employee
 const userSchema = new Schema({
 	avatar: { type: String, default: "" },
-	avatarPath: { type: String, default: "" },
 	email: {
 		type: String,
 		unique: true,

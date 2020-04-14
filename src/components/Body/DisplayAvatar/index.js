@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FaUserCircle } from "react-icons/fa";
 
+const { IMAGEAPI } = process.env;
+
 const DisplayAvatar = ({ avatar, style, width }) => {
 	const avatarWidth = width || "35px";
 
@@ -18,7 +20,7 @@ const DisplayAvatar = ({ avatar, style, width }) => {
 						width: ${avatarWidth};
 						border-radius: 50%;
 					`}
-					src={avatar}
+					src={`${IMAGEAPI}/uploads/${avatar}`}
 					alt="avatar"
 					style={style}
 				/>

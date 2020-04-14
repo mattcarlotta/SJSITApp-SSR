@@ -14,17 +14,17 @@ const RenderMessage = ({ message }) => (
 						<p css="color: #2E323B;">
 							<img
 								css="margin-right:20px;"
-								src={`${IMAGEAPI}/sapLogo.jpg`}
+								src={`${IMAGEAPI}/images/sapLogo.jpg`}
 								alt="sapLogo.jpg"
 							/>
 							<img
 								css="margin-right:20px;position: relative;top: -3px;"
-								src={`${IMAGEAPI}/sharksLogo.jpg`}
+								src={`${IMAGEAPI}/images/sharksLogo.jpg`}
 								alt="sharksLogo.png"
 							/>
 							<img
 								css="position: relative;top: -1px;"
-								src={`${IMAGEAPI}/barracudaLogo.jpg`}
+								src={`${IMAGEAPI}/images/barracudaLogo.jpg`}
 								alt="barracudaLogo.png"
 							/>
 						</p>
