@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { expectSaga, testSaga } from "redux-saga-test-plan";
 import * as matchers from "redux-saga-test-plan/matchers";
-import app from "~utils/axiosConfig";
+import app, { avatarAPI } from "~utils/axiosConfig";
 import * as actions from "~actions/Members";
 import { resetServerMessage, setServerMessage } from "~actions/Messages";
 import { signoutUser, updateUser } from "~actions/Auth";
@@ -121,6 +121,55 @@ describe("Member Sagas", () => {
 
 			return expectSaga(sagas.deleteMember, { memberId })
 				.dispatch(actions.deleteMember)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message: err,
+				})
+				.run();
+		});
+	});
+
+	describe("Delete Member Avatar", () => {
+		it("logical flow matches pattern for delete avatar requests", () => {
+			const message = "Successfully removed avatar.";
+			const res = { data: { message } };
+
+			testSaga(sagas.deleteMemberAvatar, { id: memberId })
+				.next()
+				.put(resetServerMessage())
+				.next()
+				.call(avatarAPI.delete, `delete/${memberId}`)
+				.next(res)
+				.call(parseMessage, res)
+				.next(res.data.message)
+				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data.message)
+				.call(toast, { type: "info", message: res.data.message })
+				.next()
+				.put(actions.fetchMember(memberId))
+				.next()
+				.isDone();
+		});
+
+		it("successfully deletes an avatar", async () => {
+			const message = "Successfully removed avatar.";
+			mockAPI.onDelete(`delete/${memberId}`).reply(200, { message });
+
+			return expectSaga(sagas.deleteMemberAvatar, { id: memberId })
+				.dispatch(actions.deleteMemberAvatar)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message,
+				})
+				.run();
+		});
+
+		it("if API call fails, it displays a message", async () => {
+			const err = "Unable to delete the member.";
+			mockAPI.onDelete(`delete/${memberId}`).reply(404, { err });
+
+			return expectSaga(sagas.deleteMemberAvatar, { id: memberId })
+				.dispatch(actions.deleteMemberAvatar)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,
@@ -936,6 +985,64 @@ describe("Member Sagas", () => {
 
 			return expectSaga(sagas.updateMember, { props })
 				.dispatch(actions.updateMember)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message: err,
+				})
+				.run();
+		});
+	});
+
+	describe("Update Member Avatar", () => {
+		let form;
+		let message;
+		let id;
+		let avatar;
+		beforeEach(() => {
+			message = "Successfully updated your current avatar.";
+			avatar = "123.png";
+			id = memberId;
+			form = { image: "123.png" };
+		});
+
+		it("logical flow matches pattern for update member avatar requests", () => {
+			const res = { data: { message, avatar } };
+
+			testSaga(sagas.updateMemberAvatar, { form, id })
+				.next()
+				.put(resetServerMessage())
+				.next()
+				.call(avatarAPI.put, `update/${id}`, form)
+				.next(res)
+				.call(parseData, res)
+				.next(res.data)
+				.put(setServerMessage({ message: res.data.message }))
+				.next(res.data)
+				.call(toast, { type: "info", message: res.data.message })
+				.next()
+				.put(actions.fetchMember(id))
+				.next()
+				.isDone();
+		});
+
+		it("successfully updates a member avatar", async () => {
+			mockAPI.onPut(`update/${id}`).reply(200, { message });
+
+			return expectSaga(sagas.updateMemberAvatar, { form, id })
+				.dispatch(actions.updateMemberAvatar)
+				.withReducer(messageReducer)
+				.hasFinalState({
+					message,
+				})
+				.run();
+		});
+
+		it("if API call fails, it displays a message", async () => {
+			const err = "Unable to delete the member.";
+			mockAPI.onPut(`update/${id}`).reply(404, { err });
+
+			return expectSaga(sagas.updateMemberAvatar, { form, id })
+				.dispatch(actions.updateMemberAvatar)
 				.withReducer(messageReducer)
 				.hasFinalState({
 					message: err,

@@ -9,6 +9,7 @@ const DisplayAvatar = ({ avatar, style, width }) => {
 
 	return (
 		<div
+			id="display-avatar"
 			css={`
 				width: ${avatarWidth};
 				display: inline-block;

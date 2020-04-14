@@ -25,6 +25,14 @@ describe("Dashboard Actions", () => {
 		});
 	});
 
+	it("returns DASHBOARD_RESET", () => {
+		const value = actions.resetDashboard();
+
+		expect(value).toEqual({
+			type: types.DASHBOARD_RESET,
+		});
+	});
+
 	it("returns DASHBOARD_SET_APFORM with data", () => {
 		const data = {
 			_id: "0123456789",

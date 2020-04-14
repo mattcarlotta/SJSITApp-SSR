@@ -51,6 +51,14 @@ describe("Forms Actions", () => {
 		});
 	});
 
+	it("returns FORMS_RESET", () => {
+		const value = actions.resetForms();
+
+		expect(value).toEqual({
+			type: types.FORMS_RESET,
+		});
+	});
+
 	it("returns FORMS_SET_AP with an empty array if data is empty", () => {
 		const value = actions.setFormAp([]);
 

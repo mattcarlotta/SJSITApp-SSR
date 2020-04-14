@@ -13,7 +13,7 @@ import FlexCenter from "~components/Body/FlexCenter";
 const { IMAGEAPI } = process.env;
 
 const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
-	<div css="height: 250px;width:200px;border-radius: 50%;">
+	<div id="avatar" css="height: 250px;width:200px;border-radius: 50%;">
 		{avatar ? (
 			<FlexCenter style={{ height: 192 }}>
 				<img
@@ -75,6 +75,7 @@ const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
 				<Tooltip placement="top" title="Delete Avatar">
 					<Button
 						danger
+						id="delete-avatar"
 						type="button"
 						padding="3px"
 						width="50px"

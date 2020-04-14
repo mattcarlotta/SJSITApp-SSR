@@ -59,6 +59,7 @@ const ScheduleModal = ({
 								color: "#fff",
 								textAlign: "center",
 								padding: "15px 10px",
+								textShadow: "1px 2px 2px #000000",
 							}}
 						>
 							<Bold>

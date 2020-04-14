@@ -100,6 +100,20 @@ export class ViewMemberProfile extends Component {
 		100,
 	);
 
+	handleFetchMemberResponseInitialData = () => {
+		const {
+			viewMember: { _id: id },
+		} = this.props;
+		this.props.fetchMemberEvents({ id });
+	};
+
+	handleFetchMemberScheduleInitialData = () => {
+		const {
+			viewMember: { _id: id },
+		} = this.props;
+		this.props.fetchScheduleEvents({ id, selectedGames: "My Games" });
+	};
+
 	render = () => {
 		const {
 			eventResponses,
@@ -155,7 +169,7 @@ export class ViewMemberProfile extends Component {
 										id={id}
 										scheduleEvents={eventResponses}
 										fetchAction={fetchMemberEvents}
-										fetchInitialData={() => fetchMemberEvents({ id })}
+										fetchInitialData={this.handleFetchMemberResponseInitialData}
 									/>
 								</PaneBody>
 							</Pane>
@@ -170,9 +184,7 @@ export class ViewMemberProfile extends Component {
 										id={id}
 										loggedinUserId={id}
 										fetchAction={fetchScheduleEvents}
-										fetchInitialData={() =>
-											fetchScheduleEvents({ id, selectedGames: "My Games" })
-										}
+										fetchInitialData={this.handleFetchMemberScheduleInitialData}
 										title="View Member Schedule"
 									/>
 								</PaneBody>

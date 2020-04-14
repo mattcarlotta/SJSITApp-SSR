@@ -2,6 +2,7 @@ import * as types from "types";
 import * as actions from "actions/Members";
 
 const tokenId = "0123456789";
+const id = "0123456789";
 
 const data = {
 	_id: "1234567890",
@@ -51,6 +52,15 @@ describe("Member Actions", () => {
 		expect(value).toEqual({
 			type: types.MEMBERS_DELETE,
 			memberId,
+		});
+	});
+
+	it("returns MEMBERS_DELETE_AVATAR with data", () => {
+		const value = actions.deleteMemberAvatar(id);
+
+		expect(value).toEqual({
+			type: types.MEMBERS_DELETE_AVATAR,
+			id,
 		});
 	});
 
@@ -186,6 +196,14 @@ describe("Member Actions", () => {
 
 	it("returns MEMBERS_RESET", () => {
 		const value = actions.resetMembers();
+
+		expect(value).toEqual({
+			type: types.MEMBERS_RESET,
+		});
+	});
+
+	it("returns MEMBERS_RESET", () => {
+		const value = actions.resetTokens();
 
 		expect(value).toEqual({
 			type: types.MEMBERS_RESET,
@@ -338,6 +356,20 @@ describe("Member Actions", () => {
 		expect(value).toEqual({
 			type: types.MEMBERS_UPDATE,
 			props,
+		});
+	});
+
+	it("returns MEMBERS_UPDATE_AVATAR with data", () => {
+		const form = {
+			image: "image",
+		};
+
+		const value = actions.updateMemberAvatar({ form, id });
+
+		expect(value).toEqual({
+			type: types.MEMBERS_UPDATE_AVATAR,
+			form,
+			id,
 		});
 	});
 

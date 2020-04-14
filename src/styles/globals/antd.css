@@ -6082,6 +6082,7 @@ a.ant-btn-sm {
   background: linear-gradient(90deg, #1f2126 0%, #135561 50%, rgb(30, 33, 37) 100%);
   border-top: 1px solid #144d58;
   border-bottom: 1px solid #144d58;
+  text-shadow: 1px 2px 2px #000000;
 }
 .ant-menu-dark .ant-menu-item-disabled,
 .ant-menu-dark .ant-menu-submenu-disabled,

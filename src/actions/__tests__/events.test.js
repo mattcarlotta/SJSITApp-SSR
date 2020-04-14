@@ -76,6 +76,14 @@ describe("Events Actions", () => {
 		});
 	});
 
+	it("returns EVENTS_RESET", () => {
+		const value = actions.resetEvents();
+
+		expect(value).toEqual({
+			type: types.EVENTS_RESET,
+		});
+	});
+
 	it("returns EVENTS_SET with an empty array if data is empty", () => {
 		const value = actions.setEvents([]);
 

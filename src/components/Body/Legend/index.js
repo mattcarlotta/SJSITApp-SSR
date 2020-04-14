@@ -11,6 +11,7 @@ const Legend = ({ className, style }) => (
 				marginBottom: 5,
 				background:
 					"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+				textShadow: "1px 2px 2px #000000",
 			}}
 		>
 			Legend

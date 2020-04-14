@@ -37,6 +37,10 @@ const viewMember = {
 	status: "active",
 };
 
+const eventListener = {};
+window.addEventListener = (evt, cb) => (eventListener[evt] = cb);
+window.removeEventListener = jest.fn();
+
 describe("View Member Profile", () => {
 	let wrapper;
 	beforeEach(() => {
@@ -47,37 +51,47 @@ describe("View Member Profile", () => {
 		resetServerMessage.mockClear();
 		resetMembers.mockClear();
 		fetchMember.mockClear();
+		fetchMemberEvents.mockClear();
+		window.removeEventListener.mockClear();
 	});
 
 	it("initially renders a LoadingPanel", () => {
 		expect(wrapper.find("LoadingPanel").exists()).toBeTruthy();
 	});
 
-	// it("calls resetMembers on unmount", () => {
-	// 	wrapper.unmount();
-	// 	expect(resetMembers).toHaveBeenCalledTimes(1);
-	// });
-
-	// it("initially calls fetchMember on mount", () => {
-	// 	expect(fetchMember).toHaveBeenCalledTimes(1);
-	// });
-
-	// it("initially calls resetServerMessage on mount if 'serverMessage' is present", () => {
-	// 	expect(resetServerMessage).toHaveBeenCalledTimes(1);
-	// });
-
-	it("doesn't call resetServerMessage on mount if 'serverMessage' is absent", () => {
-		resetServerMessage.mockClear();
-		wrapper.setProps({ serverMessage: "" });
-
-		wrapper.instance().componentDidMount();
-
-		expect(resetServerMessage).toHaveBeenCalledTimes(0);
+	it("calls removeEventListener on unmount", () => {
+		wrapper.unmount();
+		expect(window.removeEventListener).toHaveBeenCalledTimes(1);
 	});
 
-	it("renders 4 tabs when a member has been loaded", () => {
-		wrapper.setProps({ viewMember });
+	describe("When ViewMember data is present", () => {
+		beforeEach(() => {
+			wrapper.setProps({ viewMember });
+		});
 
-		expect(wrapper.find("TabPane")).toHaveLength(4);
+		it("renders 4 tabs", () => {
+			expect(wrapper.find("TabPane")).toHaveLength(4);
+		});
+
+		it("handles fetching initial response data", () => {
+			wrapper.instance().handleFetchMemberResponseInitialData();
+
+			expect(fetchMemberEvents).toHaveBeenCalledWith({ id: viewMember._id });
+		});
+
+		it("handles fetching initial schedule data", () => {
+			wrapper.instance().handleFetchMemberScheduleInitialData();
+
+			expect(fetchScheduleEvents).toHaveBeenCalledWith({
+				id: viewMember._id,
+				selectedGames: "My Games",
+			});
+		});
+
+		it("handles window resizing", () => {
+			wrapper.setState({ isCollapsed: true });
+
+			expect(wrapper.find("Tabs").props().tabPosition).toEqual("top");
+		});
 	});
 });

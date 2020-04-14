@@ -7,7 +7,7 @@ const updateUserAvatar = jest.fn();
 const initProps = {
 	viewMember: {
 		_id: "0123456789",
-		avatar: "",
+		avatar: "123.png",
 		firstName: "Beta",
 		lastName: "Tester",
 		registered: "2019-07-26T16:56:40.518+00:00",
@@ -19,31 +19,23 @@ const initProps = {
 	updateUserAvatar,
 };
 
-const wrapper = shallow(<Profile {...initProps} />);
-describe("Profile", () => {
+describe("Settings Profile", () => {
+	let wrapper;
+	beforeEach(() => {
+		wrapper = withRouterContext(Profile, initProps);
+	});
+
+	afterEach(() => {
+		deleteUserAvatar.mockClear();
+	});
+
 	it("renders without errors", () => {
 		expect(wrapper.find("PaneBody").exists()).toBeTruthy();
 	});
 
-	// it("displays a Title with the member's name", () => {
-	// 	expect(wrapper.find("Title").text()).toContain(
-	// 		`${initProps.firstName} ${initProps.lastName}`,
-	// 	);
-	// });
+	it("calls deleteAvatar", () => {
+		wrapper.find("Button#delete-avatar").first().simulate("click");
 
-	// it("displays the member's id", () => {
-	// 	expect(wrapper.find("LightText").first().text()).toContain(
-	// 		initProps.status,
-	// 	);
-	// });
-
-	// it("displays the member's registration date", () => {
-	// 	expect(wrapper.find("LightText").at(1).text()).toContain(
-	// 		`${moment(initProps.registered).format("MMMM Do, YYYY")}`,
-	// 	);
-	// });
-
-	// it("displays the member's role", () => {
-	// 	expect(wrapper.find("LightText").at(2).text()).toContain(initProps.role);
-	// });
+		expect(deleteUserAvatar).toHaveBeenCalledWith(initProps.viewMember._id);
+	});
 });

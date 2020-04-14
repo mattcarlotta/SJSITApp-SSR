@@ -79,6 +79,13 @@ export class Settings extends Component {
 		100,
 	);
 
+	handleFetchEventResponseInitialData = () => {
+		const {
+			viewMember: { _id: id },
+		} = this.props;
+		this.props.fetchMemberSettingsEvents({ id });
+	};
+
 	render = () => {
 		const { isCollapsed } = this.state;
 		const {
@@ -129,7 +136,7 @@ export class Settings extends Component {
 										{...this.props}
 										id={id}
 										fetchAction={fetchMemberSettingsEvents}
-										fetchInitialData={() => fetchMemberSettingsEvents({ id })}
+										fetchInitialData={this.handleFetchEventResponseInitialData}
 										scheduleEvents={eventResponses}
 									/>
 								</PaneBody>

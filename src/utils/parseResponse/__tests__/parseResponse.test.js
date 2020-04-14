@@ -1,6 +1,20 @@
-import { parseData, parseMessage } from "../index";
+import { parseCookie, parseData, parseMessage } from "../index";
 
 describe("Parse Data & Message", () => {
+	it("parses a cookie from a request", () => {
+		const cookie = "Test";
+		const req = { headers: { cookie } };
+
+		expect(parseCookie(req)).toEqual(req);
+	});
+
+	it("doesnt parse a cookie from a request", () => {
+		const cookie = "";
+		const req = { headers: { cookie } };
+
+		expect(parseCookie(req)).toBeUndefined();
+	});
+
 	it("parses data from an API response", () => {
 		const data = { email: "test@example.com" };
 		const res = { data };

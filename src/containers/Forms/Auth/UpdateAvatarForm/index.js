@@ -156,7 +156,7 @@ export class UpdateAvatarForm extends Component {
 							<Button
 								primary
 								className={!file ? "disabled" : undefined}
-								type="submit"
+								type={!file ? "button" : "submit"}
 								width="50px"
 								marginRight="0"
 								padding="5px"

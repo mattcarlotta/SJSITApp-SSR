@@ -44,6 +44,27 @@ describe("Dashboard Reducer", () => {
 		});
 
 		state = dashboardReducer(undefined, {
+			type: types.DASHBOARD_RESET,
+		});
+
+		expect(state).toEqual(initialState);
+	});
+
+	it("sets and resets apform data", () => {
+		let state = dashboardReducer(undefined, {
+			type: types.DASHBOARD_SET_APFORM,
+			payload: apForm,
+		});
+
+		expect(state).toEqual({
+			...initialState,
+			apform: {
+				data: mocks.form,
+				isLoading: false,
+			},
+		});
+
+		state = dashboardReducer(undefined, {
 			type: types.DASHBOARD_FETCH_APFORM,
 		});
 

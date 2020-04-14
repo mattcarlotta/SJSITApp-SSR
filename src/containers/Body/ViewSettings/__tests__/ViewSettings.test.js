@@ -42,6 +42,10 @@ const initProps = {
 	updateUserAvatar,
 };
 
+const eventListener = {};
+window.addEventListener = (evt, cb) => (eventListener[evt] = cb);
+window.removeEventListener = jest.fn();
+
 describe("View Settings", () => {
 	let wrapper;
 	beforeEach(() => {
@@ -49,9 +53,27 @@ describe("View Settings", () => {
 		wrapper.setState({ windowWidth: 1000 });
 	});
 
+	afterEach(() => {
+		fetchMemberSettingsEvents.mockClear();
+		window.removeEventListener.mockClear();
+	});
+
 	it("initially renders a LoadingPanel", () => {
 		wrapper.setProps({ viewMember: {} });
 		expect(wrapper.find("LoadingPanel").exists()).toBeTruthy();
+	});
+
+	it("calls removeEventListener on unmount", () => {
+		wrapper.unmount();
+		expect(window.removeEventListener).toHaveBeenCalledTimes(1);
+	});
+
+	it("handles fetching initial response data", () => {
+		wrapper.instance().handleFetchEventResponseInitialData();
+
+		expect(fetchMemberSettingsEvents).toHaveBeenCalledWith({
+			id: initProps.viewMember._id,
+		});
 	});
 
 	it("initially renders tabs along the side", () => {

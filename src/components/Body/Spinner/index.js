@@ -111,7 +111,7 @@ export default styled(Spinner)`
 		bottom: 0;
 		background: radial-gradient(circle, white, transparent 25%) center / 25% 25%,
 			radial-gradient(circle, white, black 25%) center / 12.5% 12.5%;
-		animation: light 5s linear infinite;
+		animation: light 6s linear infinite;
 		mix-blend-mode: color-dodge;
 	}
 `;

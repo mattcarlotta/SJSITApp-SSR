@@ -1,7 +1,18 @@
 import * as types from "types";
 import * as actions from "actions/Auth";
 
+const id = "0123456789";
+
 describe("Authentication Actions", () => {
+	it("returns USER_DELETE_AVATAR with props", () => {
+		const value = actions.deleteUserAvatar(id);
+
+		expect(value).toEqual({
+			type: types.USER_DELETE_AVATAR,
+			id,
+		});
+	});
+
 	it("returns USER_PASSWORD_RESET with props", () => {
 		const props = { email: "test@example.com" };
 
@@ -10,6 +21,25 @@ describe("Authentication Actions", () => {
 		expect(value).toEqual({
 			type: types.USER_PASSWORD_RESET,
 			props,
+		});
+	});
+
+	it("returns USER_SET_SIDEBAR_STATE with props", () => {
+		const value = actions.setSidebarState();
+
+		expect(value).toEqual({
+			type: types.USER_SET_SIDEBAR_STATE,
+		});
+	});
+
+	it("returns USER_SET_AVATAR with data", () => {
+		const avatar = "http://example.com/uploads/1234.png";
+
+		const value = actions.setUserAvatar(avatar);
+
+		expect(value).toEqual({
+			type: types.USER_SET_AVATAR,
+			payload: avatar,
 		});
 	});
 
@@ -98,6 +128,20 @@ describe("Authentication Actions", () => {
 		expect(value).toEqual({
 			type: types.USER_UPDATE,
 			payload: data,
+		});
+	});
+
+	it("returns USER_UPDATE_AVATAR with data", () => {
+		const form = {
+			image: "image",
+		};
+
+		const value = actions.updateUserAvatar({ form, id });
+
+		expect(value).toEqual({
+			type: types.USER_UPDATE_AVATAR,
+			form,
+			id,
 		});
 	});
 

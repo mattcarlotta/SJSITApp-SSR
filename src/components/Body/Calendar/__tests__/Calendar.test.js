@@ -60,16 +60,19 @@ const initState = {
 	],
 };
 
+const fetchInitialData = jest.fn();
+
 const initProps = {
 	id: "",
 	fetchAction,
 	loggedinUserId: "88",
-	match: {
-		params: {
-			id: "",
-		},
-	},
 	scheduleEvents: [],
+};
+
+const nextProps = {
+	...initProps,
+	id: "0123456789",
+	fetchInitialData,
 };
 
 describe("Calendar", () => {
@@ -82,6 +85,7 @@ describe("Calendar", () => {
 
 	afterEach(() => {
 		fetchAction.mockClear();
+		fetchInitialData.mockClear();
 		updateCalendarDate.mockClear();
 	});
 
@@ -93,9 +97,17 @@ describe("Calendar", () => {
 		expect(wrapper.find("Button").exists()).toBeFalsy();
 	});
 
-	// it("initially calls the fetchAction on mount", () => {
-	// 	expect(fetchAction).toHaveBeenCalledTimes(1);
-	// });
+	it("sets 'selectedGames' state to 'My Games' if an 'id' prop is present", () => {
+		wrapper = mount(<CustomCalendar {...nextProps} />);
+
+		expect(wrapper.state("selectedGames")).toEqual("My Games");
+	});
+
+	it("initially calls the fetchInitialData function on mount if present", () => {
+		wrapper = mount(<CustomCalendar {...nextProps} />);
+
+		expect(fetchInitialData).toHaveBeenCalledTimes(1);
+	});
 
 	it("selecting a month filter calls fetchAction", () => {
 		const name = "selectedMonth";

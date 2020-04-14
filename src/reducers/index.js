@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { combineReducers } from "redux";
 import * as types from "~types";
 import authReducer from "./Auth";

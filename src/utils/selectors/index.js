@@ -1,5 +1,7 @@
+/* istanbul ignore file */
+
 /**
- * Creates a static referenceable function to select the current query from redux state.
+ * Creates a static referenceable function to select the current query from window.
  *
  * @function selectQuery
  * @returns {string}

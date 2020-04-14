@@ -79,6 +79,14 @@ describe("Mail Actions", () => {
 		});
 	});
 
+	it("returns MAIL_RESET", () => {
+		const value = actions.resetMail();
+
+		expect(value).toEqual({
+			type: types.MAIL_RESET,
+		});
+	});
+
 	it("returns MAIL_SET with an empty array if data is empty", () => {
 		const value = actions.setMails([]);
 

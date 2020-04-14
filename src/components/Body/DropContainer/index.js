@@ -19,6 +19,7 @@ const DropContainer = ({ id, title, users, width }) => (
 				marginBottom: 5,
 				background:
 					"linear-gradient(90deg,#194048 0%,#0f7888 50%,#194048 100%)",
+				textShadow: "1px 2px 2px #000000",
 			}}
 		>
 			{title}
@@ -52,10 +53,7 @@ const DropContainer = ({ id, title, users, width }) => (
 												avatar={avatar}
 												width="40px"
 												style={{
-													border:
-														response !== "No response."
-															? "2px solid #ddd"
-															: "2px solid #bbb",
+													border: "2px solid #ddd",
 												}}
 											/>
 											<div css="display: inline-block;margin-left: 8px;font-size: 16px;vertical-align: middle;">

@@ -79,6 +79,7 @@ export default styled(Button)`
 		if (props.capitalize) return "capitalize";
 		return "none";
 	}};
+	text-shadow: 1px 2px 2px #000000;
 	text-decoration: none;
 	margin-right: ${({ marginRight }) => marginRight || "20px"};
 	transition: color 0.2s ease-in-out, background 0.2s ease-in-out,

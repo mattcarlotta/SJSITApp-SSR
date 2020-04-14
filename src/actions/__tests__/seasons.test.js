@@ -56,6 +56,22 @@ describe("Season Actions", () => {
 		});
 	});
 
+	it("returns SEASONS_FETCH_IDS", () => {
+		const value = actions.fetchSeasonsIds();
+
+		expect(value).toEqual({
+			type: types.SEASONS_FETCH_IDS,
+		});
+	});
+
+	it("returns SEASONS_RESET", () => {
+		const value = actions.resetSeasons();
+
+		expect(value).toEqual({
+			type: types.SEASONS_RESET,
+		});
+	});
+
 	it("returns SEASONS_SET with data", () => {
 		const value = actions.setSeasons(seasonsData);
 

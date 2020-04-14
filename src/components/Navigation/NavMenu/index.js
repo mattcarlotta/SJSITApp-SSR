@@ -17,6 +17,7 @@ const titleStyle = {
 	margin: 0,
 	padding: "4px 0",
 	fontSize: 26,
+	textShadow: "1px 2px 2px #000000",
 };
 
 const NavMenu = ({

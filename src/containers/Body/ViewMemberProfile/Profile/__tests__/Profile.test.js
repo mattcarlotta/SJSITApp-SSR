@@ -18,10 +18,10 @@ const viewMember = {
 	status: "active",
 };
 
-// const inactiveMember = {
-// 	...viewMember,
-// 	status: "suspended",
-// };
+const inactiveMember = {
+	...viewMember,
+	status: "suspended",
+};
 
 const initProps = {
 	deleteMemberAvatar,
@@ -31,58 +31,59 @@ const initProps = {
 	viewMember,
 };
 
-describe("Profile", () => {
+describe("Member Profile", () => {
 	let wrapper;
 	beforeEach(() => {
-		wrapper = shallow(<Profile {...initProps} />);
+		wrapper = withRouterContext(Profile, initProps);
+	});
+
+	afterEach(() => {
+		deleteMemberAvatar.mockClear();
+		updateMemberStatus.mockClear();
 	});
 
 	it("renders without errors", () => {
 		expect(wrapper.find("PaneBody").exists()).toBeTruthy();
 	});
 
-	// it("displays a Title with the member's name", () => {
-	// 	expect(wrapper.find("Title").text()).toContain(
-	// 		`${viewMember.firstName} ${viewMember.lastName}`,
-	// 	);
-	// });
+	it("changes flex direction when collapsed", () => {
+		wrapper.setProps({ isCollapsed: true });
+		expect(wrapper.find("Flex").props().direction).toEqual("column");
+	});
 
-	// it("displays the member's id", () => {
-	// 	expect(wrapper.find("LightText").first().text()).toContain(viewMember._id);
-	// });
+	it("calls deleteAvatar", () => {
+		wrapper.setProps({
+			viewMember: { ...initProps.viewMember, avatar: "123.png" },
+		});
 
-	// it("displays the member's status, as well as a activate/suspend button", () => {
-	// 	let statusButton = wrapper.find("Button");
+		wrapper.find("Button#delete-avatar").first().simulate("click");
 
-	// 	// active status
-	// 	expect(statusButton.props().primary).toBeFalsy();
-	// 	expect(statusButton.props().danger).toBeTruthy();
-	// 	expect(statusButton.find("FaBan").exists()).toBeTruthy();
-	// 	expect(statusButton.text()).toContain("Suspend");
+		expect(deleteMemberAvatar).toHaveBeenCalledWith(viewMember._id);
+	});
 
-	// 	// inactive status
-	// 	wrapper.setProps({ viewMember: { ...inactiveMember } });
+	it("displays the member's status, as well as a activate/suspend button", () => {
+		let statusButton = () =>
+			wrapper.find("Button#change-member-status").first();
 
-	// 	statusButton = wrapper.find("Button");
+		// active status
+		expect(statusButton().props().primary).toBeFalsy();
+		expect(statusButton().props().danger).toBeTruthy();
+		expect(statusButton().find("FaBan").exists()).toBeTruthy();
+		expect(statusButton().text()).toContain("Suspend");
 
-	// 	expect(statusButton.props().primary).toBeTruthy();
-	// 	expect(statusButton.props().danger).toBeFalsy();
-	// 	expect(statusButton.text()).toContain("Activate");
-	// });
+		// inactive status
+		wrapper.setProps({ viewMember: { ...inactiveMember } });
+		expect(statusButton().props().primary).toBeTruthy();
+		expect(statusButton().props().danger).toBeFalsy();
+		expect(statusButton().text()).toContain("Activate");
+	});
 
-	// it("calls updateMemberStatus when the button is clicked", () => {
-	// 	wrapper.find("Button").simulate("click");
+	it("calls updateMemberStatus when the button is clicked", () => {
+		wrapper.find("Button#change-member-status").first().simulate("click");
 
-	// 	expect(updateMemberStatus).toHaveBeenCalledTimes(1);
-	// });
-
-	// it("displays the member's registration date", () => {
-	// 	expect(wrapper.find("LightText").at(2).text()).toContain(
-	// 		`${moment(viewMember.registered).format("MMMM Do, YYYY")}`,
-	// 	);
-	// });
-
-	// it("displays the EditMemberForm", () => {
-	// 	expect(wrapper.find("Connect(EditMemberForm)").exists()).toBeTruthy();
-	// });
+		expect(updateMemberStatus).toHaveBeenCalledWith({
+			_id: viewMember._id,
+			status: viewMember.status,
+		});
+	});
 });

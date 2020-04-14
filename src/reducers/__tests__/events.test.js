@@ -76,6 +76,24 @@ describe("Event Reducer", () => {
 		});
 	});
 
+	it("sets up new event form", () => {
+		const state = eventReducer(undefined, {
+			type: types.EVENTS_SET_NEW_EVENT,
+			payload: { ...mocks.eventsData },
+		});
+
+		expect(state).toEqual({
+			data: [],
+			editEvent: {},
+			members: [],
+			newEvent: { ...mocks.eventsData },
+			schedule: {},
+			scheduleEvents: [],
+			isLoading: true,
+			totalDocs: 0,
+		});
+	});
+
 	it("sets a scheduled event for viewing and assigning", () => {
 		const state = eventReducer(undefined, {
 			type: types.EVENTS_SET_SCHEDULE,
