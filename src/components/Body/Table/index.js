@@ -11,7 +11,7 @@ import FlexCenter from "~components/Body/FlexCenter";
 import LoadingTable from "~components/Body/LoadingTable";
 import TableActions from "~components/Body/TableActions";
 
-const Table = dynamic(() => import("antd").then(mod => mod.Table), {
+const Table = dynamic(() => import("antd/lib/table"), {
 	ssr: false,
 });
 

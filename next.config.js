@@ -2,7 +2,7 @@ require("./env");
 require("./database");
 require("./models/all");
 const openBrowser = require("react-dev-utils/openBrowser");
-const { antConfig, optimizations, plugins, rules } = require("./config");
+const { antConfig, optimizations, plugins, rules, paths } = require("./config");
 
 const { inDevelopment, LOCALHOST } = process.env;
 
@@ -17,6 +17,13 @@ module.exports = {
 
 		/* adds custom rules to client and server */
 		config.module.rules.push(...rules(isServer));
+
+		if (!isServer) {
+			config.resolve.alias = {
+				...config.resolve.alias,
+				"@ant-design/icons/lib/dist$": paths.icons,
+			};
+		}
 
 		/* adds custom rules to handle ant's css imports */
 		antConfig(config, isServer);

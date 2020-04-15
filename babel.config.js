@@ -41,6 +41,7 @@ module.exports = api => {
 					preprocess: false,
 				},
 			],
+			["import", { libraryName: "antd", libraryDirectory: "lib" }],
 		],
 	};
 };

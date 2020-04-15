@@ -1,4 +1,4 @@
-const { DefinePlugin } = require("webpack");
+const { DefinePlugin, IgnorePlugin } = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 	.BundleAnalyzerPlugin;
@@ -37,6 +37,7 @@ module.exports = isServer => {
 
 	if (!isServer) {
 		plugins.push(
+			new IgnorePlugin(/^\.\/locale$/, /moment$/),
 			/* overlays browser with compilation errors */
 			new ErrorOverlayPlugin(),
 			/* extracts css chunks for client */
