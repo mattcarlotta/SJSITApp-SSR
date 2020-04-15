@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Router from "next/router";
+import Router, { withRouter } from "next/router";
 import Spinner from "~components/Body/Spinner";
 import AppLayout from "~components/App";
 import FadeIn from "~components/Body/FadeIn";
@@ -25,12 +25,17 @@ const requiresStaffCredentials = WrappedComponent => {
 		};
 
 		componentDidMount = () => {
-			const { email, serverError, signoutUser } = this.props;
+			const { email, router, serverError, signoutUser } = this.props;
 
 			if (serverError) {
-				if (email && serverError.indexOf("account was revoked") >= 0) {
+				if (
+					serverError.indexOf("account was revoked") >= 0 ||
+					serverError.indexOf(
+						"There was a problem with your login credentials",
+					) >= 0
+				) {
 					signoutUser();
-				} else {
+				} else if (!email || router.pathname !== "/employee/dashboard") {
 					Router.push("/employee/login");
 				}
 
@@ -55,6 +60,9 @@ const requiresStaffCredentials = WrappedComponent => {
 	RequiresStaffAuthentication.propTypes = {
 		email: PropTypes.string,
 		role: PropTypes.string,
+		router: PropTypes.shape({
+			pathname: PropTypes.string,
+		}),
 		serverError: PropTypes.string,
 		signoutUser: PropTypes.func.isRequired,
 	};
@@ -65,7 +73,9 @@ const requiresStaffCredentials = WrappedComponent => {
 		role: auth.role,
 	});
 
-	return connect(mapStateToProps, { signoutUser })(RequiresStaffAuthentication);
+	return withRouter(
+		connect(mapStateToProps, { signoutUser })(RequiresStaffAuthentication),
+	);
 };
 
 requiresStaffCredentials.propTypes = {

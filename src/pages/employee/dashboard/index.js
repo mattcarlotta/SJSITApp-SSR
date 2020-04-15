@@ -66,7 +66,9 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		].map(p => p.catch(e => e.toString())),
 	);
 
-	return { serverError: serverErrors.join("") };
+	const serverError = [...new Set(serverErrors)].join("");
+
+	return { serverError };
 };
 
 export default requiresBasicCredentials(Dashboard);
