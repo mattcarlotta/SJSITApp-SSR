@@ -21,6 +21,10 @@ const alias = {
 	...readDirectory("./src/"),
 };
 
+const { inProduction } = process.env;
+
+const inProd = inProduction === "true";
+
 module.exports = api => {
 	api.cache(true);
 
@@ -42,6 +46,7 @@ module.exports = api => {
 				},
 			],
 			["import", { libraryName: "antd", libraryDirectory: "lib" }],
-		],
+			inProd && "react-remove-properties",
+		].filter(Boolean),
 	};
 };

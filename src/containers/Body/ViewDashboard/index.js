@@ -10,7 +10,7 @@ import MembersAvailability from "./MembersAvailability";
 import EventDistribution from "./EventDistribution";
 
 export const ViewDashboard = ({ role }) => (
-	<>
+	<div data-test="dashboard">
 		<Head title="Dashboard" />
 		<Row gutter={[24, 24]}>
 			<Events />
@@ -18,7 +18,7 @@ export const ViewDashboard = ({ role }) => (
 			{role !== "employee" ? <MembersAvailability /> : <Availability />}
 			<EventDistribution />
 		</Row>
-	</>
+	</div>
 );
 
 ViewDashboard.propTypes = {

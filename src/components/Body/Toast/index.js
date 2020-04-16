@@ -30,11 +30,16 @@ export const displayIcon = type => {
 
 const ToastMessage = ({ type, message }) =>
 	toast[type](
-		<div css="display: flex; color: white;">
+		<div data-test="toast-alert" css="display: flex; color: white;">
 			<div css="font-size:15px;padding-top: 6px;flex-shrink: 0;text-align: center;width: 30px;">
 				{displayIcon(type)}
 			</div>
-			<div css="flex-grow: 1;font-size: 15px;padding: 8px 12px;">{message}</div>
+			<div
+				data-test="toast-message"
+				css="flex-grow: 1;font-size: 15px;padding: 8px 12px;"
+			>
+				{message}
+			</div>
 		</div>,
 	);
 
