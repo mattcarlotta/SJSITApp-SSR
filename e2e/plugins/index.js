@@ -15,7 +15,22 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-}
+module.exports = on => {
+	on("before:browser:launch", (browser, launchOptions) => {
+		if (browser.name === "chrome" || browser.name === "firefox") {
+			launchOptions.args.push("--window-size=1800,1100");
+			return launchOptions;
+		}
+	});
+
+	on("task", {
+		"db:seed": () => {
+			const seed = require("../../database/seedDB");
+			return seed();
+		},
+		"db:teardown": () => {
+			const teardown = require("../../database/teardownDB");
+			return teardown();
+		},
+	});
+};

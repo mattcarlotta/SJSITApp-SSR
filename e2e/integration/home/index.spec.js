@@ -1,4 +1,4 @@
-context("Login Page", () => {
+context("Home Page", () => {
 	beforeEach(() => {
 		cy.visit("/");
 	});
@@ -18,5 +18,21 @@ context("Login Page", () => {
 		cy.get("button")
 			.should("have.length", 1)
 			.should("have.text", "Employee Login");
+	});
+
+	it("changes the home page to have a 'Go To Dashboard' button", () => {
+		cy.get("button").click();
+
+		cy.get("form").find("input").first().type("carlotta.matt@gmail.com");
+
+		cy.get("form").find("input").eq(1).type("password");
+
+		cy.get("form").submit();
+
+		cy.url().should("eq", "http://localhost:3000/employee/dashboard");
+
+		cy.visit("/");
+
+		cy.get("button").should("have.text", "Go To Dashboard");
 	});
 });

@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+before(() => {
+	cy.task("db:seed");
+});
+
+after(() => {
+	cy.task("db:teardown");
+});

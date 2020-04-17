@@ -1,4 +1,4 @@
-export default [
+module.exports = [
 	{ team: "Anaheim Ducks", league: "NHL", name: "anaheim-ducks" },
 	{ team: "Arizona Coyotes", league: "NHL", name: "arizona-coyotes" },
 	{ team: "Bakersfield Condors", league: "AHL", name: "bakersfield-condors" },

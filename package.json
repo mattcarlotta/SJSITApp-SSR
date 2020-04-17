@@ -23,7 +23,8 @@
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll",
-		"test:e2e": "cypress open --project ./e2e"
+		"test:env": "NODE_ENV=test next dev",
+		"test:e2e": "NODE_ENV=test cypress open --project ./e2e"
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
@@ -96,6 +97,7 @@
 		"babel-plugin-react-remove-properties": "^0.3.0",
 		"babel-plugin-styled-components": "^1.10.7",
 		"browserslist": "^4.11.1",
+		"concurrently": "^5.1.0",
 		"cross-env": "^7.0.2",
 		"css-loader": "^3.5.2",
 		"cypress": "^4.4.0",

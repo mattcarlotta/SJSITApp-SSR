@@ -1,4 +1,4 @@
-export default (
+module.exports = (
 	LOCALHOST,
 	firstName,
 	lastName,
