@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import { shallowWrap, withRouterContext } from "~utils/testing";
 import { mockApp, mockAPI } from "~utils/__mocks__/mockAxios.js";
 import "jest-styled-components";
+import "mutationobserver-shim";
 
 configure({ adapter: new Adapter() });
 
