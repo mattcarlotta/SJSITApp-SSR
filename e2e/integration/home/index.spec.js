@@ -3,7 +3,7 @@ context("Home Page", () => {
 		cy.visit("/");
 	});
 
-	it("initially should a logo and an 'Employee Login' button", () => {
+	it("initially displays a logo and an 'Employee Login' button", () => {
 		cy.get(".container")
 			.find(".text-wrapper")
 			.should("have.length", 2)
@@ -20,18 +20,13 @@ context("Home Page", () => {
 			.should("have.text", "Employee Login");
 	});
 
-	it("changes the home page to have a 'Go To Dashboard' button", () => {
-		cy.get("button").click();
+	it("changes the home page to have a 'Go To Dashboard' button when logged in", () => {
+		cy.request("POST", "/api/signin", {
+			email: "carlotta.matt@gmail.com",
+			password: "password",
+		});
 
-		cy.get("form").find("input").first().type("carlotta.matt@gmail.com");
-
-		cy.get("form").find("input").eq(1).type("password");
-
-		cy.get("form").submit();
-
-		cy.url().should("eq", "http://localhost:3000/employee/dashboard");
-
-		cy.visit("/");
+		cy.reload();
 
 		cy.get("button").should("have.text", "Go To Dashboard");
 	});

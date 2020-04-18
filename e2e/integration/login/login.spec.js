@@ -3,7 +3,7 @@ context("Login Page", () => {
 		cy.visit("/employee/login");
 	});
 
-	it("should display a login screen", () => {
+	it("displays a login screen", () => {
 		cy.get("form").should("have.length", 1);
 	});
 
@@ -53,6 +53,6 @@ context("Login Page", () => {
 
 		cy.get("form").submit();
 
-		cy.url().should("eq", "http://localhost:3000/employee/dashboard");
+		cy.url().should("contain", "/employee/dashboard");
 	});
 });

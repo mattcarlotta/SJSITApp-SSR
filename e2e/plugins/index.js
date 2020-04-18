@@ -22,15 +22,4 @@ module.exports = on => {
 			return launchOptions;
 		}
 	});
-
-	on("task", {
-		"db:seed": () => {
-			const seed = require("../../database/seedDB");
-			return seed();
-		},
-		"db:teardown": () => {
-			const teardown = require("../../database/teardownDB");
-			return teardown();
-		},
-	});
 };

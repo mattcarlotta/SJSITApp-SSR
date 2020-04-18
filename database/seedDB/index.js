@@ -22,7 +22,7 @@ const {
 const moment = require("../../src/utils/momentWithTZ");
 const teams = require("./Teams");
 
-const { SEED } = process.env;
+const { DATABASE, EXIT, SEED } = process.env;
 
 const admin = {
 	email: "carlotta.matt@gmail.com",
@@ -85,8 +85,8 @@ const seedDB = () => {
 			]);
 
 			const newHire = {
-				authorizedEmail: "carlotta.matt@gmail.com",
-				email: "carlotta.matt@gmail.com",
+				authorizedEmail: "carlotta.matt2@gmail.com",
+				email: "carlotta.matt2@gmail.com",
 				role: "admin",
 				token: createSignupToken(),
 				expiration: expirationDate().toDate(),
@@ -998,12 +998,16 @@ const seedDB = () => {
 
 			console.log(
 				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" SEED ")} ${chalk.blue(
-					`\x1b[2mutils/\x1b[0m\x1b[1mseedDB.js`,
+					`\x1b[2mutils/\x1b[0m\x1b[1mseedDB.js\x1b[0m (${DATABASE})`,
 				)}\n`,
 			);
 
+			if (EXIT) process.exit(0);
+
 			return resolve("Success!");
 		} catch (err) {
+			if (EXIT) process.exit(0);
+
 			return reject(
 				console.log(
 					`\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n${err.toString()}\x1b[0m`,

@@ -25,9 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 before(() => {
-	cy.task("db:seed");
+	cy.exec("npm run seed:stage");
 });
 
 after(() => {
-	cy.task("db:teardown");
+	cy.exec("npm run drop:stage");
 });

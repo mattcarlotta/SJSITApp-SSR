@@ -12,35 +12,23 @@
 	},
 	"scripts": {
 		"analyze": "rimraf .next/analyze && analyze=true npm run build",
-		"build": "NODE_ENV=production next build",
+		"build:prod": "NODE_ENV=production next build",
+		"build:stage": "NODE_ENV=staging next build",
 		"checkbuild": "es-check es5 './dist/static/**/*.js'",
 		"dev": "NODE_OPTIONS=--max_old_space_size=4096 NODE_ENV=development next dev",
+		"drop:stage": "NODE_ENV=staging EXIT=true node ./database/teardownDB/index.js",
 		"lint": "eslint -c ./.eslintrc --ignore-path ./.eslintignore ./src --ext .js,.jsx",
 		"lint:styles": "stylelint **/*.scss",
+		"seed:stage": "NODE_ENV=staging EXIT=true node ./database/seedDB/index.js",
 		"start": "NODE_ENV=production next start -p 8080",
+		"staging": "NODE_ENV=staging next start",
 		"test": "NODE_ENV=test jest --config ./jest.json --passWithNoTests",
 		"test:failed": "NODE_ENV=test jest --config ./jest.json --watch --onlyFailures",
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll",
-		"test:env": "NODE_ENV=test next dev",
-		"test:e2e": "NODE_ENV=test cypress open --project ./e2e"
-	},
-	"lint-staged": {
-		"*.{js,jsx}": [
-			"npm run lint"
-		],
-		"*.scss": [
-			"npm run lint:styles"
-		],
-		"*.{json,md}": [
-			"prettier --write"
-		]
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
+		"test:e2e": "NODE_ENV=staging cypress open --project ./e2e",
+		"test:e2erun": "NODE_ENV=staging cypress run --project ./e2e"
 	},
 	"dependencies": {
 		"@nivo/bar": "^0.61.1",
@@ -87,7 +75,7 @@
 		"@zeit/next-css": "^1.0.1",
 		"@zeit/next-sass": "^1.0.1",
 		"address": "^1.1.2",
-		"alias-dirs": "^0.0.1",
+		"alias-dirs": "^0.0.11",
 		"autoprefixer": "^9.7.6",
 		"axios-mock-adapter": "^1.18.1",
 		"babel-eslint": "^10.1.0",
@@ -121,7 +109,6 @@
 		"extracted-loader": "^1.0.7",
 		"file-loader": "^6.0.0",
 		"friendly-errors-webpack-plugin": "^1.7.0",
-		"husky": "^4.2.5",
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^25.3.0",
 		"jest-css-modules-transform": "^4.0.0",
@@ -131,7 +118,6 @@
 		"jest-resolve": "^25.3.0",
 		"jest-styled-components": "^6.3.4",
 		"jsdom": "^16.2.2",
-		"lint-staged": "^10.1.3",
 		"mutationobserver-shim": "^0.3.5",
 		"node-sass": "^4.13.1",
 		"nodemon": "^2.0.3",

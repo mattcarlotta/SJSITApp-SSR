@@ -1,7 +1,8 @@
 /* eslint-disable */
 const chalk = require("chalk");
+require("../../env");
 const { connectDatabase } = require("../index");
-const { DROPDB } = process.env;
+const { DATABASE, DROP, EXIT } = process.env;
 
 /**
  * Function to tear down the testing Mongo database.
@@ -24,22 +25,23 @@ const teardownDB = () => {
 
 			console.log(
 				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" PASS ")} ${chalk.blue(
-					`\x1b[2mutils/\x1b[0m\x1b[1mteardownDB.js`,
+					`\x1b[2mutils/\x1b[0m\x1b[1mteardownDB.js\x1b[0m (${DATABASE})`,
 				)}\n`,
 			);
 
-			return resolve("Success!");
+			if (EXIT) process.exit(0);
+
+			return resolve();
 		} catch (err) {
-			return reject(
-				console.log(
-					`\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mteardownDB.js\x1b[0m\x1b[31m\n${err.toString()}\x1b[0m`,
-				),
+			console.log(
+				`\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mteardownDB.js\x1b[0m\x1b[31m\n${err.toString()}\x1b[0m`,
 			);
+			return reject(process.exit(0));
 		}
 	});
 };
 
-if (DROPDB) teardownDB();
+if (DROP) teardownDB();
 
 module.exports = teardownDB;
 /* eslint-enable no-console */
