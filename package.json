@@ -27,8 +27,8 @@
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll",
-		"test:e2e": "NODE_ENV=staging cypress open --project ./e2e",
-		"test:e2erun": "NODE_ENV=staging cypress run --project ./e2e"
+		"test:e2e": "concurrently --success first --kill-others \"npm run staging\" \"NODE_ENV=staging cypress open --project ./e2e\"",
+		"test:e2erun": "concurrently --success first --kill-others \"npm run staging\" \"NODE_ENV=staging cypress run --project ./e2e\""
 	},
 	"dependencies": {
 		"@nivo/bar": "^0.61.1",

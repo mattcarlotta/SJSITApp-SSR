@@ -7,9 +7,10 @@ import { sendError } from "~utils/helpers";
 
 moment.tz.setDefault("America/Los_Angeles");
 
-const { cookieKey, inProduction } = process.env;
+const { cookieKey, inProduction, inTesting } = process.env;
 
 const inProd = inProduction === "true";
+const inStaging = inTesting === "true";
 
 const logging = inProd
 	? ":remote-addr [:date] :referrer :method :url HTTP/:http-version :status :res[content-length]"
@@ -39,9 +40,9 @@ export default next => (req, res) => {
 					httpOnly: true,
 					// secure: inProd,
 				}),
-				morgan(logging),
+				!inStaging && morgan(logging),
 				passport.initialize(),
-			];
+			].filter(Boolean);
 
 			const promises = middlewares.reduce((acc, middleware) => {
 				const promise = new Promise((resolve, reject) => {
