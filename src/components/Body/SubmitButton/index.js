@@ -16,6 +16,7 @@ const SubmitButton = ({
 			<Submitting style={{ ...submitBtnStyle }} />
 		) : (
 			<Button
+				dataTest="submit-button"
 				style={{ ...style, minHeight: 54 }}
 				className="submit"
 				disabled={disabled}

@@ -27,7 +27,8 @@
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll",
-		"test:stage": "NODE_ENV=staging next dev",
+		"test:stage": "NODE_ENV=staging next build && npm run staging",
+		"test:stagedev": "NODE_ENV=staging next dev",
 		"test:e2e": "NODE_ENV=staging cypress open --project ./e2e",
 		"test:e2erun": "concurrently --success first --kill-others \"npm run staging\" \"NODE_ENV=staging cypress run --project ./e2e\""
 	},
@@ -89,7 +90,7 @@
 		"concurrently": "^5.1.0",
 		"cross-env": "^7.0.2",
 		"css-loader": "^3.5.2",
-		"cypress": "^4.4.0",
+		"cypress": "^4.4.1",
 		"enzyme": "^3.11.0",
 		"enzyme-adapter-react-16": "^1.15.2",
 		"error-overlay-webpack-plugin": "^0.4.1",

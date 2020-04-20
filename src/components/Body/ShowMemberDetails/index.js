@@ -14,20 +14,27 @@ const ShowMemberDetails = ({
 	status,
 }) => (
 	<div>
-		<Title style={{ fontSize: 36, margin: "0" }}>
+		<Title data-test="user-name" style={{ fontSize: 36, margin: "0" }}>
 			{firstName} {lastName}
 		</Title>
 		<LightText style={{ margin: "0" }}>
 			Account Status:{" "}
 			<Small>
-				<DisplayStatus status={status} /> <span>({status})</span>
+				<DisplayStatus status={status} />{" "}
+				<span data-test="user-status">({status})</span>
 			</Small>
 		</LightText>
 		<LightText style={{ margin: "5px 0 0 0" }}>
-			Registered: <Small>{moment(registered).format("MMMM Do, YYYY")}</Small>
+			Registered:{" "}
+			<Small data-test="user-registered">
+				{moment(registered).format("MMMM Do, YYYY")}
+			</Small>
 		</LightText>
 		<LightText style={{ margin: "5px 0 0 0" }}>
-			Role: <Small style={{ textTransform: "capitalize" }}>{role}</Small>
+			Role:{" "}
+			<Small data-test="user-role" style={{ textTransform: "capitalize" }}>
+				{role}
+			</Small>
 		</LightText>
 	</div>
 );

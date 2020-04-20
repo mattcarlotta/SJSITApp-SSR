@@ -30,9 +30,9 @@ context("Login Page", () => {
 	});
 
 	it("displays an error if the form is submitted with invalid fields", () => {
-		cy.get("form").find("input").first().type("carlotta.matt@gmail.com");
+		cy.get("[name=email]").type("carlotta.matt@gmail.com");
 
-		cy.get("form").find("input").eq(1).type("passw");
+		cy.get("[name=password]").type("passw");
 
 		cy.get("form").submit();
 
@@ -45,9 +45,9 @@ context("Login Page", () => {
 	});
 
 	it("logs the user in and redirects them to the dashboard", () => {
-		cy.get("form").find("input").first().type("carlotta.matt@gmail.com");
+		cy.get("[name=email]").type("carlotta.matt@gmail.com");
 
-		cy.get("form").find("input").eq(1).type("password");
+		cy.get("[name=password]").type("password");
 
 		cy.get("form").submit();
 
@@ -55,9 +55,9 @@ context("Login Page", () => {
 	});
 
 	it("rejects suspended users", () => {
-		cy.get("form").find("input").first().type("member5@example.com");
+		cy.get("[name=email]").type("member5@example.com");
 
-		cy.get("form").find("input").eq(1).type("password");
+		cy.get("[name=password]").type("password");
 
 		cy.get("form").submit();
 

@@ -79,7 +79,7 @@ const scheduling = (
 
 export class ViewMemberProfile extends Component {
 	state = {
-		isCollapsed: false,
+		isCollapsed: true,
 	};
 
 	componentDidMount = () => {

@@ -46,6 +46,7 @@ const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
 			>
 				<Button
 					primary
+					dataTest="open-avatar-form"
 					type="button"
 					padding="3px"
 					style={{
@@ -75,7 +76,7 @@ const Avatar = ({ avatar, deleteAvatar, openAvatarForm }) => (
 				<Tooltip placement="top" title="Delete Avatar">
 					<Button
 						danger
-						id="delete-avatar"
+						dataTest="delete-avatar"
 						type="button"
 						padding="3px"
 						width="50px"

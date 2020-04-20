@@ -93,7 +93,11 @@ export class UpdateAvatarForm extends Component {
 		const { error, file, imagePreview, isSubmitting } = this.state;
 
 		return (
-			<form css="width: 100%; max-width: 200px;" onSubmit={this.handleSubmit}>
+			<form
+				data-test="upload-avatar-form"
+				css="width: 100%; max-width: 200px;"
+				onSubmit={this.handleSubmit}
+			>
 				<div
 					css={`
 						height: 195px;
@@ -130,6 +134,7 @@ export class UpdateAvatarForm extends Component {
 						</FlexCenter>
 					)}
 					<input
+						data-test="upload-avatar-input"
 						css="position: absolute;top: 0px;right: 0px;bottom: 0px;left: 0px;opacity: 1e-05;width: 100%;cursor: pointer;z-index: 10;"
 						ref={node => (this.image = node)}
 						type="file"

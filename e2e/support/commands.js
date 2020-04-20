@@ -24,6 +24,27 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+Cypress.Commands.add(
+	"attach_file",
+	{
+		prevSubject: "element",
+	},
+	(input, fileName, fileType) => {
+		cy.fixture(fileName)
+			.then(content => Cypress.Blob.base64StringToBlob(content, fileType))
+			.then(blob => {
+				const testFile = new File([blob], fileName, { type: fileType });
+				const dataTransfer = new DataTransfer();
+
+				dataTransfer.items.add(testFile);
+
+				console.log("dataTransfer", dataTransfer);
+				input[0].files = dataTransfer.files;
+				return input;
+			});
+	},
+);
+
 before(() => {
 	cy.exec("npm run seed:stage");
 });
