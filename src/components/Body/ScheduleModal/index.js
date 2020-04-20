@@ -22,7 +22,11 @@ const ScheduleModal = ({
 	modalChildren,
 }) =>
 	isVisible ? (
-		<Modal maxWidth="600px" onClick={handleCloseModal}>
+		<Modal
+			dataTest="upcoming-event-details"
+			maxWidth="600px"
+			onClick={handleCloseModal}
+		>
 			{modalChildren.map(
 				({
 					employeeNotes,

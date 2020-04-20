@@ -17,6 +17,7 @@ export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 		<Menu style={{ padding: 0 }}>
 			<MenuItem>
 				<MenuButton
+					data-test="visit-settings"
 					style={{ width: "100%" }}
 					onClick={() => Router.push("/employee/settings")}
 				>
@@ -27,7 +28,11 @@ export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 				</MenuButton>
 			</MenuItem>
 			<MenuItem>
-				<MenuButton style={{ width: "100%" }} onClick={signoutUser}>
+				<MenuButton
+					data-test="signout-user"
+					style={{ width: "100%" }}
+					onClick={signoutUser}
+				>
 					<MenuItemContainer>
 						<FaSignOutAlt />
 						<MenuItemTitle>Logout</MenuItemTitle>
@@ -40,6 +45,7 @@ export const AccountButton = ({ avatar, firstName, lastName, signoutUser }) => {
 	return (
 		<Dropdown overlay={options} trigger={["click"]} placement="bottomCenter">
 			<MenuButton
+				data-test="account-dropdown"
 				hoverable
 				style={{ padding: "0 20px", marginRight: 0, height: 64 }}
 			>

@@ -44,7 +44,7 @@ const MemberAvailabilityAverage = ({ eventAvailability }) => {
 				motionDamping={15}
 			/>
 			<div style={styles}>
-				<span>{availabilityPercentage}%</span>
+				<span data-test="availability-avg">{availabilityPercentage}%</span>
 				<span>Availability</span>
 			</div>
 		</div>

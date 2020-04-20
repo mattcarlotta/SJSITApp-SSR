@@ -49,6 +49,7 @@ export const Forms = ({ apform, isLoading }) => {
 					!isEmpty(apform) && !hasExpired ? (
 						<Button
 							tertiary
+							dataTest="view-apform"
 							width="120px"
 							disabled={hasExpired}
 							padding="5px"

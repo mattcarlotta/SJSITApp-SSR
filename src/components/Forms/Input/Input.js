@@ -53,7 +53,7 @@ const Input = ({
 							readOnly={readOnly}
 						/>
 					</div>
-					{errors && <Errors>{errors}</Errors>}
+					{errors && <Errors data-test="errors">{errors}</Errors>}
 				</div>
 			)}
 		</ClickHandler>

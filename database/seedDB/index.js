@@ -179,6 +179,14 @@ const seedDB = () => {
 				expiration: expirationDate().toDate(),
 			};
 
+			const staticTestHire = {
+				authorizedEmail: "static@member.com",
+				email: "",
+				role: "employee",
+				token: "0123456789",
+				expiration: expirationDate().toDate(),
+			};
+
 			await Token.insertMany([
 				newHire,
 				newHire1,
@@ -193,6 +201,7 @@ const seedDB = () => {
 				newHire10,
 				newHire11,
 				newHire12,
+				staticTestHire,
 			]);
 
 			const registered = createDate().toDate();

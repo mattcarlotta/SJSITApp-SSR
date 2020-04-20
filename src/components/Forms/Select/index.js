@@ -42,7 +42,7 @@ const Select = ({
 				</SelectContainer>
 			)}
 		</ClickHandler>
-		{errors && <Errors>{errors}</Errors>}
+		{errors && <Errors data-test="errors">{errors}</Errors>}
 	</Container>
 );
 

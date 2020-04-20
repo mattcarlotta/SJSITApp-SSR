@@ -20,6 +20,19 @@ context("Home Page", () => {
 			.should("have.text", "Employee Login");
 	});
 
+	it("redirects unauthenticated users to the login page", () => {
+		cy.visit("/employee/dashboard");
+
+		cy.url().should("contain", "/employee/login");
+
+		cy.get("[data-test=toast-message]")
+			.should("have.length", 1)
+			.and(
+				"have.text",
+				"Your access to the requested page was denied. You do not have the correct account permissions.",
+			);
+	});
+
 	it("changes the home page to have a 'Go To Dashboard' button when logged in", () => {
 		cy.request("POST", "/api/signin", {
 			email: "carlotta.matt@gmail.com",

@@ -7,7 +7,7 @@ const NoEvents = ({ selectedToday }) => (
 	<FlexCenter
 		style={{ color: "#909090", flexDirection: "column", marginTop: 5 }}
 	>
-		<p css="margin: 0;padding: 0;">
+		<p data-test="no-events" css="margin: 0;padding: 0;">
 			{!selectedToday ? (
 				<MdEventNote style={{ fontSize: 70 }} />
 			) : (

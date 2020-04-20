@@ -36,9 +36,7 @@ context("Login Page", () => {
 
 		cy.get("form").submit();
 
-		cy.get("[data-test=toast-alert]")
-			.should("have.length", 1)
-			.find("[data-test=toast-message]")
+		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
 			.and(
 				"have.text",
@@ -54,5 +52,22 @@ context("Login Page", () => {
 		cy.get("form").submit();
 
 		cy.url().should("contain", "/employee/dashboard");
+	});
+
+	it("rejects suspended users", () => {
+		cy.get("form").find("input").first().type("member5@example.com");
+
+		cy.get("form").find("input").eq(1).type("password");
+
+		cy.get("form").submit();
+
+		cy.get("[data-test=toast-alert]")
+			.should("have.length", 1)
+			.find("[data-test=toast-message]")
+			.should("have.length", 1)
+			.and(
+				"have.text",
+				"Access to your account was revoked. The account you're trying to log into has been permanently suspended.",
+			);
 	});
 });

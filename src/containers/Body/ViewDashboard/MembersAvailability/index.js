@@ -87,7 +87,7 @@ export const MembersAvailability = ({
 							Availability &#40;%&#41;
 						</FlexEnd>
 					</Flex>
-					<List style={listStyle}>
+					<List data-test="employee-avail-list" style={listStyle}>
 						{membersAvailability.map(({ id, availability }, key) => (
 							<ListItem
 								key={id}
