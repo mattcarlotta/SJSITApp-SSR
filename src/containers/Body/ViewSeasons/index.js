@@ -42,6 +42,7 @@ export const ViewSeasons = ({
 		>
 			<FlexEnd>
 				<Button
+					dataTest="nav-create-season"
 					primary
 					width="180px"
 					marginRight="0px"

@@ -125,55 +125,16 @@ context("Employee Dashboard Page", () => {
 		cy.get("[data-test=availability-avg").should("have.text", "0%");
 	});
 
-	it("allows a user to view and update the current AP Form", () => {
+	it("prevents a user from submitting an empty AP form", () => {
 		cy.get("[data-test=view-apform]").click();
 
 		cy.get("form").submit();
 
 		cy.get("[data-test=errors]").should("have.length", 3);
-
-		cy.get("form")
-			.should("have.length", 1)
-			.find(".radio-value")
-			.then(e => {
-				const elements = e.map((_, el) => Cypress.$(el));
-
-				cy.wrap(elements[0]).click();
-				cy.wrap(elements[4]).click();
-				cy.wrap(elements[8]).click();
-			});
-
-		cy.get("form").submit();
-
-		cy.url().should("contain", "/employee/dashboard");
-
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and("have.text", "Successfully added your responses to the A/P form!");
-
-		cy.get("[data-test=availability-avg").should("have.text", "100%");
-	});
-
-	it("navigates the user to the settings page", () => {
-		cy.get("[data-test=account-dropdown").click();
-		cy.get("[data-test=visit-settings").click();
-
-		cy.url().should("contain", "/employee/settings");
-	});
-
-	it("logs out the user", () => {
-		cy.get("[data-test=account-dropdown").click();
-		cy.get("[data-test=signout-user").click();
-
-		cy.url().should("contain", "/employee/login");
 	});
 
 	it("allows a user to view and update the current AP Form", () => {
 		cy.get("[data-test=view-apform]").click();
-
-		cy.get("form").submit();
-
-		cy.get("[data-test=errors]").should("have.length", 3);
 
 		cy.get("form")
 			.should("have.length", 1)
