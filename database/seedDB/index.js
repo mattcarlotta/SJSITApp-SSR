@@ -65,15 +65,18 @@ const seedDB = () => {
 			};
 
 			const newSeason4 = {
-				seasonId: "20192020",
-				startDate: new Date(2019, 8, 26),
-				endDate: new Date(2020, 5, 12),
-			};
-
-			const newSeason5 = {
 				seasonId: "19801981",
 				startDate: new Date(1980, 8, 26),
 				endDate: new Date(1981, 5, 12),
+			};
+
+			const currentYearDate = moment().format("YYYY");
+			const nextYearDate = moment().add(1, "year").format("YYYY");
+
+			const currentYear = {
+				seasonId: `${currentYearDate}${nextYearDate}`,
+				startDate: moment().startOf("year").format(),
+				endDate: moment().add(1, "year").endOf("year").format(),
 			};
 
 			await Season.insertMany([
@@ -81,13 +84,13 @@ const seedDB = () => {
 				newSeason2,
 				newSeason3,
 				newSeason4,
-				newSeason5,
+				currentYear,
 			]);
 
 			const newHire = {
 				authorizedEmail: "carlotta.matt2@gmail.com",
 				email: "carlotta.matt2@gmail.com",
-				role: "admin",
+				role: "employee",
 				token: createSignupToken(),
 				expiration: expirationDate().toDate(),
 			};
@@ -1015,13 +1018,13 @@ const seedDB = () => {
 
 			return resolve("Success!");
 		} catch (err) {
+			console.log(
+				`\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n${err.toString()}\x1b[0m`,
+			);
+
 			if (EXIT) process.exit(0);
 
-			return reject(
-				console.log(
-					`\n\x1b[7m\x1b[31;1m FAIL \x1b[0m \x1b[2mutils/\x1b[0m\x1b[31;1mseedDB.js\x1b[0m\x1b[31m\n${err.toString()}\x1b[0m`,
-				),
-			);
+			return reject();
 		}
 	});
 };

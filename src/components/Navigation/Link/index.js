@@ -3,9 +3,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 
-const LinkComponent = ({ as, className, children, href, style, target }) => (
+const LinkComponent = ({
+	as,
+	className,
+	children,
+	dataTest,
+	href,
+	style,
+	target,
+}) => (
 	<Link href={href} as={as} prefetch={false} passHref>
-		<a style={style} className={className} target={target}>
+		<a data-test={dataTest} style={style} className={className} target={target}>
 			{children}
 		</a>
 	</Link>
@@ -15,6 +23,7 @@ LinkComponent.propTypes = {
 	as: PropTypes.string,
 	className: PropTypes.string.isRequired,
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+	dataTest: PropTypes.string,
 	href: PropTypes.string.isRequired,
 	style: PropTypes.objectOf(
 		PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

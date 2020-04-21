@@ -68,7 +68,7 @@ const NavMenu = ({
 						/>
 					) : !submenu ? (
 						<MenuItem value={key} key={key}>
-							<Tab href={`/employee/${value}`}>
+							<Tab dataTest="nav-link" href={`/employee/${value}`}>
 								<span className="anticon">{icon}</span>
 								<span className={`${isCollapsed ? "hidden" : undefined}`}>
 									{tab}
@@ -89,7 +89,7 @@ const NavMenu = ({
 						>
 							{submenu.map(({ icon, disabled, tab, value, key }) => (
 								<MenuItem disabled={disabled} value={value} key={key}>
-									<Tab href={`/employee/${value}`}>
+									<Tab dataTest="nav-link" href={`/employee/${value}`}>
 										<span className="anticon">{icon}</span>
 										<span className={`${isCollapsed ? "hidden" : undefined}`}>
 											{tab}

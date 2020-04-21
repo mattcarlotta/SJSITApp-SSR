@@ -32,7 +32,7 @@ context("Employee Settings Page", () => {
 		cy.get(".ant-select-lg").first().click();
 		cy.get("body").type("{downarrow}").type("{enter}");
 
-		cy.get("[data-test=upcoming-event").should("have.length", 0);
+		cy.get("[data-test=upcoming-event").should("have.length", 3);
 	});
 
 	it("displays the current user details", () => {

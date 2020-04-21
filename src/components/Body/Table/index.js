@@ -78,7 +78,12 @@ class CustomTable extends Component {
 					}
 					trigger="click"
 				>
-					<Button padding="3px" marginRight="0px" onClick={null}>
+					<Button
+						dataTest="table-actions"
+						padding="3px"
+						marginRight="0px"
+						onClick={null}
+					>
 						<FaTools style={{ position: "relative", top: 2 }} />
 					</Button>
 				</Popover>

@@ -37,6 +37,7 @@ const TableActions = ({
 			<>
 				<Button
 					primary
+					dataTest="assign-location"
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() =>
@@ -57,6 +58,7 @@ const TableActions = ({
 			<>
 				<Button
 					primary
+					dataTest="view-location"
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() =>
@@ -77,6 +79,7 @@ const TableActions = ({
 			<>
 				<Button
 					primary
+					dataTest="edit-location"
 					padding="3px 0px 0 3px"
 					marginRight="0px"
 					onClick={() =>
@@ -97,6 +100,7 @@ const TableActions = ({
 			<>
 				<Button
 					primary
+					dataTest="send-mail"
 					padding="3px 0 0 0"
 					marginRight="0px"
 					onClick={() => handleClickAction(sendMail, record)}
@@ -120,7 +124,12 @@ const TableActions = ({
 					}
 					onConfirm={() => handleClickAction(deleteAction, record)}
 				>
-					<Button danger padding="5px 0 1px 0" marginRight="0px">
+					<Button
+						dataTest="delete-item"
+						danger
+						padding="5px 0 1px 0"
+						marginRight="0px"
+					>
 						<FaTrash style={{ ...iconStyle, fontSize: 16 }} />
 						&nbsp;
 						<span>Delete</span>
@@ -140,7 +149,11 @@ const TableActions = ({
 				}
 				onConfirm={() => handleDeleteRecords(selectedRowKeys)}
 			>
-				<Button padding="5px 0 1px 0" marginRight="0px">
+				<Button
+					dataTest="delete-many-items"
+					padding="5px 0 1px 0"
+					marginRight="0px"
+				>
 					<FaCheckSquare
 						style={{ ...iconStyle, fontSize: 16, color: "#1890ff" }}
 					/>

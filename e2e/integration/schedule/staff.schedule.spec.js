@@ -1,7 +1,7 @@
 context("Staff Dashboard Page", () => {
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
-			email: "carlotta.matt@gmail.com",
+			email: "staffmember@example.com",
 			password: "password",
 		});
 		cy.reload();
