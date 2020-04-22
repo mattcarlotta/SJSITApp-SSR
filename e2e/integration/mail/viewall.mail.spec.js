@@ -1,4 +1,4 @@
-context("Staff View Seasons Page", () => {
+context("Staff View Mail Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");
 	});
@@ -9,18 +9,18 @@ context("Staff View Seasons Page", () => {
 			password: "password",
 		});
 		cy.reload();
-		cy.visit("/employee/seasons/viewall?page=1");
+		cy.visit("/employee/mail/viewall?page=1");
 	});
 
 	after(() => {
 		cy.exec("npm run drop:stage");
 	});
 
-	it("displays the season table", () => {
+	it("displays the mail table", () => {
 		cy.get(".ant-table-wrapper").should("have.length", 1);
 	});
 
-	it("deletes a season", () => {
+	it("deletes an email", () => {
 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
 
 		cy.get("[data-test=delete-item]").click();
@@ -29,10 +29,10 @@ context("Staff View Seasons Page", () => {
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the season.");
+			.and("have.text", "Successfully deleted the email.");
 	});
 
-	it("deletes multiple seasons", () => {
+	it("deletes multiple emails", () => {
 		cy.get("input[type=checkbox]").then(e => {
 			const elements = e.map((_, el) => Cypress.$(el));
 
@@ -48,21 +48,21 @@ context("Staff View Seasons Page", () => {
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the seasons.");
+			.and("have.text", "Successfully deleted the mail.");
 	});
 
-	it("navigates to a New Season page", () => {
-		cy.get("[data-test=nav-create-season]").click();
-		cy.url().should("contain", "/employee/seasons/create");
+	it("navigates to a Send Mail page", () => {
+		cy.get(".send-mail").click();
+		cy.url().should("contain", "/employee/mail/create");
 		cy.get("form").should("have.length", 1);
 	});
 
-	it("navigates to an Edit Season page", () => {
+	it("navigates to an Edit Mail page", () => {
 		cy.get("[data-test=table-actions]").first().click({ force: true });
 
 		cy.get("[data-test=edit-location]").click();
 
-		cy.url().should("contain", "/employee/seasons/edit");
+		cy.url().should("contain", "/employee/mail/edit");
 
 		cy.get("form").should("have.length", 1);
 	});

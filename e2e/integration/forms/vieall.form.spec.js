@@ -1,4 +1,4 @@
-context("Staff View Seasons Page", () => {
+context("Staff View Forms Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");
 	});
@@ -9,7 +9,7 @@ context("Staff View Seasons Page", () => {
 			password: "password",
 		});
 		cy.reload();
-		cy.visit("/employee/seasons/viewall?page=1");
+		cy.visit("/employee/forms/viewall?page=1");
 	});
 
 	after(() => {
@@ -20,7 +20,20 @@ context("Staff View Seasons Page", () => {
 		cy.get(".ant-table-wrapper").should("have.length", 1);
 	});
 
-	it("deletes a season", () => {
+	it("resends AP form notifications", () => {
+		cy.get("[data-test=table-actions]").first().click({ force: true });
+
+		cy.get("[data-test=send-mail]").click();
+
+		cy.get("[data-test=toast-message]")
+			.should("have.length", 1)
+			.and(
+				"have.text",
+				"Email notifications for that form will be resent shortly.",
+			);
+	});
+
+	it("deletes a form", () => {
 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
 
 		cy.get("[data-test=delete-item]").click();
@@ -29,10 +42,10 @@ context("Staff View Seasons Page", () => {
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the season.");
+			.and("have.text", "Successfully deleted the form.");
 	});
 
-	it("deletes multiple seasons", () => {
+	it("deletes multiple forms", () => {
 		cy.get("input[type=checkbox]").then(e => {
 			const elements = e.map((_, el) => Cypress.$(el));
 
@@ -48,21 +61,21 @@ context("Staff View Seasons Page", () => {
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the seasons.");
+			.and("have.text", "Successfully deleted the forms.");
 	});
 
-	it("navigates to a New Season page", () => {
-		cy.get("[data-test=nav-create-season]").click();
-		cy.url().should("contain", "/employee/seasons/create");
+	it("navigates to a New Form page", () => {
+		cy.get(".create-ap-form").click();
+		cy.url().should("contain", "/employee/forms/create");
 		cy.get("form").should("have.length", 1);
 	});
 
-	it("navigates to an Edit Season page", () => {
+	it("navigates to an Edit Form page", () => {
 		cy.get("[data-test=table-actions]").first().click({ force: true });
 
 		cy.get("[data-test=edit-location]").click();
 
-		cy.url().should("contain", "/employee/seasons/edit");
+		cy.url().should("contain", "/employee/forms/edit");
 
 		cy.get("form").should("have.length", 1);
 	});
