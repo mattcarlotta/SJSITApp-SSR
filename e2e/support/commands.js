@@ -44,11 +44,3 @@ Cypress.Commands.add(
 			});
 	},
 );
-
-before(() => {
-	cy.exec("npm run seed:stage");
-});
-
-after(() => {
-	cy.exec("npm run drop:stage");
-});

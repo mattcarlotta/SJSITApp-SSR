@@ -1,4 +1,8 @@
 context("Employee Settings Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "member2@example.com",
@@ -6,6 +10,10 @@ context("Employee Settings Page", () => {
 		});
 		cy.reload();
 		cy.visit("/employee/settings");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("intially displays the profile tab", () => {

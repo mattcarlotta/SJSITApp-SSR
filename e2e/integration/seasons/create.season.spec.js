@@ -1,6 +1,10 @@
 const moment = require("../../../src/utils/momentWithTZ");
 
 context("Staff Create Season Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "staffmember@example.com",
@@ -8,6 +12,10 @@ context("Staff Create Season Page", () => {
 		});
 		cy.reload();
 		cy.visit("/employee/seasons/create");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("displays the create season form", () => {

@@ -18,10 +18,12 @@ const Table = dynamic(() => import("antd/lib/table"), {
 class CustomTable extends Component {
 	state = {
 		selectedRowKeys: [],
+		isMounted: false,
 	};
 
 	componentDidMount = () => {
 		this.handlePageOverflowRedirect();
+		this.setState({ isMounted: true });
 	};
 
 	shouldComponentUpdate = (nextProps, nextState) =>
@@ -96,7 +98,7 @@ class CustomTable extends Component {
 	};
 
 	render = () =>
-		this.props.isLoading ? (
+		this.props.isLoading || !this.state.isMounted ? (
 			<LoadingTable />
 		) : (
 			<FadeIn timing="0.4s">

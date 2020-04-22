@@ -3,7 +3,11 @@ const moment = require("../../../src/utils/momentWithTZ");
 const lastMonthStart = moment().subtract(1, "month").startOf("month");
 const lastMonthEnd = moment().subtract(1, "month").endOf("month");
 
-context("Staff Create Season Page", () => {
+context("Staff Create Form Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "staffmember@example.com",
@@ -11,6 +15,10 @@ context("Staff Create Season Page", () => {
 		});
 		cy.reload();
 		cy.visit("/employee/forms/create");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("displays the create forms form", () => {
@@ -48,7 +56,7 @@ context("Staff Create Season Page", () => {
 
 		cy.get(".ant-calendar-prev-month-btn").eq(1).click();
 
-		cy.get("input[placeholder='Select a start date and time...'")
+		cy.get("input[placeholder='Select a start date and time...']")
 			.eq(2)
 			.type("03/21/2020 5:00pm")
 			.type("{enter}");

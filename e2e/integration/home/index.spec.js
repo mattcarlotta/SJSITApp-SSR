@@ -1,6 +1,14 @@
 context("Home Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.visit("/");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("initially displays a logo and an 'Employee Login' button", () => {

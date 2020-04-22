@@ -1,4 +1,8 @@
 context("Employee Schedule Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "carlotta.matthew@gmail.com",
@@ -6,6 +10,10 @@ context("Employee Schedule Page", () => {
 		});
 		cy.reload();
 		cy.visit("/employee/schedule");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("displays a calendar", () => {

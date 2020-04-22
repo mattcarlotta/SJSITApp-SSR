@@ -1,4 +1,8 @@
 context("Employee Dashboard Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "member@example.com",
@@ -6,6 +10,10 @@ context("Employee Dashboard Page", () => {
 		});
 		cy.reload();
 		cy.visit("/employee/dashboard");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("only displays employee routes in the side navigation", () => {

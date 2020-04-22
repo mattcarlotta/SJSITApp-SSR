@@ -3,6 +3,10 @@ const moment = require("../../../src/utils/momentWithTZ");
 const findFloorYear = date => Math.floor(parseInt(date, 10) / 10) * 10;
 
 context("Staff Edit Season Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "staffmember@example.com",
@@ -12,6 +16,10 @@ context("Staff Edit Season Page", () => {
 		cy.visit("/employee/seasons/viewall?page=1");
 		cy.get("[data-test=table-actions]").last().click();
 		cy.get("[data-test=edit-location]").click();
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("displays the edit season form", () => {

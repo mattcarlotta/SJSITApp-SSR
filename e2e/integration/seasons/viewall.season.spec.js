@@ -1,4 +1,8 @@
 context("Staff View Seasons Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
 			email: "staffmember@example.com",
@@ -12,11 +16,9 @@ context("Staff View Seasons Page", () => {
 		cy.get(".ant-table-wrapper").should("have.length", 1);
 	});
 
-	// it("navigates to the 'New Season' page", () => {
-	// 	cy.get("[data-test=nav-create-season]").click();
-
-	// 	cy.url().should("contain", "/employee/seasons/create");
-	// });
+	after(() => {
+		cy.exec("npm run drop:stage");
+	});
 
 	it("deletes a season", () => {
 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });

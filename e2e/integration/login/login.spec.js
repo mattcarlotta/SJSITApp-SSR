@@ -1,6 +1,14 @@
 context("Login Page", () => {
+	before(() => {
+		cy.exec("npm run seed:stage");
+	});
+
 	beforeEach(() => {
 		cy.visit("/employee/login");
+	});
+
+	after(() => {
+		cy.exec("npm run drop:stage");
 	});
 
 	it("displays a login screen", () => {
