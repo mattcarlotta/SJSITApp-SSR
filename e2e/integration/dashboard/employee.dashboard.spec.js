@@ -1,7 +1,7 @@
 context("Employee Dashboard Page", () => {
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
-			email: "carlotta.matthew@gmail.com",
+			email: "member@example.com",
 			password: "password",
 		});
 		cy.reload();
@@ -25,8 +25,8 @@ context("Employee Dashboard Page", () => {
 	});
 
 	it("displays the current logged in user first and last name", () => {
-		cy.get(".firstname").contains("Matthew");
-		cy.get(".lastname").contains("Carlotta");
+		cy.get(".firstname").contains("Member");
+		cy.get(".lastname").contains("Member");
 	});
 
 	it("displays events, forms, availability and event distribution tiles", () => {
@@ -74,9 +74,10 @@ context("Employee Dashboard Page", () => {
 	it("displays current user availability average", () => {
 		cy.get("[data-test=availability-avg").should("have.text", "0%");
 	});
+
 	it("displays the current logged in user first and last name", () => {
-		cy.get(".firstname").contains("Matthew");
-		cy.get(".lastname").contains("Carlotta");
+		cy.get(".firstname").contains("Member");
+		cy.get(".lastname").contains("Member");
 	});
 
 	it("displays events, forms, availability and event distribution tiles", () => {

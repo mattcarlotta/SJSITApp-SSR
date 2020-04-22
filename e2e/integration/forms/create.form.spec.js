@@ -48,11 +48,10 @@ context("Staff Create Season Page", () => {
 
 		cy.get(".ant-calendar-prev-month-btn").eq(1).click();
 
-		cy.get(
-			`[title='${lastMonthStart.add(1, "day").format("MMMM D, YYYY")}']`,
-		).click();
-
-		cy.get(".ant-calendar-ok-btn").click();
+		cy.get("input[placeholder='Select a start date and time...'")
+			.eq(2)
+			.type("03/21/2020 5:00pm")
+			.type("{enter}");
 
 		cy.get("form").submit();
 

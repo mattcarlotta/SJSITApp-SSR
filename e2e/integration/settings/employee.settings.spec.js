@@ -1,7 +1,7 @@
 context("Employee Settings Page", () => {
 	beforeEach(() => {
 		cy.request("POST", "/api/signin", {
-			email: "carlotta.matthew@gmail.com",
+			email: "member2@example.com",
 			password: "password",
 		});
 		cy.reload();
@@ -32,11 +32,11 @@ context("Employee Settings Page", () => {
 		cy.get(".ant-select-lg").first().click();
 		cy.get("body").type("{downarrow}").type("{enter}");
 
-		cy.get("[data-test=upcoming-event").should("have.length", 3);
+		cy.get("[data-test=upcoming-event").should("have.length", 0);
 	});
 
 	it("displays the current user details", () => {
-		cy.get("[data-test=user-name]").should("have.text", "Matthew Carlotta");
+		cy.get("[data-test=user-name]").should("have.text", "Member2 Member2");
 		cy.get("[data-test=user-status]").should("have.text", "(active)");
 		cy.get("[data-test=user-registered]").should(e => {
 			const elements = e.map((_, el) => Cypress.$(el));
