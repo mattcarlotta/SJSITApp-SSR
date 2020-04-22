@@ -16,8 +16,21 @@ context("Staff View Forms Page", () => {
 		cy.exec("npm run drop:stage");
 	});
 
-	it("displays the season table", () => {
+	it("displays the forms table", () => {
 		cy.get(".ant-table-wrapper").should("have.length", 1);
+	});
+
+	it("filters the forms table", () => {
+		cy.get(".ant-pagination-total-text").contains("11 items");
+
+		cy.get("button#sent-emails").click();
+		cy.get(".ant-select").click();
+		cy.get("li[role=option]").eq(1).click();
+
+		cy.get(".ant-pagination-total-text").contains("6 items");
+
+		cy.get("button#clear-filters").click();
+		cy.get(".ant-pagination-total-text").contains("11 items");
 	});
 
 	it("resends AP form notifications", () => {

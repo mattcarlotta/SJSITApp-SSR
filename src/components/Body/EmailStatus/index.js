@@ -25,7 +25,7 @@ const displayEmailStatus = status => {
 
 const EmailStatus = ({ status }) => (
 	<Tooltip title={status} placement="top">
-		{displayEmailStatus(status)}
+		<span data-status={status}>{displayEmailStatus(status)}</span>
 	</Tooltip>
 );
 

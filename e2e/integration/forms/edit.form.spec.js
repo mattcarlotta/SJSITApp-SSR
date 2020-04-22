@@ -18,7 +18,7 @@ context("Staff Edit Form Page", () => {
 		cy.exec("npm run drop:stage");
 	});
 
-	it("displays the create forms form", () => {
+	it("displays the Edit Form form", () => {
 		cy.get("form").should("have.length", 1);
 	});
 

@@ -20,6 +20,22 @@ context("Staff View Mail Page", () => {
 		cy.get(".ant-table-wrapper").should("have.length", 1);
 	});
 
+	it("filters the mail table", () => {
+		cy.get(".ant-pagination-total-text").contains("6 items");
+
+		cy.get("button#status").click();
+
+		cy.get(".ant-select").click();
+
+		cy.get("li[role=option]").eq(1).click();
+
+		cy.get(".ant-pagination-total-text").contains("3 items");
+
+		cy.get("button#clear-filters").click();
+
+		cy.get(".ant-pagination-total-text").contains("6 items");
+	});
+
 	it("deletes an email", () => {
 		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
 
@@ -30,6 +46,26 @@ context("Staff View Mail Page", () => {
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
 			.and("have.text", "Successfully deleted the email.");
+	});
+
+	it("resends an email", () => {
+		cy.get(".ant-table-row")
+			.eq(1)
+			.find("[data-status=sent]")
+			.should("have.length", 1);
+
+		cy.get("[data-test=table-actions]").eq(1).click({ force: true });
+
+		cy.get("[data-test=send-mail]").click();
+
+		cy.get(".ant-table-row")
+			.eq(1)
+			.find("[data-status=unsent]")
+			.should("have.length", 1);
+
+		cy.get("[data-test=toast-message]")
+			.should("have.length", 1)
+			.and("have.text", "That email will be resent shortly.");
 	});
 
 	it("deletes multiple emails", () => {

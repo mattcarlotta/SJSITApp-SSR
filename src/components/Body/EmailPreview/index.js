@@ -40,7 +40,6 @@ const EmailPreview = ({
 					width: "600px",
 					marginLeft: "auto",
 					marginRight: "auto",
-					marginTop: "20px",
 					textAlign: "center",
 				}}
 				title={submitTitle}
