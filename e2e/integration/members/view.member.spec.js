@@ -56,12 +56,34 @@ context("Staff View Member Page", () => {
 		cy.get("[data-test=user-role]").should("have.text", "employee");
 	});
 
+	it("suspends and activates the selected user", () => {
+		cy.get("[data-test=change-member-status]").click();
+
+		cy.get("[data-test=toast-message]")
+			.first()
+			.should("have.length", 1)
+			.and("have.text", "Member has been suspended.");
+
+		cy.get("[data-test=toast-alert]").click();
+
+		cy.wait(500);
+
+		cy.get("[data-test=change-member-status]").click();
+
+		cy.get("[data-test=toast-message]")
+			.first()
+			.should("have.length", 1)
+			.and("have.text", "Member has been reactivated.");
+	});
+
 	it("updates the selected user's avatar", () => {
 		cy.get("[data-test=open-avatar-form").click();
 
 		cy.get("[data-test=upload-avatar-input]")
 			.attach_file("files/example.png", "image/png")
 			.trigger("change", { force: true });
+
+		cy.wait(500);
 
 		cy.get("[data-test=upload-avatar-form]").submit();
 

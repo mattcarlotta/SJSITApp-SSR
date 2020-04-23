@@ -178,54 +178,54 @@ describe("Member Sagas", () => {
 		});
 	});
 
-	describe("Delete Many Members", () => {
-		it("logical flow matches pattern for delete many members requests", () => {
-			const message = "Successfully deleted the members.";
-			const res = { data: { message } };
+	// describe("Delete Many Members", () => {
+	// 	it("logical flow matches pattern for delete many members requests", () => {
+	// 		const message = "Successfully deleted the members.";
+	// 		const res = { data: { message } };
 
-			testSaga(sagas.deleteManyMembers, { ids })
-				.next()
-				.put(resetServerMessage())
-				.next()
-				.call(app.delete, `members/delete-many`, { data: { ids } })
-				.next(res)
-				.call(parseMessage, res)
-				.next(res.data.message)
-				.put(setServerMessage({ message: res.data.message }))
-				.next(res.data.message)
-				.call(toast, { type: "success", message: res.data.message })
-				.next()
-				.put(actions.fetchMembers())
-				.next()
-				.isDone();
-		});
+	// 		testSaga(sagas.deleteManyMembers, { ids })
+	// 			.next()
+	// 			.put(resetServerMessage())
+	// 			.next()
+	// 			.call(app.delete, `members/delete-many`, { data: { ids } })
+	// 			.next(res)
+	// 			.call(parseMessage, res)
+	// 			.next(res.data.message)
+	// 			.put(setServerMessage({ message: res.data.message }))
+	// 			.next(res.data.message)
+	// 			.call(toast, { type: "success", message: res.data.message })
+	// 			.next()
+	// 			.put(actions.fetchMembers())
+	// 			.next()
+	// 			.isDone();
+	// 	});
 
-		it("successfully deletes many members", async () => {
-			const message = "Successfully deleted the members.";
-			mockApp.onDelete(`members/delete-many`).reply(200, { message });
+	// 	it("successfully deletes many members", async () => {
+	// 		const message = "Successfully deleted the members.";
+	// 		mockApp.onDelete(`members/delete-many`).reply(200, { message });
 
-			return expectSaga(sagas.deleteManyMembers, { ids })
-				.dispatch(actions.deleteManyMembers)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message,
-				})
-				.run();
-		});
+	// 		return expectSaga(sagas.deleteManyMembers, { ids })
+	// 			.dispatch(actions.deleteManyMembers)
+	// 			.withReducer(messageReducer)
+	// 			.hasFinalState({
+	// 				message,
+	// 			})
+	// 			.run();
+	// 	});
 
-		it("if API call fails, it displays a message", async () => {
-			const err = "Unable to delete the event.";
-			mockApp.onDelete(`members/delete-many`).reply(404, { err });
+	// 	it("if API call fails, it displays a message", async () => {
+	// 		const err = "Unable to delete the event.";
+	// 		mockApp.onDelete(`members/delete-many`).reply(404, { err });
 
-			return expectSaga(sagas.deleteManyMembers, { ids })
-				.dispatch(actions.deleteManyMembers)
-				.withReducer(messageReducer)
-				.hasFinalState({
-					message: err,
-				})
-				.run();
-		});
-	});
+	// 		return expectSaga(sagas.deleteManyMembers, { ids })
+	// 			.dispatch(actions.deleteManyMembers)
+	// 			.withReducer(messageReducer)
+	// 			.hasFinalState({
+	// 				message: err,
+	// 			})
+	// 			.run();
+	// 	});
+	// });
 
 	describe("Delete Token", () => {
 		it("logical flow matches pattern for delete member token requests", () => {

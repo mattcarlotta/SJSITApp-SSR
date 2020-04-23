@@ -105,10 +105,14 @@ class CustomTable extends Component {
 				<Table
 					columns={this.createTableColumns()}
 					dataSource={this.props.data}
-					rowSelection={{
-						selectedRowKeys: this.state.selectedRowKeys,
-						onChange: this.handleSelectChange,
-					}}
+					rowSelection={
+						typeof this.props.rowSelection !== "undefined"
+							? this.props.rowSelection
+							: {
+									selectedRowKeys: this.state.selectedRowKeys,
+									onChange: this.handleSelectChange,
+							  }
+					}
 					pagination={{
 						position: "bottom",
 						current: this.props.queries.page,
@@ -143,9 +147,10 @@ CustomTable.propTypes = {
 	isLoading: PropTypes.bool.isRequired,
 	queries: PropTypes.any,
 	queryString: PropTypes.string,
+	rowSelection: PropTypes.bool,
 	location: PropTypes.any,
 	deleteAction: PropTypes.func,
-	deleteManyRecords: PropTypes.func.isRequired,
+	deleteManyRecords: PropTypes.func,
 	editLocation: PropTypes.string,
 	fetchData: PropTypes.func.isRequired,
 	sendMail: PropTypes.func,

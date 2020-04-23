@@ -64,16 +64,6 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_DELETE_MANY with ids", () => {
-		const ids = ["01", "02", "03"];
-		const value = actions.deleteManyMembers(ids);
-
-		expect(value).toEqual({
-			type: types.MEMBERS_DELETE_MANY,
-			ids,
-		});
-	});
-
 	it("returns MEMBERS_DELETE_TOKEN with a memberId", () => {
 		const value = actions.deleteToken(tokenId);
 
@@ -83,7 +73,17 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_DELETE_MANY_TOKENS with a memberId", () => {
+	// it("returns MEMBERS_DELETE_MANY", () => {
+	// 	const ids = ["01", "02", "03"];
+	// 	const value = actions.deleteManyMembers(ids);
+
+	// 	expect(value).toEqual({
+	// 		type: types.MEMBERS_DELETE_MANY,
+	// 		ids,
+	// 	});
+	// });
+
+	it("returns MEMBERS_DELETE_MANY_TOKENS", () => {
 		const ids = ["01", "02", "03"];
 		const value = actions.deleteManyTokens(ids);
 

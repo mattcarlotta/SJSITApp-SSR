@@ -124,27 +124,27 @@ export function* deleteMemberAvatar({ id }) {
  * @throws {action} - A redux action to display a server message by type.
  */
 
-export function* deleteManyMembers({ ids }) {
-	try {
-		yield put(resetServerMessage());
+// export function* deleteManyMembers({ ids }) {
+// 	try {
+// 		yield put(resetServerMessage());
 
-		const res = yield call(app.delete, `members/delete-many`, {
-			data: { ids },
-		});
-		const message = yield call(parseMessage, res);
+// 		const res = yield call(app.delete, `members/delete-many`, {
+// 			data: { ids },
+// 		});
+// 		const message = yield call(parseMessage, res);
 
-		yield put(
-			setServerMessage({
-				message,
-			}),
-		);
-		yield call(toast, { type: "success", message });
+// 		yield put(
+// 			setServerMessage({
+// 				message,
+// 			}),
+// 		);
+// 		yield call(toast, { type: "success", message });
 
-		yield put(actions.fetchMembers());
-	} catch (e) {
-		yield call(setError, e.toString());
-	}
-}
+// 		yield put(actions.fetchMembers());
+// 	} catch (e) {
+// 		yield call(setError, e.toString());
+// 	}
+// }
 
 /**
  * Attempts to delete a token.
@@ -689,7 +689,7 @@ export default function* membersSagas() {
 		takeLatest(types.MEMBERS_CREATE, createMember),
 		takeLatest(types.MEMBERS_DELETE, deleteMember),
 		takeLatest(types.MEMBERS_DELETE_AVATAR, deleteMemberAvatar),
-		takeLatest(types.MEMBERS_DELETE_MANY, deleteManyMembers),
+		// takeLatest(types.MEMBERS_DELETE_MANY, deleteManyMembers),
 		takeLatest(types.MEMBERS_DELETE_TOKEN, deleteToken),
 		takeLatest(types.MEMBERS_DELETE_MANY_TOKENS, deleteManyTokens),
 		takeLatest(types.MEMBERS_FETCH_AVAILABILITY, fetchAvailability),

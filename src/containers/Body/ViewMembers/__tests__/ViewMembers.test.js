@@ -25,12 +25,12 @@ const data = [
 ];
 
 const deleteMember = jest.fn();
-const deleteManyMembers = jest.fn();
+// const deleteManyMembers = jest.fn();
 const fetchMembers = jest.fn();
 
 const initProps = {
 	data: [],
-	deleteManyMembers,
+	// deleteManyMembers,
 	deleteMember,
 	fetchMembers,
 	isLoading: true,

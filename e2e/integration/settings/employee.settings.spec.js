@@ -61,6 +61,8 @@ context("Employee Settings Page", () => {
 			.attach_file("files/example.png", "image/png")
 			.trigger("change", { force: true });
 
+		cy.wait(500);
+
 		cy.get("[data-test=upload-avatar-form]").submit();
 
 		cy.get("[data-test=toast-message]")

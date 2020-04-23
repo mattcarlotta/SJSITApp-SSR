@@ -45,24 +45,24 @@ context("Staff View Members Page", () => {
 			.and("have.text", "Successfully deleted the member.");
 	});
 
-	it("deletes multiple members", () => {
-		cy.get("input[type=checkbox]").then(e => {
-			const elements = e.map((_, el) => Cypress.$(el));
+	// it("deletes multiple members", () => {
+	// 	cy.get("input[type=checkbox]").then(e => {
+	// 		const elements = e.map((_, el) => Cypress.$(el));
 
-			cy.wrap(elements[8]).click();
-			cy.wrap(elements[9]).click();
-		});
+	// 		cy.wrap(elements[8]).click();
+	// 		cy.wrap(elements[9]).click();
+	// 	});
 
-		cy.get("[data-test=table-actions]").eq(2).click({ force: true });
+	// 	cy.get("[data-test=table-actions]").eq(2).click({ force: true });
 
-		cy.get("[data-test=delete-many-items]").click();
+	// 	cy.get("[data-test=delete-many-items]").click();
 
-		cy.get(".ant-popover-buttons").find("button").eq(1).click();
+	// 	cy.get(".ant-popover-buttons").find("button").eq(1).click();
 
-		cy.get("[data-test=toast-message]")
-			.should("have.length", 1)
-			.and("have.text", "Successfully deleted the members.");
-	});
+	// 	cy.get("[data-test=toast-message]")
+	// 		.should("have.length", 1)
+	// 		.and("have.text", "Successfully deleted the members.");
+	// });
 
 	it("navigates to a Create Member page", () => {
 		cy.get(".add-member").click();
