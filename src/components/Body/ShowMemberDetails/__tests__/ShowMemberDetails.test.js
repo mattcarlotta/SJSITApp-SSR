@@ -1,8 +1,5 @@
 import ShowMemberDetails from "../index";
 
-const deleteAvatar = jest.fn();
-const updateAvatar = jest.fn();
-
 const initProps = {
 	firstName: "Bob",
 	lastName: "Dole",
@@ -25,13 +22,13 @@ describe("ShowMemberDetails", () => {
 		expect(wrapper.find("LightText").first().text()).toContain("active");
 	});
 
-	it("renders an registered date", () => {
+	it("renders a registered date", () => {
 		expect(wrapper.find("LightText").at(1).text()).toContain(
 			"April 21st, 2020",
 		);
 	});
 
-	it("renders an registered date", () => {
+	it("renders the role", () => {
 		expect(wrapper.find("LightText").at(2).text()).toContain("employee");
 	});
 });

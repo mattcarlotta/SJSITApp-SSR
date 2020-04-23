@@ -194,7 +194,7 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_RESET", () => {
+	it("returns MEMBERS_RESET for members", () => {
 		const value = actions.resetMembers();
 
 		expect(value).toEqual({
@@ -202,7 +202,7 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_RESET", () => {
+	it("returns MEMBERS_RESET for tokens", () => {
 		const value = actions.resetTokens();
 
 		expect(value).toEqual({
