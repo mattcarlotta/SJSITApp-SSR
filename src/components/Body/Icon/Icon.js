@@ -72,11 +72,12 @@ const icons = type => {
 	}
 };
 
-const Icon = ({ className, onClick, style, type }) => (
+const Icon = ({ className, dataTest, onClick, style, type }) => (
 	<i
 		role="presentation"
 		aria-hidden="true"
 		className={className}
+		data-test={dataTest}
 		onClick={onClick}
 		style={style}
 		tabIndex="0"
@@ -87,6 +88,7 @@ const Icon = ({ className, onClick, style, type }) => (
 
 Icon.propTypes = {
 	className: PropTypes.string.isRequired,
+	dataTest: PropTypes.string,
 	onClick: PropTypes.func,
 	style: PropTypes.objectOf(
 		PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

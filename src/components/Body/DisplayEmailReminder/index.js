@@ -9,15 +9,20 @@ const iconStyle = {
 	top: "2px",
 };
 
-const DisplayReminder = ({ reminder }) => (
-	<Tooltip title={reminder ? "sent" : "unsent"} placement="top">
-		{reminder ? (
-			<FaShareSquare style={{ ...iconStyle, color: "#008000" }} />
-		) : (
-			<FaStopwatch style={{ ...iconStyle, color: "#ffa000" }} />
-		)}
-	</Tooltip>
-);
+const DisplayReminder = ({ reminder }) => {
+	const reminderStatus = reminder ? "sent" : "unsent";
+	return (
+		<Tooltip title={reminderStatus} placement="top">
+			<span data-test={reminderStatus}>
+				{reminder ? (
+					<FaShareSquare style={{ ...iconStyle, color: "#008000" }} />
+				) : (
+					<FaStopwatch style={{ ...iconStyle, color: "#ffa000" }} />
+				)}
+			</span>
+		</Tooltip>
+	);
+};
 
 DisplayReminder.propTypes = {
 	reminder: PropTypes.bool,

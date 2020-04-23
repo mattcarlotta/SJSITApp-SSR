@@ -72,9 +72,10 @@ const seedDB = () => {
 
 			const currentYearDate = moment().format("YYYY");
 			const nextYearDate = moment().add(1, "year").format("YYYY");
+			const currentSeason = `${currentYearDate}${nextYearDate}`;
 
 			const currentYear = {
-				seasonId: `${currentYearDate}${nextYearDate}`,
+				seasonId: currentSeason,
 				startDate: moment().startOf("year").format(),
 				endDate: moment().add(1, "year").endOf("year").format(),
 			};
@@ -472,7 +473,7 @@ const seedDB = () => {
 				location: "Test Location",
 				callTimes: newEventCallTimes,
 				uniform: "Teal Jersey",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				eventDate: "2019-02-10T02:30:31.834Z",
 				scheduledIds: [scheduledUser._id],
 				schedule: [
@@ -510,7 +511,7 @@ const seedDB = () => {
 				location: "Test Location",
 				callTimes: newEventCallTimes,
 				uniform: "Teal Jersey",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				eventDate: moment().add(1, "day").format(),
 				scheduledIds: [scheduledUser._id],
 				schedule: [
@@ -550,7 +551,7 @@ const seedDB = () => {
 				location: "SAP Center at San Jose",
 				callTimes: newEventCallTimes2,
 				uniform: "Barracuda Jacket",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				eventDate: "2019-08-11T02:30:30.036Z",
 				schedule: createSchedule(newEventCallTimes2),
 				sentEmailReminders: false,
@@ -571,7 +572,7 @@ const seedDB = () => {
 				eventDate: "2019-08-21T02:30:36.000Z",
 				notes: "",
 				opponent: "Vegas Golden Knights",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Sharks",
 				employeeResponses: [
 					{
@@ -599,7 +600,7 @@ const seedDB = () => {
 				eventDate: "2019-10-21T02:30:36.000Z",
 				notes: "",
 				opponent: "Dallas Stars",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Sharks",
 				employeeResponses: [
 					{
@@ -627,7 +628,7 @@ const seedDB = () => {
 				eventDate: "2019-10-31T02:30:36.000Z",
 				notes: "",
 				opponent: "Arizona Coyotes",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Sharks",
 				schedule: createSchedule(newEventCallTimes5),
 				sentEmailReminders: false,
@@ -643,7 +644,7 @@ const seedDB = () => {
 				eventDate: "2019-09-06T16:30:36.000Z",
 				notes: "",
 				opponent: "San Diego Gulls",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes6),
 				sentEmailReminders: false,
@@ -659,7 +660,7 @@ const seedDB = () => {
 				eventDate: "2019-09-07T16:30:36.000Z",
 				notes: "Star Wars night!",
 				opponent: "San Diego Gulls",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes7),
 				sentEmailReminders: false,
@@ -675,7 +676,7 @@ const seedDB = () => {
 				eventDate: "2019-09-08T16:30:36.000Z",
 				notes: "Bring a dog!",
 				opponent: "San Diego Gulls",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes8),
 				sentEmailReminders: false,
@@ -691,7 +692,7 @@ const seedDB = () => {
 				eventDate: "2019-10-08T16:30:36.000Z",
 				notes: "Star Wars Night!",
 				opponent: "Charlotte Checkers",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes9),
 				sentEmailReminders: true,
@@ -705,7 +706,7 @@ const seedDB = () => {
 				eventDate: "2019-07-08T16:30:36.000Z",
 				notes: "Unscheduled game.",
 				opponent: "Colorado Eagles",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes9),
 				sentEmailReminders: true,
@@ -719,7 +720,7 @@ const seedDB = () => {
 				eventDate: moment().format(),
 				notes: "Unscheduled game.",
 				opponent: "Chicago Wolves",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes9),
 				scheduledIds: [scheduledUser._id],
@@ -741,7 +742,7 @@ const seedDB = () => {
 				eventDate: moment().add(1, "months").format(),
 				notes: "Unscheduled game.",
 				opponent: "Chicago Wolves",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes9),
 				scheduledIds: [scheduledUser._id],
@@ -763,7 +764,7 @@ const seedDB = () => {
 				eventDate: moment().add(1, "months").format(),
 				notes: "Delete this game.",
 				opponent: "Chicago Wolves",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				team: "San Jose Barracuda",
 				schedule: createSchedule(newEventCallTimes9),
 				scheduledIds: [scheduledUser._id],
@@ -854,7 +855,7 @@ const seedDB = () => {
 				startMonth: new Date("2019-08-01T07:00:00.000Z"),
 				endMonth: new Date("2019-08-31T07:00:00.000Z"),
 				notes: "Form 4",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2019-08-31T07:00:00.000Z"),
 				sentEmails: false,
 			};
@@ -864,7 +865,7 @@ const seedDB = () => {
 				startMonth: new Date("2019-09-01T07:00:00.000Z"),
 				endMonth: new Date("2019-09-30T07:00:00.000Z"),
 				notes: "Form 5",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2019-09-31T07:00:00.000Z"),
 				sentEmails: false,
 			};
@@ -874,7 +875,7 @@ const seedDB = () => {
 				startMonth: new Date("2019-10-01T07:00:00.000Z"),
 				endMonth: new Date("2019-10-31T07:00:00.000Z"),
 				notes: "Form 6",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2019-10-31T07:00:00.000Z"),
 				sentEmails: false,
 			};
@@ -884,7 +885,7 @@ const seedDB = () => {
 				startMonth: new Date("2019-11-01T07:00:00.000Z"),
 				endMonth: new Date("2019-11-31T07:00:00.000Z"),
 				notes: "Form 7",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2019-11-31T07:00:00.000Z"),
 				sentEmails: true,
 			};
@@ -894,7 +895,7 @@ const seedDB = () => {
 				startMonth: moment().startOf("month").format(),
 				endMonth: moment().endOf("month").format(),
 				notes: "Todays Form",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2099-11-31T07:00:00.000Z"),
 				sentEmails: true,
 			};
@@ -904,7 +905,7 @@ const seedDB = () => {
 				startMonth: moment().add(1, "months").startOf("month").format(),
 				endMonth: moment().add(1, "months").endOf("month").format(),
 				notes: "Next Months Form",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2099-11-31T07:00:00.000Z"),
 				sentEmails: true,
 			};
@@ -914,7 +915,7 @@ const seedDB = () => {
 				startMonth: new Date("2019-11-01T07:00:00.000Z"),
 				endMonth: new Date("2019-11-31T07:00:00.000Z"),
 				notes: "Delete this form.",
-				seasonId: "20192020",
+				seasonId: currentSeason,
 				sendEmailNotificationsDate: new Date("2019-11-31T07:00:00.000Z"),
 				sentEmails: true,
 			};

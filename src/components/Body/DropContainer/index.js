@@ -13,7 +13,7 @@ import DisplayAvatar from "~components/Body/DisplayAvatar";
 import UserContainer from "~components/Body/UserContainer";
 
 const DropContainer = ({ id, title, users, width }) => (
-	<Column width={width}>
+	<Column data-test="column" width={width}>
 		<ColumnTitle
 			style={{
 				marginBottom: 5,
@@ -26,7 +26,11 @@ const DropContainer = ({ id, title, users, width }) => (
 		</ColumnTitle>
 		<Droppable droppableId={id}>
 			{({ innerRef, placeholder }, { isDraggingOver }) => (
-				<UserContainer ref={innerRef} isDraggingOver={isDraggingOver}>
+				<UserContainer
+					data-test={title}
+					ref={innerRef}
+					isDraggingOver={isDraggingOver}
+				>
 					{!isEmpty(users) ? (
 						users.map(
 							(
@@ -44,6 +48,7 @@ const DropContainer = ({ id, title, users, width }) => (
 									) => (
 										<User
 											ref={innerRef}
+											data-test={`${firstName} ${lastName}`}
 											{...draggableProps}
 											{...eventHandlers}
 											isDragging={isDragging}

@@ -11,11 +11,13 @@ const iconStyle = {
 
 const EmailReminders = ({ status }) => (
 	<Tooltip title={status ? "active" : "inactive"} placement="top">
-		{status ? (
-			<FaShareSquare style={{ ...iconStyle, color: "#008000" }} />
-		) : (
-			<FaTimes style={{ ...iconStyle, color: "red" }} />
-		)}
+		<span data-test={status}>
+			{status ? (
+				<FaShareSquare style={{ ...iconStyle, color: "#008000" }} />
+			) : (
+				<FaTimes style={{ ...iconStyle, color: "red" }} />
+			)}
+		</span>
 	</Tooltip>
 );
 
