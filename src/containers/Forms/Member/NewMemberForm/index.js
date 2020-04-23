@@ -50,7 +50,10 @@ export class NewMemberForm extends Component {
 	render = () => (
 		<Card
 			extra={
-				<BackButton push={Router.push} location="/employee/members/viewall" />
+				<BackButton
+					push={Router.push}
+					location="/employee/members/viewall?page=1"
+				/>
 			}
 			title={
 				<>

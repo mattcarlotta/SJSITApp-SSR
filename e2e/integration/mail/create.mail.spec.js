@@ -1,4 +1,4 @@
-context("Staff Send Mail Form Page", () => {
+context("Staff Send Mail Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");
 	});

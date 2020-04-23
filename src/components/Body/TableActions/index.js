@@ -153,6 +153,9 @@ const TableActions = ({
 					dataTest="delete-many-items"
 					padding="5px 0 1px 0"
 					marginRight="0px"
+					style={{
+						textShadow: "none",
+					}}
 				>
 					<FaCheckSquare
 						style={{ ...iconStyle, fontSize: 16, color: "#1890ff" }}

@@ -1,5 +1,3 @@
-const moment = require("../../../src/utils/momentWithTZ");
-
 context("Staff Schedule Event Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");

@@ -21,7 +21,7 @@ context("Staff Create Form Page", () => {
 		cy.exec("npm run drop:stage");
 	});
 
-	it("displays the create forms form", () => {
+	it("displays the Create AP Form form", () => {
 		cy.get("form").should("have.length", 1);
 	});
 
@@ -113,7 +113,9 @@ context("Staff Create Form Page", () => {
 
 		cy.get(".date-picker").find("input").first().click();
 
-		cy.get(".ant-calendar-selected-day").eq(2).click();
+		cy.wait(500);
+
+		cy.get(".ant-calendar-selected-day").click();
 
 		cy.get(".ant-calendar-ok-btn").click();
 

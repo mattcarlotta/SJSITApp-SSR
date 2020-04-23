@@ -33,7 +33,7 @@ context("Staff View Forms Page", () => {
 		cy.get(".ant-pagination-total-text").contains("11 items");
 	});
 
-	it("resends AP form notifications", () => {
+	it("resends AP Form notifications", () => {
 		cy.get("[data-test=table-actions]").first().click({ force: true });
 
 		cy.get("[data-test=send-mail]").click();
