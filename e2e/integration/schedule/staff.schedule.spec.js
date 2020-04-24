@@ -1,4 +1,4 @@
-context("Staff Dashboard Page", () => {
+context("Staff Schedule Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");
 	});

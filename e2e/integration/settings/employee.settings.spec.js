@@ -70,6 +70,10 @@ context("Employee Settings Page", () => {
 			.should("have.length", 1)
 			.and("have.text", "Successfully updated your current avatar.");
 
+		// cy.get("[data-test=toast-alert]").click();
+
+		// cy.wait(500);
+
 		cy.get("[data-test=delete-avatar]").click();
 
 		cy.get("[data-test=toast-message]")

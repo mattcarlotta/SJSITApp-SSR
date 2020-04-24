@@ -3,6 +3,8 @@ const moment = require("../../../src/utils/momentWithTZ");
 const currentYearDate = moment().format("YYYY");
 const nextYearDate = moment().add(1, "year").format("YYYY");
 
+const currentSeason = `${currentYearDate}${nextYearDate}`;
+
 context("Staff Create Event Page", () => {
 	before(() => {
 		cy.exec("npm run seed:stage");
@@ -75,7 +77,7 @@ context("Staff Create Event Page", () => {
 			.should("have.length", 1)
 			.and(
 				"have.text",
-				"Successfully added a new event to the 20202021 season.",
+				`Successfully added a new event to the ${currentSeason} season.`,
 			);
 
 		cy.url().should("contain", "/employee/events/viewall?page=1");
@@ -127,7 +129,7 @@ context("Staff Create Event Page", () => {
 			.should("have.length", 1)
 			.and(
 				"have.text",
-				`Successfully added a new event to the ${currentYearDate}${nextYearDate} season.`,
+				`Successfully added a new event to the ${currentSeason} season.`,
 			);
 
 		cy.url().should("contain", "/employee/events/viewall?page=1");
