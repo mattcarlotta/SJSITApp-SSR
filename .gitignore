@@ -24,7 +24,7 @@ videos
 .cc_token
 
 # env
-env
+*.env.*
 
 # misc
 .DS_Store
