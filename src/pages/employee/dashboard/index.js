@@ -14,6 +14,15 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 
 	dispatch(actions.resetDashboard());
 
+	/**
+	 * Attempts to get event for dashboard viewing.
+	 *
+	 * @function fetchEvents
+	 * @param {string} eventId
+	 * @yields {object} - A response from a call to the API.
+	 * @function parseData - returns a parsed res.data.
+	 * @function dispatch - Dispatches a redux action to set today/upcoming event data to redux state.
+	 */
 	const fetchEvents = async () => {
 		const res = await app.get("dashboard/events/today", headers);
 		const data = parseData(res);
@@ -21,6 +30,14 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		dispatch(actions.setEvents(data));
 	};
 
+	/**
+	 * Attempts to get AP form for dashboard viewing.
+	 *
+	 * @function fetchAPForm
+	 * @yields {object} - A response from a call to the API.
+	 * @function parseData - returns a parsed res.data.
+	 * @function dispatch - Dispatches a redux action to set AP form data to redux state.
+	 */
 	const fetchAPForm = async () => {
 		const res = await app.get("dashboard/ap-form", headers);
 		const data = parseData(res);
@@ -28,6 +45,14 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		dispatch(actions.setAPForm(data));
 	};
 
+	/**
+	 * Attempts to get event availability for dashboard viewing.
+	 *
+	 * @function fetchAvailability
+	 * @yields {object} - A response from a call to the API.
+	 * @function parseData - Returns a parsed res.data.
+	 * @function dispatch - Dispatches a redux action to set availabity data to redux state.
+	 */
 	const fetchAvailability = async () => {
 		if (role !== "employee") {
 			// all member availability
@@ -44,6 +69,15 @@ Dashboard.getInitialProps = async ({ store: { dispatch, getState }, req }) => {
 		}
 	};
 
+	/**
+	 * Attempts to get event distribution for dashboard viewing.
+	 *
+	 * @function fetchEventDistribution
+	 * @param {object} params - startDate and endDate
+	 * @yields {object} - A response from a call to the API.
+	 * @function parseData - returns a parsed res.data.
+	 * @function dispatch - Dispatches a redux action to set event distribution data to redux state.
+	 */
 	const fetchEventDistribution = async () => {
 		const res = await app.get("dashboard/event-distribution", {
 			...headers,

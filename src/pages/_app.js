@@ -16,7 +16,16 @@ import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
 import { version } from "../../package.json";
 import "~styles/globals/globals.scss";
-import "react-toastify/dist/ReactToastify.css";
+
+/**
+ * Custom app wrapper to initialize nProgress, redux, redux sagas and initial session authentication.
+ *
+ * @generator
+ * @class MyApp
+ * @method componentDidMount - intializes nProgress, intializes Router event listeners for resetting window position on route changes, and displays any server-side generated errors.
+ * @method componentWillUnmount - removes Router event listeners.
+ * @method getInitialProps - handles authentication and redux initialization for child components.
+ */
 
 NProgress.configure({
 	trickleSpeed: 50,

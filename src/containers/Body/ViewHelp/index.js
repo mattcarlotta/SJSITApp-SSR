@@ -6,6 +6,7 @@ import { FaQuestionCircle } from "react-icons/fa";
 import Head from "~components/Navigation/Head";
 import { ViewingContact } from "./Other";
 import {
+	ChangingAvatar,
 	ChangingEmail,
 	ChangingEmailPreferences,
 	ChangingName,
@@ -82,13 +83,16 @@ const Help = ({ role }) => (
 				expandIconPosition="right"
 				defaultActiveKey="GeneralQuestions"
 			>
-				<Panel header="General Questions" key="GeneralQuestions">
+				<Panel id="category" header="General Questions" key="GeneralQuestions">
 					<Collapse expandIconPosition="right">
 						<Panel header="How do I change my password?" key="ChangingPassword">
 							<ChangingPassword />
 						</Panel>
 						<Panel header="How do I change my email?" key="ChangingEmail">
 							<ChangingEmail />
+						</Panel>
+						<Panel header="How do I change my avatar?" key="ChangingAvatar">
+							<ChangingAvatar />
 						</Panel>
 						<Panel
 							header="How do I change my email preferences?"
@@ -132,7 +136,7 @@ const Help = ({ role }) => (
 						</Panel>
 					</Collapse>
 				</Panel>
-				<Panel header="Employee Actions" key="Employee">
+				<Panel id="category" header="Employee Actions" key="Employee">
 					<Collapse expandIconPosition="right">
 						<Panel
 							header="How do I add my availability to an A/P form?"
@@ -155,7 +159,7 @@ const Help = ({ role }) => (
 					</Collapse>
 				</Panel>
 				{role !== "employee" && (
-					<Panel header="Staff Actions" key="Staff">
+					<Panel id="category" header="Staff Actions" key="Staff">
 						<Collapse expandIconPosition="right">
 							<Panel header="Getting Started" key="GettingStarted">
 								<GettingStarted />
@@ -200,7 +204,7 @@ const Help = ({ role }) => (
 									</Panel>
 								</Collapse>
 							</Panel>
-							<Panel header="Forms" key="Forms">
+							<Panel id="category" header="Forms" key="Forms">
 								<Collapse expandIconPosition="right">
 									<Panel
 										header="How do I view all A/P forms?"
@@ -237,7 +241,7 @@ const Help = ({ role }) => (
 									</Panel>
 								</Collapse>
 							</Panel>
-							<Panel header="Mail" key="Mail">
+							<Panel id="category" header="Mail" key="Mail">
 								<Collapse expandIconPosition="right">
 									<Panel
 										header="How do I view all emails?"
@@ -262,7 +266,7 @@ const Help = ({ role }) => (
 									</Panel>
 								</Collapse>
 							</Panel>
-							<Panel header="Members" key="Members">
+							<Panel id="category" header="Members" key="Members">
 								<Collapse expandIconPosition="right">
 									<Panel
 										header="How do I view all members?"
@@ -314,7 +318,7 @@ const Help = ({ role }) => (
 									</Panel>
 								</Collapse>
 							</Panel>
-							<Panel header="Schedule" key="Schedule">
+							<Panel id="category" header="Schedule" key="Schedule">
 								<Collapse expandIconPosition="right">
 									<Panel
 										header="How do I create monthly schedules?"
@@ -336,7 +340,7 @@ const Help = ({ role }) => (
 									</Panel>
 								</Collapse>
 							</Panel>
-							<Panel header="Seasons" key="Seasons">
+							<Panel id="category" header="Seasons" key="Seasons">
 								<Collapse expandIconPosition="right">
 									<Panel
 										header="How do I view all seasons?"
@@ -364,7 +368,7 @@ const Help = ({ role }) => (
 						</Collapse>
 					</Panel>
 				)}
-				<Panel header="Other" key="ViewingContact">
+				<Panel id="category" header="Other" key="ViewingContact">
 					<ViewingContact />
 				</Panel>
 			</Collapse>

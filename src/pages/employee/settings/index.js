@@ -8,6 +8,21 @@ import { parseCookie, parseData } from "~utils/parseResponse";
 
 const SettingsPage = () => <ViewSettings />;
 
+/**
+ * Attempts to get a single member's settings for review/editing.
+ *
+ * @function SettingsPage.getInitialProps
+ * @function parseCookie - Returns a parsed res.cookie.
+ * @function getState - Returns auth.role redux state.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - Returns a parsed res.data (basic member info).
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - Returns a parsed res.data (member event response).
+ * @yields {action} - A redux action to update the user's first and last name.
+ * @yields {action} - A redux action to set member data to redux state.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+
 SettingsPage.getInitialProps = async ({
 	req,
 	store: { dispatch, getState },

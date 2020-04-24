@@ -7,6 +7,19 @@ import { parseCookie, parseData } from "~utils/parseResponse";
 
 const ScheduleEventPage = () => <EventScheduleForm />;
 
+/**
+ * Attempts to get event for scheduling.
+ *
+ * @function ScheduleEventPage.getInitialProps
+ * @function parseCookie - Returns a parsed res.cookie.
+ * @yields {action} - A redux action to reset server messages.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {object} - A response from a call to the API.
+ * @function parseData - returns a parsed res.data.
+ * @function dispatch - Dispatches a redux action to set event data for scheduling to redux state.
+ * @throws {object} - A server message by type.
+ */
 ScheduleEventPage.getInitialProps = async ({
 	store: { dispatch },
 	req,

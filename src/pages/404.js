@@ -6,6 +6,10 @@ import Center from "~components/Body/Center";
 import Button from "~components/Body/Button";
 import Logo from "~images/ITLogo_192x192.png";
 
+/**
+ * Custom client-side error page.
+ */
+
 const NotFound = () => (
 	<div css="background: #000;height: 100vh;">
 		<FlexCenter style={{ minHeight: "90vh" }} direction="column" id="notfound">
