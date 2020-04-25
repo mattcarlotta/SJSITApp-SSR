@@ -4,7 +4,7 @@ import styled from "styled-components";
 import FlexCenter from "~components/Body/FlexCenter";
 import HomeLogo from "~components/Body/HomeLogo";
 
-class Spinner extends Component {
+export class Spinner extends Component {
 	state = { isMounted: false, isIE: false, isEdge: false };
 
 	componentDidMount() {
@@ -18,7 +18,7 @@ class Spinner extends Component {
 		const { className, children } = this.props;
 
 		return (
-			<div className={className}>
+			<div data-test="spinner" className={className}>
 				{!isMounted ? null : isIE || isEdge ? (
 					<FlexCenter style={{ height: "100%" }} direction="column">
 						<HomeLogo />
