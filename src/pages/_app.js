@@ -10,11 +10,11 @@ import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import ServerMessages from "~containers/Auth/ServerMessages";
 import app from "~utils/axiosConfig";
-import toast from "~components/Body/Toast";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
 import { version } from "../../package.json";
+import toast from "~components/Body/Toast";
 import "~styles/globals/globals.scss";
 
 /**

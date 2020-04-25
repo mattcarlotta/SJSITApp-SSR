@@ -11,7 +11,8 @@
 		"npm": ">=6"
 	},
 	"scripts": {
-		"analyze": "rimraf .next/analyze && analyze=true npm run build",
+		"analyze:prod": "rimraf .next/analyze && analyze=true npm run build:prod",
+		"analyze:stage": "rimraf .next/analyze && analyze=true npm run build:stage",
 		"build:prod": "NODE_ENV=production next build",
 		"build:stage": "NODE_ENV=staging next build",
 		"checkbuild": "es-check es5 './dist/static/**/*.js'",
@@ -82,7 +83,6 @@
 		"axios-mock-adapter": "^1.18.1",
 		"babel-eslint": "^10.1.0",
 		"babel-jest": "^25.4.0",
-		"babel-plugin-import": "^1.13.0",
 		"babel-plugin-module-resolver": "^4.0.0",
 		"babel-plugin-react-remove-properties": "^0.3.0",
 		"babel-plugin-styled-components": "^1.10.7",

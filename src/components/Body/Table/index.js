@@ -11,9 +11,19 @@ import FlexCenter from "~components/Body/FlexCenter";
 import LoadingTable from "~components/Body/LoadingTable";
 import TableActions from "~components/Body/TableActions";
 
-const Table = dynamic(() => import("antd/lib/table"), {
-	ssr: false,
-});
+const { inTesting, inProduction } = process.env;
+
+let Table;
+/* istanbul ignore next */
+if (inTesting && !inProduction) {
+	Table = dynamic(() => import("antd/es/table"), {
+		ssr: false,
+	});
+} else {
+	Table = dynamic(() => import("antd/lib/table"), {
+		ssr: false,
+	});
+}
 
 class CustomTable extends Component {
 	state = {
