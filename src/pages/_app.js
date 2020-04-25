@@ -72,6 +72,7 @@ export class MyApp extends App {
 				return { serverError: e.toString() };
 			}
 		}
+
 		return {
 			pageProps: {
 				...(Component.getInitialProps
