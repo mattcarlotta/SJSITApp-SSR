@@ -11,7 +11,7 @@ const SideMenu = ({
 	onHandleBreakpoint,
 	...rest
 }) => {
-	const style = hideSideBar ? { display: "none " } : {};
+	const style = hideSideBar ? { display: "none" } : { background: "#1f1f23" };
 
 	return (
 		<Sider
