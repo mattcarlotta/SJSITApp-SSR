@@ -28,7 +28,7 @@ import "~styles/globals/globals.scss";
  */
 
 NProgress.configure({
-	trickleSpeed: 50,
+	trickleSpeed: 100,
 });
 
 export class MyApp extends App {
