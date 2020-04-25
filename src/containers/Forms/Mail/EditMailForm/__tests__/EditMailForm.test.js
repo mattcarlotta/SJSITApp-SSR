@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { EditMailForm } from "../index";
 
 const id = "0123456789";
@@ -53,6 +54,10 @@ describe("Edit Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = mount(<EditMailForm {...initProps} />);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	afterEach(() => {

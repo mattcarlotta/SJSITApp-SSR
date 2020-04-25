@@ -5,7 +5,6 @@ import {
 	Form,
 	DatePicker,
 	TimePicker,
-	Transfer,
 	Radio,
 	Input as AntInput,
 	Switch,
@@ -25,6 +24,7 @@ import Input from "~components/Forms/Input";
 import Select from "~components/Forms/Select";
 import Quill from "~components/Forms/LazyQuill";
 import Eraser from "~components/Body/Eraser";
+import Transfer from "~components/Forms/Transfer";
 
 const RangePicker = DatePicker.RangePicker;
 const TextArea = AntInput.TextArea;
