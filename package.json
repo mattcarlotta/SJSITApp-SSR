@@ -28,6 +28,7 @@
 		"test:cov": "NODE_ENV=test jest --config ./jest.json --coverage",
 		"test:watch": "NODE_ENV=test jest --config ./jest.json --watch --onlyChanged",
 		"test:watchall": "NODE_ENV=test jest --config ./jest.json --watchAll",
+		"test:prod": "NODE_ENV=production next build && npm run start",
 		"test:stage": "NODE_ENV=staging next build && npm run staging",
 		"test:stagedev": "NODE_ENV=staging next dev",
 		"test:e2e": "NODE_ENV=staging cypress open --project ./e2e",
