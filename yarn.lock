@@ -9301,10 +9301,10 @@ next-redux-saga@^4.1.2:
   resolved "https://registry.yarnpkg.com/next-redux-saga/-/next-redux-saga-4.1.2.tgz#adf65cd694deac2514676767d3b733862297db66"
   integrity sha512-UEI/8bRObquIpHeHX1RuqOFBe2zhI2gTHLijBLiinOZrCbir18B4/lJpymrEoHHpel0iiZEwV4R6jeUWYv+Avw==
 
-next-redux-wrapper@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-5.0.0.tgz#0f36f94ea00581fbdc94f2405594f6360beb08dc"
-  integrity sha512-jw893pPRJ4DCwskChp8iB+OjzfvblkEEw7frO3+u/jgZxlQ2yLaTAIRyEBjdCxTf7AOQGYb8aiWdC5toZOHJjg==
+next-redux-wrapper@^6.0.0-rc.7:
+  version "6.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-6.0.0-rc.7.tgz#44e962d99d951226fb5e998b36acaa9250cb5c24"
+  integrity sha512-oK+IMbCr4fo1zjGn/ZXV0RvgN6V1XndADzXOBpJzx/1b13gJ+cnpnc3KJm+57en39Ev5BlybxXbbcTYYw/nB6A==
 
 next-tick@~1.0.0:
   version "1.0.0"
