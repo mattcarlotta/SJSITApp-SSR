@@ -62,7 +62,7 @@ context("Staff Create Member Page", () => {
 			.should("have.length", 1)
 			.and(
 				"have.text",
-				"Succesfully created and sent an authorization key to carlotta.matthew@gmail.com.",
+				"Successfully created and sent an authorization key to carlotta.matthew@gmail.com.",
 			);
 
 		cy.url().should(

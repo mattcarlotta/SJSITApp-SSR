@@ -40,7 +40,7 @@ const createToken = async (req, res) => {
 		await Mail.create(createAuthMail(authorizedEmail, token, expiration, role));
 
 		res.status(201).json({
-			message: `Succesfully created and sent an authorization key to ${authorizedEmail}.`,
+			message: `Successfully created and sent an authorization key to ${authorizedEmail}.`,
 		});
 	} catch (err) {
 		sendError(err, 400, res);
