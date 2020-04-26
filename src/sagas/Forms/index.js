@@ -18,8 +18,9 @@ import * as types from "~types";
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to a URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates user to a route.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -52,8 +53,9 @@ export function* createForm({ props }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to fetch forms data again.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh forms data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -86,8 +88,9 @@ export function* deleteForm({ formId }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to fetch forms data again.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to fresh forms data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -145,7 +148,9 @@ export function* fetchForms() {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to refetch forms data.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to fresh forms data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -178,8 +183,9 @@ export function* resendFormEmails({ formId }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to go back to a previous URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates a user to a previous URL.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -212,8 +218,9 @@ export function* updateForm({ props }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to a URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates a user to a route.
  * @throws {action} - A redux action to display a server message by type.
  */
 

@@ -2,7 +2,7 @@
 import get from "lodash.get";
 import axios from "axios";
 
-const { AVATARAPI, baseURL } = process.env;
+const { IMAGEAPI, baseURL } = process.env;
 
 const app = axios.create({
 	baseURL,
@@ -19,7 +19,7 @@ app.interceptors.response.use(
 );
 
 export const avatarAPI = axios.create({
-	baseURL: AVATARAPI,
+	baseURL: `${IMAGEAPI}/api/avatar/`,
 	withCredentials: true,
 });
 

@@ -12,7 +12,7 @@ const RenderSendTo = ({ fields }) => {
 			<td css="display: inline-block; font-size: 16px; max-width: 550px">
 				<div css="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 					<span>to&nbsp;</span>
-					<span>
+					<span data-test="sendto-address">
 						{!isEmpty(sendTo) && sendTo.length > 1 ? (
 							sendTo.map((email, key) => (
 								<span id="multipleemailaddresses" key={email}>

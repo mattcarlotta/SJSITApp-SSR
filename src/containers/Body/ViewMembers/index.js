@@ -8,7 +8,7 @@ import Table from "~components/Body/Table";
 import QueryHandler from "~components/Navigation/QueryHandler";
 import {
 	deleteMember,
-	deleteManyMembers,
+	// deleteManyMembers,
 	fetchMembers,
 } from "~actions/Members";
 import Filters from "./Filters";
@@ -24,7 +24,7 @@ const iconStyle = {
 export const ViewMembers = ({
 	data,
 	deleteMember,
-	deleteManyMembers,
+	// deleteManyMembers,
 	fetchMembers,
 	...rest
 }) => (
@@ -48,9 +48,10 @@ export const ViewMembers = ({
 							columns={columns}
 							data={data}
 							deleteAction={deleteMember}
-							deleteManyRecords={deleteManyMembers}
+							// deleteManyRecords={deleteManyMembers}
 							fetchData={fetchMembers}
 							viewLocation="members"
+							rowSelection={null}
 						/>
 					</>
 				)}
@@ -73,7 +74,7 @@ ViewMembers.propTypes = {
 		}),
 	),
 	deleteMember: PropTypes.func.isRequired,
-	deleteManyMembers: PropTypes.func.isRequired,
+	// deleteManyMembers: PropTypes.func.isRequired,
 	fetchMembers: PropTypes.func.isRequired,
 	isLoading: PropTypes.bool.isRequired,
 	totalDocs: PropTypes.number.isRequired,
@@ -89,7 +90,7 @@ const mapStateToProps = state => ({
 /* istanbul ignore next */
 const mapDispatchToProps = {
 	deleteMember,
-	deleteManyMembers,
+	// deleteManyMembers,
 	fetchMembers,
 };
 

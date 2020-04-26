@@ -17,8 +17,9 @@ import * as types from "~types";
  * @param {object} props - props contain league, eventType, location, timeSlots, uniform, start/end dates and times, and seasonId.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to a URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates user to route.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -50,8 +51,9 @@ export function* createEvent({ props }) {
  * @param {object} eventId
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to fetch events data again.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh events data again.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -76,15 +78,16 @@ export function* deleteEvent({ eventId }) {
 }
 
 /**
- * Attempts to delete an event.
+ * Attempts to delete many events.
  *
  * @generator
  * @function deleteManyEvents
  * @param {object} ids
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to fetch events data again.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh events data again.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -182,7 +185,7 @@ export function* fetchEvents() {
  * @param {object} params - selectedDate and games (all or my)
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to set schedule  data to redux state.
+ * @yields {action} - A redux action to set schedule data to redux state.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -206,7 +209,9 @@ export function* fetchScheduleEvents({ params }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to refetch events data.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh events data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -238,8 +243,9 @@ export function* resendEventEmails({ eventId }) {
  * @param {object} props - props contain league, eventType, location, timeSlots, uniform, start/end dates and times, and seasonId.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to go back to previous URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates user to a previous URL.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -272,8 +278,9 @@ export function* updateEvent({ props }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to go back to a previous URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates user to a previous URL.
  * @throws {action} - A redux action to display a server message by type.
  */
 

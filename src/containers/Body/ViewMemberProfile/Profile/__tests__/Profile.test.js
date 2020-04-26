@@ -62,7 +62,7 @@ describe("Member Profile", () => {
 	});
 
 	it("displays the member's status, as well as a activate/suspend button", () => {
-		let statusButton = () =>
+		const statusButton = () =>
 			wrapper.find("Button#change-member-status").first();
 
 		// active status

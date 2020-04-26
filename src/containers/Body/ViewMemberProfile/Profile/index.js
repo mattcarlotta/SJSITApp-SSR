@@ -47,6 +47,7 @@ const Profile = ({
 				>
 					<Button
 						id="change-member-status"
+						dataTest="change-member-status"
 						primary={!isActive}
 						danger={isActive}
 						width="130px"

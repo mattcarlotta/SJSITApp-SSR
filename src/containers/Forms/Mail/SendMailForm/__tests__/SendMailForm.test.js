@@ -1,3 +1,4 @@
+import preloadAll from "jest-next-dynamic";
 import { SendMailForm } from "../index";
 
 const createMail = jest.fn();
@@ -43,6 +44,10 @@ describe("Send Mail Form", () => {
 	let wrapper;
 	beforeEach(() => {
 		wrapper = mount(<SendMailForm {...initProps} />);
+	});
+
+	beforeAll(async () => {
+		await preloadAll();
 	});
 
 	afterEach(() => {

@@ -44,10 +44,10 @@ export const deleteMemberAvatar = id => ({
  * @param {array} ids
  * @returns {object}
  */
-export const deleteManyMembers = ids => ({
-	type: types.MEMBERS_DELETE_MANY,
-	ids,
-});
+// export const deleteManyMembers = ids => ({
+// 	type: types.MEMBERS_DELETE_MANY,
+// 	ids,
+// });
 
 /**
  * Deletes many tokens.

@@ -1,28 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import FlexCenter from "~components/Body/FlexCenter";
+import HomeLogo from "~components/Body/HomeLogo";
 
-const Spinner = ({ className, children }) => (
-	<div className={className}>
-		<div className="container">
-			<div className="text-wrapper">
-				<span className="text sharks" data-text="sharks">
-					sharks
-				</span>
-				<span className="gradient"></span>
-				<span className="spotlight"></span>
+export class Spinner extends Component {
+	state = { isMounted: false, isIE: false, isEdge: false };
+
+	componentDidMount() {
+		const isIE = /* @cc_on!@ */ false || !!document.documentMode;
+		const isEdge = !isIE && !!window.StyleMedia;
+		this.setState({ isMounted: true, isIE, isEdge });
+	}
+
+	render = () => {
+		const { isEdge, isIE, isMounted } = this.state;
+		const { className, children } = this.props;
+
+		return (
+			<div data-test="spinner" className={className}>
+				{!isMounted ? null : isIE || isEdge ? (
+					<FlexCenter style={{ height: "100%" }} direction="column">
+						<HomeLogo />
+						{children}
+					</FlexCenter>
+				) : (
+					<div className="container">
+						<div className="text-wrapper">
+							<span className="text sharks" data-text="sharks">
+								sharks
+							</span>
+							<span className="gradient"></span>
+							<span className="spotlight"></span>
+						</div>
+						<div className="text-wrapper">
+							<span className="text iceteam" data-text="ice team">
+								ice team
+							</span>
+							<span className="gradient"></span>
+							<span className="spotlight"></span>
+						</div>
+						{children}
+					</div>
+				)}
 			</div>
-			<div className="text-wrapper">
-				<span className="text iceteam" data-text="ice team">
-					ice team
-				</span>
-				<span className="gradient"></span>
-				<span className="spotlight"></span>
-			</div>
-			{children}
-		</div>
-	</div>
-);
+		);
+	};
+}
 
 Spinner.propTypes = {
 	className: PropTypes.string.isRequired,

@@ -11,12 +11,12 @@ if (inDevelopment) openBrowser(LOCALHOST);
 
 module.exports = {
 	distDir: "dist",
-	webpack(config, { isServer }) {
+	webpack(config, { defaultLoaders, isServer }) {
 		/* adds custom aliased extensions */
 		config.resolve.extensions.push(".css", ".sass", ".scss");
 
 		/* adds custom rules to client and server */
-		config.module.rules.push(...rules(isServer));
+		config.module.rules.push(...rules(isServer, defaultLoaders));
 
 		if (!isServer) {
 			config.resolve.alias = {

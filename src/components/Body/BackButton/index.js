@@ -17,6 +17,7 @@ const textStyle = {
 const BackButton = ({ push, location, style, title }) => (
 	<Button
 		tertiary
+		dataTest="go-back"
 		width="110px"
 		padding="4px"
 		style={{ ...style, lineHeight: 1.5 }}

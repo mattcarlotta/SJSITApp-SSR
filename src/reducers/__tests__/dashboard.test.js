@@ -29,7 +29,7 @@ describe("Dashboard Reducer", () => {
 		);
 	});
 
-	it("sets and resets apform data", () => {
+	it("on reset, resets apform data", () => {
 		let state = dashboardReducer(undefined, {
 			type: types.DASHBOARD_SET_APFORM,
 			payload: apForm,
@@ -50,7 +50,7 @@ describe("Dashboard Reducer", () => {
 		expect(state).toEqual(initialState);
 	});
 
-	it("sets and resets apform data", () => {
+	it("on fetch, resets apform data", () => {
 		let state = dashboardReducer(undefined, {
 			type: types.DASHBOARD_SET_APFORM,
 			payload: apForm,

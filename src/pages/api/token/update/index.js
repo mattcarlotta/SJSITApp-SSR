@@ -1,6 +1,6 @@
 import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
-import { Mail, Token, User } from "~models";
+import { Mail, Token } from "~models";
 import {
 	createAuthMail,
 	createSignupToken,
@@ -8,7 +8,7 @@ import {
 	sendError,
 } from "~utils/helpers";
 import {
-	emailAlreadyTaken,
+	emailAssociatedWithKey,
 	missingUpdateTokenParams,
 	unableToLocateToken,
 	unableToUpdateToken,
@@ -30,8 +30,21 @@ const updateToken = async (req, res) => {
 		if (!existingToken) throw unableToLocateToken;
 		if (existingToken.email) throw unableToUpdateToken;
 
-		const emailInUse = await User.findOne({ email: authorizedEmail });
-		if (emailInUse) throw emailAlreadyTaken;
+		let emailInUse;
+		if (existingToken.authorizedEmail !== authorizedEmail) {
+			emailInUse = await Token.findOne(
+				{
+					authorizedEmail,
+				},
+				{ token: 1 },
+			).lean();
+		} else {
+			emailInUse = await Token.findOne(
+				{ email: authorizedEmail },
+				{ token: 1 },
+			).lean();
+		}
+		if (emailInUse) throw emailAssociatedWithKey;
 
 		const token = createSignupToken();
 		const expiration = expirationDate();

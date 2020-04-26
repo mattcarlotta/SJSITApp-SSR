@@ -55,7 +55,7 @@ const styleRules = [
 	},
 ];
 
-module.exports = isServer => [
+module.exports = (isServer, defaultLoaders) => [
 	/* lints js files */
 	jsRule({
 		loader: "eslint-loader",
@@ -64,6 +64,12 @@ module.exports = isServer => [
 			emitWarning: inDev,
 		},
 	}),
+	/* transpile modules */
+	{
+		test: /\.js$/,
+		loader: defaultLoaders.babel,
+		include: /[\\/]node_modules[\\/](d3-scale)[\\/]/,
+	},
 	/* handle image assets */
 	mediaRule({
 		test: imagesRegex,

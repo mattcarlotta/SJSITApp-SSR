@@ -3,6 +3,8 @@ import { requireStaffRole } from "~services/strategies";
 import { Event, Token, User } from "~models";
 import { sendError } from "~utils/helpers";
 import { missingMemberId, unableToDeleteMember } from "~messages/errors";
+import { avatarAPI } from "~utils/axiosConfig";
+import { parseCookie } from "~utils/parseResponse";
 
 /**
  * Deletes a member.
@@ -18,6 +20,9 @@ const deleteMember = async (req, res) => {
 
 		const existingUser = await User.findOne({ _id });
 		if (!existingUser) throw unableToDeleteMember;
+
+		const headers = parseCookie(req);
+		await avatarAPI.delete(`delete/${_id}`, headers);
 
 		await existingUser.delete();
 		await Token.deleteOne({ email: existingUser.email });

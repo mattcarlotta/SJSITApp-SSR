@@ -40,7 +40,7 @@ describe("Update Avatar Form", () => {
 	});
 
 	it("initially displays two disabled buttons", () => {
-		expect(wrapper.find("button.disabled").length).toEqual(2);
+		expect(wrapper.find("button.disabled")).toHaveLength(2);
 	});
 
 	it("closes the form if a successful message appears", () => {

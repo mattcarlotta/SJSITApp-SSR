@@ -18,8 +18,9 @@ import * as types from "~types";
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to a URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates a user to a route.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -52,8 +53,9 @@ export function* createSeason({ props }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to refetch seasons.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh seasons data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -86,8 +88,9 @@ export function* deleteSeason({ seasonId }) {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to refetch seasons.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to refresh seasons data.
  * @throws {action} - A redux action to display a server message by type.
  */
 
@@ -172,8 +175,9 @@ export function* fetchSeasonsIds() {
  * @yields {action} - A redux action to reset server messages.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to go back to a previous URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates a user to a previous URL.
  * @throws {action} - A redux action to display a server message by type.
  */
 

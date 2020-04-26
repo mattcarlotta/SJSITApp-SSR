@@ -17,12 +17,13 @@ const REMOTEADDRESS = address.ip();
 
 const {
 	analyze,
-	AVATARAPI,
 	baseURL,
 	cookieSecret,
 	DATABASE,
 	IMAGEAPI,
 	inDevelopment,
+	inProduction,
+	inStaging,
 	inTesting,
 	LOCALHOST,
 	PORT,
@@ -48,12 +49,13 @@ module.exports = isServer => {
 			/* envs for client */
 			new DefinePlugin({
 				"process.env": {
-					AVATARAPI: JSON.stringify(AVATARAPI),
 					baseURL: JSON.stringify(baseURL),
 					DATABASE: JSON.stringify(DATABASE),
 					cookieSecret: JSON.stringify(cookieSecret),
 					IMAGEAPI: JSON.stringify(IMAGEAPI),
 					inDevelopment: inDev,
+					inProduction: JSON.stringify(inProduction),
+					inStaging: JSON.stringify(inStaging),
 					inTesting: JSON.stringify(inTesting),
 					LOCALHOST: JSON.stringify(LOCALHOST),
 				},

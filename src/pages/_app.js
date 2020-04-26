@@ -10,16 +10,25 @@ import configureStore from "~store";
 import GlobalStylesheet from "~styles/theme/globalStylesheet";
 import ServerMessages from "~containers/Auth/ServerMessages";
 import app from "~utils/axiosConfig";
-import toast from "~components/Body/Toast";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
 import { version } from "../../package.json";
+import toast from "~components/Body/Toast";
 import "~styles/globals/globals.scss";
-import "react-toastify/dist/ReactToastify.css";
+
+/**
+ * Custom app wrapper to initialize nProgress, redux, redux sagas and initial session authentication.
+ *
+ * @generator
+ * @class MyApp
+ * @method componentDidMount - intializes nProgress, intializes Router event listeners for resetting window position on route changes, and displays any server-side generated errors.
+ * @method componentWillUnmount - removes Router event listeners.
+ * @method getInitialProps - handles authentication and redux initialization for child components.
+ */
 
 NProgress.configure({
-	trickleSpeed: 50,
+	trickleSpeed: 100,
 });
 
 export class MyApp extends App {
@@ -63,6 +72,7 @@ export class MyApp extends App {
 				return { serverError: e.toString() };
 			}
 		}
+
 		return {
 			pageProps: {
 				...(Component.getInitialProps

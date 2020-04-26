@@ -58,7 +58,7 @@ const responses = (
 
 export class Settings extends Component {
 	state = {
-		isCollapsed: false,
+		isCollapsed: true,
 	};
 
 	componentDidMount = () => {

@@ -64,16 +64,6 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_DELETE_MANY with ids", () => {
-		const ids = ["01", "02", "03"];
-		const value = actions.deleteManyMembers(ids);
-
-		expect(value).toEqual({
-			type: types.MEMBERS_DELETE_MANY,
-			ids,
-		});
-	});
-
 	it("returns MEMBERS_DELETE_TOKEN with a memberId", () => {
 		const value = actions.deleteToken(tokenId);
 
@@ -83,7 +73,17 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_DELETE_MANY_TOKENS with a memberId", () => {
+	// it("returns MEMBERS_DELETE_MANY", () => {
+	// 	const ids = ["01", "02", "03"];
+	// 	const value = actions.deleteManyMembers(ids);
+
+	// 	expect(value).toEqual({
+	// 		type: types.MEMBERS_DELETE_MANY,
+	// 		ids,
+	// 	});
+	// });
+
+	it("returns MEMBERS_DELETE_MANY_TOKENS", () => {
 		const ids = ["01", "02", "03"];
 		const value = actions.deleteManyTokens(ids);
 
@@ -194,7 +194,7 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_RESET", () => {
+	it("returns MEMBERS_RESET for members", () => {
 		const value = actions.resetMembers();
 
 		expect(value).toEqual({
@@ -202,7 +202,7 @@ describe("Member Actions", () => {
 		});
 	});
 
-	it("returns MEMBERS_RESET", () => {
+	it("returns MEMBERS_RESET for tokens", () => {
 		const value = actions.resetTokens();
 
 		expect(value).toEqual({

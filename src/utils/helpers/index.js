@@ -1,14 +1,14 @@
-import get from "lodash.get";
-import isEmpty from "lodash.isempty";
-import random from "lodash.random";
-import sortBy from "lodash.sortby";
-import { Types } from "mongoose";
-import { Event, User } from "~models";
-import {
+const get = require("lodash.get");
+const isEmpty = require("lodash.isempty");
+const random = require("lodash.random");
+const sortBy = require("lodash.sortby");
+const { Types } = require("mongoose");
+const { Event, User } = require("../../../models");
+const {
 	newAuthorizationKeyTemplate,
 	newStaffTemplate,
-} from "~services/templates";
-import moment from "~utils/momentWithTZ";
+} = require("../../services/templates");
+const moment = require("../momentWithTZ");
 
 const { ObjectId } = Types;
 const { LOCALHOST } = process.env;
@@ -698,7 +698,7 @@ const updateScheduleIds = schedule =>
 		[],
 	);
 
-export {
+module.exports = {
 	clearSession,
 	convertId,
 	createAuthMail,

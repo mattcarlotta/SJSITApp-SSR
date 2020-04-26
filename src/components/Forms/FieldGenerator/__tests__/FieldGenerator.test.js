@@ -1,4 +1,5 @@
 import { DatePicker, TimePicker, Transfer } from "antd";
+import preloadAll from "jest-next-dynamic";
 import moment from "~utils/momentWithTZ";
 import FieldGenerator from "../index";
 
@@ -155,6 +156,10 @@ describe("Field Generator", () => {
 		wrapper = mount(<FieldGenerator {...initProps} />);
 	});
 
+	beforeAll(async () => {
+		await preloadAll();
+	});
+
 	afterEach(() => {
 		onChange.mockClear();
 	});
@@ -294,7 +299,7 @@ describe("Field Generator", () => {
 		expect(wrapper.find("TimePicker").exists()).toBeTruthy();
 	});
 
-	it("returns a Transfer field when type is 'trasnfer'", () => {
+	it("returns a Transfer field when type is 'transfer'", () => {
 		wrapper.setProps({ fields: [transfer] });
 
 		expect(wrapper.find("Transfer").exists()).toBeTruthy();

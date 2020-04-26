@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const RenderSubject = ({ subject }) => (
-	<h2>
+	<h2 data-test="email-subject">
 		{subject || (
 			<span id="emptysubject" css="color: red;">
 				(empty subject)

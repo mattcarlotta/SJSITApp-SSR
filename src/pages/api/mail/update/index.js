@@ -3,7 +3,7 @@ import { requireStaffRole } from "~services/strategies";
 import { Mail } from "~models";
 import { createDate, getStartOfDay, sendError } from "~utils/helpers";
 import {
-	invalidSendDate,
+	// invalidSendDate,
 	unableToLocateMail,
 	unableToUpdateMail,
 } from "~messages/errors";
@@ -27,11 +27,10 @@ const updateMail = async (req, res) => {
 
 		const currentDay = getStartOfDay();
 		const sendEmailDate = createDate(sendDate);
-		if (sendEmailDate.format() < currentDay) throw invalidSendDate;
-
-		const sentDateMessage = sendDate
-			? sendEmailDate.format("MMMM Do YYYY @ hh:mm a")
-			: "shortly";
+		const sentDateMessage =
+			sendEmailDate.format() >= currentDay
+				? sendEmailDate.format("MMMM Do YYYY @ hh:mm a")
+				: "shortly";
 
 		await emailExists.updateOne({
 			message,

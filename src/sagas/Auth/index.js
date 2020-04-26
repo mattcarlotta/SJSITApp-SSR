@@ -38,8 +38,10 @@ export function* signoutUserSession() {
  * @param {object} id - user id.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to sign the user of any sessions.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to reset users avatar url.
+ * @yields {action} - A redux action to refresh the member's settings.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* deleteUserAvatar({ id }) {
@@ -71,8 +73,9 @@ export function* deleteUserAvatar({ id }) {
  * @param {object} props - props just contain an email field.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to sign the user of any sessions.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action to sign the user out of any sessions.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* resetPassword({ props }) {
@@ -104,6 +107,7 @@ export function* resetPassword({ props }) {
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
  * @yields {action} -  A redux action to set the current user to redux state.
+ * @yields {action} - Navigates user to route.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* signinUser({ props }) {
@@ -128,8 +132,9 @@ export function* signinUser({ props }) {
  * @param {object} props - props contain a token, an email, first/last name, and a password.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to a URL.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - Navigates user to route.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* signupUser({ props }) {
@@ -161,8 +166,10 @@ export function* signupUser({ props }) {
  * @param {string} id - user's id.
  * @yields {object} - A response from a call to the API.
  * @function parseData - returns a parsed res.data.
- * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to sign the user out of any sessions.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
+ * @yields {action} - A redux action do set user avatar to redux state.
+ * @yields {action} - A redux action to fresh member settings.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* updateUserAvatar({ form, id }) {
@@ -196,7 +203,8 @@ export function* updateUserAvatar({ form, id }) {
  * @param {object} props - props contain a token and (new) password fields.
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
- * @yields {action} - A redux action to display a server message by type.
+ * @yields {action} - A redux action to set a server message by type.
+ * @yields {action} - A redux action to display a toast message by type.
  * @yields {action} - A redux action to push to sign the user out of any sessions.
  * @throws {action} - A redux action to display a server message by type.
  */

@@ -5,7 +5,6 @@ import {
 	Form,
 	DatePicker,
 	TimePicker,
-	Transfer,
 	Radio,
 	Input as AntInput,
 	Switch,
@@ -25,6 +24,7 @@ import Input from "~components/Forms/Input";
 import Select from "~components/Forms/Select";
 import Quill from "~components/Forms/LazyQuill";
 import Eraser from "~components/Body/Eraser";
+import Transfer from "~components/Forms/Transfer";
 
 const RangePicker = DatePicker.RangePicker;
 const TextArea = AntInput.TextArea;
@@ -121,7 +121,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 								onChange({ target: { name: props.name, value } })
 							}
 						/>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}
@@ -161,7 +161,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 						>
 							<FaEraser style={{ fontSize: 18 }} />
 						</Eraser>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}
@@ -189,7 +189,9 @@ const FieldGenerator = ({ fields, onChange }) =>
 								))}
 						</RadioGroup>
 						{props.errors && (
-							<Errors style={{ textAlign: "center" }}>{props.errors}</Errors>
+							<Errors data-test="errors" style={{ textAlign: "center" }}>
+								{props.errors}
+							</Errors>
 						)}
 					</Form.Item>
 				);
@@ -213,7 +215,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 								onChange({ target: { name: props.name, value } })
 							}
 						/>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}
@@ -237,7 +239,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 							rows={props.rows || 4}
 							value={props.value}
 						/>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}
@@ -277,7 +279,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 								onChange({ target: { name: props.name, value } })
 							}
 						/>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}
@@ -299,7 +301,7 @@ const FieldGenerator = ({ fields, onChange }) =>
 								onChange({ target: { name: props.name, value } })
 							}
 						/>
-						{props.errors && <Errors>{props.errors}</Errors>}
+						{props.errors && <Errors data-test="errors">{props.errors}</Errors>}
 					</Form.Item>
 				);
 			}

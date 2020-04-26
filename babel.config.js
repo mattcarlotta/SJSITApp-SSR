@@ -1,28 +1,8 @@
-const { readdirSync, statSync } = require("fs");
-const { resolve } = require("path");
-
-const ignoreFolders = /(\.next)|(\.git)|(node_modules)|(public)|(server)|(src)/;
-
-const readDirectory = path =>
-	readdirSync(path).reduce((acc, folder) => {
-		const dirPath = `${path}${folder}`;
-		if (
-			!folder.match(ignoreFolders) &&
-			statSync(resolve(dirPath)).isDirectory()
-		) {
-			acc[`~${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
-		}
-
-		return acc;
-	}, {});
-
-const alias = {
-	...readDirectory("./"),
-	...readDirectory("./src/"),
-};
+const aliasDirs = require("alias-dirs");
 
 module.exports = api => {
-	api.cache(true);
+	const inProd = api.env("production");
+	api.cache.using(() => process.env.NODE_ENV);
 
 	return {
 		presets: ["next/babel"],
@@ -30,18 +10,20 @@ module.exports = api => {
 			[
 				"module-resolver",
 				{
-					alias,
+					alias: aliasDirs({
+						ignoreDirectories: [...aliasDirs.ignoreDirectories, "e2e", "src"],
+					}),
 				},
 			],
 			[
 				"styled-components",
 				{
 					ssr: true,
-					displayName: true,
+					displayName: !inProd,
 					preprocess: false,
 				},
 			],
-			["import", { libraryName: "antd", libraryDirectory: "lib" }],
-		],
+			inProd && "react-remove-properties",
+		].filter(Boolean),
 	};
 };

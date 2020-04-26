@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 
+export { default as ChangingAvatar } from "./ChangingAvatar";
 export { default as ChangingEmail } from "./ChangingEmail";
 export { default as ChangingEmailPreferences } from "./ChangingEmailPreferences";
 export { default as ChangingName } from "./ChangingName";

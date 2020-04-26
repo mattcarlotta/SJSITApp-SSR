@@ -166,7 +166,7 @@ class MemberAvailability extends Component {
 						>
 							Responses
 						</Center>
-						<div style={containerStyle}>
+						<div data-test="availability-pie" style={containerStyle}>
 							<ResponsivePie
 								indexBy="id"
 								{...pieProps}
@@ -205,7 +205,10 @@ class MemberAvailability extends Component {
 						>
 							Events
 						</Center>
-						<div css="height: 450px;width: 100%; max-width: 500px; margin: 0 auto;">
+						<div
+							data-test="availability-bar"
+							css="height: 450px;width: 100%; max-width: 500px; margin: 0 auto;"
+						>
 							<ResponsiveBar
 								borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
 								colors={["#247BA0", "#2A9D8F"]}

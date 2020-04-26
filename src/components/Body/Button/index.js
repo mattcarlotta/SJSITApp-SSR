@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Button = ({
 	className,
 	children,
+	dataTest,
 	disabled,
 	onBlur,
 	onContextMenu,
@@ -19,6 +20,7 @@ const Button = ({
 }) => (
 	<button
 		aria-label="button"
+		data-test={dataTest}
 		className={className}
 		disabled={disabled}
 		onBlur={onBlur}
@@ -39,6 +41,7 @@ const Button = ({
 Button.propTypes = {
 	className: PropTypes.string.isRequired,
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+	dataTest: PropTypes.string,
 	disabled: PropTypes.bool,
 	onBlur: PropTypes.func,
 	onClick: PropTypes.func,

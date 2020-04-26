@@ -75,6 +75,7 @@ export class Events extends Component {
 						extra={
 							role === "employee" && (
 								<Select
+									data-test="event-selection"
 									size="large"
 									onChange={this.handleSelection}
 									defaultValue={selectedEvent}
