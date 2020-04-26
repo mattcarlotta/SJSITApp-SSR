@@ -1,0 +1,19 @@
+ Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    filters:
+      branches:
+        only:
+          - master
+    docker:
+      - image: circleci/node:10.20.1
+      - image: circleci/mongo:4.2.6
+    steps:
+      - checkout
+      - run:
+          name: Redeploy Application
+          command: ssh -o "StrictHostKeyChecking no" -v $DROPLET_USER@$DROPLET_IP "cd /var/www/sjsiceteam.com/app; git pull origin master; yarn initialize; yarn compile; yarn build; pm2 reload 0"
