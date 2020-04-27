@@ -36,8 +36,7 @@ export default next => (req, res) => {
 
 			return next(req, res, resolve);
 		} catch (error) {
-			sendError(error, 400, res);
-			return resolve();
+			return resolve(sendError(error, 400, res));
 		}
 	});
 };
