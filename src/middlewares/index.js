@@ -19,7 +19,7 @@ export default next => (req, res) => {
 					httpOnly: true,
 					secure: inProduction && !inStaging,
 				}),
-				inDevelopment && morgan(logging),
+				inDevelopment && morgan("tiny"),
 				passport.initialize(),
 			].filter(Boolean);
 
