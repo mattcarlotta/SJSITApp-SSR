@@ -16,7 +16,7 @@ const Divider = Menu.Divider;
 const titleStyle = {
 	color: "#fff",
 	margin: 0,
-	fontSize: 25,
+	fontSize: 24,
 	textShadow: "1px 2px 2px #000000",
 };
 
