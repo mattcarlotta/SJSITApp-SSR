@@ -20,6 +20,7 @@
 		"drop:stage": "NODE_ENV=staging EXIT=true node ./database/teardownDB/index.js",
 		"lint": "eslint -c ./.eslintrc --ignore-path ./.eslintignore ./src --ext .js,.jsx",
 		"lint:styles": "stylelint **/*.scss",
+		"seed:prod": "NODE_ENV=production EXIT=true node ./database/seedDB/index.js",
 		"seed:stage": "NODE_ENV=staging EXIT=true node ./database/seedDB/index.js",
 		"start": "NODE_ENV=production next start -p 8080",
 		"staging": "NODE_ENV=staging next start -p 8080",

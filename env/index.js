@@ -4,8 +4,8 @@ const dotenv = require("dotenv");
 const { statSync } = require("fs");
 const { resolve } = require("path");
 
-const { NODE_ENV } = process.env;
-const path = `${__dirname}/.env.${NODE_ENV}`;
+const { DATABASE, NODE_ENV } = process.env;
+const path = `env/.env.${NODE_ENV}`;
 
 try {
 	if (statSync(resolve(path)).isFile()) {
@@ -20,7 +20,7 @@ try {
 		);
 	}
 } catch (error) {
-	if (NODE_ENV !== "production" || NODE_ENV !== "staging") {
+	if (!DATABASE && (NODE_ENV !== "production" || NODE_ENV !== "staging")) {
 		console.log(
 			`\n${chalk.rgb(255, 255, 255).bgRgb(255, 17, 0)(" ERROR ")} ${chalk.red(
 				`Missing ${NODE_ENV} environment variables!`,

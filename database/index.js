@@ -27,7 +27,7 @@ if (!inTesting) {
 		"connected",
 		() =>
 			log(
-				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" I ")} ${chalk.blue(
+				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" INFO ")} ${chalk.blue(
 					`Connected to ${DATABASE}`,
 				)}\n`,
 			), // log mongodb connection established
@@ -37,7 +37,7 @@ if (!inTesting) {
 		"disconnected",
 		() =>
 			log(
-				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" I ")} ${chalk.rgb(
+				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" INFO ")} ${chalk.rgb(
 					34,
 					155,
 					127,
@@ -49,7 +49,7 @@ if (!inTesting) {
 		"error",
 		() =>
 			log(
-				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" I ")} ${chalk.red(
+				`\n${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" ERROR ")} ${chalk.red(
 					`Connection error to ${DATABASE}`,
 				)}`,
 			), // log mongodb connection error
@@ -58,7 +58,7 @@ if (!inTesting) {
 	process.on("SIGINT", () => {
 		mongoose.connection.close(() => {
 			log(
-				`${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" I ")} ${chalk.magenta(
+				`${chalk.rgb(7, 54, 66).bgRgb(38, 139, 210)(" INFO ")} ${chalk.magenta(
 					`Connection was manually terminated from ${DATABASE}`,
 				)}`,
 			);
