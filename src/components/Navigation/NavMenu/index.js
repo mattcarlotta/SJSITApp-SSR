@@ -4,6 +4,7 @@ import { Menu } from "antd";
 import Center from "~components/Body/Center";
 import Legal from "~components/Body/Legal";
 import Tab from "~components/Body/Tab";
+import FlexCenter from "~components/Body/FlexCenter";
 import Title from "~components/Body/Title";
 import Link from "~components/Navigation/Link";
 import { StaffRoutes, EmployeeRoutes } from "./Tabs";
@@ -15,8 +16,7 @@ const Divider = Menu.Divider;
 const titleStyle = {
 	color: "#fff",
 	margin: 0,
-	padding: "4px 0",
-	fontSize: 26,
+	fontSize: 25,
 	textShadow: "1px 2px 2px #000000",
 };
 
@@ -41,15 +41,15 @@ const NavMenu = ({
 				}}
 			>
 				<Link href="/" style={{ padding: 0, margin: 0 }}>
-					<div css="text-align:center;padding: 12px 18px 0 18px;">
+					<FlexCenter style={{ height: "100%" }}>
 						{isCollapsed ? (
 							<div css="border: 1px solid #fff;">
-								<Title style={titleStyle}>IT</Title>
+								<Title style={{ ...titleStyle, padding: "6px 10px" }}>IT</Title>
 							</div>
 						) : (
 							<Title style={titleStyle}>Sharks Ice Team</Title>
 						)}
-					</div>
+					</FlexCenter>
 				</Link>
 			</Center>
 			<Menu
