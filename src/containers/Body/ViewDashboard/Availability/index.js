@@ -17,7 +17,7 @@ const iconStyle = {
 	fontSize: 22,
 };
 
-const format = "MM/DD/YYYY";
+const format = "MMM Do";
 
 export const Availability = props => (
 	<Col {...columns}>

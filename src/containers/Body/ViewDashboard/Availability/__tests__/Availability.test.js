@@ -11,7 +11,7 @@ const eventAvailability = [
 	},
 ];
 
-const format = "MM/DD/YYYY";
+const format = "MMM Do";
 
 const startOfMonth = moment().startOf("month");
 const endOfMonth = moment().endOf("month");

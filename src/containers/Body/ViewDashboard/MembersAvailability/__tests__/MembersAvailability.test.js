@@ -1,7 +1,7 @@
 import moment from "~utils/momentWithTZ";
 import { MembersAvailability } from "../index";
 
-const format = "MM/DD/YYYY";
+const format = "MMM Do";
 const fetchMembersAvailability = jest.fn();
 const months = [
 	`${moment().startOf("month").format()}`,

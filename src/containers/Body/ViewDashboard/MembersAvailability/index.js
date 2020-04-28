@@ -47,7 +47,7 @@ const tableHeader = {
 	fontSize: 18,
 };
 
-const format = "MM/DD/YYYY";
+const format = "MMM Do";
 
 export const MembersAvailability = ({
 	membersAvailability,
