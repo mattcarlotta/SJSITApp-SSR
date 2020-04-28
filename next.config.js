@@ -10,7 +10,6 @@ const { inDevelopment, LOCALHOST } = process.env;
 if (inDevelopment) openBrowser(LOCALHOST);
 
 module.exports = {
-	distDir: "dist",
 	webpack(config, { defaultLoaders, isServer }) {
 		/* adds custom aliased extensions */
 		config.resolve.extensions.push(".css", ".sass", ".scss");

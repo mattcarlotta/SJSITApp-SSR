@@ -57,7 +57,7 @@ context("Staff Edit Authorization Page", () => {
 			.should("have.length", 1)
 			.and(
 				"have.text",
-				"Succesfully updated and sent a new authorization key to carlotta.matthew@gmail.com.",
+				"Successfully updated and sent a new authorization key to carlotta.matthew@gmail.com.",
 			);
 
 		cy.url().should(
