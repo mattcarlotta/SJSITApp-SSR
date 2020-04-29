@@ -176,7 +176,9 @@ export function* updateUserAvatar({ form, id }) {
 	try {
 		yield put(resetServerMessage());
 
-		const res = yield call(avatarAPI.put, `update/${id}`, form);
+		const res = yield call(avatarAPI.put, `update/${id}`, form, {
+			withCredentials: true,
+		});
 		const data = yield call(parseData, res);
 
 		const { avatar, message } = data;
