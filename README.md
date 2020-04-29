@@ -3,7 +3,7 @@
 An application to manage the San Jose Sharks Ice Team scheduling.
 
 <a target="_blank" rel="noopener noreferrer" href="https://sjsiceteam.com/" alt="sharksWelcome.png">
-<img src="https://i.sjsiceteam.com/sharksWelcome.png" />
+<img src="https://i.sjsiceteam.com/images/sharksWelcome.png" />
 </a>
 
 <br />
@@ -18,8 +18,8 @@ An application to manage the San Jose Sharks Ice Team scheduling.
 
 Current browser support:
 <br />
-<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/misc/chrome.png" alt="chrome.png" />
-<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/misc/firefox.png" alt="firefox.png" />
-<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/misc/safari.png" alt="safari.png" />
-<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/misc/samsung.png" alt="samsung.png" />
-<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/misc/ie11.png" alt="ie11.png" />
+<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/images/misc/chrome.png" alt="chrome.png" />
+<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/images/misc/firefox.png" alt="firefox.png" />
+<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/images/misc/safari.png" alt="safari.png" />
+<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/images/misc/samsung.png" alt="samsung.png" />
+<img style="margin-right: 5px;" src="https://i.sjsiceteam.com/images/misc/ie11.png" alt="ie11.png" />
