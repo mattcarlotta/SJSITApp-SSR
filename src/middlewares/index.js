@@ -17,7 +17,7 @@ export default next => (req, res) => {
 					maxAge: 2592000000,
 					sameSite: inProduction && !inStaging,
 					httpOnly: true,
-					secure: inProduction && !inStaging,
+					secure: inProduction && !inStaging ? "Lax" : "None",
 				}),
 				inDevelopment && morgan("tiny"),
 				passport.initialize(),
