@@ -1,4 +1,3 @@
-import axios from "axios";
 import Router from "next/router";
 import { all, put, call, select, takeLatest } from "redux-saga/effects";
 import app, { avatarAPI } from "~utils/axiosConfig";
@@ -566,14 +565,7 @@ export function* updateMemberAvatar({ form, id }) {
 	try {
 		yield put(resetServerMessage());
 
-		const res = yield call(
-			axios({
-				method: "put",
-				url: `https://i.sjsiceteam.com/api/avatar/update/${id}`,
-				data: form,
-				headers: { withCredentials: true },
-			}),
-		);
+		const res = yield call(avatarAPI.put, `update/${id}`, form);
 		const data = yield call(parseData, res);
 
 		const { message } = data;
