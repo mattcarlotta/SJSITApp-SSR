@@ -15,7 +15,6 @@ export default next => (req, res) => {
 					keys: [cookieKey],
 					name: "SJSITApp",
 					maxAge: 2592000000,
-					sameSite: inProduction && !inStaging,
 					httpOnly: true,
 					secure: inProduction && !inStaging ? "Lax" : "None",
 				}),
