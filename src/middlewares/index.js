@@ -4,7 +4,13 @@ import session from "cookie-session";
 import passport from "passport";
 import { sendError } from "~utils/helpers";
 
-const { cookieKey, inDevelopment, inProduction, inStaging } = process.env;
+const {
+	cookieKey,
+	DOMAIN,
+	inDevelopment,
+	inProduction,
+	inStaging,
+} = process.env;
 
 export default next => (req, res) => {
 	return new Promise(async resolve => {
@@ -16,7 +22,9 @@ export default next => (req, res) => {
 					name: "SJSITApp",
 					maxAge: 2592000000,
 					httpOnly: true,
+					domain: DOMAIN,
 					secure: inProduction && !inStaging,
+					sameSite: inProduction && !inStaging,
 				}),
 				inDevelopment && morgan("tiny"),
 				passport.initialize(),
