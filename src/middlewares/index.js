@@ -16,7 +16,7 @@ export default next => (req, res) => {
 					name: "SJSITApp",
 					maxAge: 2592000000,
 					httpOnly: true,
-					secure: inProduction && !inStaging ? "Lax" : "None",
+					secure: inProduction && !inStaging,
 				}),
 				inDevelopment && morgan("tiny"),
 				passport.initialize(),
