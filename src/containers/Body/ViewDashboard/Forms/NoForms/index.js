@@ -9,7 +9,7 @@ const NoForms = () => (
 			flexDirection: "column",
 			background: "#f7f6f6",
 			height: 252,
-			border: "1px solid rgba(12, 137, 157, 0.4);",
+			border: "1px solid rgba(12, 137, 157, 0.4)",
 		}}
 	>
 		<p css="margin: 0;padding: 0;">

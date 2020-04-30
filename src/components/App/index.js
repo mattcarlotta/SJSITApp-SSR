@@ -110,7 +110,9 @@ export class AppLayout extends Component {
 						<LeftMenu toggleSideMenu={this.toggleSideMenu} />
 						<RightMenu {...this.props} />
 					</Header>
-					<Content>{this.props.children}</Content>
+					<Content>
+						<div css="padding-bottom: 40px;">{this.props.children}</div>
+					</Content>
 				</Layout>
 			</Layout>
 			{this.state.hideSideBar && (

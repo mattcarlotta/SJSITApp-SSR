@@ -14,6 +14,30 @@ jobs:
       - image: circleci/mongo:4.2.6
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Test Application
+          command: yarn test
+          environment:
+            baseURL: http://localhost:3000/api/
+            cookieKey: eat-me-pfftt
+            LOCALHOST: http://localhost:3000
+            DATABASE: iceteam-test-database
+            IMAGEAPI: http://localhost:4000
+            NODE_ENV: testing
+            PORT: 5001
+            inTesting: true
       - run:
           name: Redeploy Application
-          command: ssh -o "StrictHostKeyChecking no" -v $DROPLET_USER@$DROPLET_IP "cd /var/www/sjsiceteam.com/app; git pull origin master; yarn initialize; yarn compile; yarn build; pm2 reload 0"
+          command: ssh -o "StrictHostKeyChecking no" -v $DROPLET_USER@$DROPLET_IP "cd /var/www/sjsiceteam.com/app; git pull origin master; yarn install; yarn build; pm2 restart 0"
