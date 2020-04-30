@@ -111,7 +111,7 @@ export class AppLayout extends Component {
 						<RightMenu {...this.props} />
 					</Header>
 					<Content>
-						<div css="padding-bottom: 40px;">{this.props.children}</div>
+						<div css="margin: 10px 0 40px;">{this.props.children}</div>
 					</Content>
 				</Layout>
 			</Layout>
