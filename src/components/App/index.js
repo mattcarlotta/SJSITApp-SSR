@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "next/router";
 import { Layout } from "antd";
+import MobileLayout from "~components/Body/MobileLayout";
 import LeftMenu from "~components/Navigation/LeftMenu";
 import RightMenu from "~components/Navigation/RightMenu";
 import SideMenu from "~components/Navigation/SideMenu";
@@ -111,7 +112,7 @@ export class AppLayout extends Component {
 						<RightMenu {...this.props} />
 					</Header>
 					<Content>
-						<div css="margin: 10px 0 40px;">{this.props.children}</div>
+						<MobileLayout>{this.props.children}</MobileLayout>
 					</Content>
 				</Layout>
 			</Layout>
