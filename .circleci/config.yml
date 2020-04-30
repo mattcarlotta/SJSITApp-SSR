@@ -11,7 +11,8 @@ jobs:
           - master
     docker:
       - image: circleci/node:10.20.1
-      - image: circleci/mongo:4.2.6
+      - image: circleci/mongo:3.6.3
+        port: 27017:27017
     steps:
       - checkout
       - restore_cache:
