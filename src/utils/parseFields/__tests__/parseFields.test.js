@@ -8,11 +8,12 @@ describe("Parse Fields Helper", () => {
 	});
 
 	it("doesn't parse empty callTime values", () => {
+		const date = moment(new Date("2019-12-17T01:00:00"));
 		const fields = [
 			{
 				name: "callTime1",
 				type: "time",
-				value: moment(new Date("2019-12-17T01:00:00")),
+				value: date,
 			},
 			{
 				name: "callTime2",
@@ -24,7 +25,7 @@ describe("Parse Fields Helper", () => {
 		const nextFields = parsedFields(fields);
 		expect(nextFields).toEqual(
 			expect.objectContaining({
-				callTimes: ["2019-12-17T01:00:00-08:00"],
+				callTimes: [date.format()],
 			}),
 		);
 	});
