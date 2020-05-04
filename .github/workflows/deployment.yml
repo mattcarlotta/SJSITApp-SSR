@@ -18,21 +18,19 @@ jobs:
         with:
           version: 10.x
 
-      - name: Retrieves Yarn Cache Directory
-        id: yarn-cache-path
+     - name: Yarn Cache
+        id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Utilizes Yarn Cache Directory
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
       - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Passes Tests
