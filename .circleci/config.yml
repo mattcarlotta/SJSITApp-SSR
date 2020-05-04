@@ -15,18 +15,9 @@ jobs:
         port: 27017:27017
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+          command: yarn install
       - run:
           name: Test Application
           command: yarn test
@@ -41,4 +32,4 @@ jobs:
             inTesting: true
       - run:
           name: Redeploy Application
-          command: ssh -o "StrictHostKeyChecking no" -v $DROPLET_USER@$DROPLET_IP "cd /var/www/sjsiceteam.com/app; git pull origin master; yarn install; yarn build; pm2 restart 0"
+          command: ssh -o "StrictHostKeyChecking no" -v $DROPLET_USER@$DROPLET_IP "cd /var/www/sjsiceteam.com/app; git pull origin master; yarn install; yarn test; yarn build; pm2 restart 0"
