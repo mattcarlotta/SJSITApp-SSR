@@ -64,12 +64,12 @@ jobs:
       - name: Deploys
         if: steps.build.exit_code == 0
         uses: appleboy/ssh-action@master
+        env:
+          DESTINATION: ${{ secrets.DESTINATION }}
         with:
           host: ${{ secrets.LOCALHOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          envs:
-            DESTINATION: ${{ secrets.DESTINATION }}
           script: |
             cd $DESTINATION
             git pull origin master
