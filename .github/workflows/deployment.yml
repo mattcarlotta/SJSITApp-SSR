@@ -74,9 +74,12 @@ jobs:
         run: |
           echo '${{secrets.DEPLOYKEY}}' > deploy_key
           chmod 600 ./deploy_key
-          rsync -chav --delete --exclude={'prod.json','/env/'}  \
+          rsync -chav --delete --exclude prod.json --exlude /env/ \
             -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
-            --exclude={'/deploy_key', '/.git', '/node_modules/', '/env/', 'prod.json'}  \
+            --exclude /deploy_key \
+            --exclude /.git/ \
+            --exclude /.github/ \
+            --exclude /node_modules/ \
             ./ ${{env.REMOTE}}:${{secrets.DESTINATION}}
 
       - name: Restart Application
