@@ -1,0 +1,80 @@
+name: Deployment
+
+"on":
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Environment
+        uses: actions/setup-node@v1
+        with:
+          version: 10.x
+
+      - name: Utilizes Yarn Cache
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Uses Yarn Cache
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        with:
+          cmd: yarn install
+
+      - name: Runs Tests
+        id: tests
+        with:
+          cmd: yarn test
+          env:
+            baseURL: "http://localhost:3000/api/"
+            cookieKey: eat-me-pfftt
+            LOCALHOST: "http://localhost:3000"
+            DATABASE: iceteam-test-database
+            IMAGEAPI: "http://localhost:4000"
+            NODE_ENV: testing
+            PORT: 5000
+            inTesting: true
+
+      - name: Locally Builds
+        if: steps.tests.exit_code == 0
+        id: build
+        with:
+          cmd: yarn build
+          env:
+            baseURL: ${{ secrets.baseURL }}
+            cookieKey: ${{ secrets.cookieKey }}
+            DATABASE: ${{ secrets.DATABASE }}
+            DOMAIN: ${{ secrets.DOMAIN }}
+            IMAGEAPI: ${{ secrets.IMAGEAPI }}
+            LOCALHOST: ${{ secrets.LOCALHOST }}
+            PORT: ${{ secrets.PORT }}
+
+      - name: Deploy
+        if: steps.build.exit_code == 0
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.LOCALHOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          envs:
+            DESTINATION: ${{ secrets.DESTINATION }}
+        script: |
+          cd $DESTINATION
+          git pull origin master
+          yarn install
+          yarn build
+          pm2 restart 0
