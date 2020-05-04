@@ -35,7 +35,12 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
-      - name: Passes Tests
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.2.0
+        with:
+          mongodb-version: 3.6.3
+
+      - name: Run Tests
         id: tests
         run: yarn test
         env:
@@ -48,7 +53,7 @@ jobs:
           PORT: 5000
           inTesting: true
 
-      - name: Locally Builds
+      - name: Create Local Build
         if: steps.tests.exit_code == 0
         id: build
         run: yarn build
@@ -61,13 +66,13 @@ jobs:
           LOCALHOST: ${{ secrets.LOCALHOST }}
           PORT: ${{ secrets.PORT }}
 
-      - name: Deploys
+      - name: Remote Redeploy
         if: steps.build.exit_code == 0
         uses: appleboy/ssh-action@master
         env:
           DESTINATION: ${{ secrets.DESTINATION }}
         with:
-          host: ${{ secrets.LOCALHOST }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
