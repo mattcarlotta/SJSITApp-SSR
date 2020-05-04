@@ -5,6 +5,8 @@ jobs:
       branches:
         only:
           - master
+    docker:
+      - image: circleci/node:10.20.1
     steps:
       - run:
           name: Redeploy Application
