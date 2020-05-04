@@ -16,7 +16,7 @@ jobs:
       - name: Setup Environment
         uses: actions/setup-node@v1
         with:
-          version: 10.x
+          node-version: 10.x
 
       - name: Yarn Cache
         id: yarn-cache-dir-path
