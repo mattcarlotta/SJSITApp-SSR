@@ -1,4 +1,4 @@
-## SJ Ice Team App [![Codecov](https://img.shields.io/codecov/c/github/mattcarlotta/SJSITApp-SSR)](https://codecov.io/gh/mattcarlotta/SJSITApp-SSR/branch/master)
+## SJ Ice Team App [![Codecov](https://img.shields.io/codecov/c/github/mattcarlotta/SJSITApp-SSR)](https://codecov.io/gh/mattcarlotta/SJSITApp-SSR/branch/master) ![Deployment](https://github.com/mattcarlotta/SJSITApp-SSR/workflows/Deployment/badge.svg)
 
 An application to manage the San Jose Sharks Ice Team scheduling.
 
