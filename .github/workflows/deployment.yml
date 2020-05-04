@@ -80,6 +80,8 @@ jobs:
             --exclude /.git/ \
             --exclude /.github/ \
             --exclude /node_modules/ \
+            --exclude /prod.json/ \
+            --exclude /env/ \
             ./ ${{env.REMOTE}}:${{secrets.DESTINATION}}
 
       - name: Restart Application
