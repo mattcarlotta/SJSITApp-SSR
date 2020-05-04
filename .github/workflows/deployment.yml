@@ -77,7 +77,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
-            cd $DESTINATION
+            cd "$DESTINATION"
             git pull origin master
             yarn install
             yarn build
