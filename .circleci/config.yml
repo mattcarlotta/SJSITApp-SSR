@@ -27,9 +27,9 @@ jobs:
           command: yarn test
           environment:
             baseURL: http://localhost:3000/api/
-            cookieKey: eat-me-pfftt
+            cookieKey: this-is-only-a-test
             LOCALHOST: http://localhost:3000
-            DATABASE: iceteam-test-database
+            DATABASE: iceteam-test-db
             IMAGEAPI: http://localhost:4000
             NODE_ENV: testing
             PORT: 5001
