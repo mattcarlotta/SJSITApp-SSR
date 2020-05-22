@@ -9,7 +9,7 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res, resolve) => {
+export default next => async (req, res) => {
 	try {
 		const user = get(req, ["session", "user"]);
 		const role = get(user, ["role"]);
@@ -21,8 +21,8 @@ export default next => async (req, res, resolve) => {
 		if (!existingUser || existingUser.status === "suspended")
 			throw String(badCredentials);
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (err) {
-		return resolve(sendError(err, 403, res));
+		return sendError(err, 403, res);
 	}
 };

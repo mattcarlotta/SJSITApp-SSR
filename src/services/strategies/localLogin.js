@@ -41,14 +41,14 @@ passport.use(
  * @returns {function}
  * @throws {string}
  */
-export const localLogin = next => async (req, res, resolve) => {
+export const localLogin = next => async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		if (!email || !password) throw String(badCredentials);
 
-		const existingUser = await new Promise((resolveAuth, reject) => {
+		const existingUser = await new Promise((resolve, reject) => {
 			passport.authenticate("local-login", (err, user) =>
-				err ? reject(err) : resolveAuth(user),
+				err ? reject(err) : resolve(user),
 			)(req, res, next);
 		});
 
@@ -61,9 +61,9 @@ export const localLogin = next => async (req, res, resolve) => {
 			role: existingUser.role,
 		};
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (err) {
-		return resolve(sendError(err, 403, res));
+		return sendError(err, 403, res);
 	}
 };
 

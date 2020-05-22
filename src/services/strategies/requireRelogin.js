@@ -7,7 +7,7 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res, resolve) => {
+export default next => async (req, res) => {
 	try {
 		const _id = parseSession(req);
 		if (!_id) throw String("No previous session detected.");
@@ -28,8 +28,8 @@ export default next => async (req, res, resolve) => {
 			role: existingUser.role,
 		};
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (err) {
-		return resolve(clearSession(req, res, 200));
+		return clearSession(req, res, 200);
 	}
 };

@@ -53,24 +53,24 @@ passport.use(
  * @function resetToken
  * @returns {function}
  */
-export const resetToken = next => async (req, res, resolve) => {
+export const resetToken = next => async (req, res) => {
 	try {
 		const { email } = req.body;
 		req.body.password = "reset-password";
 
 		if (!email) throw missingEmailCreds;
 
-		const existingUser = await new Promise((resolveToken, reject) => {
+		const existingUser = await new Promise((resolve, reject) => {
 			passport.authenticate("reset-token", (err, existingEmail) =>
-				err ? reject(err) : resolveToken(existingEmail),
+				err ? reject(err) : resolve(existingEmail),
 			)(req, res, next);
 		});
 
 		req.user = existingUser;
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (err) {
-		return resolve(sendError(err, 404, res));
+		return sendError(err, 404, res);
 	}
 };
 

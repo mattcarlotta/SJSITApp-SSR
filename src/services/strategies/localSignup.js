@@ -85,16 +85,16 @@ passport.use(
  * @returns {function}
  * @throws {string}
  */
-export const localSignup = next => async (req, res, resolve) => {
+export const localSignup = next => async (req, res) => {
 	try {
 		const { email, firstName, lastName, password, token } = req.body;
 
 		if (!email || !firstName || !lastName || !password || !token)
 			throw missingSignupCreds;
 
-		const newUser = await new Promise((resolveSignup, reject) => {
+		const newUser = await new Promise((resolve, reject) => {
 			passport.authenticate("local-signup", (err, user) =>
-				err ? reject(err) : resolveSignup(user),
+				err ? reject(err) : resolve(user),
 			)(req, res, next);
 		});
 
@@ -104,9 +104,9 @@ export const localSignup = next => async (req, res, resolve) => {
 			lastName: newUser.lastName,
 		};
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (err) {
-		return resolve(sendError(err, 403, res));
+		return sendError(err, 403, res);
 	}
 };
 

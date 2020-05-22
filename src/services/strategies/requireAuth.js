@@ -8,7 +8,7 @@ import { User } from "~models";
  * @function
  * @returns {function}
  */
-export default next => async (req, res, resolve) => {
+export default next => async (req, res) => {
 	try {
 		const _id = parseSession(req);
 		if (!_id) throw String(badCredentials);
@@ -17,8 +17,8 @@ export default next => async (req, res, resolve) => {
 		if (!existingUser) throw String(badCredentials);
 		if (existingUser.status === "suspended") throw String(invalidStatus);
 
-		return resolve(next(req, res));
+		return next(req, res);
 	} catch (error) {
-		return resolve(sendError(error, 403, res));
+		return sendError(error, 403, res);
 	}
 };
