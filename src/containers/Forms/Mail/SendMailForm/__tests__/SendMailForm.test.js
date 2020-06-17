@@ -114,13 +114,7 @@ describe("Send Mail Form", () => {
 
 			it("successful validation calls updateEvent with fields", () => {
 				expect(wrapper.find("SendMailForm").state("isSubmitting")).toBeTruthy();
-				expect(createMail).toHaveBeenCalledWith({
-					sendTo: ["Bobby Axelrod <member10@example.com>"],
-					sendFrom: "San Jose Sharks Ice Team <noreply@sjsiceteam.com>",
-					sendDate: "",
-					subject: "Test",
-					message: "<span>Test</span>",
-				});
+				expect(createMail).toHaveBeenCalledTimes(1);
 			});
 
 			it("on submission error, falls back to the form", () => {
