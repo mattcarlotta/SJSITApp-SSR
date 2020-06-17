@@ -13,9 +13,11 @@ import app from "~utils/axiosConfig";
 import { signin } from "~actions/Auth";
 import { parseCookie, parseData } from "~utils/parseResponse";
 import { resetServerMessage } from "~actions/Messages";
-import { version } from "../../package.json";
 import toast from "~components/Body/Toast";
+import "react-toastify/dist/ReactToastify.css";
+import "~styles/globals/antd.min.css";
 import "~styles/globals/globals.scss";
+import { version } from "../../package.json";
 
 /**
  * Custom app wrapper to initialize nProgress, redux, redux sagas and initial session authentication.
