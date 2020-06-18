@@ -1,6 +1,7 @@
-import Document from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { resetServerContext } from "react-beautiful-dnd";
+import { version } from "../../package.json";
 
 /**
  * Custom document to handle react-beautiful-dnd and styled-components sheeting.
@@ -38,6 +39,36 @@ class CustomDocument extends Document {
 		} finally {
 			sheet.seal();
 		}
+	}
+
+	render() {
+		return (
+			<Html lang="en">
+				<Head>
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1, shrink-to-fit=no"
+					/>
+					<meta name="theme-color" content="#000000" />
+					<meta
+						name="description"
+						content="Official website for the Sharks Ice Team."
+					/>
+					<meta name="build version" content={version} />
+					<link
+						rel="apple-touch-icon"
+						sizes="192x192"
+						href="/ITLogo_192x192.png"
+					/>
+					<link rel="icon" href="/favicon.ico" />
+					<link rel="manifest" href="/manifest.json" />
+				</Head>
+				<body>
+					<Main />
+					<NextScript />
+				</body>
+			</Html>
+		);
 	}
 }
 

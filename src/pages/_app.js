@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
 import App from "next/app";
-import Head from "next/head";
 import Router from "next/router";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
@@ -17,7 +16,6 @@ import toast from "~components/Body/Toast";
 import "react-toastify/dist/ReactToastify.css";
 import "~styles/globals/antd.min.css";
 import "~styles/globals/globals.scss";
-import { version } from "../../package.json";
 
 /**
  * Custom app wrapper to initialize nProgress, redux, redux sagas and initial session authentication.
@@ -94,17 +92,6 @@ export class MyApp extends App {
 		const { Component, pageProps, store } = this.props;
 		return (
 			<>
-				<Head>
-					<meta charSet="utf-8" />
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
-					<meta name="theme-color" content="#000000" />
-					<meta
-						name="description"
-						content="Official website for the Sharks Ice Team."
-					/>
-					<meta name="build version" content={`${version}`} />
-					<link rel="icon" href="/favicon.ico" />
-				</Head>
 				<GlobalStylesheet />
 				<Provider store={store}>
 					<Component {...pageProps} />
