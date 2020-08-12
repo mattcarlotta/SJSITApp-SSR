@@ -41,7 +41,7 @@ class FilterInput extends Component {
 					value={this.state[name]}
 					name={name}
 					placeholder={`Search by ${placeholder}...`}
-					style={{ marginBottom: 8, display: "block" }}
+					style={{ marginBottom: 8, display: "block", width: 205 }}
 					onChange={this.handleChange}
 				/>
 				<Button
