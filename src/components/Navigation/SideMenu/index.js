@@ -21,7 +21,7 @@ const SideMenu = ({
 			onBreakpoint={onHandleBreakpoint}
 			collapsible
 			collapsed={isCollapsed}
-			style={style}
+			style={{ ...style, overflow: "auto" }}
 		>
 			{!hideSideBar && <NavMenu isCollapsed={isCollapsed} {...rest} />}
 		</Sider>
