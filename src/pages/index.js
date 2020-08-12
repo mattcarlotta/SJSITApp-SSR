@@ -1,39 +1,60 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Router from "next/router";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from "~components/Body/Button";
 import Spinner from "~components/Body/Spinner";
+import LoadingItem from "~components/Body/LoadingItem";
 import Head from "~components/Navigation/Head";
+import { signinOnLoad } from "~actions/Auth";
+import { wrapper } from "~store";
+import { parseCookie } from "~utils/parseResponse";
 
-const Home = ({ role }) => {
+const Home = () => {
+	const role = useSelector(({ auth }) => auth.role);
 	const isLoggedin = role && role !== "guest";
+
+	console.log("role", role);
 
 	return (
 		<>
 			<Head title="Home" />
 			<Spinner>
-				<Button
-					tertiary
-					marginRight="0px"
-					width="200px"
-					style={{ margin: "20px auto 0" }}
-					onClick={() =>
-						Router.push(isLoggedin ? "/employee/dashboard" : "/employee/login")
-					}
-				>
-					{isLoggedin ? "Go To Dashboard" : "Employee Login"}
-				</Button>
+				<div css="margin: 20px auto 0;">
+					{role ? (
+						<Button
+							tertiary
+							marginRight="0px"
+							width="200px"
+							onClick={() =>
+								Router.push(
+									isLoggedin ? "/employee/dashboard" : "/employee/login",
+								)
+							}
+						>
+							{isLoggedin ? "Go To Dashboard" : "Employee Login"}
+						</Button>
+					) : (
+						<LoadingItem width="200px">Loading...</LoadingItem>
+					)}
+				</div>
 			</Spinner>
 		</>
 	);
 };
 
-Home.propTypes = {
-	role: PropTypes.string,
-};
+export const getServerSideProps = wrapper.getServerSideProps(
+	async ({ store: { dispatch, getState, sagaTask }, req }) => {
+		const { role } = getState().auth;
 
-/* istanbul ignore next */
-const mapStateToProps = ({ auth }) => ({ role: auth.role });
+		console.log("role", role);
 
-export default connect(mapStateToProps)(Home);
+		if (!role) {
+			dispatch(signinOnLoad(parseCookie(req)));
+			await sagaTask.toPromise();
+		}
+
+		return {};
+	},
+);
+
+export default Home;

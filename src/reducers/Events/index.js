@@ -1,3 +1,4 @@
+// import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -19,6 +20,8 @@ export const initialState = {
  */
 const eventReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		// case HYDRATE:
+		// 	return { ...state, ...payload.events };
 		case types.EVENTS_EDIT:
 		case types.EVENTS_FETCH:
 		case types.EVENTS_RESET:

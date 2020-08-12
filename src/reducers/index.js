@@ -25,5 +25,7 @@ const reducers = {
 
 const rootReducer = combineReducers(reducers);
 
-export default (state, action) =>
+const combinedReducers = (state, action) =>
 	rootReducer(action.type === types.USER_SIGNOUT ? undefined : state, action);
+
+export default combinedReducers;

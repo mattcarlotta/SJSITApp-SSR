@@ -1,4 +1,5 @@
 import Router from "next/router";
+import { END } from "redux-saga";
 import { all, put, call, takeLatest } from "redux-saga/effects";
 import app, { avatarAPI } from "~utils/axiosConfig";
 import { setUserAvatar, signin, signout } from "~actions/Auth";
@@ -8,6 +9,31 @@ import { parseData, parseMessage } from "~utils/parseResponse";
 import setError from "~utils/setError";
 import toast from "~components/Body/Toast";
 import * as types from "~types";
+
+/**
+ * Client-side sign in on initial load
+ *
+ * @generator
+ * @function signinOnLoad
+ * @param {object} headers - client-side headers.
+ * @yields {object} - A response from a call to API.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} - A redux action to update redux authentication state.
+ * @yields {action} - A redux action to get updated profile details.
+ * @throws {action} - A redux action to display a server message by type.
+ */
+function* signinOnLoad({ headers }) {
+	let data = {};
+	try {
+		const res = yield call(app.get, "signedin", headers);
+		data = yield call(parseData, res);
+	} catch (e) {
+		yield call(setError, e.toString());
+	} finally {
+		yield put(signin(data));
+		yield put(END);
+	}
+}
 
 /**
  * Removes the current user from a express and redux session.
@@ -240,6 +266,7 @@ export default function* authSagas() {
 		takeLatest(types.USER_DELETE_AVATAR, deleteUserAvatar),
 		takeLatest(types.USER_PASSWORD_RESET, resetPassword),
 		takeLatest(types.USER_SIGNIN_ATTEMPT, signinUser),
+		takeLatest(types.USER_SIGNIN_ON_LOAD, signinOnLoad),
 		takeLatest(types.USER_SIGNOUT_SESSION, signoutUserSession),
 		takeLatest(types.USER_SIGNUP, signupUser),
 		takeLatest(types.USER_UPDATE_AVATAR, updateUserAvatar),

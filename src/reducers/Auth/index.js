@@ -1,3 +1,4 @@
+import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -18,6 +19,10 @@ export const initialState = {
  */
 const authReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		case HYDRATE:
+			if (state.role && !payload.auth.role) delete payload.auth;
+
+			return { ...state, ...payload.auth };
 		case types.USER_SET_SIDEBAR_STATE: {
 			return { ...state, isCollapsed: !state.isCollapsed };
 		}

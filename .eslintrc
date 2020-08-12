@@ -29,6 +29,7 @@
 				"allowTemplateLiterals": true
 			}
 		],
+		"no-console": "off",
 		"arrow-parens": ["warn", "as-needed"],
 		"indent": 0,
 		"class-methods-use-this": 0,

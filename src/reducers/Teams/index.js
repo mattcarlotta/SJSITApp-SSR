@@ -1,3 +1,4 @@
+// import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -12,6 +13,8 @@ export const initialState = {
  */
 const teamsReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		// case HYDRATE:
+		// 	return { ...state, ...payload.teams };
 		case types.TEAMS_FETCH_NAMES: {
 			return initialState;
 		}

@@ -7,10 +7,12 @@ import qs from "qs";
  * @param {string} search - a URL string.
  * @returns {string} - a parsed token string from search.
  */
-export default search => {
+const parseToken = search => {
 	const { token } = qs.parse(search, {
 		ignoreQueryPrefix: true,
 	});
 
 	return token;
 };
+
+export default parseToken;

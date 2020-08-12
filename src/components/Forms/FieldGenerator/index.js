@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 import isEmpty from "lodash.isempty";
@@ -334,62 +335,4 @@ FieldGenerator.defaultProps = {
 
 export default FieldGenerator;
 
-/*
-return (
-	<Form.Item key={props.name} style={{ height: 400 }}>
-		{props.label && <Label {...props} />}
-		<FroalaEditor
-			model={props.value}
-			config={{
-				placeholderText: props.placeholder,
-				toolbarButtons: {
-					moreText: {
-						buttons: [
-							"bold",
-							"italic",
-							"underline",
-							"strikeThrough",
-							"subscript",
-							"superscript",
-							"fontFamily",
-							"fontSize",
-							"textColor",
-							"backgroundColor",
-							"insertLink",
-							"quote",
-						],
-						buttonsVisible: 3,
-					},
-					moreParagraph: {
-						buttons: [
-							"alignLeft",
-							"alignCenter",
-							"alignRight",
-							"alignJustify",
-							"formatOLSimple",
-							"formatOL",
-							"formatUL",
-							"paragraphFormat",
-							"paragraphStyle",
-							"lineHeight",
-							"outdent",
-							"indent",
-							"insertHR",
-						],
-						buttonsVisible: 3,
-					},
-					moreMisc: {
-						buttons: ["undo", "redo", "selectAll", "clearFormatting"],
-						align: "right",
-						buttonsVisible: 2,
-					},
-				},
-			}}
-			onModelChange={value =>
-				onChange({ target: { name: props.name, value } })
-			}
-		/>
-		{props.errors && <Errors>{props.errors}</Errors>}
-	</Form.Item>
-);
-*/
+/* eslint-enable react/forbid-prop-types */

@@ -1,3 +1,4 @@
+// import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -15,6 +16,8 @@ export const initialState = {
  */
 const mailReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		// case HYDRATE:
+		// 	return { ...state, ...payload.mail };
 		case types.MAIL_RESET:
 		case types.MAIL_FETCH: {
 			return initialState;

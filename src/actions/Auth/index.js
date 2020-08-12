@@ -61,6 +61,17 @@ export const signin = data => ({
 });
 
 /**
+ * Attemtps to sign user into a previous session on initial load
+ *
+ * @function signinOnLoad
+ * @returns {object}
+ */
+export const signinOnLoad = headers => ({
+	type: types.USER_SIGNIN_ON_LOAD,
+	headers,
+});
+
+/**
  * Attempts to sign user into a new session via login form.
  *
  * @function signinUser

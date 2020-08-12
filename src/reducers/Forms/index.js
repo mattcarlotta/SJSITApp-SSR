@@ -1,3 +1,4 @@
+// import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -17,6 +18,8 @@ export const initialState = {
  */
 const formReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		// case HYDRATE:
+		// 	return { ...state, ...payload.forms };
 		case types.FORMS_FETCH:
 		case types.FORMS_RESET:
 			return initialState;

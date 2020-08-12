@@ -1,3 +1,4 @@
+import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 const apform = {
@@ -40,6 +41,8 @@ export const initialState = {
  */
 const dashboardReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		case HYDRATE:
+			return { ...state, ...payload.dashboard };
 		case types.DASHBOARD_RESET: {
 			return initialState;
 		}

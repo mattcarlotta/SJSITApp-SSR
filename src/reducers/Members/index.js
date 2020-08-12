@@ -1,3 +1,4 @@
+// import { HYDRATE } from "next-redux-wrapper";
 import * as types from "~types";
 
 export const initialState = {
@@ -20,6 +21,8 @@ export const initialState = {
  */
 const memberReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
+		// case HYDRATE:
+		// 	return { ...state, ...payload.members };
 		case types.MEMBERS_REVIEW:
 		case types.MEMBERS_FETCH:
 		case types.MEMBERS_RESET_TOKENS:
