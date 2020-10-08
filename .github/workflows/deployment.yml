@@ -81,7 +81,6 @@ jobs:
             -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
             --exclude /deploy_key \
             --exclude /.git/ \
-            --exclude /.github/ \
             --exclude /node_modules/ \
             --exclude /prod.json/ \
             --exclude /env/ \
@@ -89,4 +88,4 @@ jobs:
             ./ ${{env.REMOTE}}:${{secrets.DESTINATION}}
 
       - name: Restart Application
-        run: ssh -i ./deploy_key -o 'StrictHostKeyChecking no' -v ${{env.REMOTE}} 'pm2 restart 0'
+        run: ssh -i ./deploy_key -o 'StrictHostKeyChecking no' -v ${{env.REMOTE}} 'cd ${{secrets.DESTINATION}};yarn;pm2 restart 0'

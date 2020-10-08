@@ -1,6 +1,6 @@
 {
 	"name": "sjsitapp",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"description": "An application for the San Jose Sharks Ice Team.",
 	"repository": "https://github.com/mattcarlotta/SJITApp",
 	"author": "Matt Carlotta",
@@ -11,7 +11,7 @@
 		"npm": ">=6"
 	},
 	"scripts": {
-		"analyze:prod": "rimraf .next/analyze && analyze=true npm run build:prod",
+		"analyze:prod": "rimraf .next/analyze && analyze=true npm run build",
 		"analyze:stage": "rimraf .next/analyze && analyze=true npm run build:stage",
 		"build": "next build",
 		"build:stage": "NODE_ENV=staging next build",
