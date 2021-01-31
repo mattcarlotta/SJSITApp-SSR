@@ -80,7 +80,7 @@ context("Staff Edit Season Page", () => {
 
 		cy.get(`td[title='${nextYearDate.format("MMMM D, YYYY")}']`).click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -118,7 +118,7 @@ context("Staff Edit Season Page", () => {
 
 		cy.get(`td[title='${endSeasonYear.format("MMMM D, YYYY")}']`).click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

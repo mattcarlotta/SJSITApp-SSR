@@ -104,7 +104,7 @@ context("Staff View Member Page", () => {
 		cy.get("[name=firstName]").clear().type("John");
 		cy.get("[name=lastName]").clear().type("Smith");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -116,7 +116,7 @@ context("Staff View Member Page", () => {
 	it("updates the selected user's email and logs them out", () => {
 		cy.get("[name=email]").clear().type("john@smith.com");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

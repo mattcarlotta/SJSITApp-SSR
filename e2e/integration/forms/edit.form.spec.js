@@ -61,7 +61,7 @@ context("Staff Edit Form Page", () => {
 	// 		.first()
 	// 		.click();
 
-	// 	cy.get("form").submit();
+	// 	cy.get("[data-test=submit-button]").click();
 
 	// 	cy.get("[data-test=toast-message]")
 	// 		.should("have.length", 1)
@@ -79,7 +79,7 @@ context("Staff Edit Form Page", () => {
 		cy.get("[title='July 1, 2005']").click();
 		cy.get("[title='July 31, 2005']").first().click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

@@ -22,5 +22,5 @@ module.exports = (
   </div>
   <div style="color:#999999;font-size:11px;text-align:center;margin-top: 10px;">
     Or click on this link:
-    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/newpassword/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/new-password/verify?token=${token}</a>
+    <a style="color: #999999; text-decoration: underline; margin-left: 2px;" href="${LOCALHOST}/employee/new-password/verify?token=${token}" target="_blank" rel="noopener noreferrer">${LOCALHOST}/employee/new-password/verify?token=${token}</a>
   </div>`;

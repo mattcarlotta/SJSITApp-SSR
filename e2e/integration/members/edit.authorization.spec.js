@@ -36,7 +36,7 @@ context("Staff Edit Authorization Page", () => {
 			.clear()
 			.type("carlotta.matt2@gmail.com");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -51,7 +51,7 @@ context("Staff Edit Authorization Page", () => {
 			.clear()
 			.type("carlotta.matthew@gmail.com");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

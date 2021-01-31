@@ -21,7 +21,7 @@ context("Staff Contact Us Page", () => {
 	});
 
 	it("displays form errors if fields are empty", () => {
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 		cy.get("[data-test=errors]").should("have.length", 3);
 	});
 
@@ -34,7 +34,7 @@ context("Staff Contact Us Page", () => {
 
 		cy.get("textarea[name=message]").type("Hi. :)");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

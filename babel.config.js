@@ -2,6 +2,7 @@ const aliasDirs = require("alias-dirs");
 
 module.exports = api => {
 	const inProd = api.env("production");
+	const inStaging = process.env.inStaging;
 	api.cache.using(() => process.env.NODE_ENV);
 
 	return {
@@ -23,7 +24,7 @@ module.exports = api => {
 					preprocess: false,
 				},
 			],
-			inProd && "react-remove-properties",
+			inProd && !inStaging && "react-remove-properties",
 		].filter(Boolean),
 	};
 };

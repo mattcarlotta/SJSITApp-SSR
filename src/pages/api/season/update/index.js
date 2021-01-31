@@ -2,6 +2,7 @@ import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import { Event, Form, Season } from "~models";
 import { sendError } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import {
 	seasonAlreadyExists,
 	unableToLocateSeason,
@@ -29,7 +30,10 @@ const updateSeason = async (req, res) => {
 			if (seasonInUse) throw seasonAlreadyExists;
 		}
 
-		const [startDate, endDate] = seasonDuration;
+		const [startMonthDate, endMonthDate] = seasonDuration;
+		const startDate = moment(startMonthDate).startOf("day");
+		const endDate = moment(endMonthDate).endOf("day");
+
 		await existingSeason.updateOne({ seasonId, startDate, endDate });
 		await Event.updateMany({ seasonId: existingSeason.seasonId }, { seasonId });
 		await Form.updateMany({ seasonId: existingSeason.seasonId }, { seasonId });

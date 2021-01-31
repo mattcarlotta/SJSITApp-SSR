@@ -51,7 +51,7 @@ context("Staff Schedule Event Page", () => {
 			.trigger("keydown", { keyCode: 32, force: true })
 			.wait(750);
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

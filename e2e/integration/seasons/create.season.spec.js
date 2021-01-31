@@ -23,7 +23,7 @@ context("Staff Create Season Page", () => {
 	});
 
 	it("displays errors if empty fields are submitted", () => {
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=errors]").should("have.length", 2);
 	});
@@ -39,7 +39,7 @@ context("Staff Create Season Page", () => {
 		const nextYear = moment()
 			.add(1, "year")
 			.endOf("year")
-			.format("MMMM D, YYYY");
+			
 
 		cy.get(".ant-calendar-picker").first().click();
 
@@ -47,19 +47,19 @@ context("Staff Create Season Page", () => {
 
 		cy.get("td[title=Jan]").click();
 
+		cy.get(`td[title='${currentYear}']`).click();
+
 		cy.get(".ant-calendar-month-select").eq(1).click();
 
 		cy.get("td[title=Dec]").click();
 
 		cy.get(".ant-calendar-year-select").eq(1).click();
 
-		cy.get(".ant-calendar-year-panel-cell").eq(2).click();
+		cy.get(`td[title='${nextYear.format("YYYY")}']`).click();
 
-		cy.get(`td[title='${currentYear}']`).click();
+		cy.get(`td[title='${nextYear.format("MMMM D, YYYY")}']`).click();
 
-		cy.get(`td[title='${nextYear}']`).click();
-
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -95,7 +95,7 @@ context("Staff Create Season Page", () => {
 
 		cy.get(`td[title='${threeYearsFromNow.format("MMMM D, YYYY")}']`).click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

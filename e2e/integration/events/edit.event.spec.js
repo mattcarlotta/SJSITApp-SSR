@@ -51,7 +51,7 @@ context("Staff Edit Event Page", () => {
 
 		cy.get("[data-value='Milwaukee Admirals'").click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -96,7 +96,7 @@ context("Staff Edit Event Page", () => {
 
 		clickDefaultTimeSlots();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

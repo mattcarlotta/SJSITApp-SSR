@@ -3,6 +3,7 @@ import withMiddleware from "~middlewares";
 import { requireStaffRole } from "~services/strategies";
 import { Form, Season } from "~models";
 import { createDate, sendError } from "~utils/helpers";
+import moment from "~utils/momentWithTZ";
 import {
 	formAlreadyExists,
 	unableToLocateForm,
@@ -37,7 +38,10 @@ const updateForm = async (req, res) => {
 		const formExists = await Form.findOne({ _id });
 		if (!formExists) throw unableToLocateForm;
 
-		const [startMonth, endMonth] = enrollMonth;
+		const [startMonthDate, endMonthDate] = enrollMonth;
+		const startMonth = moment(startMonthDate).startOf("day");
+		const endMonth = moment(endMonthDate).endOf("day");
+
 		const existingForms = await Form.find({
 			_id: { $ne: formExists._id },
 			startMonth: { $gte: startMonth },

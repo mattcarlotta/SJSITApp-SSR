@@ -27,7 +27,7 @@ context("Staff Create Member Page", () => {
 	});
 
 	it("displays errors if empty fields are submitted", () => {
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=errors]").should("have.length", 2);
 	});
@@ -39,7 +39,7 @@ context("Staff Create Member Page", () => {
 
 		cy.get("input[name=authorizedEmail]").type("carlotta.matt2@gmail.com");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -56,7 +56,7 @@ context("Staff Create Member Page", () => {
 
 		cy.get("input[name=authorizedEmail]").type("carlotta.matthew@gmail.com");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

@@ -32,7 +32,7 @@ context("Staff Create Form Page", () => {
 	});
 
 	it("displays errors if empty fields are submitted", () => {
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=errors]").should("have.length", 2);
 	});
@@ -61,7 +61,7 @@ context("Staff Create Form Page", () => {
 			.type("03/21/2020 5:00pm")
 			.type("{enter}");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -84,7 +84,7 @@ context("Staff Create Form Page", () => {
 
 		cy.get(".ant-calendar-ok-btn").click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -119,7 +119,7 @@ context("Staff Create Form Page", () => {
 
 		cy.get(".ant-calendar-ok-btn").click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)

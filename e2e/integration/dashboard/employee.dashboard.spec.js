@@ -137,7 +137,7 @@ context("Employee Dashboard Page", () => {
 	it("prevents a user from submitting an empty AP form", () => {
 		cy.get("[data-test=view-apform]").click();
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=errors]").should("have.length", 3);
 	});
@@ -156,7 +156,7 @@ context("Employee Dashboard Page", () => {
 				cy.wrap(elements[8]).click();
 			});
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.url().should("contain", "/employee/dashboard");
 

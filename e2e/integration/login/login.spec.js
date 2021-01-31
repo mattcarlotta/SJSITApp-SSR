@@ -32,7 +32,7 @@ context("Login Page", () => {
 	});
 
 	it("displays required fields if the form is submitted with empty fields", () => {
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get(".error").should("have.length", 2);
 	});
@@ -42,7 +42,7 @@ context("Login Page", () => {
 
 		cy.get("[name=password]").type("passw");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-message]")
 			.should("have.length", 1)
@@ -57,7 +57,7 @@ context("Login Page", () => {
 
 		cy.get("[name=password]").type("password");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.url().should("contain", "/employee/dashboard");
 	});
@@ -67,7 +67,7 @@ context("Login Page", () => {
 
 		cy.get("[name=password]").type("password");
 
-		cy.get("form").submit();
+		cy.get("[data-test=submit-button]").click();
 
 		cy.get("[data-test=toast-alert]")
 			.should("have.length", 1)
